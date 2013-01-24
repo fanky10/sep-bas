@@ -43,3 +43,33 @@ Icon?
 Thumbs.db
 
 
+
+dev/AppModel/.classpath
+
+dev/AppModel/.classpath
+
+dev/AppModel/.project
+
+dev/AppModel/.settings/.component
+
+*.prefs
+
+*.prefs
+
+dev/AppModel/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+dev/AppModel/.settings/org.eclipse.jdt.core.prefs
+
+dev/Web/.classpath
+
+dev/Web/.project
+
+dev/Web/.settings/.component
+
+dev/Web/.settings/org.eclipse.jdt.core.prefs
+
+dev/Web/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+dev/Web/target/maven-archiver/pom.properties
+
+dev/AppModel/target/maven-archiver/pom.properties
