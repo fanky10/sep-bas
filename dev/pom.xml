@@ -19,6 +19,7 @@
 	<properties>
 		<spring.version>3.0.6.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<slf4j.version>1.6.4</slf4j.version>
 	</properties>
 	<!-- List of dependencies for all modules in the application. This section 
 		sets the version of the dependencies. Each module must define its specific 
@@ -31,12 +32,6 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<version>${spring.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -98,6 +93,7 @@
 				<artifactId>jstl</artifactId>
 				<version>1.2</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
