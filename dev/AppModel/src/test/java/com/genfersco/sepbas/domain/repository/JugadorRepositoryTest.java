@@ -30,18 +30,18 @@ public class JugadorRepositoryTest {
 	
 	@Before
 	public void buildData(){
-//		jugador.setApellido("Gonzalez");
-//		jugador.setFechaNacimiento(new Date(System.currentTimeMillis()));
-//		jugador.setNombre("Cacho");
-//		
-//		jugador = jugadorRepository.save(jugador);
+		jugador.setApellido("Gonzalez");
+		jugador.setFechaNacimiento(new Date(System.currentTimeMillis()));
+		jugador.setNombre("Cacho");
+		
+		jugador = jugadorRepository.save(jugador);
 	}
 	
 	@Test
 	public void testGuardarJugador(){
 		assertTrue(true);
-//		assertTrue(jugadorRepository.exists(jugador.getId()));
-//		assertTrue(jugadorRepository.count()>0);
+		assertTrue(jugadorRepository.exists(jugador.getId()));
+		assertTrue(jugadorRepository.count()>0);
 	}
 }
 

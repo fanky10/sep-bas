@@ -10,19 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "jugador")
+@Table(name = "jugadores")
 public class Jugador {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "jugador_id", nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "jugador_fec_nac", nullable = false, unique = true)
 	private Date fechaNacimiento;
 
 	@Column(name = "jugador_nombre", nullable = false)
 	private String nombre;
-	
+
 	@Column(name = "jugador_apellido", nullable = false)
 	private String apellido;
 
@@ -57,7 +57,5 @@ public class Jugador {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
-	
-	
+
 }
