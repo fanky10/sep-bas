@@ -1,8 +1,9 @@
-package com.genfersco.sepbas.domain.repository;
+package com.genfersco.sepbas.app.services.impl;
 
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,32 +13,30 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.genfersco.sepbas.app.services.JugadorManager;
 import com.genfersco.sepbas.domain.model.Jugador;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/dataAccessContext.xml" })
+@ContextConfiguration(locations = { "classpath:/dataAccessContext.xml" })
 @Transactional
-public class JugadorRepositoryTest {
-	
-	private Jugador jugador = new Jugador();
-	
+public class JugadorManagerTest {
 	@Autowired
-	private JugadorRepository jugadorRepository;
-	
+	private JugadorManager jugadorManager;
+
+	private Jugador jugador = new Jugador();
+
 	@Before
-	public void buildData(){
+	public void buildData() {
 		jugador.setApellido("Gonzalez");
 		jugador.setFechaNacimiento(new Date(System.currentTimeMillis()));
 		jugador.setNombre("Cacho");
-		
-		jugador = jugadorRepository.save(jugador);
+
+		jugador = jugadorManager.addJugador(jugador);
 	}
-	
+
 	@Test
-	public void testGuardarJugador(){
-		assertTrue(jugadorRepository.exists(jugador.getId()));
-		assertTrue(jugadorRepository.count()>0);
+	public void testGetAll() {
+		List<Jugador> jugadores = jugadorManager.getJugadores();
+		assertTrue(jugadores!=null && !jugadores.isEmpty());
 	}
 }
-

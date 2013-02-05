@@ -1,4 +1,4 @@
-package com.genfersco.sepbas.controller;
+package com.genfersco.sepbas.web.controller;
 
 import javax.annotation.Resource;
 
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.genfersco.sepbas.web.constants.WebAppConstants;
+
 @Controller
 public class HomeController {
 
@@ -19,7 +21,7 @@ public class HomeController {
 	@RequestMapping(value = { "/", "/home" })
 	public String home(Model map) {
 		map.addAttribute("mensaje", getHomeMessage());
-		return "web/home";
+		return WebAppConstants.HOMEPAGE;
 	}
 
 	@RequestMapping(value = "/compare", method = RequestMethod.GET)

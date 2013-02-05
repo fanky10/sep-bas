@@ -1,18 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<parent>
 		<groupId>com.genfersco.sepbas</groupId>
 		<artifactId>dev</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.genfersco.sepbas</groupId>
-	<artifactId>Web</artifactId>
+	<artifactId>AppServices</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
-	<name>Genfersco SEPBAS - WEB</name>
+	<name>Genfersco SEPBAS - AppServices</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -20,52 +22,22 @@
 	</properties>
 
 	<dependencies>
-		<!-- test -->
+		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- Spring mvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency>
-
-		<!-- Servlet -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<!-- other projects -->
 		<dependency>
 			<groupId>com.genfersco.sepbas</groupId>
-			<artifactId>AppServices</artifactId>
+		        <artifactId>AppModel</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<ajdtVersion>none</ajdtVersion>
-				</configuration>
-			</plugin>
-		</plugins>
-
-	</build>
 </project>
 

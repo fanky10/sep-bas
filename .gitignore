@@ -73,3 +73,7 @@ dev/Web/.settings/org.eclipse.wst.common.project.facet.core.xml
 dev/Web/target/maven-archiver/pom.properties
 
 dev/AppModel/target/maven-archiver/pom.properties
+
+dev/AppServices/.classpath
+
+dev/Web/target/Web-1.0-SNAPSHOT/WEB-INF/web.xml

@@ -1,4 +1,4 @@
-package com.genfersco.sepbas.controller;
+package com.genfersco.sepbas.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
