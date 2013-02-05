@@ -30,4 +30,14 @@ public class JugadorManagerImpl implements JugadorManager {
 		Jugador saved = jugadorRepository.save(jugador);
 		return saved;
 	}
+
+	@Override
+	public void deleteJugador(Jugador jugador) {
+		jugadorRepository.delete(jugador);
+	}
+
+	@Override
+	public Jugador getJugadorById(Integer id) {
+		return jugadorRepository.findOne(id);
+	}
 }

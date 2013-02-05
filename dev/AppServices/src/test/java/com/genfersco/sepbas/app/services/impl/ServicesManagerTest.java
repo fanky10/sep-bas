@@ -41,5 +41,13 @@ public class ServicesManagerTest {
 		List<Jugador> jugadores = servicesManager.getJugadores();
 		assertTrue(jugadores!=null && !jugadores.isEmpty());
 	}
+	
+	@Test
+	public void testEliminaJugador() {
+		Integer generatedId = jugador.getId();
+		servicesManager.deleteJugador(generatedId);
+		Jugador deleted = servicesManager.getJugadorById(generatedId);
+		assertTrue(deleted==null);
+	}
 
 }

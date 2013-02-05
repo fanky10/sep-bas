@@ -13,4 +13,6 @@ import com.genfersco.sepbas.domain.model.Jugador;
 public interface ServicesManager {
 	public Jugador addJugador(Jugador jugador);
 	public List<Jugador> getJugadores();
+	public void deleteJugador(Integer id);
+	public Jugador getJugadorById(Integer id);
 }

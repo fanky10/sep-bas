@@ -39,4 +39,13 @@ public class JugadorManagerTest {
 		List<Jugador> jugadores = jugadorManager.getJugadores();
 		assertTrue(jugadores!=null && !jugadores.isEmpty());
 	}
+	
+	@Test 
+	public void testDeleteJugador(){
+		Jugador aux = jugadorManager.getJugadorById(jugador.getId());
+		jugadorManager.deleteJugador(aux);
+		aux = jugadorManager.getJugadorById(jugador.getId());
+		assertTrue(aux == null);
+		
+	}
 }

@@ -24,4 +24,16 @@ public class ServicesManagerImpl implements ServicesManager {
 		return jugadorManager.getJugadores();
 	}
 
+	@Override
+	public void deleteJugador(Integer id) {
+		Jugador jugador = getJugadorById(id);
+		if(jugador!=null){//jugador valido
+			jugadorManager.deleteJugador(jugador);
+		}
+	}
+	
+	public Jugador getJugadorById(Integer id){
+		return jugadorManager.getJugadorById(id);
+	}
+
 }
