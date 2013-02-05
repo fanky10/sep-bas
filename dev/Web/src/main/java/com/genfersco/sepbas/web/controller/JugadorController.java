@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.genfersco.sepbas.app.services.ServicesManager;
 import com.genfersco.sepbas.domain.model.Jugador;
@@ -44,6 +46,15 @@ public class JugadorController {
 		jugador.setFechaNacimiento(new Date(System.currentTimeMillis()));
 		servicesManager.addJugador(jugador);
 		//redirecciona a la url correspondiente
+		return "redirect:/jugadores/list";
+	}
+	@RequestMapping(value = "/jugadores/del", method = RequestMethod.GET)
+	public String deleteJugador(@RequestParam("id") String id,Model map) {
+		// shows view
+		if(StringUtils.hasText(id)){
+			Integer iId = Integer.parseInt(id);
+			servicesManager.deleteJugador(iId);
+		}
 		return "redirect:/jugadores/list";
 	}
 }

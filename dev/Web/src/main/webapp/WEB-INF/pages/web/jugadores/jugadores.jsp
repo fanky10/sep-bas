@@ -11,13 +11,14 @@
 		</h3>
 	</c:if>
 	<!-- for now just a simple list<String> -->
-	<c:url var="jugadoresURL" value="/jugadores/add"></c:url>
-	<a href="${jugadoresURL}">Agregar Nuevo Jugador</a>
+	<c:url var="agregarJugador" value="/jugadores/add"></c:url>
+	<c:url var="eliminarJugador" value="/jugadores/del"></c:url>
+	<a href="${agregarJugador}">Agregar Nuevo Jugador</a>
 	<ul>
 		<c:forEach var="jugador" items="${jugadores}">
 			<li>
-				${jugador.nombre}
-				${jugador.apellido}
+				${jugador.nombre} 
+				${jugador.apellido} <a href="${eliminarJugador}?id=${jugador.id}">Eliminar</a>
 			</li>
 		</c:forEach>
 	</ul>
