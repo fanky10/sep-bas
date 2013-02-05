@@ -18,7 +18,7 @@ import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.JugadorForm;
 
 @Controller
-public class JugadorController {
+public class JugadorController extends BaseController {
 
 	@Autowired
 	private ServicesManager servicesManager;

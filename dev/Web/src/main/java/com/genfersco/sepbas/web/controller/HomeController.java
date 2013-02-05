@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
 
 	@Resource
 	private String homeMessage;
