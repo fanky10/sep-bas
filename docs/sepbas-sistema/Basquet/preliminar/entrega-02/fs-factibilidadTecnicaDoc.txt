@@ -1,0 +1,27 @@
+Factibilidad Tecnica
+
+La factibilidad técnica consistió en realizar una evaluación de la tecnología existente en la organización, este estudio estuvo destinado a recolectar información sobre los componentes técnicos que posee la organización y la posibilidad de hacer uso de los mismos en el desarrollo e implementación del sistema propuesto y de ser necesario, los requerimientos tecnológicos que deben ser adquiridos para la puesta en marcha del sistema en cuestión.
+
+Se tuvieron encienta dos enfoques: Hardware y Software.
+
+Hardware:
+En cuanto a Hardware, específicamente cada punto de ingreso de datos (PID) donde debe estar instalado el sistema propuesto, debe cubrir los siguientes requerimientos mínimos:
+
+Procesador Pentium IV 2.0 Ghz
+Tarjeta Madre
+2GB de Memoria RAM
+Espacio disponible en Disco Duro: 5GB
+Tarjeta de red.
+Tarjeta de video
+Monitor
+Teclado
+Mouse
+Unidad de Protección UPS (recomendado)
+
+Evaluando el hardware existente y tomando en cuenta la configuración mínima necesaria, la institución no requirió de realizar inversión inicial para la adquisición de nuevos equipos, ni tampoco para repotenciar o actualizar los equipos existentes, ya que los mismos satisfacen los requerimientos establecidos para la puesta en marcha del sistema propuesto. 
+
+Software:
+
+En cuanto al software, la institución cuenta con todas las aplicaciones que emplearon para el sistema anterior, lo cual no amerita a inversión alguna para la adquisición de los mismos. Los PID operan bajo ambiente Windows, el servidor requiere el sistema operativo Linux el cual es una variante de Unix. Para el uso general de las estaciones en actividades diversas se debe poseer las herramientas de escritorio y navegadores que existen en el mercado actualmente.
+
+Como resultado de este estudio técnico se determino que en los actuales momentos, la institución posee la infraestructura tecnológica (Hardware y Software) necesaria para la puesta en funcionamiento del sistema propuesto.

@@ -1,8 +1,127 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="WebApp_ID" version="3.0">
-        <display-name>Simple Web Application</display-name>
-</web-app>
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
+<web-app>
+	<display-name>Simple Web Application</display-name>
+	<!--
+	based on: 
+	http://blog.springsource.com/2011/01/04/green-beans-getting-started-with-spring-mvc/ 
+	-->
+	
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+		 	classpath:/dataAccessContext.xml
+			/WEB-INF/config/dispatcher-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/error?statusCode=400</location>
+	</error-page>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/error?statusCode=401</location>
+	</error-page>
+	<error-page>
+		<error-code>402</error-code>
+		<location>/error?statusCode=402</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error?statusCode=403</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error?statusCode=404</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error?statusCode=405</location>
+	</error-page>
+	<error-page>
+		<error-code>406</error-code>
+		<location>/error?statusCode=406</location>
+	</error-page>
+	<error-page>
+		<error-code>407</error-code>
+		<location>/error?statusCode=407</location>
+	</error-page>
+	<error-page>
+		<error-code>408</error-code>
+		<location>/error?statusCode=408</location>
+	</error-page>
+	<error-page>
+		<error-code>409</error-code>
+		<location>/error?statusCode=409</location>
+	</error-page>
+	<error-page>
+		<error-code>410</error-code>
+		<location>/error?statusCode=410</location>
+	</error-page>
+	<error-page>
+		<error-code>411</error-code>
+		<location>/error?statusCode=411</location>
+	</error-page>
+	<error-page>
+		<error-code>412</error-code>
+		<location>/error?statusCode=412</location>
+	</error-page>
+	<error-page>
+		<error-code>413</error-code>
+		<location>/error?statusCode=413</location>
+	</error-page>
+	<error-page>
+		<error-code>414</error-code>
+		<location>/error?statusCode=414</location>
+	</error-page>
+	<error-page>
+		<error-code>415</error-code>
+		<location>/error?statusCode=415</location>
+	</error-page>
+	<error-page>
+		<error-code>416</error-code>
+		<location>/error?statusCode=416</location>
+	</error-page>
+	<error-page>
+		<error-code>417</error-code>
+		<location>/error?statusCode=417</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error?statusCode=500</location>
+	</error-page>
+	<error-page>
+		<error-code>501</error-code>
+		<location>/error?statusCode=501</location>
+	</error-page>
+	<error-page>
+		<error-code>502</error-code>
+		<location>/error?statusCode=502</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/error?statusCode=503</location>
+	</error-page>
+	<error-page>
+		<error-code>504</error-code>
+		<location>/error?statusCode=504</location>
+	</error-page>
+	<error-page>
+		<error-code>505</error-code>
+		<location>/error?statusCode=505</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/error?statusCode=500</location>
+	</error-page>
+</web-app>

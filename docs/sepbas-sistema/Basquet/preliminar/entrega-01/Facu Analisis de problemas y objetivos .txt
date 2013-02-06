@@ -1,0 +1,11 @@
+Probemas encontrados con el uso del sistema actual.
+
+Actualmente, se encuentran dos personas ingresando datos a mano en una planilla de papel, y otro operario con conocimientos sobre el uso del sistema actual ingresando datos mediante el mismo.
+Esto conlleva a que hay datos que figuran en las planillas ingresadas a manos que el sistema actual no contempla.
+La informacion, no se encuentra publicada en internet de forma dinamica a medida que se ingresan los datos, lo que conlleva a que los mismos no se encuentren disponibles para los fanaticos que siguen un partido de baquet mediante internet.
+
+Objetivos Encontrados:
+Asociar en su seno a las entidades que practiquen el deporte del Básquetbol, a los efectos de coordinar la acción de todas ellas en pro de la difusión del deporte y de su práctica disciplinada.
+La correcta difusión del deporte no se puede concretar de forma completa, ya que los datos de los partidos de basquet no se encuentran en la pagina web correspondiente en tiempo y forma. Normalmente los datos no se publican en tiempo real lo que genera una disconformidad con el fanático del club.
+En general, el impulso y fomento de la actividad basquetbolística tendiente al desarrollo de ésta, en todo el territorio Nacional.
+El fomento, se maneja de forma local, ya que a los fanáticos le es dificil conseguir información sobre partidos de equipos que no son de la zona. 
