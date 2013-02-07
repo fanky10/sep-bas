@@ -1,0 +1,32 @@
+Presentación de alternativas:
+Alternativa 1: 
+Abstract:
+Se encuentra como alternativa el trabajo de personal con fichas de Exel pre-impresas. Volcando los datos para cada técnico y luego de la jornada deportiva en un sitio web.
+Se encuentra con la dificultad de tener datos en tiempo real, pero es una opción de inmediata implementación en los partido y corto plazo en el desarrollo del sitio web.
+Nos motiva elegir ésta opción ya que, los costos de desarrollo de ésta alternativa son significativamente más bajos que cualquier opción de desarrollo más compleja.
+Se concluye que ésta alternativa si bien no satisface la necesidad de un seguimiento en tiempo real de las estadísticas de un partido de básquet con el personal adecuado y bien capacitado podría ser una alternativa a muy corto plazo. Las herramientas de Exel permitirán la carga de éstos y generar graficas de desempeño, Etc.
+Entorno Tecnólogico y tecnología necesaria:
+Para la implementación de ésta alternativa no se necita mas que una máquina, Disco 80 GB o superior, Ram  256 Mb o superior.
+Licencia de Microsoft Office y también del sistema operativo que corra en la pc. Se recomienda XP o superior.
+El sitio será desarrollado en php y base de datos Mysql.
+El cliente será desarrollado en HTML, Javascript, y php.
+RRHH:
+Por cada partido se necesitaran 5 operadores. Uno confeccionando informes para el director técnico local otro confeccionando informes para el técnico visitante. Y tres recolectando los datos estadísticos de cada partido.
+Funciones Incluidas:
+-Elaboración de informes para técnicos.
+-Carga al sitio los datos estadísticos del partido.
+Funciones Excluidas:
+-Carga en tiempo real de los datos de los partidos.
+-Representación de los datos en dispositivos móviles.
+Comparación de alternativas propuestas:
+
+Para la mejora de del sistemas actual de estadísticas de básquet vemos poco factible el desarrollo de plantillas de Exel respecto a la construcción de un sistema más robusto, que ofrezca resultados más precisos, en tiempo y forma, y con disponibilidad en distintos formatos. 
+
+Si bien se tiene que la construcción de un sistema en una primera etapa es notablemente más costoso y tiene un lapso de desarrollo, encontramos que el costo de mantenerlo luego es mucho más económico que el costo de la alternativa de plantillas, esto se debe a la necesidad de los clubes de tener mucho personal en la opción de Exel para lograr una redundancia de datos que aseguren la fiabilidad de la recolección. También se tiene el costo de licencias de sistema operativo y Microsoft office y Microsoft XP que no se tienen en la construcción del sistema , ya que correrá en un sistema operativo libre. Con lo cual en un lapso de 2 años los costos de los proyectos no serán tan distantes.
+
+También el desarrollo del sistema contempla la totalidad de las funcionalidades y la alternativa de Exel no.
+
+
+
+
+

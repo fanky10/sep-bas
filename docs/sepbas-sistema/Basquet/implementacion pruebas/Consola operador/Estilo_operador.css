@@ -1,0 +1,60 @@
+body{ background-color:#000000
+}
+.cancha
+{
+position: absolute;
+left: 50%;
+top: 50%;
+width: 550px;
+height: 341px;
+margin-top: -170px;
+margin-left: -275px;
+
+overflow: auto;
+
+background-image:url(Imagenes/cancha.jpg);
+padding-top:15px;
+}
+.semi_circulo_derecha{
+   	
+width: 156px;
+height: 246px;
+
+
+
+border-radius: 123px 0 0 123px;
+
+overflow:hidden;
+background-color: #FF0000;
+float:right;margin-top:19px;
+filter: alpha(opacity=50); opacity: .5;
+
+z-index:1;
+}
+
+.semi_circulo_izquierda {
+	
+ width: 156px;
+    height: 246px;
+    
+	border-radius: 0 123px 123px 0;
+   
+    overflow:hidden;
+	background-color:#CC6600;
+	float:left;
+	margin-top:19px;
+filter: alpha(opacity=50); opacity: .5;
+z-index:-1;
+}
+
+.fondo_cancha{
+background-color:#CCFF00;
+
+width:526px;
+height:283px;
+
+margin-left:14px;
+
+filter: alpha(opacity=50); opacity: .5;*/
+z-index:0;
+}
