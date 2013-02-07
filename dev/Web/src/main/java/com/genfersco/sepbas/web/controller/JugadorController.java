@@ -38,20 +38,21 @@ public class JugadorController extends BaseController {
 	}
 
 	@RequestMapping(value = "/jugadores/add", method = RequestMethod.POST)
-	public String addJugador(@ModelAttribute JugadorForm jugadorForm,Model map) {
+	public String addJugador(@ModelAttribute JugadorForm jugadorForm, Model map) {
 		// some validation later (:
 		Jugador jugador = new Jugador();
 		jugador.setNombre(jugadorForm.getNombre());
 		jugador.setApellido(jugadorForm.getApellido());
 		jugador.setFechaNacimiento(new Date(System.currentTimeMillis()));
 		servicesManager.addJugador(jugador);
-		//redirecciona a la url correspondiente
+		// redirecciona a la url correspondiente
 		return "redirect:/jugadores/list";
 	}
+
 	@RequestMapping(value = "/jugadores/del", method = RequestMethod.GET)
-	public String deleteJugador(@RequestParam("id") String id,Model map) {
+	public String deleteJugador(@RequestParam("id") String id, Model map) {
 		// shows view
-		if(StringUtils.hasText(id)){
+		if (StringUtils.hasText(id)) {
 			Integer iId = Integer.parseInt(id);
 			servicesManager.deleteJugador(iId);
 		}

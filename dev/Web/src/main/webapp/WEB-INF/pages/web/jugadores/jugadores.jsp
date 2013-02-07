@@ -10,10 +10,7 @@
 			<c:out value="no hay jugadores" />
 		</h3>
 	</c:if>
-	<!-- for now just a simple list<String> -->
-	<c:url var="agregarJugador" value="/jugadores/add"></c:url>
-	<c:url var="eliminarJugador" value="/jugadores/del"></c:url>
-	<a href="${agregarJugador}">Agregar Nuevo Jugador</a>
+	<c:url var="eliminarJugador" value="/jugadores/del"/>
 	<ul>
 		<c:forEach var="jugador" items="${jugadores}">
 			<li>

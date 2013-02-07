@@ -1,0 +1,1 @@
+Fanky10 2011 Copyleft

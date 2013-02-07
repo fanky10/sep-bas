@@ -48,11 +48,26 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
+
+		<!-- Apache Tiles -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-template</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
 		<!-- other projects -->
 		<dependency>
 			<groupId>com.genfersco.sepbas</groupId>
 			<artifactId>AppServices</artifactId>
 		</dependency>
+
 	</dependencies>
 
 	<build>
