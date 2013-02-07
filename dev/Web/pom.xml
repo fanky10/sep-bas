@@ -12,7 +12,7 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Genfersco SEPBAS - WEB</name>
+	<name>Genfersco SEPBAS - Web</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -48,11 +48,30 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
+
+		<!-- Apache Tiles -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-template</artifactId>
+		</dependency>
+
+		<!-- Jackson JSON Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+
 		<!-- other projects -->
 		<dependency>
 			<groupId>com.genfersco.sepbas</groupId>
 			<artifactId>AppServices</artifactId>
 		</dependency>
+
 	</dependencies>
 
 	<build>

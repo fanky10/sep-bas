@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<!-- Como base usa el layout, el template -->
+	<definition name="base.definition" template="/WEB-INF/pages/web/tiles/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/pages/web/tiles/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/pages/web/tiles/footer.jsp" />
+	</definition>
+	
+	<definition name="jugadores_list" extends="base.definition">
+		<put-attribute name="title" value="Lista Producto" />
+		<put-attribute name="body" value="/WEB-INF/pages/web/jugadores/jugadores.jsp" />
+	</definition>
+
+	<definition name="jugadores_add" extends="base.definition">
+		<put-attribute name="title" value="Lista Producto" />
+		<put-attribute name="body" value="/WEB-INF/pages/web/jugadores/jugador.jsp" />
+	</definition>
+	
+	<definition name="home" extends="base.definition">
+		<put-attribute name="title" value="Lista Producto" />
+		<put-attribute name="body" value="/WEB-INF/pages/web/home.jsp" />
+	</definition>
+	
+</tiles-definitions>
