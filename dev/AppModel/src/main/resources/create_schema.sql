@@ -58,7 +58,8 @@ CREATE TABLE eventos(
     evento_id integer unsigned not null primary key AUTO_INCREMENT,
     evento_generador_id integer unsigned not null,
 	evento_tipo_evento_id integer unsigned not null,
-	evento_estado TINYINT(1) default 0
+	evento_estado TINYINT(1) default 0,
+	evento_cuarto_id integer unsigned not null
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS tipos_eventos;
@@ -75,3 +76,8 @@ CREATE TABLE tipos_eventos(
 
 ALTER TABLE jugador_club ADD CONSTRAINT `FK_jugador_club_id_1` FOREIGN KEY (`club_id`) REFERENCES `clubes` (`club_id`);
 ALTER TABLE jugador_club ADD CONSTRAINT `FK_jugador_club_id_2` FOREIGN KEY (`jugador_id`) REFERENCES `jugadores` (`jugador_id`);
+
+ALTER TABLE cuartos ADD CONSTRAINT `FK_cuartos_id_1` FOREIGN KEY (`cuarto_partido_id`) REFERENCES `partidos` (`partido_id`);
+
+ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_tipo_evento_id`) REFERENCES `tipos_eventos` (`tipo_evento_id`);
+ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_2` FOREIGN KEY (`evento_cuarto_id`) REFERENCES `cuartos` (`cuarto_id`);
