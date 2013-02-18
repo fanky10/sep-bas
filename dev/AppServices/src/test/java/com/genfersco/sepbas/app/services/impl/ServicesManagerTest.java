@@ -2,7 +2,6 @@ package com.genfersco.sepbas.app.services.impl;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,41 +12,46 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.genfersco.sepbas.app.services.JugadorManager;
 import com.genfersco.sepbas.app.services.ServicesManager;
+import com.genfersco.sepbas.domain.mocked.JugadorMocked;
+import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Jugador;
+import com.genfersco.sepbas.domain.repository.ClubRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/dataAccessContext.xml" })
 @Transactional
 public class ServicesManagerTest {
-	
+
 	@Autowired
 	private ServicesManager servicesManager;
-	
+	@Autowired
+	private ClubRepository clubRepository;
+
 	private Jugador jugador = new Jugador();
 
 	@Before
 	public void buildData() {
-		jugador.setApellido("Gonzalez");
-		jugador.setFechaNacimiento(new Date(System.currentTimeMillis()));
-		jugador.setNombre("Cacho");
+		Club club = new Club();
+		club.setNombre("SportClub");
 
-		jugador = servicesManager.addJugador(jugador);
+		club = clubRepository.save(club);
+
+		jugador = servicesManager.addJugador(JugadorMocked.getJugador(club));
 	}
 
 	@Test
 	public void testGetAll() {
 		List<Jugador> jugadores = servicesManager.getJugadores();
-		assertTrue(jugadores!=null && !jugadores.isEmpty());
+		assertTrue(jugadores != null && !jugadores.isEmpty());
 	}
-	
+
 	@Test
 	public void testEliminaJugador() {
 		Integer generatedId = jugador.getId();
 		servicesManager.deleteJugador(generatedId);
 		Jugador deleted = servicesManager.getJugadorById(generatedId);
-		assertTrue(deleted==null);
+		assertTrue(deleted == null);
 	}
 
 }
