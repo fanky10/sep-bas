@@ -5,9 +5,7 @@ drop database if exists sepbas_web;
 create database sepbas_web;
 grant all privileges on sepbas_web.* to sepbas_root@'localhost' identified by 'root';
 connect sepbas_web;
-/**
-* reglas de negocio a aplicar en las noticias, la noticia tiene un titulo, una fecha-hora, un cuerpo y (al menos por ahora) una sola imagen.
-*/
+
 DROP TABLE IF EXISTS jugadores;
 
 CREATE TABLE jugadores(
@@ -16,6 +14,7 @@ CREATE TABLE jugadores(
     jugador_nombre varchar(100) not null,
     jugador_apellido varchar(100) not null,
     jugador_numero integer unsigned not null,
+    jugador_actual_club_id integer unsigned not null,
     jugador_estado TINYINT(1) default 0 
 )ENGINE=InnoDB;
 
@@ -73,6 +72,7 @@ CREATE TABLE tipos_eventos(
 
 
 -- foreign key relationships
+ALTER TABLE jugadores ADD CONSTRAINT `FK_jugador_id_1` FOREIGN KEY (`jugador_actual_club_id`) REFERENCES `clubes` (`club_id`);
 
 ALTER TABLE jugador_club ADD CONSTRAINT `FK_jugador_club_id_1` FOREIGN KEY (`club_id`) REFERENCES `clubes` (`club_id`);
 ALTER TABLE jugador_club ADD CONSTRAINT `FK_jugador_club_id_2` FOREIGN KEY (`jugador_id`) REFERENCES `jugadores` (`jugador_id`);

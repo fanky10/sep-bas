@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +28,13 @@ public class Jugador {
 
 	@Column(name = "jugador_apellido", nullable = false)
 	private String apellido;
+	
+	@Column(name= "jugador_numero", nullable = false)
+	private Integer numero;
+	
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+	@JoinColumn(name = "jugador_actual_club_id", referencedColumnName = "club_id")
+	private Club club;
 
 	public Integer getId() {
 		return id;
@@ -56,6 +66,22 @@ public class Jugador {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+	public Club getClub() {
+		return club;
+	}
+
+	public void setClub(Club club) {
+		this.club = club;
 	}
 
 }

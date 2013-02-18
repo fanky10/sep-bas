@@ -8,6 +8,7 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.genfersco.sepbas.domain.model.Jugador</class>
+		<class>com.genfersco.sepbas.domain.model.Club</class>
 		<exclude-unlisted-classes />
 		<properties>
 		  <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
