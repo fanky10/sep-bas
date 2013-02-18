@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.genfersco.sepbas.domain.model.Club;
+import com.genfersco.sepbas.domain.model.EstadoJugador;
 import com.genfersco.sepbas.domain.model.Jugador;
 
 
@@ -41,6 +42,7 @@ public class JugadorRepositoryTest {
 		jugador.setNombre("Cacho");
 		jugador.setNumero(2);
 		jugador.setClub(club);
+		jugador.setEstado(EstadoJugador.HABILITADO);
 		
 		jugador = jugadorRepository.save(jugador);
 	}

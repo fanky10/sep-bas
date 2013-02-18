@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,13 +29,17 @@ public class Jugador {
 
 	@Column(name = "jugador_apellido", nullable = false)
 	private String apellido;
-	
-	@Column(name= "jugador_numero", nullable = false)
+
+	@Column(name = "jugador_numero", nullable = false)
 	private Integer numero;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
 	@JoinColumn(name = "jugador_actual_club_id", referencedColumnName = "club_id")
 	private Club club;
+
+	@Column(name = "jugador_estado", nullable = false)
+	@Enumerated
+	private EstadoJugador estado;
 
 	public Integer getId() {
 		return id;
@@ -82,6 +87,14 @@ public class Jugador {
 
 	public void setClub(Club club) {
 		this.club = club;
+	}
+
+	public EstadoJugador getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoJugador estado) {
+		this.estado = estado;
 	}
 
 }
