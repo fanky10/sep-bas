@@ -13,12 +13,15 @@
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<!-- @Controller, @Service, @Configuration, etc. -->
+	<!-- web controllers -->
 	<context:component-scan base-package="com.genfersco.sepbas.web.controller" />
+	<!-- services controllers -->
 	<context:component-scan base-package="com.genfersco.sepbas.services.controller" />
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-	<!-- handling objects as request. It's done implicity, but if more are needed 
+	
+	<!-- handling objects in request. It's done implicity, but if more are needed 
 		they should be placed here -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -31,26 +34,10 @@
 	</bean>
 
 	<!-- MANEJO DE VIEWS -->
-
-	<!-- fist the content negotiating view resolver -->
-	<bean id="contentNegotiatingViewResolver"
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="order"
-			value="#{T(org.springframework.core.Ordered).HIGHEST_PRECEDENCE}" />
-		<property name="mediaTypes">
-			<map>
-				<entry key="json" value="application/json" />
-				<entry key="html" value="text/html" />
-			</map>
-		</property>
-		<property name="ignoreAcceptHeader" value="true" />
-		<property name="defaultContentType" value="text/html" />
-		<property name="favorPathExtension" value="true" />
-	</bean>
-	<!-- luego el tilesResolver -->
+	<!-- mayor precedencia el tilesResolver -->
 	<bean id="tilesResolver"
 		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
-		<property name="order" value="#{contentNegotiatingViewResolver.order+1}" />
+		<property name="order" value="#{T(org.springframework.core.Ordered).HIGHEST_PRECEDENCE}" />
 	</bean>
 	<!-- Configuracion de tiles -->
 	<bean id="tilesConfigurer"
@@ -61,21 +48,11 @@
 			</list>
 		</property>
 	</bean>
-	<!-- luego el jsonViewResolver -->
-	<bean id="jsonViewResolver"
-		class="com.genfersco.sepbas.web.view.resolver.SimpleViewResolver">
-		<property name="order" value="#{tilesResolver.order+1}" />
-		<constructor-arg>
-			<bean
-				class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-		</constructor-arg>
-	</bean>
-
 	<!-- y por ultimo Resolve logical view names to .jsp resources in the /WEB-INF/pages 
 		directory -->
 	<bean id="urlBasedViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="#{jsonViewResolver.order+1}" />
+		<property name="order" value="#{tilesResolver.order+1}" />
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
