@@ -12,7 +12,6 @@
 		<class>com.genfersco.sepbas.domain.model.Evento</class>
 		<class>com.genfersco.sepbas.domain.model.Jugador</class>
 		<class>com.genfersco.sepbas.domain.model.Partido</class>
-		<class>com.genfersco.sepbas.domain.model.TipoEvento</class>
 		<exclude-unlisted-classes />
 		<properties>
 		  <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />

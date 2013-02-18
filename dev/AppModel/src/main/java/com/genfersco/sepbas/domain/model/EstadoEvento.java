@@ -1,11 +1,11 @@
 package com.genfersco.sepbas.domain.model;
 
-public enum TipoEvento {
-	INGRESA_JUGADOR(1),SALIDA_JUGADOR(0);
+public enum EstadoEvento{
+	ELIMINADO(1),NO_ELIMINADO(0);
 
 	private final int valor;
 
-	TipoEvento(int valor) {
+	EstadoEvento(int valor) {
 		this.valor = valor;
 	}
 

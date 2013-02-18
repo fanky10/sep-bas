@@ -55,19 +55,24 @@ DROP TABLE IF EXISTS eventos;
 
 CREATE TABLE eventos(
     evento_id integer unsigned not null primary key AUTO_INCREMENT,
-    evento_generador_id integer unsigned not null,
-	evento_tipo_evento_id integer unsigned not null,
+    evento_generador_id integer unsigned null,
+	evento_tipo_evento integer unsigned not null,
 	evento_estado TINYINT(1) default 0,
-	evento_cuarto_id integer unsigned not null
+	evento_cuarto_id integer unsigned not null,
+	evento_fec_hora timestamp not null default current_timestamp
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS tipos_eventos;
-
+/** 
+ * AHORA LOS TIPOS DE EVENTOS LOS MANEJA JAVA CON UN ENUM
+ * 
 CREATE TABLE tipos_eventos(
     tipo_evento_id integer unsigned not null primary key AUTO_INCREMENT,
     tipo_evento_descripcion varchar(100) not null
 )ENGINE=InnoDB;
 
+ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_tipo_evento_id`) REFERENCES `tipos_eventos` (`tipo_evento_id`);
+**/
 
 
 
@@ -79,5 +84,4 @@ ALTER TABLE jugador_club ADD CONSTRAINT `FK_jugador_club_id_2` FOREIGN KEY (`jug
 
 ALTER TABLE cuartos ADD CONSTRAINT `FK_cuartos_id_1` FOREIGN KEY (`cuarto_partido_id`) REFERENCES `partidos` (`partido_id`);
 
-ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_tipo_evento_id`) REFERENCES `tipos_eventos` (`tipo_evento_id`);
-ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_2` FOREIGN KEY (`evento_cuarto_id`) REFERENCES `cuartos` (`cuarto_id`);
+ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_cuarto_id`) REFERENCES `cuartos` (`cuarto_id`);
