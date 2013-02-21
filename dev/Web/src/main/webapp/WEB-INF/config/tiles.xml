@@ -17,7 +17,7 @@
 	</definition>
 
 	<definition name="jugadores_add" extends="base.definition">
-		<put-attribute name="title" value="Lista Producto" />
+		<put-attribute name="title" value="Lista Productos" />
 		<put-attribute name="body" value="/WEB-INF/pages/web/jugadores/jugador.jsp" />
 	</definition>
 	
@@ -26,4 +26,12 @@
 		<put-attribute name="body" value="/WEB-INF/pages/web/home.jsp" />
 	</definition>
 	
+	<definition name="clubes_list" extends="base.definition">
+		<put-attribute name="title" value="Lista Clubes" />
+		<put-attribute name="body" value="/WEB-INF/pages/web/clubes/clubes.jsp" />
+	</definition>
+	<definition name="clubes_add" extends="base.definition">
+		<put-attribute name="title" value="Agregar Club" />
+		<put-attribute name="body" value="/WEB-INF/pages/web/clubes/club.jsp" />
+	</definition>	
 </tiles-definitions>
