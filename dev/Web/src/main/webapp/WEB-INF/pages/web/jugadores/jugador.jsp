@@ -3,6 +3,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Agregar Jugador</title>
+<script type="text/javascript" src="<c:url value="/js/jquery.js" />"></script>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery.ui.datepicker-es.js" />"></script>
+
+<script>
+	$(function() {
+		$("#datePickerfechaNacimiento").datepicker({
+			onSelect : function(textoFecha, objDatepicker) {
+				//on select do something!
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<h1>Agregar Jugador</h1>
@@ -27,7 +42,7 @@
 	    <br/>
 	    <label for="fechaNacimiento"> Fecha Nacimiento: </label> 
 	    <span class="input"> 
-	      <input type="text" name="fechaNacimiento" id="fechaNacimiento">
+	      <input id="datePickerfechaNacimiento" type="text" name="fechaNacimiento" id="fechaNacimiento">
 	      <form:errors path="fechaNacimiento" id="fechaNacimientoError"/>
 	    </span>
 	    <br/>
