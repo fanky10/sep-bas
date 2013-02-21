@@ -44,6 +44,10 @@ public class Evento {
 	@Column(name = "evento_tipo_evento", nullable = false)
 	@Enumerated
 	private TipoEvento tipoEvento;
+	
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Jugador.class)
+	@JoinColumn(name = "evento_jugador_id", referencedColumnName = "jugador_id")
+	private Jugador jugador;
 
 	public Integer getId() {
 		return id;
@@ -91,6 +95,14 @@ public class Evento {
 
 	public void setTipoEvento(TipoEvento tipoEvento) {
 		this.tipoEvento = tipoEvento;
+	}
+
+	public Jugador getJugador() {
+		return jugador;
+	}
+
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
 	}
 
 }

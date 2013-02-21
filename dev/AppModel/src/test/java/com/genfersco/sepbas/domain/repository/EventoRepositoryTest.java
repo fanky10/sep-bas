@@ -12,11 +12,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.genfersco.sepbas.domain.mocked.ClubMocked;
 import com.genfersco.sepbas.domain.mocked.CuartoMocked;
+import com.genfersco.sepbas.domain.mocked.EventoMocked;
+import com.genfersco.sepbas.domain.mocked.JugadorMocked;
 import com.genfersco.sepbas.domain.mocked.PartidoMocked;
+import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.EstadoEvento;
 import com.genfersco.sepbas.domain.model.Evento;
+import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.domain.model.TipoEvento;
 
@@ -30,23 +35,27 @@ public class EventoRepositoryTest {
 	private PartidoRepository partidoRepository;
 	@Autowired
 	private EventoRepository eventoRepository;
+	@Autowired
+	private ClubRepository clubRepository;
+	@Autowired
+	private JugadorRepository jugadorRepository;
 	
 	private Partido partido = new Partido();
 	private Cuarto cuarto = new Cuarto();
+	private Club club = new Club();
+	private Jugador jugador = new Jugador();
 	private Evento evento = new Evento();
 	
 	
 	@Before
 	public void buildData() {
 		// evento simple
+		club = clubRepository.save(ClubMocked.getClub());
+		jugador = jugadorRepository.save(JugadorMocked.getJugador(club));
 		partido = partidoRepository.save(PartidoMocked.getPartido());
 		cuarto = cuartoRepository.save(CuartoMocked.getCuarto(partido));
-		evento.setCuarto(cuarto);
-		evento.setFechaHora(new Date(System.currentTimeMillis()));
-		evento.setEstado(EstadoEvento.NO_ELIMINADO);
-		evento.setTipoEvento(TipoEvento.INGRESA_JUGADOR);
 		
-		evento = eventoRepository.save(evento);
+		evento = eventoRepository.save(EventoMocked.getEvento(cuarto, jugador));
 	}
 
 	@Test
@@ -60,6 +69,7 @@ public class EventoRepositoryTest {
 		// evento hijo
 		Evento eventoHijo = new Evento();
 		eventoHijo.setCuarto(cuarto);
+		eventoHijo.setJugador(jugador);
 		eventoHijo.setFechaHora(new Date(System.currentTimeMillis()));
 		eventoHijo.setEstado(EstadoEvento.NO_ELIMINADO);
 		eventoHijo.setTipoEvento(TipoEvento.INGRESA_JUGADOR);
