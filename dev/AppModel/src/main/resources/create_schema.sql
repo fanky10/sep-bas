@@ -15,7 +15,7 @@ CREATE TABLE jugadores(
     jugador_apellido varchar(100) not null,
     jugador_numero integer unsigned not null,
     jugador_actual_club_id integer unsigned not null,
-    jugador_estado TINYINT(1) default 0 
+    jugador_estado integer unsigned not null default 0 
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS clubes;

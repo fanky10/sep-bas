@@ -1,8 +1,11 @@
 package com.genfersco.sepbas.web.form;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
+
+import com.genfersco.sepbas.domain.model.Club;
 
 @Component
 public class JugadorForm implements Serializable {
@@ -14,7 +17,10 @@ public class JugadorForm implements Serializable {
 	private Integer id;
 	private String nombre;
 	private String apellido;
-
+	private Club club;
+	private Integer numero;
+	private Date fechaNacimiento;
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -37,6 +43,30 @@ public class JugadorForm implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Club getClub() {
+		return club;
+	}
+
+	public void setClub(Club club) {
+		this.club = club;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 }

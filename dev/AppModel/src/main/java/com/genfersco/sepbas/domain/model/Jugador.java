@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "jugadores")
 public class Jugador {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "jugador_id", nullable = false)
@@ -39,7 +40,7 @@ public class Jugador {
 
 	@Column(name = "jugador_estado", nullable = false)
 	@Enumerated
-	private EstadoJugador estado;
+	private EstadoJugador estado = EstadoJugador.HABILITADO;
 
 	public Integer getId() {
 		return id;
