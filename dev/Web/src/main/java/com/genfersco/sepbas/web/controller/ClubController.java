@@ -57,7 +57,7 @@ public class ClubController extends BaseController {
 		try {
 			if (StringUtils.hasText(id)) {
 				Integer iId = Integer.parseInt(id);
-				servicesManager.deleteJugador(iId);
+				servicesManager.deleteClub(iId);
 				response = new DefaultJSONResponse("OK", "Club eliminado");
 			} else {
 				response = new DefaultJSONResponse("ERROR", "Id club vacio");
