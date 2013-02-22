@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
+<tiles:insertAttribute name="common_css" ignore="true" />
+<tiles:insertAttribute name="customheader" ignore="true" />
 </head>
 
 <body>

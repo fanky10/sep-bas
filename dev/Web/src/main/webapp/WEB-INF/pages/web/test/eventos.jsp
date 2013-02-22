@@ -13,10 +13,10 @@
 		    data:JSON.stringify(jsonData),
 		    dataType: 'json',
 		    success: function(data){
-		        $("responseMessage").html(data.message);
+		        $("#responseMessage").html(data.message);
 		    },
 		    error: function(){
-		    	console.log("device control failed response: "+data.message);
+		    	$("#responseMessage").html("device control failed response: "+data.message);
 		    },
 		    processData: false,
 		    type: 'POST',

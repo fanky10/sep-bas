@@ -1,29 +1,5 @@
 <%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="<c:url value="/js/jquery.js" />"></script>
-<script>
-	function deleteClub(element){
-		clubId = element.getAttribute("club-id"); //refers to the element actioning this method
-		li = element.parentNode;
-		$.post("${ctx}/clubes/delete.json", { "id": clubId },
-				function(response){
-					if(response.status=="OK"){//remove it
-						$(li).fadeOut("slow", function() { 
-		                    $(this).remove(); 
-		                });
-					}else if(response.status=="ERROR"){
-						$("#deleteResponse").html(response.error);
-					}
-				
-				}, "json"
-		);
-	}
-</script>
-<title>Clubes</title>
-</head>
-<body>
+<content>
 	<c:if test="${empty clubes}">
 		<h3>
 			<c:out value="no hay clubes" />
@@ -39,5 +15,4 @@
 		</c:forEach>
 	</ul>
 	<div id="deleteResponse"></div>
-</body>
-</html>
+</content>
