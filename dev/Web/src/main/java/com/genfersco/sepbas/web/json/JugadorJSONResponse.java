@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
 import com.genfersco.sepbas.domain.model.Jugador;
 
 public class JugadorJSONResponse extends DefaultJSONResponse {
@@ -23,12 +19,12 @@ public class JugadorJSONResponse extends DefaultJSONResponse {
 		super(status, message);
 		this.jugadores = jugadores;
 	}
-	
+
 	@Override
-	public Object getResultList() {
-		//avoids complex json mapping for front-end devs.
+	public Object getContent() {
+		// avoids complex json mapping for front-end devs.
 		List<JugadorVO> resultList = new ArrayList<JugadorJSONResponse.JugadorVO>();
-		for(Jugador j: jugadores){
+		for (Jugador j : jugadores) {
 			resultList.add(new JugadorVO(j));
 		}
 		return resultList;

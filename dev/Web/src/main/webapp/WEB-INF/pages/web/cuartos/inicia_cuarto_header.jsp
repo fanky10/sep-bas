@@ -52,7 +52,7 @@
 	function renderJugadores(data,inputId,divId) {
 		//super cool rendering here ajajaj
 
-		var jugadoresList = data.resultList;
+		var jugadoresList = data.content;
 		if (jugadoresList.length == 0) {
 			$("#"+divId).html("Sin jugadores.");
 		} else {
@@ -64,7 +64,6 @@
 				htmlResult.push("</ul>");
 			});
 			htmlResult.push("</li>");
-			console.log(htmlResult.join(''));
 			$("#"+divId).html(htmlResult.join(''));
 		}
 	}

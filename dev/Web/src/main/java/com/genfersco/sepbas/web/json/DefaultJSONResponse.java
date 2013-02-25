@@ -20,7 +20,7 @@ public class DefaultJSONResponse implements JSONResponse {
 	}
 
 	@Override
-	public Object getResultList() {
+	public Object getContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}

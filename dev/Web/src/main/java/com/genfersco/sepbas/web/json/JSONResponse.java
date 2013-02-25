@@ -3,7 +3,7 @@ package com.genfersco.sepbas.web.json;
 import java.io.Serializable;
 
 public interface JSONResponse extends Serializable {
-	Object getResultList();
+	Object getContent();
 	String getMessage();
 	String getStatus();
 }
