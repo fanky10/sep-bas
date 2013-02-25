@@ -1,7 +1,6 @@
 package com.genfersco.sepbas.web.controller;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +22,14 @@ import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciaCuartoForm;
+import com.genfersco.sepbas.web.util.PartidoHelper;
 
 @Controller
 public class CuartoController extends BaseController {
 	@Autowired
 	private ServicesManager serviceManager;
+	@Autowired
+	private PartidoController partidoController;
 
 	@InitBinder
 	protected void initBinder(HttpServletRequest request,
@@ -47,7 +49,7 @@ public class CuartoController extends BaseController {
 	@RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.POST)
 	public String guardarIniciaCuarto(HttpServletRequest request,
 			@ModelAttribute IniciaCuartoForm iniciaCuartoForm) {
-		// TODO create a VO object (BO) CuartoBO 
+		// TODO create a VO object (BO) CuartoBO
 		// with equipo1 and equipo2 as attributes
 		List<Jugador> equipo1 = Arrays.asList(iniciaCuartoForm
 				.getJugadoresEquipo1());
@@ -58,7 +60,7 @@ public class CuartoController extends BaseController {
 		cuarto.setNumero(1);
 		cuarto.setPartido(partido);
 		cuarto = getServiceManager().addCuarto(cuarto, equipo1, equipo2);
-		
+
 		// TODO: redirect ingresoEventos controller (:
 		return "web/test/okMessage";
 	}
@@ -75,10 +77,11 @@ public class CuartoController extends BaseController {
 	}
 
 	protected Partido getPartido(HttpServletRequest request) {
-		// TODO: ecapsulate into ClientRequest object -- save it when neccesary
-		Partido partido = new Partido();
-		partido.setFecha(new Date(System.currentTimeMillis()));
-		getServiceManager().addPartido(partido);
+		Partido partido = PartidoHelper.getPartido(request);
+		if (partido == null) {
+			getPartidoController().addPartido(request);
+			partido = PartidoHelper.getPartido(request);//should be working now hehe
+		}
 		return partido;
 	}
 
@@ -88,6 +91,14 @@ public class CuartoController extends BaseController {
 
 	public void setServiceManager(ServicesManager serviceManager) {
 		this.serviceManager = serviceManager;
+	}
+
+	public PartidoController getPartidoController() {
+		return partidoController;
+	}
+
+	public void setPartidoController(PartidoController partidoController) {
+		this.partidoController = partidoController;
 	}
 
 }
