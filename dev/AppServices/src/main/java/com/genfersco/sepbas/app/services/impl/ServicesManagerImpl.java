@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.genfersco.sepbas.app.services.ClubManager;
 import com.genfersco.sepbas.app.services.JugadorManager;
@@ -64,6 +63,14 @@ public class ServicesManagerImpl implements ServicesManager {
 		} catch (NumberFormatException nfe) {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Jugador> getJugadoresClub(Integer clubId) {
+		if(clubId==null){
+			return null;
+		}
+		return jugadorManager.getJugadoresClub(clubId);
 	}
 
 }

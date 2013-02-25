@@ -28,12 +28,11 @@ public class JugadorManagerTest {
 	private ClubRepository clubRepository;
 
 	private Jugador jugador = new Jugador();
+	private Club club = new Club();
 
 	@Before
 	public void buildData() {
-		Club club = new Club();
 		club.setNombre("SportClub");
-
 		club = clubRepository.save(club);
 
 		jugador = jugadorManager.addJugador(JugadorMocked.getJugador(club));
@@ -53,4 +52,17 @@ public class JugadorManagerTest {
 		assertTrue(aux == null);
 
 	}
+
+	@Test
+	public void testGetJugadoresClub() {
+		Club club = new Club();
+		club.setNombre("SportTest");
+		club = clubRepository.save(club);
+		for (int i = 0; i < 10; i++) {
+			jugador = jugadorManager.addJugador(JugadorMocked.getJugador(club));
+		}
+		List<Jugador> jugadores = jugadorManager.getJugadoresClub(club.getId());
+		assertTrue(jugadores!=null && !jugadores.isEmpty());
+	}
+	
 }

@@ -9,4 +9,5 @@ public interface JugadorManager {
 	public List<Jugador> getJugadores();
 	public void deleteJugador(Jugador jugador);
 	public Jugador getJugadorById(Integer id);
+	public List<Jugador> getJugadoresClub(Integer clubId);
 }

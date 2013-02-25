@@ -29,4 +29,6 @@ public interface ServicesManager {
 	
 	public Club getClub(String id);
 	
+	public List<Jugador> getJugadoresClub(Integer clubId);
+	
 }
