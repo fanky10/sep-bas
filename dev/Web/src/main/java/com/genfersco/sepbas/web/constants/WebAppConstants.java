@@ -9,4 +9,5 @@ public class WebAppConstants {
 	public static final String STATIC_ERROR_PAGE = "web/staticerror";
 	public static final String AGREGAR_CLUB = "clubes_add";
 	public static final String CLUBES = "clubes_list";
+	public static final String INICIO_CUARTO = "cuartos_inicia";
 }

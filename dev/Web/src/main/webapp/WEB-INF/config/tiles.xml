@@ -43,6 +43,7 @@
 	<definition name="cuartos_inicia" extends="base.definition">
 		<put-attribute name="title" value="Inicia Cuarto" />
 		<put-attribute name="body" value="/WEB-INF/pages/web/cuartos/inicia_cuarto.jsp" />
+		<put-attribute name="customheader" value="/WEB-INF/pages/web/cuartos/inicia_cuarto_header.jsp"></put-attribute>
 	</definition>
 	
 	<definition name="cuartos_finaliza" extends="base.definition">

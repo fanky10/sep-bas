@@ -1,11 +1,16 @@
 package com.genfersco.sepbas.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.genfersco.sepbas.app.services.ServicesManager;
+import com.genfersco.sepbas.domain.model.Club;
+import com.genfersco.sepbas.web.constants.WebAppConstants;
 
 @Controller
 public class CuartoController {
@@ -13,8 +18,11 @@ public class CuartoController {
 	private ServicesManager serviceManager;
 	
 	@RequestMapping(value="/cuartos/iniciar",method=RequestMethod.GET)
-	public String showIniciaCuarto(){
-		return "";
+	public String showIniciaCuarto(ModelMap map){
+		List<Club> clubes = getServiceManager().getClubes();
+		map.addAttribute("clubes",clubes);
+		
+		return WebAppConstants.INICIO_CUARTO;
 	}
 	
 	@RequestMapping(value="/cuartos/iniciar",method=RequestMethod.POST)

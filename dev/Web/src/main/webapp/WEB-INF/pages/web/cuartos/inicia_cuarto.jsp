@@ -1,23 +1,15 @@
 <%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Agregar Club</title>
-</head>
-<body>
-	<h1>Agregar Club</h1>
-  <form:form action="${pageContext.request.contextPath}/clubes/add" modelAttribute="clubForm" method="POST">
-      <fieldset>
-      	<form:hidden path="id" />
-	    <label for="name"> Nombre: </label> 
-	    <span class="input"> 
-	      <form:input path="nombre" />
-	      <form:errors path="nombre" id="nombreError"/>
-	    </span>  
-	    <br/>
-	    <br/>
-	   <input name="submit" type="submit" value="Guardar" />
-     </fieldset>
-  </form:form>
-</body>
-</html>
+<content>
+	 <label for="club" class="hint">Seleccione un club</label>
+	    
+	    <select id="clubSelector" name="club" id="club">
+				<c:forEach var="club" items="${clubes}">
+					<option data-content="${club.nombre}" label="${club.nombre}"
+						value="${club.id}" />${club.nombre}
+				</c:forEach>
+		</select>
+		
+		<div id="jugadoresClub"></div>
+	    
+
+</content>

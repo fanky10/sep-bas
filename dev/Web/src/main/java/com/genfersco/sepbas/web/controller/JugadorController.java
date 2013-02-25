@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.JugadorForm;
 import com.genfersco.sepbas.web.json.DefaultJSONResponse;
 import com.genfersco.sepbas.web.json.JSONResponse;
+import com.genfersco.sepbas.web.json.JugadorJSONResponse;
 
 @Controller
 public class JugadorController extends BaseController {
@@ -62,7 +64,7 @@ public class JugadorController extends BaseController {
 		Jugador jugador = new Jugador();
 		jugador.setNombre(jugadorForm.getNombre());
 		jugador.setApellido(jugadorForm.getApellido());
-		jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());//new Date(System.currentTimeMillis()));
+		jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());
 		jugador.setClub(jugadorForm.getClub());
 		jugador.setNumero(jugadorForm.getNumero());
 		getServicesManager().addJugador(jugador);
@@ -89,8 +91,29 @@ public class JugadorController extends BaseController {
 		}
 		return response;
 	}
-	
-	public ServicesManager getServicesManager(){
+
+	@RequestMapping(value = "/jugadores/club/{clubId}/list.json", method = RequestMethod.GET)
+	public @ResponseBody
+	JSONResponse getJugadoresClub(@PathVariable("clubId") String id, Model map) {
+		// shows view
+		JSONResponse response = null;
+		try {
+			if (StringUtils.hasText(id)) {
+				Integer clubId = Integer.parseInt(id);
+				List<Jugador> jugadores = getServicesManager()
+						.getJugadoresClub(clubId);
+				response = new JugadorJSONResponse("OK", "", jugadores);
+			} else {
+				response = new DefaultJSONResponse("ERROR", "Id club vacio");
+			}
+		} catch (NumberFormatException nfe) {
+			response = new DefaultJSONResponse("ERROR",
+					"Id jugador no es un entero");
+		}
+		return response;
+	}
+
+	public ServicesManager getServicesManager() {
 		return this.servicesManager;
 	}
 }

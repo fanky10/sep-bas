@@ -11,4 +11,6 @@
 	<a href="${agregarJugador}">Agregar Nuevo Jugador</a>
 	<c:url var="agregarClub" value="/clubes/add"/>
 	<a href="${agregarClub}">Agregar Nuevo Club</a>
+	<c:url var="iniciarCuarto" value="/cuartos/iniciar"/>
+	<a href="${iniciarCuarto}">Iniciar Nuevo Cuarto</a>
 </div>
