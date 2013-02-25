@@ -1,5 +1,7 @@
 package com.genfersco.sepbas.web.controller;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.genfersco.sepbas.app.services.ServicesManager;
 import com.genfersco.sepbas.datafields.JugadorPropertyEditor;
 import com.genfersco.sepbas.domain.model.Club;
+import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.Jugador;
+import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciaCuartoForm;
 
 @Controller
-public class CuartoController {
+public class CuartoController extends BaseController {
 	@Autowired
 	private ServicesManager serviceManager;
 
@@ -37,17 +41,25 @@ public class CuartoController {
 		List<Club> clubes = getServiceManager().getClubes();
 		map.addAttribute("clubes", clubes);
 		map.addAttribute("iniciaCuartoForm", new IniciaCuartoForm());
-
 		return WebAppConstants.INICIO_CUARTO;
 	}
 
 	@RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.POST)
-	public String guardarIniciaCuarto(
+	public String guardarIniciaCuarto(HttpServletRequest request,
 			@ModelAttribute IniciaCuartoForm iniciaCuartoForm) {
-		// TODO: call corresponding service.
-		System.out.println("initCuartos:"
-				+ iniciaCuartoForm.getJugadoresEquipo1());
-		// TODO: call ingresoEventos controller (:
+		// TODO create a VO object (BO) CuartoBO 
+		// with equipo1 and equipo2 as attributes
+		List<Jugador> equipo1 = Arrays.asList(iniciaCuartoForm
+				.getJugadoresEquipo1());
+		List<Jugador> equipo2 = Arrays.asList(iniciaCuartoForm
+				.getJugadoresEquipo2());
+		Partido partido = getPartido(request);
+		Cuarto cuarto = new Cuarto();
+		cuarto.setNumero(1);
+		cuarto.setPartido(partido);
+		cuarto = getServiceManager().addCuarto(cuarto, equipo1, equipo2);
+		
+		// TODO: redirect ingresoEventos controller (:
 		return "web/test/okMessage";
 	}
 
@@ -60,6 +72,14 @@ public class CuartoController {
 	public String guardarFinCuarto() {
 		// TODO: call ingresoEventos controller (:
 		return "";
+	}
+
+	protected Partido getPartido(HttpServletRequest request) {
+		// TODO: ecapsulate into ClientRequest object -- save it when neccesary
+		Partido partido = new Partido();
+		partido.setFecha(new Date(System.currentTimeMillis()));
+		getServiceManager().addPartido(partido);
+		return partido;
 	}
 
 	public ServicesManager getServiceManager() {

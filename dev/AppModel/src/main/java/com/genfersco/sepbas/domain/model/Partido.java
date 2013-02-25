@@ -21,10 +21,10 @@ public class Partido {
 	@Column(name = "partido_fecha", nullable = false, unique = true)
 	private Date fecha;
 
-	@Column(name = "partido_resultado_local", nullable = false)
+	@Column(name = "partido_resultado_local", nullable = true)
 	private Integer resultadoLocal;
 
-	@Column(name = "partido_resultado_visitante", nullable = false)
+	@Column(name = "partido_resultado_visitante", nullable = true)
 	private Integer resultadoVisitante;
 
 	public Integer getId() {
