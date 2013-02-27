@@ -32,7 +32,7 @@
 		<div id="equipo1"></div>
 		<label>Jugadores Disponibles Equipo 2</label>
 		<div id="equipo2"></div>
-		<input name="submit" type="submit" value="Guardar" />
+		<input name="submit" type="submit" value="Iniciar Cuarto" />
 	</form:form>
 
 

@@ -11,4 +11,10 @@ public class TestController {
 		model.put("evento","evento!!");
 		return "web/test/eventos";
 	}
+	
+	@RequestMapping("/style/test")
+	public String showStyleView(ModelMap model){
+		model.put("evento","evento!!");
+		return "web/test/styledSite";
+	}
 }
