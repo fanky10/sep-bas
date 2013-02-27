@@ -33,8 +33,8 @@
 	<div class="logo">
 		<div class="row">
 			<div class="one columns isotipo">
-				<a href="#" title="Sistema De estadisticos locos">
-					<img src="/una/imagen.png" /></a>
+				<a href="#" title="Sistema De estadisticos locos"> <img
+					src="/una/imagen.png" /></a>
 			</div>
 			<div class="eleven columns">
 				<h2 class="slogan">Contribuyendo estadisticas desde 2013</h2>
@@ -60,15 +60,15 @@
 	</div>
 	<!-- navigation  -->
 	<div class="breadcrums">
-    <div class="row">
-        <div class="twelve columns">
-            <ul class="inline-list">
-                <li><a href="#">Home</a></li>
-                <li>></li>
-                <li>Home</li>
-            </ul>        
-        </div>
-    </div>
-</div>
+		<div class="row">
+			<div class="twelve columns">
+				<ul class="inline-list">
+					<li><a href="#">Home</a></li>
+					<li>></li>
+					<li>Home</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
