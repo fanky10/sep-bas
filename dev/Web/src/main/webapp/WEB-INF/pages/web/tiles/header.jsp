@@ -21,24 +21,12 @@
 	<div class="row">
 		<div class="twelve columns menu-wrapper">
 			<ul class="nav link-list">
-				<li><a href="#" title="Nuevo Cuarto">Nuevo Cuarto</a></li>
+				<li><a href="<c:url value="/jugadores/list" />" title="Ver Jugadores">Ver Jugadores</a></li>
 				<li>|</li>
-				<li><a href="#" title="Opcion 1">Opcion 1</a></li>
+				<li><a href="<c:url value="/clubes/list" />" title="Ver Jugadores">Ver Clubes</a></li>
 				<li>|</li>
 				<li><a href="#" title="Opcion 2">Opcion 2</a></li>
 				<li>|</li>
-			</ul>
-		</div>
-	</div>
-</div>
-<!-- navigation  -->
-<div class="breadcrums">
-	<div class="row">
-		<div class="twelve columns">
-			<ul class="inline-list">
-				<li><a href="#">Home</a></li>
-				<li>></li>
-				<li>Home</li>
 			</ul>
 		</div>
 	</div>

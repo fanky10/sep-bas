@@ -6,6 +6,19 @@
 <title>Jugadores</title>
 </head>
 <body>
+	
+	<!-- navigation  -->
+	<div class="breadcrums">
+		<div class="row">
+			<div class="twelve columns">
+				<ul class="inline-list">
+					<li><a href="#">Home</a></li>
+					<li>></li>
+					<li>Home</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 	<c:if test="${empty jugadores}">
 		<h3>
 			<c:out value="no hay jugadores" />
