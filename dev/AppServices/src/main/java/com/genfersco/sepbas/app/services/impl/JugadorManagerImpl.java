@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.genfersco.sepbas.app.services.JugadorManager;
+import com.genfersco.sepbas.domain.model.EstadoJugador;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.repository.JugadorRepository;
 
@@ -23,7 +24,11 @@ public class JugadorManagerImpl implements JugadorManager {
 
 	@Override
 	public List<Jugador> getJugadores() {
-		return jugadorRepository.findAll();
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT jugadores FROM Jugador jugadores WHERE jugadores.estado = :estadoJugador");
+		Query query = getEntityManager().createQuery(sb.toString());
+		query.setParameter("estadoJugador", EstadoJugador.HABILITADO);
+		return query.getResultList();
 	}
 
 	@Override
@@ -34,7 +39,8 @@ public class JugadorManagerImpl implements JugadorManager {
 
 	@Override
 	public void deleteJugador(Jugador jugador) {
-		jugadorRepository.delete(jugador);
+		jugador.setEstado(EstadoJugador.DESHABILITADO);
+		jugadorRepository.save(jugador);
 	}
 
 	@Override
