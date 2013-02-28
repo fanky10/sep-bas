@@ -25,7 +25,8 @@ public class ClubManagerImpl implements ClubManager{
 	
 	@Override
 	public void deleteClub(Integer id){
-		clubRepository.delete(id);
+		// TODO: eliminar solo aquellos clubes sin jugadores relacionados.
+//		clubRepository.delete(id); 
 	}
 
 	@Override
