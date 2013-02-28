@@ -13,13 +13,13 @@
 	</definition>
 	
 	<definition name="jugadores_list" extends="base.definition">
-		<put-attribute name="title" value="Lista Producto" />
+		<put-attribute name="title" value="Lista Jugadores" />
 		<put-attribute name="body" value="/WEB-INF/pages/web/jugadores/jugadores.jsp" />
 		<put-attribute name="customheader" value="/WEB-INF/pages/web/jugadores/jugadores_header.jsp" />
 	</definition>
 
 	<definition name="jugadores_add" extends="base.definition">
-		<put-attribute name="title" value="Lista Productos" />
+		<put-attribute name="title" value="Agregar Jugador" />
 		<put-attribute name="body" value="/WEB-INF/pages/web/jugadores/jugador.jsp" />
 		<put-attribute name="customheader" value="/WEB-INF/pages/web/jugadores/jugador_header.jsp" />
 	</definition>

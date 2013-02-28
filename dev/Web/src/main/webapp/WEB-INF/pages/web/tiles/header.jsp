@@ -23,7 +23,7 @@
 			<ul class="nav link-list">
 				<li><a href="<c:url value="/jugadores/list" />" title="Ver Jugadores">Ver Jugadores</a></li>
 				<li>|</li>
-				<li><a href="<c:url value="/clubes/list" />" title="Ver Jugadores">Ver Clubes</a></li>
+				<li><a href="<c:url value="/clubes/list" />" title="Ver Clubes">Ver Clubes</a></li>
 				<li>|</li>
 				<li><a href="#" title="Opcion 2">Opcion 2</a></li>
 				<li>|</li>
