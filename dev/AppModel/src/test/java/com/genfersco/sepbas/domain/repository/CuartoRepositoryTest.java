@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.Partido;
 
@@ -23,13 +24,25 @@ public class CuartoRepositoryTest {
 	private CuartoRepository cuartoRepository;
 	@Autowired
 	private PartidoRepository partidoRepository;
+	@Autowired
+	private ClubRepository clubRepository;
 
 	private Cuarto cuarto = new Cuarto();
 
 	@Before
 	public void buildData() {
+		Club clubVisitante = new Club();
+		clubVisitante.setNombre("Visitante");
+		clubVisitante = clubRepository.save(clubVisitante);
+		
+		Club clubLocal = new Club();
+		clubLocal.setNombre("Local!");
+		clubLocal = clubRepository.save(clubLocal);
+		
 		Partido partido = new Partido();
 		partido.setFecha(new Date(System.currentTimeMillis()));
+		partido.setClubVisitante(clubVisitante);
+		partido.setClubLocal(clubLocal);
 		partido.setResultadoLocal(11);
 		partido.setResultadoVisitante(111);
 		partido = partidoRepository.save(partido);

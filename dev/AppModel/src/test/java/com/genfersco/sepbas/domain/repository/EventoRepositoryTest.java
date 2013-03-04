@@ -42,7 +42,7 @@ public class EventoRepositoryTest {
 	
 	private Partido partido = new Partido();
 	private Cuarto cuarto = new Cuarto();
-	private Club club = new Club();
+	private Club clubLocal = new Club();
 	private Jugador jugador = new Jugador();
 	private Evento evento = new Evento();
 	
@@ -50,9 +50,10 @@ public class EventoRepositoryTest {
 	@Before
 	public void buildData() {
 		// evento simple
-		club = clubRepository.save(ClubMocked.getClub());
-		jugador = jugadorRepository.save(JugadorMocked.getJugador(club));
-		partido = partidoRepository.save(PartidoMocked.getPartido());
+		clubLocal = clubRepository.save(ClubMocked.getClub());
+		jugador = jugadorRepository.save(JugadorMocked.getJugador(clubLocal));
+		Club clubVisitante = clubRepository.save(ClubMocked.getClub());
+		partido = partidoRepository.save(PartidoMocked.getPartido(clubLocal,clubVisitante));
 		cuarto = cuartoRepository.save(CuartoMocked.getCuarto(partido));
 		
 		evento = eventoRepository.save(EventoMocked.getEvento(cuarto, jugador));

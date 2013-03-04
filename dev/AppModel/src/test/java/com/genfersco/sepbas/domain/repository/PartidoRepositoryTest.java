@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.genfersco.sepbas.domain.mocked.ClubMocked;
+import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Partido;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,11 +22,20 @@ import com.genfersco.sepbas.domain.model.Partido;
 public class PartidoRepositoryTest {
 	@Autowired
 	private PartidoRepository partidoRepository;
+	@Autowired
+	private ClubRepository clubRepository;
 	
 	private Partido partido = new Partido();
+	private Club clubLocal = new Club();
+	private Club clubVisitante = new Club();
 	
 	@Before
 	public void buildData(){
+		clubLocal = clubRepository.save(ClubMocked.getClub());
+		clubVisitante = clubRepository.save(ClubMocked.getClub());
+		
+		partido.setClubLocal(clubLocal);
+		partido.setClubVisitante(clubVisitante);
 		partido.setFecha(new Date(System.currentTimeMillis()));
 		partido.setResultadoLocal(10);
 		partido.setResultadoVisitante(20);

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.genfersco.sepbas.app.services.ServicesManager;
 import com.genfersco.sepbas.domain.mocked.JugadorMocked;
 import com.genfersco.sepbas.domain.model.Club;
+import com.genfersco.sepbas.domain.model.EstadoJugador;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.repository.ClubRepository;
 
@@ -51,7 +52,7 @@ public class ServicesManagerTest {
 		Integer generatedId = jugador.getId();
 		servicesManager.deleteJugador(generatedId);
 		Jugador deleted = servicesManager.getJugadorById(generatedId);
-		assertTrue(deleted == null);
+		assertTrue(deleted.getEstado()==EstadoJugador.DESHABILITADO);
 	}
 
 }

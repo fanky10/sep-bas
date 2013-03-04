@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,7 +29,15 @@ public class Partido {
 
 	@Column(name = "partido_resultado_visitante", nullable = true)
 	private Integer resultadoVisitante;
-
+	
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+	@JoinColumn(name = "partido_local_club_id", referencedColumnName = "club_id")
+	private Club clubLocal;
+	
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+	@JoinColumn(name = "partido_visitante_club_id", referencedColumnName = "club_id")
+	private Club clubVisitante;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -57,6 +68,22 @@ public class Partido {
 
 	public void setResultadoVisitante(Integer resultadoVisitante) {
 		this.resultadoVisitante = resultadoVisitante;
+	}
+
+	public Club getClubLocal() {
+		return clubLocal;
+	}
+
+	public void setClubLocal(Club clubLocal) {
+		this.clubLocal = clubLocal;
+	}
+
+	public Club getClubVisitante() {
+		return clubVisitante;
+	}
+
+	public void setClubVisitante(Club clubVisitante) {
+		this.clubVisitante = clubVisitante;
 	}
 
 }
