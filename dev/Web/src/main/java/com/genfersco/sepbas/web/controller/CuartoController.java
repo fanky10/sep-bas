@@ -43,7 +43,7 @@ public class CuartoController extends BaseController {
 		List<Jugador> jugadoresClubLocal = getServiceManager()
 				.getJugadoresClub(partido.getClubLocal().getId());
 		List<Jugador> jugadoresClubVisitante = getServiceManager()
-				.getJugadoresClub(partido.getClubLocal().getId());
+				.getJugadoresClub(partido.getClubVisitante().getId());
 
 		map.addAttribute("clubLocal", partido.getClubLocal());
 		map.addAttribute("clubVisitante", partido.getClubVisitante());
