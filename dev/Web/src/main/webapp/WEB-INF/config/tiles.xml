@@ -46,8 +46,8 @@
 		<put-attribute name="customheader" value="/WEB-INF/pages/web/cuartos/inicia_cuarto_header.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="cuartos_finaliza" extends="base.definition">
-		<put-attribute name="title" value="Finaliza Cuarto" />
-		<put-attribute name="body" value="/WEB-INF/pages/web/cuartos/finaliza_cuarto.jsp" />
+	<definition name="partidos_add" extends="base.definition">
+		<put-attribute name="title" value="Nuevo Partido" />
+		<put-attribute name="body" value="/WEB-INF/pages/web/partidos/partido.jsp" />
 	</definition>	
 </tiles-definitions>

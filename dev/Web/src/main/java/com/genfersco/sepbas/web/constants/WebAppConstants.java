@@ -10,6 +10,7 @@ public class WebAppConstants {
 	public static final String AGREGAR_CLUB = "clubes_add";
 	public static final String CLUBES = "clubes_list";
 	public static final String INICIO_CUARTO = "cuartos_inicia";
+	public static final String AGREGAR_PARTIDO = "partidos_add";
 	
 	// List of Session and Request attribute names
 	public static final String PARTIDO_KEY = "sessionPartido";

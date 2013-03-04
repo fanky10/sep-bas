@@ -79,7 +79,8 @@ public class CuartoController extends BaseController {
 	protected Partido getPartido(HttpServletRequest request) {
 		Partido partido = PartidoHelper.getPartido(request);
 		if (partido == null) {
-			getPartidoController().addPartido(request);
+			//TODO: mock this or something!
+//			getPartidoController().addPartido(request);
 			partido = PartidoHelper.getPartido(request);//should be working now hehe
 		}
 		return partido;

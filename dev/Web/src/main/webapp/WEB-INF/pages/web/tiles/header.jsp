@@ -25,7 +25,7 @@
 				<li>|</li>
 				<li><a href="<c:url value="/clubes/list" />" title="Ver Clubes">Ver Clubes</a></li>
 				<li>|</li>
-				<li><a href="#" title="Opcion 2">Opcion 2</a></li>
+				<li><a href="<c:url value="/partidos/add" />" title="Nuevo Partido">Nuevo Partido</a></li>
 				<li>|</li>
 			</ul>
 		</div>
