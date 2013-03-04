@@ -9,7 +9,7 @@
 					<li style="list-style-type:none">
 					<c:forEach var="jugador" items="${jugadoresClubLocal}" varStatus="status">
 						<ul>
-						<input id="equipo1${status.index}" name="jugadoresEquipo1" type="checkbox" value="${jugador.id}"/>${jugador.nombre}
+						<input class="chkEquipo1" id="equipo1${status.index}" name="jugadoresEquipo1" type="checkbox" value="${jugador.id}"/>${jugador.nombre}
 						</ul>
 					</c:forEach>
 					</li>
@@ -20,7 +20,7 @@
 					<li style="list-style-type:none">
 					<c:forEach var="jugador" items="${jugadoresClubVisitante}" varStatus="status">
 						<ul>
-						<input id="equipo2${status.index}" name="jugadoresEquipo2" type="checkbox" value="${jugador.id}"/>${jugador.nombre}
+						<input class="chkEquipo2" id="equipo2${status.index}" name="jugadoresEquipo2" type="checkbox" value="${jugador.id}"/>${jugador.nombre}
 						</ul>
 					</c:forEach>
 					</li>

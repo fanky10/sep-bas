@@ -27,6 +27,7 @@
 				<li>|</li>
 				<li><a href="<c:url value="/partidos/add" />" title="Nuevo Partido">Nuevo Partido</a></li>
 				<li>|</li>
+				<li><a href="<c:url value="/cuartos/iniciar" />" title="Nuevo Partido">Nuevo Cuarto</a></li>
 			</ul>
 		</div>
 	</div>
