@@ -43,7 +43,7 @@ public class PartidoController extends BaseController {
 		partido.setFecha(new Date(System.currentTimeMillis()));
 		partido = getServicesManager().addPartido(partido);
 		PartidoHelper.setPartido(request, partido);
-		return "";// TODO: some redirection here
+		return "redirect:/cuartos/iniciar";
 	}
 
 	@RequestMapping(value = "/partidos/add", method = RequestMethod.GET)

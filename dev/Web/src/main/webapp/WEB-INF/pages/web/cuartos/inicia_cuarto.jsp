@@ -1,40 +1,32 @@
 <%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
-<content> 
-	<div>
-		Equipo 1
-		<label for="club" class="hint">Seleccione un club</label> 
-		<select id="clubSelectorEquipo1" name="club" id="club">
-			<option data-content="" label="Seleccione Club"
-				value="-1" />Seleccione Club
-			<c:forEach var="club" items="${clubes}">
-				<option data-content="${club.nombre}" label="${club.nombre}"
-					value="${club.id}" />${club.nombre}
-			</c:forEach>
-		</select> 
-		
+<div class="content">
+	<div class="row">
+		<div class="tree columns">
+			<form:form action="${ctx}/cuartos/iniciar"
+				modelAttribute="iniciaCuartoForm" method="POST">
+				<label>Jugadores Disponibles Club Local ${clubLocal.nombre}</label>
+				<div id="equipo1">
+					<li style="list-style-type:none">
+					<c:forEach var="jugador" items="${jugadoresClubLocal}" varStatus="status">
+						<ul>
+						<input id="equipo1${status.index}" name="jugadoresEquipo1" type="checkbox" value="${jugador.id}"/>${jugador.nombre}
+						</ul>
+					</c:forEach>
+					</li>
+				</div>
+				<label>Jugadores Disponibles Club Visitante
+					${clubVisitante.nombre}</label>
+				<div id="equipo2">
+					<li style="list-style-type:none">
+					<c:forEach var="jugador" items="${jugadoresClubVisitante}" varStatus="status">
+						<ul>
+						<input id="equipo2${status.index}" name="jugadoresEquipo2" type="checkbox" value="${jugador.id}"/>${jugador.nombre}
+						</ul>
+					</c:forEach>
+					</li>
+				</div>
+				<input name="submit" type="submit" value="Iniciar Cuarto" />
+			</form:form>
+		</div>
 	</div>
-	<div>
-		Equipo 2
-		<label for="club" class="hint">Seleccione un club</label> 
-		<select id="clubSelectorEquipo2" name="club" id="club">
-			<option data-content="" label="Seleccione Club"
-				value="-1" />Seleccione Club
-			<c:forEach var="club" items="${clubes}">
-				<option data-content="${club.nombre}" label="${club.nombre}"
-					value="${club.id}" />${club.nombre}
-			</c:forEach>
-		</select> 
-		
-	</div>
-	<!-- TODO: validate input according to the number of selected elements -->
-	<form:form action="${ctx}/cuartos/iniciar" modelAttribute="iniciaCuartoForm" method="POST">
-		<label>Jugadores Disponibles Equipo 1</label>
-		<div id="equipo1"></div>
-		<label>Jugadores Disponibles Equipo 2</label>
-		<div id="equipo2"></div>
-		<input name="submit" type="submit" value="Iniciar Cuarto" />
-	</form:form>
-
-
-
-</content>
+</div>

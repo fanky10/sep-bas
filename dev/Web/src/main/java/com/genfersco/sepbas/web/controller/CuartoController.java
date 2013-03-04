@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.genfersco.sepbas.app.services.ServicesManager;
 import com.genfersco.sepbas.datafields.JugadorPropertyEditor;
-import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
@@ -39,9 +38,18 @@ public class CuartoController extends BaseController {
 	}
 
 	@RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.GET)
-	public String showIniciaCuarto(ModelMap map) {
-		List<Club> clubes = getServiceManager().getClubes();
-		map.addAttribute("clubes", clubes);
+	public String showIniciaCuarto(HttpServletRequest request, ModelMap map) {
+		Partido partido = getPartido(request);
+		List<Jugador> jugadoresClubLocal = getServiceManager()
+				.getJugadoresClub(partido.getClubLocal().getId());
+		List<Jugador> jugadoresClubVisitante = getServiceManager()
+				.getJugadoresClub(partido.getClubLocal().getId());
+
+		map.addAttribute("clubLocal", partido.getClubLocal());
+		map.addAttribute("clubVisitante", partido.getClubVisitante());
+		map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
+		map.addAttribute("jugadoresClubVisitante", jugadoresClubVisitante);
+
 		map.addAttribute("iniciaCuartoForm", new IniciaCuartoForm());
 		return WebAppConstants.INICIO_CUARTO;
 	}
@@ -79,9 +87,7 @@ public class CuartoController extends BaseController {
 	protected Partido getPartido(HttpServletRequest request) {
 		Partido partido = PartidoHelper.getPartido(request);
 		if (partido == null) {
-			//TODO: mock this or something!
-//			getPartidoController().addPartido(request);
-			partido = PartidoHelper.getPartido(request);//should be working now hehe
+			throw new IllegalArgumentException("Sin partido guardado");
 		}
 		return partido;
 	}

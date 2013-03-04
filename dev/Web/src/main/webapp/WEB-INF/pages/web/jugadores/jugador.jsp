@@ -1,25 +1,7 @@
 <%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Agregar Jugador</title>
-<script type="text/javascript" src="<c:url value="/js/jquery.js" />"></script>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-<script type="text/javascript" src="<c:url value="/js/jquery.ui.datepicker-es.js" />"></script>
-
-<script>
-	$(function() {
-		$("#datePickerfechaNacimiento").datepicker({
-			onSelect : function(textoFecha, objDatepicker) {
-				//on select do something!
-			}
-		});
-	});
-</script>
-</head>
-<body>
+<div class="content">
+	<div class="row">
+		<div class="twelve columns">
 	<h1>Agregar Jugador</h1>
 	
 
@@ -74,5 +56,4 @@
 	   <input name="submit" type="submit" value="Guardar" />
      </fieldset>
   </form:form>
-</body>
-</html>
+  </div></div></div>
