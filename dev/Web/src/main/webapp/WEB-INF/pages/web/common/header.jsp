@@ -1,31 +1,43 @@
-
-<!-- head -->
-<div class="logo">
-	<div class="row">
-		<div class="one columns isotipo">
-			<a href="#" title="Sistema De estadisticos locos"> <img
-				src="/una/imagen.png" /></a>
-		</div>
-		<div class="eleven columns">
-			<h2 class="slogan">Contribuyendo estadisticas desde 2013</h2>
-			<h1 class="logotipo">Sistema Estadistico de Partidos de Basquet</h1>
-		</div>
+<div class="row">
+	<div class="nine columns">
+		<ul class="link-list" >
+			<li><a href="index.html" > Inicio</a></li>
+			<li><a href="#" > Configuraciones</a></li>
+			<li><a href="#" > Reportar</a></li>
+		</ul>
+	</div>
+	<div class="three columns">
+		<p>Usr: Pablo Fernández</p>		
 	</div>
 </div>
-
-<!-- menu  -->
-<div class="menu">
+<div class="row">
+	<div class="three columns">
+		<img src="<c:url value="/images/foundation/orbit/Logo SEPBas sin cintas.png"/>" alt="">
+	</div>
+	<div class="nine columns">
+		<h1>Sistema Estadistico</h1>
+		<h2>de partidos de basquet</h2>
+	</div>
+</div>
 	<div class="row">
-		<div class="twelve columns menu-wrapper">
-			<ul class="nav link-list">
-				<li><a href="<c:url value="/jugadores/list" />" title="Ver Jugadores">Ver Jugadores</a></li>
-				<li>|</li>
-				<li><a href="<c:url value="/clubes/list" />" title="Ver Clubes">Ver Clubes</a></li>
-				<li>|</li>
-				<li><a href="<c:url value="/partidos/add" />" title="Nuevo Partido">Nuevo Partido</a></li>
-				<li>|</li>
-				<li><a href="<c:url value="/cuartos/iniciar" />" title="Nuevo Partido">Nuevo Cuarto</a></li>
-			</ul>
-		</div>
+	<div class="twelve columns">
+		
+		<ul class="nav-bar" >
+			<li class="active"><a href="/" > Inicio</a></li>
+			<li><a href="/juego/nuevo" > Juego</a></li>
+			<li class="has-flyout" >
+				<a href="#" > Ayuda</a>
+				<a href="#" class="flyout-toggle"><span> </span></a>
+				<ul class="flyout" >
+					<li><a href="#" >Documentación</a></li>
+					<li><a href="#" > Reportar problema</a></li>
+					<li><a href="#" > FAQ</a></li>
+				</ul>
+			</li>
+			<li><a href="<c:url value="/jugadores/list" />" title="Ver Jugadores">Ver Jugadores</a></li>
+			<li><a href="<c:url value="/clubes/list" />" title="Ver Clubes">Ver Clubes</a></li>
+			<li><a href="<c:url value="/partidos/add" />" title="Nuevo Partido">Nuevo Partido</a></li>
+			<li><a href="<c:url value="/cuartos/iniciar" />" title="Nuevo Partido">Nuevo Cuarto</a></li>
+		</ul>
 	</div>
 </div>
