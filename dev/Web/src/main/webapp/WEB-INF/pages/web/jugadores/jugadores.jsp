@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
 <content tag="styles">
-	<!-- some link rel to this page in specific -->	
+	<%-- some link rel to this page in specific --%>	
 </content>
 <content tag="jscriptlibs">
 	<%-- some jscript libraries rel to this page in specific --%>	
