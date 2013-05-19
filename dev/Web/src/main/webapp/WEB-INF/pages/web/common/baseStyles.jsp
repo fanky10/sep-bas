@@ -1,12 +1,8 @@
 <%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
 <!-- css common include goes here -->
-
 <!-- Included CSS Files (Compressed) -->
 <link rel="stylesheet" href="<c:url value="/css/foundation.css" />">
 <link rel="stylesheet" href="<c:url value="/css/app.css" />">
-
-
-<!-- Jquery and other stuff -->
-<script type="text/javascript" src="<c:url value="/js/jquery.js" />"></script>
-<script type="text/javascript"
-	src="<c:url value="/js/modernizr.foundation.js" />"></script>
+<!-- Jquery-ui.css and other stuff -->
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />

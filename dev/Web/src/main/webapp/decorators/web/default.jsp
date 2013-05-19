@@ -51,12 +51,15 @@
    	<decorator:getProperty property="page.headerTags" />
 
 
+<%----------------------------------------------------------------------------------------
+   Load Cascade Style Sheets
+   ---------------------------------------------------------------------------------------%>    
+    <jsp:include page="/WEB-INF/pages/web/common/baseStyles.jsp" />
+    <decorator:getProperty property="page.styles" />
 
 <%----------------------------------------------------------------------------------------
    Load Scripts
    ---------------------------------------------------------------------------------------%>    
-    <jsp:include page="/WEB-INF/pages/web/common/baseStyles.jsp" />
-    
     <%-- Typekit --%>
     <%-- Setup variables needed for tracking and load scode --%>
 	<script type="text/javascript">
@@ -69,7 +72,12 @@
 	   var sep = ":";
 	   var prefix = region + sep + lang + sep + channel + sep + company;              
 	</script>
-  <decorator:getProperty property="page.styles" />
+	<%-- common --%>
+	<jsp:include page="/WEB-INF/pages/web/common/baseJScripts.jsp" />
+	<%-- specific --%>
+  	<decorator:getProperty property="page.jscriptlibs" />
+  	<%-- written --%>
+  	<decorator:getProperty property="page.jscript" />
 <decorator:head />       
 </head>
 
