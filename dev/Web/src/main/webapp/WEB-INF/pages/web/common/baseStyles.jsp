@@ -2,6 +2,7 @@
 <!-- css common include goes here -->
 <!-- Included CSS Files (Compressed) -->
 <link rel="stylesheet" href="<c:url value="/css/foundation.css" />">
+<link rel="stylesheet" href="<c:url value="/css/foundation.min.css" />">
 <link rel="stylesheet" href="<c:url value="/css/app.css" />">
 <!-- Jquery-ui.css and other stuff -->
 <link rel="stylesheet"
