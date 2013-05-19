@@ -49,15 +49,10 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 
-		<!-- Apache Tiles -->
+		<!-- SiteMesh -->
 		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-template</artifactId>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
 		</dependency>
 
 		<!-- Jackson JSON Mapper -->

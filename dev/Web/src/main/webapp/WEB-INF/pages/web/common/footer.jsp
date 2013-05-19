@@ -1,4 +1,3 @@
-<%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
 <!-- Three-up Content Blocks -->
 <div class="content">
 

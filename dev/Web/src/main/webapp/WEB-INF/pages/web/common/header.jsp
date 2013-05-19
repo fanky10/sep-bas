@@ -1,7 +1,4 @@
-<%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
-<!-- 
-	dos formas de decir lo mismo jaja
- -->
+
 <!-- head -->
 <div class="logo">
 	<div class="row">
