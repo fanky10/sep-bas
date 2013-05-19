@@ -11,6 +11,7 @@ public class WebAppConstants {
 	public static final String CLUBES = "web/clubes/clubes";
 	public static final String INICIO_CUARTO = "web/cuartos/inicia_cuarto";
 	public static final String AGREGAR_PARTIDO = "web/partidos/partido";
+	public static final String NUEVO_JUEGO = "web/juegos/juego";
 	
 	// List of Session and Request attribute names
 	public static final String PARTIDO_KEY = "sessionPartido";

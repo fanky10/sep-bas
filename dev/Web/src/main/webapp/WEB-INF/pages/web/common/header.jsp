@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="nine columns">
 		<ul class="link-list" >
-			<li><a href="index.html" > Inicio</a></li>
+			<li><a href="<c:url value="/home"/>" > Inicio</a></li>
 			<li><a href="#" > Configuraciones</a></li>
 			<li><a href="#" > Reportar</a></li>
 		</ul>
@@ -23,8 +23,8 @@
 	<div class="twelve columns">
 		
 		<ul class="nav-bar" >
-			<li class="active"><a href="/" > Inicio</a></li>
-			<li><a href="/juego/nuevo" > Juego</a></li>
+			<li class="active"><a href="<c:url value="/home"/>" > Inicio</a></li>
+			<li><a href="<c:url value="/juegos/nuevo"/>" > Juego</a></li>
 			<li class="has-flyout" >
 				<a href="#" > Ayuda</a>
 				<a href="#" class="flyout-toggle"><span> </span></a>
