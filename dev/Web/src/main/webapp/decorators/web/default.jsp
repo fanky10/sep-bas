@@ -49,6 +49,7 @@
     <meta charset="utf-8">
     <title><decorator:title /></title>
    	<decorator:getProperty property="page.headerTags" />
+   	<link href="<c:url value="/images/foundation/orbit/favicon.ico"/>" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 
 
 <%----------------------------------------------------------------------------------------
