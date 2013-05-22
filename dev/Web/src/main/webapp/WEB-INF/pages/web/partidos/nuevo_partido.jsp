@@ -33,12 +33,12 @@
 
 
 					<!-- Equipo local-->
-					<label for="customDropdown">Local</label> <select
-						style="display: none;" id="customDropdown">
-						<option SELECTED>Equipo 1</option>
-						<option>Equipo 2</option>
-						<option>Equipo 3</option>
-					</select>
+					<label for="customDropdown">Local</label> 
+						<select style="display: none;" id="customDropdown">
+						<c:forEach items="${clubes}" var="club" varStatus="stat">
+							<option>${club.nombre}</option>
+						</c:forEach>
+						</select>
 					<div class="custom dropdown">
 						<a href="#" class="current"> Local </a> <a href="#"
 							class="selector"></a>

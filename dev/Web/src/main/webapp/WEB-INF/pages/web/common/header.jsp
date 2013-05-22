@@ -24,7 +24,7 @@
 		
 		<ul class="nav-bar" >
 			<li class="active"><a href="<c:url value="/home"/>" > Inicio</a></li>
-			<li><a href="<c:url value="/juegos/nuevo"/>" > Juego</a></li>
+			<li><a href="<c:url value="/partidos/nuevo"/>" > Partido</a></li>
 			<li class="has-flyout" >
 				<a href="#" > Ayuda</a>
 				<a href="#" class="flyout-toggle"><span> </span></a>
