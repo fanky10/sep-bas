@@ -7,6 +7,15 @@
 </content>
 <content tag="jscript">
 	<%-- some javascript written --%>
+	<script>
+		var idClubUno = $("#club1").val();
+		//TODO: buscar el json.s
+		//var juegores = {[{nombre:pepe,apellido:pepe},{nombre..}]}
+		$.foreach(function(){
+			//loop jugadores,
+			$("#selector").append("jugador.id...");
+		});
+	</script>
 </content>
 <content tag="bodyContent">
 <div class="row">
