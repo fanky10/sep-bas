@@ -15,14 +15,13 @@
 				$(this).attr("class","selected");
 			});
 			
-			$('#divClubLocal').one('keyup', function(e) {
+			$('#divClubLocal').bind('keyup', function(e) {
 				changeSelectedValue(e);
 			 });
 			
 			var called = 0;
 			function changeSelectedValue(e){
-				e.stopPropagation();
-				e.preventDefault();
+				
 				console.log('called: '+called);
 				called++;
 				if(e.keyCode == 13){//enter
@@ -61,6 +60,8 @@
 				});
 				var current = filtered.filter(".selected").filter(':first');
 		        $("#divClubLocal a.current").text(current.text());
+		        e.stopPropagation();
+		        e.preventDefault();
 		        
 			}
 			
