@@ -8,6 +8,9 @@
 <content tag="jscript">
 	<%-- some javascript written --%>
 	<script>
+	var config = {
+			'vecesTyped':0, //nro jugadores seleccionados equipo 1
+			};
 		$(document).ready(function(){
 			
 			$('#clubLocal').on('change',function(e){
@@ -19,11 +22,13 @@
 				changeSelectedValue(e);
 			 });
 			
-			var called = 0;
 			function changeSelectedValue(e){
-				
-				console.log('called: '+called);
-				called++;
+				config.vecesTyped++;
+				console.log('typed: '+config.vecesTyped);
+				if(config.vecesTyped%2 == 0){
+					console.log('end!');
+					return false;
+				}
 				if(e.keyCode == 13){//enter
 					$('#clubLocal').trigger('change');
 					return false;
