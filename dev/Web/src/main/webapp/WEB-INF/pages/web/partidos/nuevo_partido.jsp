@@ -8,13 +8,64 @@
 <content tag="jscript">
 	<%-- some javascript written --%>
 	<script>
-		var idClubUno = $("#club1").val();
-		//TODO: buscar el json.s
-		//var juegores = {[{nombre:pepe,apellido:pepe},{nombre..}]}
-		$.foreach(function(){
-			//loop jugadores,
-			$("#selector").append("jugador.id...");
+		$(document).ready(function(){
+			
+			$('#clubLocal').on('change',function(e){
+				$(this).attr("isselected",true);
+				$(this).attr("class","selected");
+			});
+			
+			$('#divClubLocal').one('keyup', function(e) {
+				changeSelectedValue(e);
+			 });
+			
+			var called = 0;
+			function changeSelectedValue(e){
+				e.stopPropagation();
+				e.preventDefault();
+				console.log('called: '+called);
+				called++;
+				if(e.keyCode == 13){//enter
+					$('#clubLocal').trigger('change');
+					return false;
+				}
+				var searching = String.fromCharCode(e.keyCode);
+				var selectedElements = $("#divClubLocal ul li.selected");
+				$("#divClubLocal ul li.selected").removeClass("selected");
+				var filtered = $("#divClubLocal ul li").filter(function(){
+					var currentText = $(this).text();
+					var found = $(this).text().slice(0, searching.length).toLowerCase() == searching.toLowerCase(); 
+					return found;
+				});
+				//we have everything found, but if there's something selected then select the next one
+				var length = filtered.length;
+				filtered.each(function(index,element){
+					var isSelected = $(element).attr("isselected") == 'true';
+					console.log('current element: '+$(element).text() + " isSelected: "+isSelected+" from: "+length+" idx "+index);
+					
+					if(isSelected && index == length-1){//we are the last one and we are selected!
+						console.log('soy la unica opc');
+						$(element).attr("class","selected");
+						return false;//nothing to do
+					}else if(isSelected && index<length-1){//selected but not the last one
+						//remove properties
+						$(element).attr("isselected",false);	
+						console.log('not the last one! give me another');
+						//continue (:
+					}else{//not selected first one
+						console.log('first timer!');
+						$(element).attr("isselected",true);
+						$(element).attr("class","selected");
+						return false;
+					}
+				});
+				var current = filtered.filter(".selected").filter(':first');
+		        $("#divClubLocal a.current").text(current.text());
+		        
+			}
+			
 		});
+		
 	</script>
 </content>
 <content tag="bodyContent">
@@ -39,28 +90,27 @@
 				<h5>Aquí seleccionaremos el local y el visitante</h5>
 
 				<form class="custom">
-
-
 					<!-- Equipo local-->
 					<label for="customDropdown">Local</label> 
-						<select style="display: none;" id="customDropdown">
-						<c:forEach items="${clubes}" var="club" varStatus="stat">
-							<option>${club.nombre}</option>
-						</c:forEach>
-						</select>
-					<div class="custom dropdown">
-						<a href="#" class="current"> Local </a> <a href="#"
-							class="selector"></a>
+					<select id="clubLocal" style="display: none;" id="customDropdown">						
+					<c:forEach items="${clubes}" var="club" varStatus="stat">
+						<option value="${club.nombre}">${club.nombre}</option>
+					</c:forEach>
+					</select>
+					<div id="divClubLocal" class="custom dropdown">
+						<a id="currentClubLocal" href="#" class="current"> Local </a> 
+						<a href="#" class="selector"></a>
 						<ul>
 							<li>Equipo 1</li>
 							<li>Equipo 2</li>
 							<li>Equipo 3</li>
 						</ul>
 					</div>
+					
 
 					<!-- Equipo visitante-->
-					<label for="customDropdown">Visita</label> <select
-						style="display: none;" id="customDropdown">
+					<label for="customDropdown">Visita</label> 
+						<select style="display: none;" id="customDropdown">
 						<option SELECTED>Equipo 1</option>
 						<option>Equipo 2</option>
 						<option>Equipo 3</option>
