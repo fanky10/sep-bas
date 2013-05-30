@@ -16,7 +16,19 @@
 			$("#selector").append("jugador.id...");
 		});
 		
-		
+		function valida_clubes()
+		{
+			var v=document.getElementsByName("visita");
+			var l=document.getElementsByName("local");
+			
+			if (v[0].value == l[0].value){
+				alert("Se eligieron los mismos clubes");	
+				return false;
+			}else {
+				
+				return true;
+			}
+		}
 		function cargarDatos()
 		{
 			var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -109,13 +121,14 @@
 					<!-- Equipo visitante-->
 					<label for="customDropdown">Visita</label> <select
 						style="display: none;" id="customDropdown" name="visita">
-						<option SELECTED>Equipo 1</option>
-						<option>Equipo 2</option>
-						<option>Equipo 3</option>
+						
+						<c:forEach items="${clubes}" var="club" varStatus="stat">
+							<option>${club.nombre}</option>
+						</c:forEach>
+						</select>
 					</select>
 					<div class="custom dropdown">
-						<a href="#" class="current"> Visita </a> <a href="#"
-							class="selector"></a>
+						<a href="#" class="current"> Visita </a> <a href="#" class="selector"></a>
 						<ul>
 							<li>Equipo 1</li>
 							<li>Equipo 2</li>
@@ -125,7 +138,7 @@
 				</form>
 				<div class="row">
 					<div class="two columns offset-by-ten">
-						<a class="round button" href="#simple2">Siguiente</a>
+						<a class="round button" href="#simple2" onClick="valida_clubes()">Siguiente</a>
 					</div>
 				</div>
 			</li>
