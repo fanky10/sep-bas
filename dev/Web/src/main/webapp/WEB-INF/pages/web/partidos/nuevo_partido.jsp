@@ -21,13 +21,16 @@
 			var v=document.getElementsByName("visita");
 			var l=document.getElementsByName("local");
 			
-			if (v[0].value == l[0].value){
+			
+			if (l[0].value.length == 0 || v[0].value.length == 0){
+				alert("Debe elegirse algún club");	
+				return false;
+			} else if (v[0].value == l[0].value){
 				alert("Deben elegirse clubes diferentes");	
 				return false;
-			}else {
-				
-				return true;
 			}
+			
+			return true;
 		}
 		
 		function valida_jugadores_habilitados()
@@ -61,8 +64,34 @@
 			}else{alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo visitante");}
 		}
 		
+		 function valida_arbitros()
+		{
+			
+			var checkboxes = document.getElementsByName("checkbox_arbitros"); //Array que contiene los checkbox
+
+			  var cont = 0; //Variable que lleva la cuenta de los checkbox pulsados
+
+			  for (var x=0; x < checkboxes.length; x++) {
+			   if (checkboxes[x].checked) {
+			    cont = cont + 1;
+			   }
+			  }
+			 
+			
+			  				
+			if (cont == 0){
+				alert("Debe seleccionarse al menos un árbitro");
+				return true;	
+			}
+			
+			
+		
+		}
+		
 		function cargarDatos()
 		{
+			if (valida_arbitros())
+				{return false;}
 			var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 			var f=new Date();
 						
@@ -136,6 +165,7 @@
 					<!-- Equipo local-->
 					<label for="customDropdown">Local</label> 
 						<select style="display: none;" id="customDropdown" name="local">
+						<option></option>
 						<c:forEach items="${clubes}" var="club" varStatus="stat">
 							<option>${club.nombre}</option>
 						</c:forEach>
@@ -153,7 +183,7 @@
 					<!-- Equipo visitante-->
 					<label for="customDropdown">Visita</label> <select
 						style="display: none;" id="customDropdown" name="visita">
-						
+						<option></option>
 						<c:forEach items="${clubes}" var="club" varStatus="stat">
 							<option>${club.nombre}</option>
 						</c:forEach>
@@ -270,10 +300,11 @@
 						<div class="row">		
 							
 							<div class="two columns">
-								<a class="round button" href="#simple2">Volver</a>
+								<a class="alert button" href="<c:url value="/partidos/nuevo" />">Cancelar</a>
+								
 							</div>
 							<div class="two columns offset-by-eight">
-								<a class="alert button" href="#simple2">Iniciar Partido</a>
+								<a class="success button" href="#simple2">Iniciar Partido</a>
 							</div>
 						</div>
 
