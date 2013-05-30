@@ -22,13 +22,45 @@
 			var l=document.getElementsByName("local");
 			
 			if (v[0].value == l[0].value){
-				alert("Se eligieron los mismos clubes");	
+				alert("Deben elegirse clubes diferentes");	
 				return false;
 			}else {
 				
 				return true;
 			}
 		}
+		
+		function valida_jugadores_habilitados()
+		{
+			valida_jugadores("checkbox_local");
+			valida_jugadores("checkbox_visita");
+		
+		}
+		
+		
+		function valida_jugadores(tag_name_origen)
+		{
+			
+			var checkboxes = document.getElementsByName(tag_name_origen); //Array que contiene los checkbox
+
+			  var cont = 0; //Variable que lleva la cuenta de los checkbox pulsados
+
+			  for (var x=0; x < checkboxes.length; x++) {
+			   if (checkboxes[x].checked) {
+			    cont = cont + 1;
+			   }
+			  }
+			 
+			
+						
+			if (cont > 4 && cont < 12){
+				return true;
+			}
+			if (tag_name_origen == "checkbox_local"){
+			alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo local");
+			}else{alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo visitante");}
+		}
+		
 		function cargarDatos()
 		{
 			var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -51,13 +83,13 @@
 		{
 			var ch_l = document.getElementsByName(tag_name_origen);
 			var jugadores = '';
-			jugadores +='<table class="twelve">'
-			jugadores +='<thead>'
-			jugadores +='<tr>'
-			jugadores +='<th>'+titulo_tabla+'</th>'
-			jugadores +='</tr>'
-			jugadores +='</thead>'
-			jugadores +='<tbody>'
+			jugadores +='<table class="twelve">';
+			jugadores +='<thead>';
+			jugadores +='<tr>';
+			jugadores +='<th>'+titulo_tabla+'</th>';
+			jugadores +='</tr>';
+			jugadores +='</thead>';
+			jugadores +='<tbody>';
 			
 			for (var x=0; x < ch_l.length; x++) 
 			{
@@ -68,8 +100,8 @@
 					jugadores +='</tr>';
 					}
 			}
-			jugadores +='</tbody>'
-			jugadores +='</table>'
+			jugadores +='</tbody>';
+			jugadores +='</table>';
 			document.getElementById(tag_id_destino).innerHTML=jugadores;
 		}
 	</script>
@@ -151,13 +183,20 @@
 							<label for="checkbox2"><input name="checkbox_local" type="checkbox" CHECKED id="checkbox2" title="Jugador 2"> Jugador 2</label>
 							<label for="checkbox3"><input name="checkbox_local" type="checkbox" CHECKED id="checkbox3" title="Jugador 3"> Jugador 3</label>
 							<label for="checkbox4"><input name="checkbox_local" type="checkbox" CHECKED id="checkbox4" title="Jugador 4"> Jugador 4</label>
+							<label for="checkbox4"><input name="checkbox_local" type="checkbox" CHECKED id="checkbox5" title="Jugador 5"> Jugador 5</label>
+							<label for="checkbox4"><input name="checkbox_local" type="checkbox" CHECKED id="checkbox6" title="Jugador 6"> Jugador 6</label>
+							<label for="checkbox4"><input name="checkbox_local" type="checkbox" CHECKED id="checkbox7" title="Jugador 7"> Jugador 7</label>
 						</div>
 						<div class="five columns end">
 							<p>Visita</p>
-							<label for="checkbox6"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox6" title="Jugador 1"> Jugador 1</label>
-							<label for="checkbox7"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox7" title="Jugador 2"> Jugador 2</label>
-							<label for="checkbox8"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox8" title="Jugador 3"> Jugador 3</label>
-							<label for="checkbox9"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox9" title="Jugador 4"> Jugador 4</label>
+							<label for="checkbox6"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox66" title="Jugador 1"> Jugador 1</label>
+							<label for="checkbox7"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox76" title="Jugador 2"> Jugador 2</label>
+							<label for="checkbox8"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox86" title="Jugador 3"> Jugador 3</label>
+							<label for="checkbox9"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox96" title="Jugador 4"> Jugador 4</label>
+							<label for="checkbox9"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox93" title="Jugador 5"> Jugador 5</label>
+							<label for="checkbox9"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox92" title="Jugador 6"> Jugador 6</label>
+							<label for="checkbox9"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox91" title="Jugador 7"> Jugador 7</label>
+							<label for="checkbox9"><input name="checkbox_visita" type="checkbox" CHECKED id="checkbox94" title="Jugador 8"> Jugador 8</label>
 						</div>
 					</div>
 
@@ -166,7 +205,7 @@
 								<a class="round button" href="#simple2">Volver</a>
 							</div>
 							<div class="two columns offset-by-eight">
-								<a class="round button" href="#simple2">Siguiente</a>
+								<a class="round button" href="#simple2"  onClick="valida_jugadores_habilitados()">Siguiente</a>
 							</div>
 						</div>
 			</li>
