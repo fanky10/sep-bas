@@ -19,7 +19,10 @@
 		
 		function cargarDatos()
 		{
-			document.getElementById("fecha_reemplaza").innerHTML='<input name="Fecha" disabled type="text" value="'+Date()+'">';
+			var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+			var f=new Date();
+						
+			document.getElementById("fecha_reemplaza").innerHTML='<input name="Fecha" disabled type="text" value="'+f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()+'">';
 			var l=document.getElementsByName("local");
 			
 			document.getElementById("equipo_local").innerHTML='<input name="e_local" disabled type="text" value="'+l[0].value+'">';
