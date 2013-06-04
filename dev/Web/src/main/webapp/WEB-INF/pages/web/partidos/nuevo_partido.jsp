@@ -8,67 +8,80 @@
 <content tag="jscript">
 	<%-- some javascript written --%>
 	<script>
-	var config = {
-			'vecesTyped':0, //nro jugadores seleccionados equipo 1
-			};
+	//this is my superScript plugin!!
+	    (function($){
+	        $.fn.extend({	            
+	            //pass the options variable to the function
+	            customDropdown: function(options) {
+					//Set the default values, use comma to separate the settings, example:
+  					var defaults = {
+      					opt:1,
+      					targetLabel:$("#divClubLocal a.current"),
+      					targetSelect:$('#clubLocal')      						
+					}
+      
+      				var options = $.extend(defaults, options);
+					return this.each(function() {
+					        var o = options;
+					        var obj = $(this);
+					        obj.bind('keyup',function(e){
+					        	if(e.keyCode == 13){//enter
+									o.targetSelect.trigger('change');
+									return false;
+								}
+								
+								var searching = String.fromCharCode(e.keyCode);
+								var selectedElements = $("ul li.selected",obj);
+								selectedElements.removeClass("selected");
+								var filtered = $("ul li",obj).filter(function(){
+									var currentText = $(this).text();
+									var found = $(this).text().slice(0, searching.length).toLowerCase() == searching.toLowerCase(); 
+									return found;
+								});
+								
+								//we have everything found, but if there's something selected then select the next one
+								var length = filtered.length;
+								filtered.each(function(index,element){
+									var isSelected = $(element).attr("isselected") == 'true';
+									
+									if(isSelected && index == length-1){//we are the last one and we are selected!
+										$(element).attr("class","selected");
+										return false;//nothing to do
+									}else if(isSelected && index<length-1){//selected but not the last one
+										//remove properties
+										$(element).attr("isselected",false);//i'm not the last one, give me another!
+										//continue (:
+									}else{//not selected first one --> first timer!
+										$(element).attr("isselected",true);
+										$(element).attr("class","selected");
+										return false;
+									}
+								});
+								//in case there are several
+								var current = filtered.filter(".selected").filter(':first');
+						        o.targetLabel.text(current.text());
+								
+					        });
+					    
+					});
+	        	}
+	        });
+    	})(jQuery);
+	</script>
+	
+	<script>
+		$('#divClubLocal').customDropdown({targetLabel:$("#divClubLocal a.current"),
+				targetSelect:$('#clubLocal')});
+		$('#divClubVisita').customDropdown({targetLabel:$("#divClubVisita a.current"),
+			targetSelect:$('#clubLocal')});
+		$('#clubLocal').on('change',function(e){
+			var element = $("#divClubLocal ul li.selected");
+			$(element).attr("isselected",true);
+			//TODO: change clubVisita values, avoid select same element
+		});
 		$(document).ready(function(){
 			
-			$('#clubLocal').on('change',function(e){
-				$(this).attr("isselected",true);
-				$(this).attr("class","selected");
-			});
 			
-			$('#divClubLocal').bind('keyup', function(e) {
-				changeSelectedValue(e);
-			 });
-			
-			function changeSelectedValue(e){
-				config.vecesTyped++;
-				console.log('typed: '+config.vecesTyped);
-				if(config.vecesTyped%2 == 0){
-					console.log('end!');
-					return false;
-				}
-				if(e.keyCode == 13){//enter
-					$('#clubLocal').trigger('change');
-					return false;
-				}
-				var searching = String.fromCharCode(e.keyCode);
-				var selectedElements = $("#divClubLocal ul li.selected");
-				$("#divClubLocal ul li.selected").removeClass("selected");
-				var filtered = $("#divClubLocal ul li").filter(function(){
-					var currentText = $(this).text();
-					var found = $(this).text().slice(0, searching.length).toLowerCase() == searching.toLowerCase(); 
-					return found;
-				});
-				//we have everything found, but if there's something selected then select the next one
-				var length = filtered.length;
-				filtered.each(function(index,element){
-					var isSelected = $(element).attr("isselected") == 'true';
-					console.log('current element: '+$(element).text() + " isSelected: "+isSelected+" from: "+length+" idx "+index);
-					
-					if(isSelected && index == length-1){//we are the last one and we are selected!
-						console.log('soy la unica opc');
-						$(element).attr("class","selected");
-						return false;//nothing to do
-					}else if(isSelected && index<length-1){//selected but not the last one
-						//remove properties
-						$(element).attr("isselected",false);	
-						console.log('not the last one! give me another');
-						//continue (:
-					}else{//not selected first one
-						console.log('first timer!');
-						$(element).attr("isselected",true);
-						$(element).attr("class","selected");
-						return false;
-					}
-				});
-				var current = filtered.filter(".selected").filter(':first');
-		        $("#divClubLocal a.current").text(current.text());
-		        e.stopPropagation();
-		        e.preventDefault();
-		        
-			}
 			
 		});
 		
@@ -97,37 +110,37 @@
 
 				<form class="custom">
 					<!-- Equipo local-->
+					
 					<label for="customDropdown">Local</label> 
-					<select id="clubLocal" style="display: none;" id="customDropdown">						
-					<c:forEach items="${clubes}" var="club" varStatus="stat">
-						<option value="${club.nombre}">${club.nombre}</option>
-					</c:forEach>
+					<select style="display: none;" id="customDropdown">						
+						<c:forEach items="${clubes}" var="club" varStatus="stat">
+							<option value="${club.nombre}">${club.nombre}</option>
+						</c:forEach>
 					</select>
 					<div id="divClubLocal" class="custom dropdown">
 						<a id="currentClubLocal" href="#" class="current"> Local </a> 
 						<a href="#" class="selector"></a>
 						<ul>
-							<li>Equipo 1</li>
-							<li>Equipo 2</li>
-							<li>Equipo 3</li>
+							<c:forEach items="${clubes}" var="club" varStatus="stat">
+							<li>${club.nombre}</li>
+							</c:forEach>
 						</ul>
 					</div>
 					
-
 					<!-- Equipo visitante-->
-					<label for="customDropdown">Visita</label> 
-						<select style="display: none;" id="customDropdown">
-						<option SELECTED>Equipo 1</option>
-						<option>Equipo 2</option>
-						<option>Equipo 3</option>
+					<label for="customDropdown">Visita</label>
+					<select style="display: none;" id="customDropdown">						
+						<c:forEach items="${clubes}" var="club" varStatus="stat">
+							<option value="${club.nombre}">${club.nombre}</option>
+						</c:forEach>
 					</select>
-					<div class="custom dropdown">
+					<div id="divClubVisita" class="custom dropdown">
 						<a href="#" class="current"> Visita </a> <a href="#"
 							class="selector"></a>
 						<ul>
-							<li>Equipo 1</li>
-							<li>Equipo 2</li>
-							<li>Equipo 3</li>
+							<c:forEach items="${clubes}" var="club" varStatus="stat">
+								<li>${club.nombre}</li>
+							</c:forEach>
 						</ul>
 					</div>
 			</li>
