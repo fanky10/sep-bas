@@ -8,16 +8,8 @@
 <content tag="jscript">
 	<%-- some javascript written --%>
 	<script>
-		var idClubUno = $("#club1").val();
-		//TODO: buscar el json.s
-		//var juegores = {[{nombre:pepe,apellido:pepe},{nombre..}]}
-		$.foreach(function(){
-			//loop jugadores,
-			$("#selector").append("jugador.id...");
-		});
 		
-		function valida_clubes()
-		{
+		function valida_clubes(){
 			var v=document.getElementsByName("visita");
 			var l=document.getElementsByName("local");
 			
@@ -41,8 +33,7 @@
 		}
 		
 		
-		function valida_jugadores(tag_name_origen)
-		{
+		function valida_jugadores(tag_name_origen){
 			
 			var checkboxes = document.getElementsByName(tag_name_origen); //Array que contiene los checkbox
 
@@ -64,8 +55,7 @@
 			}else{alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo visitante");}
 		}
 		
-		 function valida_arbitros()
-		{
+		 function valida_arbitros(){
 			
 			var checkboxes = document.getElementsByName("checkbox_arbitros"); //Array que contiene los checkbox
 
@@ -94,9 +84,22 @@
 				{return false;}
 			var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 			var f=new Date();
-						
+
 			document.getElementById("fecha_reemplaza").innerHTML='<input name="Fecha" disabled type="text" value="'+f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()+'">';
 			var l=document.getElementsByName("local");
+			var local = $("local");//getElementsByName
+			local = $("#local");//getElementsById
+			local = $(".local");//getElementsByClass
+			("ul li",local).text("pepe");//todos los elementos a dentro de li
+			/**
+			<div id="local">
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			*/
 			
 			document.getElementById("equipo_local").innerHTML='<input name="e_local" disabled type="text" value="'+l[0].value+'">';
 			var v=document.getElementsByName("visita");
@@ -288,6 +291,13 @@
 						</div>
 						<div class="row">
 							<div class="twelve columns">
+								<div id="jugadoresLocales" class="twelve columns">
+								</div>
+								<div id="jugadoresVisita" class="twelve columns">
+								</div>
+								<div id="arbitros" class="twelve columns">
+								</div>
+								
 								 <p id="jugadores_locales__habilitados">Jugadores locales</p>
 								 
 								 <p id="jugadores_visitantes_habilitados">Jugadores Visitantes</p>
