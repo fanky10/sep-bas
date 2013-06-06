@@ -78,6 +78,7 @@
 			var element = $("#divClubLocal ul li.selected");
 			$(element).attr("isselected",true);
 			//TODO: change clubVisita values, avoid select same element
+			//TODO: get listed players! --> ajax request
 		});
 		$(document).ready(function(){
 			

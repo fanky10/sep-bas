@@ -79,6 +79,13 @@ ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_tipo_e
 **/
 
 
+DROP TABLE IF EXISTS arbitros;
+
+CREATE TABLE arbitros(
+    arbitro_id integer unsigned not null primary key AUTO_INCREMENT,
+    arbitro_nombre varchar(100) not null,
+    arbitro_apellido varchar(100) not null 
+)ENGINE=InnoDB;
 
 -- foreign key relationships
 ALTER TABLE jugadores ADD CONSTRAINT `FK_jugador_id_1` FOREIGN KEY (`jugador_actual_club_id`) REFERENCES `clubes` (`club_id`);
