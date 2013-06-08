@@ -8,89 +8,73 @@
 <content tag="jscript">
 	<%-- some javascript written --%>
 	<script>
-		var idClubUno = $("#club1").val();
+		/* var idClubUno = $("#club1").val();
 		//TODO: buscar el json.s
 		//var juegores = {[{nombre:pepe,apellido:pepe},{nombre..}]}
 		$.foreach(function(){
 			//loop jugadores,
 			$("#selector").append("jugador.id...");
-		});
+		});*/
 		
-		function valida_clubes()
-		{
-			var v=document.getElementsByName("visita");
-			var l=document.getElementsByName("local");
+		function validaClubes(){
+			var equipoVisitante=document.getElementsByName("visita");
+			var equipoLocal=document.getElementsByName("local");
 			
-			
-			if (l[0].value.length == 0 || v[0].value.length == 0){
+			if (equipoLocal[0].value.length == 0 || equipoVisitante[0].value.length == 0){
 				alert("Debe elegirse algún club");	
 				return false;
-			} else if (v[0].value == l[0].value){
+			} else if (equipoVisitante[0].value == equipoLocal[0].value){
 				alert("Deben elegirse clubes diferentes");	
 				return false;
 			}
 			
 			return true;
-		}
+			}
 		
-		function valida_jugadores_habilitados()
-		{
-			valida_jugadores("checkbox_local");
-			valida_jugadores("checkbox_visita");
-		
-		}
+		function validaJugadoresHabilitados(){
+			validaJugadores("checkbox_local");
+			validaJugadores("checkbox_visita");
+			}
 		
 		
-		function valida_jugadores(tag_name_origen)
-		{
+		function validaJugadores(tagNameOrigen){
 			
-			var checkboxes = document.getElementsByName(tag_name_origen); //Array que contiene los checkbox
+			var checkboxes = document.getElementsByName(tagNameOrigen); //Array que contiene los checkbox
 
 			  var cont = 0; //Variable que lleva la cuenta de los checkbox pulsados
 
 			  for (var x=0; x < checkboxes.length; x++) {
 			   if (checkboxes[x].checked) {
-			    cont = cont + 1;
-			   }
+			    cont = cont + 1;}
 			  }
 			 
-			
-						
+									
 			if (cont > 4 && cont < 12){
 				return true;
 			}
-			if (tag_name_origen == "checkbox_local"){
+			if (tagNameOrigen == "checkbox_local"){
 			alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo local");
 			}else{alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo visitante");}
-		}
+			}
 		
-		 function valida_arbitros()
-		{
+		 function validaArbitros(){
 			
-			var checkboxes = document.getElementsByName("checkbox_arbitros"); //Array que contiene los checkbox
-
-			  var cont = 0; //Variable que lleva la cuenta de los checkbox pulsados
+			var checkboxes = document.getElementsByName("checkbox_arbitros"); //Array que contiene los checkbox	
+			 var cont = 0; //Variable que lleva la cuenta de los checkbox pulsados
 
 			  for (var x=0; x < checkboxes.length; x++) {
 			   if (checkboxes[x].checked) {
 			    cont = cont + 1;
 			   }
 			  }
-			 
-			
-			  				
-			if (cont == 0){
+			 if (cont == 0){
 				alert("Debe seleccionarse al menos un árbitro");
 				return true;	
 			}
-			
-			
+			}
 		
-		}
-		
-		function cargarDatos()
-		{
-			if (valida_arbitros())
+		function cargarDatos(){
+			if (validaArbitros())
 				{return false;}
 			var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 			var f=new Date();
@@ -102,36 +86,34 @@
 			var v=document.getElementsByName("visita");
 			document.getElementById("equipo_visita").innerHTML='<input name="e_visita" disabled type="text" value="'+v[0].value+'">';
 			
-			crear_tabla("checkbox_local","jugadores_locales__habilitados","Jugadores en cancha de: " + l[0].value);
-			crear_tabla("checkbox_visita","jugadores_visitantes_habilitados","Jugadores en cancha de: " +v[0].value);
-			crear_tabla("checkbox_arbitros","arbitros_asignados","Arbitros designados");
-			
-		}
+			crearTabla("checkbox_local","jugadores_locales__habilitados","Jugadores en cancha de: " + l[0].value);
+			crearTabla("checkbox_visita","jugadores_visitantes_habilitados","Jugadores en cancha de: " +v[0].value);
+			crearTabla("checkbox_arbitros","arbitros_asignados","Arbitros designados");
+			}
 		
-		function crear_tabla(tag_name_origen,tag_id_destino,titulo_tabla)
-		{
-			var ch_l = document.getElementsByName(tag_name_origen);
-			var jugadores = '';
-			jugadores +='<table class="twelve">';
-			jugadores +='<thead>';
-			jugadores +='<tr>';
-			jugadores +='<th>'+titulo_tabla+'</th>';
-			jugadores +='</tr>';
-			jugadores +='</thead>';
-			jugadores +='<tbody>';
+		function crearTabla(tagNameOrigen,tagIdDestino,tituloTabla)	{
+			var checboxes = document.getElementsByName(tagNameOrigen);
+			var tabla = '';
+			tabla +='<table class="twelve">';
+			tabla +='<thead>';
+			tabla +='<tr>';
+			tabla +='<th>'+tituloTabla+'</th>';
+			tabla +='</tr>';
+			tabla +='</thead>';
+			tabla +='<tbody>';
 			
-			for (var x=0; x < ch_l.length; x++) 
+			for (var x=0; x < checboxes.length; x++) 
 			{
-			  if (ch_l[x].checked) 
+			  if (checboxes[x].checked) 
 			  		{
-			  		jugadores += '<tr>';
-					jugadores +='<td><input name="e_visita" disabled type="text" value="'+ch_l[x].getAttribute("title")+'"></td>';
-					jugadores +='</tr>';
+					tabla += '<tr>';
+					tabla +='<td><input name="e_visita" disabled type="text" value="'+checboxes[x].getAttribute("title")+'"></td>';
+					tabla +='</tr>';
 					}
 			}
-			jugadores +='</tbody>';
-			jugadores +='</table>';
-			document.getElementById(tag_id_destino).innerHTML=jugadores;
+			tabla +='</tbody>';
+			tabla +='</table>';
+			document.getElementById(tagIdDestino).innerHTML=tabla;
 		}
 	</script>
 </content>
@@ -200,7 +182,7 @@
 				</form>
 				<div class="row">
 					<div class="two columns offset-by-ten">
-						<a class="round button" href="#simple2" onClick="valida_clubes()">Siguiente</a>
+						<a class="round button" href="#simple2" onClick="validaClubes()">Siguiente</a>
 					</div>
 				</div>
 			</li>
@@ -235,7 +217,7 @@
 								<a class="round button" href="#simple2">Volver</a>
 							</div>
 							<div class="two columns offset-by-eight">
-								<a class="round button" href="#simple2"  onClick="valida_jugadores_habilitados()">Siguiente</a>
+								<a class="round button" href="#simple2"  onClick="validaJugadoresHabilitados()">Siguiente</a>
 							</div>
 						</div>
 			</li>
