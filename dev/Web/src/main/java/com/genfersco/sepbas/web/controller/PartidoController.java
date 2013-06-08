@@ -61,6 +61,14 @@ public class PartidoController extends BaseController {
 		map.addAttribute("clubes", getServicesManager().getClubes());
 		return WebAppConstants.NUEVO_PARTIDO;
 	}
+	
+	@RequestMapping(value = "/partidos/operador", method = RequestMethod.GET)
+	public String nuevoJuegoOperador(HttpServletRequest request,
+			HttpServletResponse repsponse, ModelMap map) {
+		// TODO: clubes locales.
+		//map.addAttribute("clubes", getServicesManager().getClubes());
+		return WebAppConstants.INICIAR_PARTIDO;
+	}
 
 	public ServicesManager getServicesManager() {
 		return servicesManager;
