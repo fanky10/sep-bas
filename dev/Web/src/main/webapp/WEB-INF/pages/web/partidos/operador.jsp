@@ -15,10 +15,26 @@
 		<div class = "three columns">
 			Equipo 1
 		</div>
-		<div class = "six columns">
+		<div class = "four columns">
+		</div>
+		<div class = "two columns">
+			TIEMPO
 		</div>
 		<div class = "three columns">
 			Equipo 2
+		</div>
+	</div>
+	<div class = "row">
+	<div class = "three columns">
+			jugadores locales
+		</div>
+		<div class = "six columns">
+			<div style="width:528 px; height:284 px">
+				<img src="/Web/images/foundation/orbit/cancha.jpg" />
+			</div>
+		</div>
+		<div class = "three columns">
+			Jugadores Visita
 		</div>
 	</div>
 </content>
