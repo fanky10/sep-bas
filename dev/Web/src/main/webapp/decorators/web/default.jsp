@@ -64,14 +64,7 @@
     <%-- Typekit --%>
     <%-- Setup variables needed for tracking and load scode --%>
 	<script type="text/javascript">
-	   var url = "${fn:toLowerCase(pageContext.request.getRequestURI().replace('/','-'))}".replace(/^-|-$/g,"");
-	   var serverName = "${pageContext.request.getServerName()}";
-	   var region = "${currentCountry}" || "us";
-	   var lang = "${fn:toLowerCase(currentLanguage)}" || "en";
-	   var channel = "desk";
-	   var company = "${fn:toLowerCase(company)}" || serverName.indexOf("fire") >= 0 ? "fst" : "bst" 
-	   var sep = ":";
-	   var prefix = region + sep + lang + sep + channel + sep + company;              
+	                 
 	</script>
 	<%-- common --%>
 	<jsp:include page="/WEB-INF/pages/web/common/baseJScripts.jsp" />
