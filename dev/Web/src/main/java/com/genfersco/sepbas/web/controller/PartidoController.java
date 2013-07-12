@@ -59,6 +59,7 @@ public class PartidoController extends BaseController {
 			HttpServletResponse repsponse, ModelMap map) {
 		// TODO: clubes locales.
 		map.addAttribute("clubes", getServicesManager().getClubes());
+		map.addAttribute("arbitros", getServicesManager().getArbitrosHabilitados());
 		return WebAppConstants.NUEVO_PARTIDO;
 	}
 

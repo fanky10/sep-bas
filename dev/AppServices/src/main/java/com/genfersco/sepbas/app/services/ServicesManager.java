@@ -2,6 +2,7 @@ package com.genfersco.sepbas.app.services;
 
 import java.util.List;
 
+import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.Jugador;
@@ -37,4 +38,5 @@ public interface ServicesManager {
 	
 	public Cuarto addCuarto(Cuarto cuarto, List<Jugador> equipo1, List<Jugador> equipo2);
 	
+	public List<Arbitro> getArbitrosHabilitados();
 }

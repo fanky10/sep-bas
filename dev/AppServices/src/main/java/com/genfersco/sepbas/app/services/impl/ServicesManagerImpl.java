@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.genfersco.sepbas.app.services.ArbitroManager;
 import com.genfersco.sepbas.app.services.ClubManager;
 import com.genfersco.sepbas.app.services.CuartoManager;
 import com.genfersco.sepbas.app.services.EventoManager;
 import com.genfersco.sepbas.app.services.JugadorManager;
 import com.genfersco.sepbas.app.services.PartidoManager;
 import com.genfersco.sepbas.app.services.ServicesManager;
+import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.EstadoEvento;
@@ -32,6 +34,8 @@ public class ServicesManagerImpl implements ServicesManager {
 	private CuartoManager cuartoManager;
 	@Autowired
 	private EventoManager eventoManager;
+	@Autowired
+	private ArbitroManager arbitroManager;
 	
 	
 	@Override
@@ -118,6 +122,11 @@ public class ServicesManagerImpl implements ServicesManager {
 	}
 	private Evento generaEventoIngresaJugador(Cuarto cuarto, Jugador jugador){
 		return generaEvento(cuarto, jugador, TipoEvento.INGRESA_JUGADOR);
+	}
+
+	@Override
+	public List<Arbitro> getArbitrosHabilitados() {
+		return arbitroManager.getArbitrosHabilitados();
 	}
 
 }

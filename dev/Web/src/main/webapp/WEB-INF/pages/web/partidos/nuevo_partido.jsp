@@ -171,12 +171,11 @@
 				</div>
 			</li>
 			<li id="simple3Tab">
-				<h5>Aquí seleccionaremos los árbitros del encuentro</h5> <label
-				for="radio4"><input name="radio2" type="radio" id="radio4">
-					Arbitro 1</label> <label for="radio5"><input name="radio2"
-					type="radio" id="radio5"> Arbitro 2</label> <label for="radio6"><input
-					name="radio2" type="radio" id="radio6"> Arbitro 3</label> <input
-				name="" type="submit" value="Iniciar partido">
+				<h5>Aquí seleccionaremos los árbitros del encuentro</h5> 
+					<c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
+						<label for="radio${stat.count}"> <input name="radio${stat.count}" type="radio" id="radio${stat.count}">${arbitro.nombre} ${arbitro.apellido}</label>
+					</c:forEach> 
+					
 				</form>
 			</li>
 		</ul>
