@@ -60,33 +60,28 @@
 	<div class = "row">
 		<div class = "two columns">
 				<h4 class="local"> Local</h4>
-			<table class="twelve">
+				<table class="two">
 			  <thead>
 				<tr>
-				  <th class="local">Jugadas</th>
-				  <th class="local">Totales</th>
-				 
-				</tr>
+				  <th colspan="2" class="local">Totales</th>
+			    </tr>
 			  </thead>
 			  <tbody>
 				<tr>
 				  <td>Perdidas</td>
 				  <td>0</td>
-				 
+				 </tr>
 				<tr>
 				  <td>Recuperos</td>
 				  <td>0</td>
-				  
 				</tr>
 				<tr>
 				  <td>Faltas</td>
 				  <td>0</td>
-				 
 				</tr>
 				<tr>
-				  <td>Sustituciones</td>
+				  <td>Sust.</td>
 				  <td>0</td>
-				  
 				</tr>
 			  </tbody>
 			</table>
@@ -102,36 +97,32 @@
 			
 			<div class = "two columns">
 				<h4 class = "visita"> Visita </h4>
-				<table class="twelve">
+				<table class="two" >
 				  <thead>
 					<tr>
-					  <th class="visita">Jugadas</th>
-					  <th class="visita">Totales</th>
-					 
-					</tr>
+					  <th colspan="2" class="visita">Totales</th>
+				    </tr>
 				  </thead>
 				  <tbody>
 					<tr>
 					  <td>Perdidas</td>
 					  <td>0</td>
-					 
+					 </tr>
 					<tr>
 					  <td>Recuperos</td>
 					  <td>0</td>
-					  
 					</tr>
 					<tr>
 					  <td>Faltas</td>
 					  <td>0</td>
-					 
 					</tr>
 					<tr>
-					  <td>Sustituciones</td>
+					  <td>Sust.</td>
 					  <td>0</td>
-					  
 					</tr>
 				  </tbody>
 				</table>
+
 			</div>
 		</div>
 		<div class="row">
