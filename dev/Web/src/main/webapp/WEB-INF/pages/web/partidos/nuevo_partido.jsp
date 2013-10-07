@@ -208,7 +208,7 @@
 			<dd style="display: none">
 				<a href="#simple3"> Árbitros</a>
 			</dd>
-			<dd class="hide-for-small">
+			<dd style="display: none">
 				<a href="#simple4"> Resumen</a>
 			</dd>
 		</dl>
