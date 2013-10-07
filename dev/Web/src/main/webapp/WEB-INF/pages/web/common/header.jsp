@@ -1,16 +1,4 @@
 <div class="row">
-	<div class="nine columns">
-		<ul class="link-list" >
-			<li><a href="<c:url value="/home"/>" > Inicio</a></li>
-			<li><a href="#" > Configuraciones</a></li>
-			<li><a href="#" > Reportar</a></li>
-		</ul>
-	</div>
-	<div class="three columns">
-		<p>Usr: Pablo Fernández</p>		
-	</div>
-</div>
-<div class="row">
 	<div class="three columns">
 		<img src="<c:url value="/images/foundation/orbit/Logo SEPBas sin cintas.png"/>" alt="">
 	</div>
@@ -38,6 +26,7 @@
 			<li><a href="<c:url value="/clubes/list" />" title="Ver Clubes">Ver Clubes</a></li>
 			<li><a href="<c:url value="/partidos/add" />" title="Nuevo Partido">Nuevo Partido</a></li>
 			<li><a href="<c:url value="/cuartos/iniciar" />" title="Nuevo Partido">Nuevo Cuarto</a></li>
+			<li><a href="<c:url value="/partidos/operador" />" title="Nuevo Partido">Operador</a></li>
 		</ul>
 	</div>
 </div>

@@ -82,6 +82,10 @@
 		<url-pattern>*.ico</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>static</servlet-name>
+		<url-pattern>*.JPEG</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
