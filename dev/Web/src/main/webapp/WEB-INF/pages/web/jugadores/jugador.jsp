@@ -55,6 +55,13 @@
 	    </span>  
 	    <br/>
 	    <br/>
+	    <label for="altura"> Altura: </label> 
+	    <span class="input"> 
+	      <form:input path="altura" />
+	      <form:errors path="altura" id="alturaError"/>
+	    </span>  
+	    <br/>
+	    <br/>
 	    <label for="club" class="hint">Seleccione un club</label>
 	    <span class="input">
 			<form:select path="club">
