@@ -97,10 +97,10 @@
 			<dd class="active">
 				<a href="#simple1"> Equipos</a>
 			</dd>
-			<dd>
+			<dd style="display:none">
 				<a href="#simple2"> Jugadores Habilitados</a>
 			</dd>
-			<dd class="hide-for-small">
+			<dd style="display:none">
 				<a href="#simple3"> Árbitros</a>
 			</dd>
 		</dl>
