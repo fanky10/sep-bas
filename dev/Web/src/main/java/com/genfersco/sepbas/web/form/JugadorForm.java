@@ -20,7 +20,16 @@ public class JugadorForm implements Serializable {
 	private Club club;
 	private Integer numero;
 	private Date fechaNacimiento;
+	private Float altura;
 	
+	public Float getAltura() {
+		return altura;
+	}
+
+	public void setAltura(Float altura) {
+		this.altura = altura;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
