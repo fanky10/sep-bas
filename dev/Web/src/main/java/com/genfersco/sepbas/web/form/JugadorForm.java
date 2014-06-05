@@ -21,6 +21,7 @@ public class JugadorForm implements Serializable {
 	private Integer numero;
 	private Date fechaNacimiento;
 	private Float altura;
+	private Date fechaAlta;
 	
 	public Float getAltura() {
 		return altura;
@@ -76,6 +77,14 @@ public class JugadorForm implements Serializable {
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
 	}
 
 }

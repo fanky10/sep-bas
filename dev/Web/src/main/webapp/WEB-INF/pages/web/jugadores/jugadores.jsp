@@ -27,15 +27,10 @@
 </content>
 <content tag="bodyContent">
 	<!-- navigation  -->
-	<div class="breadcrums">
-		<div class="row">
-			<div class="twelve columns">
-				<ul class="inline-list">
-					<li><a href="#">Home</a></li>
-					<li>></li>
-					<li>Home</li>
-				</ul>
-			</div>
+	<div class="row">
+		<div class="twelve columns">
+			</br>
+			<a href="<c:url value="/jugadores/add"/>" class="button" align="center" >NUEVO JUGADOR</a>
 		</div>
 	</div>
 	
@@ -59,7 +54,10 @@
 							<div class="two columns">
 								<h5>Apellido</h5>
 							</div>
-							<div class="four columns"></div>
+							<div class="two columns">
+								<h5>Equipo</h5>
+							</div>
+							<div class="two columns"></div>
 							<div class="four columns"></div>
 						</div>
 						<c:forEach var="jugador" items="${jugadores}">
@@ -70,11 +68,14 @@
 								<div class="two columns">
 									<h5>${jugador.apellido}</h5>
 								</div>
-								<div class="two columns" align="center">
+								<div class="two columns">
+									<h5>${jugador.club.nombre}</h5>
+								</div>
+								<div class="one column" align="center">
 									<a href="#"><img alt="Editar" jugador-id="${jugador.id}"
 										src="<c:url value="/images/soft-scraps-edit-icon.png" />"></a>
 								</div>
-								<div class="two columns" align="center">
+								<div class="one column" align="center">
 									<a href="#"><img alt="Editar" jugador-id="${jugador.id}"
 										onclick="deleteJugador(this); return false;"
 										src="<c:url value="/images/soft-scraps-delete-icon.png" />"></a>
@@ -82,7 +83,6 @@
 								<div class="four columns" align="center"></div>
 							</div>
 						</c:forEach>
-	
 						<div id="deleteResponse"></div>
 					</c:otherwise>
 				</c:choose>

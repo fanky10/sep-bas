@@ -14,18 +14,31 @@
 					//on select do something!
 				}
 			});
+		
+		});
+	</script>
+	<script>
+		$(function() {
+			$("#datePickerfechaAlta").datepicker({
+				onSelect : function(textoFecha, objDatepicker) {
+					//on select do something!
+				}
+			});
+		
 		});
 	</script>
 </content>
 <content tag="bodyContent">
 <div class="content">
 	<div class="row">
-		<div class="twelve columns">
-	<h1>Agregar Jugador</h1>
-	
+		<div class="eight columns">
+			<h1>Nuevo Jugador</h1>
+				<br/>
+	    		<br/>
 
   <form:form action="${pageContext.request.contextPath}/jugadores/add" modelAttribute="jugadorForm" method="POST">
       <fieldset>
+      	<legend>Datos Personales</legend>
       	<form:hidden path="id" />
 	    <label for="name"> Nombre: </label> 
 	    <span class="input"> 
@@ -48,7 +61,7 @@
 	    </span>
 	    <br/>
 	    <br/>
-	    <label for="numero"> Numero: </label> 
+	    <label for="numero"> DNI: </label> 
 	    <span class="input"> 
 	      <form:input path="numero" />
 	      <form:errors path="numero" id="numeroError"/>
@@ -79,7 +92,17 @@
 					</c:forEach>
 			</form:select>
 	    </span>
-	   <input name="submit" type="submit" value="Guardar" />
+	    <br/>
+	    <br/>
+	    <label for="fechaAlta"> Fecha Alta: </label> 
+	    <span class="input"> 
+	      <input id="datePickerfechaAlta" type="text" name="fechaAlta" id="fechaAlta">
+	      <form:errors path="fechaAlta" id="fechaAltaError"/>
+	    </span>
+	    <br/>
+	    <br/>
+	   <input name="submit" type="submit" class="button tiny" value="Guardar" />
+	   <a href="<c:url value="/home"/>" class="button tiny"> Volver</a>
      </fieldset>
   </form:form>
   </div></div></div>
