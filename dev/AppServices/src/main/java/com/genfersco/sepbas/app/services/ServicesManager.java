@@ -40,5 +40,9 @@ public interface ServicesManager {
 	
 	public List<Arbitro> getArbitrosHabilitados();
         
-        public Arbitro addArbitro(Arbitro arbitro);
+        public Arbitro saveArbitro(Arbitro arbitro);
+        
+        public Arbitro getArbitro(Integer id);
+        
+        public void eliminarArbitro(Integer id);
 }

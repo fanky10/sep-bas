@@ -130,8 +130,18 @@ public class ServicesManagerImpl implements ServicesManager {
 	}
 
     @Override
-    public Arbitro addArbitro(Arbitro arbitro) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Arbitro saveArbitro(Arbitro arbitro) {
+        return arbitroManager.addArbitro(arbitro);
+    }
+
+    @Override
+    public Arbitro getArbitro(Integer id) {
+        return arbitroManager.getArbitro(id);
+    }
+
+    @Override
+    public void eliminarArbitro(Integer id) {
+        arbitroManager.deleteArbitro(id);
     }
 
 }

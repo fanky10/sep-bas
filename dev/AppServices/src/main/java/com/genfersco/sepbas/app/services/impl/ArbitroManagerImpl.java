@@ -21,17 +21,17 @@ public class ArbitroManagerImpl implements ArbitroManager{
 
     @Override
     public Arbitro addArbitro(Arbitro arbitro) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return arbitroRepository.save(arbitro);
     }
 
     @Override
     public void deleteArbitro(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        arbitroRepository.delete(id);
     }
 
     @Override
     public Arbitro getArbitro(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return arbitroRepository.findOne(id);
     }
 
 }
