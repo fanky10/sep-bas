@@ -19,4 +19,19 @@ public class ArbitroManagerImpl implements ArbitroManager{
 		return arbitroRepository.findAll();
 	}
 
+    @Override
+    public Arbitro addArbitro(Arbitro arbitro) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void deleteArbitro(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Arbitro getArbitro(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

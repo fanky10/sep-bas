@@ -33,7 +33,8 @@ public class JugadorManagerTest {
 
 	@Before
 	public void buildData() {
-		club.setNombre("SportClub");
+		club.setNombre("SportClub");                
+		club.setLocalidad("Canada de Gomez");
 		club = clubRepository.save(club);
 
 		jugador = jugadorManager.addJugador(JugadorMocked.getJugador(club));
@@ -57,7 +58,8 @@ public class JugadorManagerTest {
 	@Test
 	public void testGetJugadoresClub() {
 		Club club = new Club();
-		club.setNombre("SportTest");
+		club.setNombre("SportTest");             
+		club.setLocalidad("Canada de Gomez");
 		club = clubRepository.save(club);
 		for (int i = 0; i < 10; i++) {
 			jugador = jugadorManager.addJugador(JugadorMocked.getJugador(club));

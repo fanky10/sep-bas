@@ -39,4 +39,6 @@ public interface ServicesManager {
 	public Cuarto addCuarto(Cuarto cuarto, List<Jugador> equipo1, List<Jugador> equipo2);
 	
 	public List<Arbitro> getArbitrosHabilitados();
+        
+        public Arbitro addArbitro(Arbitro arbitro);
 }
