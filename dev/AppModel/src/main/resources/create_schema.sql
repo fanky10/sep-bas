@@ -84,7 +84,8 @@ DROP TABLE IF EXISTS arbitros;
 CREATE TABLE arbitros(
     arbitro_id integer unsigned not null primary key AUTO_INCREMENT,
     arbitro_nombre varchar(100) not null,
-    arbitro_apellido varchar(100) not null 
+    arbitro_apellido varchar(100) not null,
+    arbitro_localidad varchar(100) not null 
 )ENGINE=InnoDB;
 
 -- foreign key relationships
@@ -97,3 +98,5 @@ ALTER TABLE cuartos ADD CONSTRAINT `FK_cuartos_id_1` FOREIGN KEY (`cuarto_partid
 
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_cuarto_id`) REFERENCES `cuartos` (`cuarto_id`);
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_2` FOREIGN KEY (`evento_jugador_id`) REFERENCES `jugadores` (`jugador_id`);
+
+--- ALTER TABLE `sepbas_web`.`jugadores` ADD COLUMN `altura` FLOAT AFTER `jugador_estado`;

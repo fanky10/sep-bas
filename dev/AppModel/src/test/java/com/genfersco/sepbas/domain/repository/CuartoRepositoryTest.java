@@ -33,10 +33,12 @@ public class CuartoRepositoryTest {
 	public void buildData() {
 		Club clubVisitante = new Club();
 		clubVisitante.setNombre("Visitante");
+                clubVisitante.setLocalidad("Arequito");
 		clubVisitante = clubRepository.save(clubVisitante);
 		
 		Club clubLocal = new Club();
-		clubLocal.setNombre("Local!");
+		clubLocal.setNombre("Local");
+                clubLocal.setLocalidad("Rosario");
 		clubLocal = clubRepository.save(clubLocal);
 		
 		Partido partido = new Partido();
