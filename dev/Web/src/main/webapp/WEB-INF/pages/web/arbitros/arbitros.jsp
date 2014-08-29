@@ -8,9 +8,9 @@
 <content tag="jscript">
 	<script>
 		function deleteClub(element){
-			clubId = element.getAttribute("club-id"); //refers to the element actioning this method
+			clubId = element.getAttribute("arbitro-id"); //refers to the element actioning this method
 			li = element.parentNode;
-			$.post("${ctx}/clubes/delete.json", { "id": clubId },
+			$.post("${ctx}/arbitros/delete.json", { "id": arbitroId },
 					function(response){
 						if(response.status=="OK"){//remove it
 							$(li).fadeOut("slow", function() { 
@@ -30,33 +30,32 @@
 		<div class="row">
 			<div class="twelve columns">
 				<c:choose>
-					<c:when test="${empty clubes}">
+					<c:when test="${empty arbitros}">
 						<div class="twelve columns">
-			                <hr class="sin-margin-top" />
-			            </div>
-			            <div class="twelve columns">
-			                <h3>Proximamente Clubes...</h3>
-			            </div>
+                                                    No se encontraron arbitros
+                                                <hr class="sin-margin-top" />
+                                                </div>
 					</c:when>
 					<c:otherwise>
 						<div class="row">
 							<div class="four columns">
-								<h5>Nombre</h5>
+								<h5>Arbitro</h5>
 							</div>
 							<div class="four columns"></div>
 							<div class="four columns"></div>
 						</div>
-						<c:forEach var="club" items="${clubes}">
+						<c:forEach var="arbitro" items="${arbitros}">
 							<div class="row">
 								<div class="four columns">
-									<h5>${club.nombre}</h5>
+									<h5>${arbitro.nombre}</h5>
+                                                                        <h5>${arbitro.apellido}</h5>
 								</div>
 								<div class="four columns">
-									<a href="#"><img alt="Editar" club-id="${club.id}"
+									<a href="<c:url value="/arbitros/edit/${arbitro.id}" />" ><img alt="Editar" arbitro-id="${arbitro.id}"
 										src="<c:url value="/images/soft-scraps-edit-icon.png" />"></a>
 								</div>
 								<div class="four columns">
-									<a href="#"><img alt="Eliminar" club-id="${club.id}"
+									<a href="<c:url value="/arbitros/del/${arbitro.id}" />" ><img alt="Eliminar" arbitro-id="${arbitro.id}"
 										src="<c:url value="/images/soft-scraps-delete-icon.png" />"></a>
 								</div>
 							</div>
