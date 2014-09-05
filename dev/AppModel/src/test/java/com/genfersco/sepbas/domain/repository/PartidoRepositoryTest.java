@@ -23,16 +23,16 @@ public class PartidoRepositoryTest {
 	@Autowired
 	private PartidoRepository partidoRepository;
 	@Autowired
-	private ClubRepository clubRepository;
-	
+        private ClubMocked clubMocked;
+        
 	private Partido partido = new Partido();
 	private Club clubLocal = new Club();
 	private Club clubVisitante = new Club();
 	
 	@Before
 	public void buildData(){
-		clubLocal = clubRepository.save(ClubMocked.getClub());
-		clubVisitante = clubRepository.save(ClubMocked.getClub());
+		clubLocal = clubMocked.getClub();
+		clubVisitante = clubMocked.getClub();
 		
 		partido.setClubLocal(clubLocal);
 		partido.setClubVisitante(clubVisitante);

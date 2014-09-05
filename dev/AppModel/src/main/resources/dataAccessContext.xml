@@ -25,7 +25,8 @@
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 	<jpa:repositories base-package="com.genfersco.sepbas.domain.repository" />
-
+        <jpa:repositories base-package="com.genfersco.sepbas.domain.mocked" />
+        
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${hibernate.driverClassName}" />

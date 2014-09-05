@@ -14,7 +14,6 @@ public class Club {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "club_id", nullable = false)
 	private Integer id;
-
 	@Column(name = "club_nombre", nullable = false)
 	private String nombre;
         @Column(name = "club_localidad", nullable = false)
@@ -40,6 +39,6 @@ public class Club {
 	}
 
 	public void setLocalidad(String nombre) {
-		this.localidad = nombre;
+		this.localidad = localidad;
 	}
 }

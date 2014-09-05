@@ -30,33 +30,32 @@ import com.genfersco.sepbas.domain.model.TipoEvento;
 @Transactional
 public class EventoRepositoryTest {
 	@Autowired
-	private CuartoRepository cuartoRepository;
-	@Autowired
-	private PartidoRepository partidoRepository;
-	@Autowired
 	private EventoRepository eventoRepository;
 	@Autowired
-	private ClubRepository clubRepository;
-	@Autowired
-	private JugadorRepository jugadorRepository;
-	
-	private Partido partido = new Partido();
+        private EventoMocked eventoMocked;
+        @Autowired
+        private CuartoMocked cuartoMocked;
+        @Autowired
+        private JugadorMocked jugadorMocked;
+        
 	private Cuarto cuarto = new Cuarto();
-	private Club clubLocal = new Club();
 	private Jugador jugador = new Jugador();
 	private Evento evento = new Evento();
 	
 	
 	@Before
 	public void buildData() {
-		// evento simple
-		clubLocal = clubRepository.save(ClubMocked.getClub());
-		jugador = jugadorRepository.save(JugadorMocked.getJugador(clubLocal));
-		Club clubVisitante = clubRepository.save(ClubMocked.getClub());
-		partido = partidoRepository.save(PartidoMocked.getPartido(clubLocal,clubVisitante));
-		cuarto = cuartoRepository.save(CuartoMocked.getCuarto(partido));
+                cuarto = cuartoMocked.getCuarto();
+                jugador = jugadorMocked.getJugador();
+                
+                evento = new Evento();
+		evento.setCuarto(cuarto);
+		evento.setJugador(jugador);
+		evento.setFechaHora(new Date(System.currentTimeMillis()));
+		evento.setEstado(EstadoEvento.NO_ELIMINADO);
+		evento.setTipoEvento(TipoEvento.INGRESA_JUGADOR);
 		
-		evento = eventoRepository.save(EventoMocked.getEvento(cuarto, jugador));
+		evento = eventoRepository.save(evento);
 	}
 
 	@Test
