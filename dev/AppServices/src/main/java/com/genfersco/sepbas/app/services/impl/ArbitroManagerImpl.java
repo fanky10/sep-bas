@@ -19,4 +19,19 @@ public class ArbitroManagerImpl implements ArbitroManager{
 		return arbitroRepository.findAll();
 	}
 
+    @Override
+    public Arbitro addArbitro(Arbitro arbitro) {
+        return arbitroRepository.save(arbitro);
+    }
+
+    @Override
+    public void deleteArbitro(Integer id) {
+        arbitroRepository.delete(id);
+    }
+
+    @Override
+    public Arbitro getArbitro(Integer id) {
+        return arbitroRepository.findOne(id);
+    }
+
 }

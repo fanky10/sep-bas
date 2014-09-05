@@ -20,6 +20,9 @@ public class Arbitro {
 
 	@Column(name = "arbitro_apellido", nullable = false)
 	private String apellido;
+        
+        @Column(name = "arbitro_localidad", nullable = false)
+	private String localidad;
 
 	public Integer getId() {
 		return id;
@@ -43,6 +46,14 @@ public class Arbitro {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+        
+        public String getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
 	}
 
 }

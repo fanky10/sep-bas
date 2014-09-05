@@ -13,6 +13,8 @@ public class WebAppConstants {
 	public static final String AGREGAR_PARTIDO = "web/partidos/partido";
 	public static final String NUEVO_PARTIDO = "web/partidos/nuevo_partido";
 	public static final String INICIAR_PARTIDO= "web/partidos/operador";
+	public static final String AGREGAR_ARBITRO = "web/arbitros/arbitro";
+	public static final String ARBITROS = "web/arbitros/arbitros";
 	
 	// List of Session and Request attribute names
 	public static final String PARTIDO_KEY = "sessionPartido";

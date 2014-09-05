@@ -33,7 +33,8 @@ public class JugadorRepositoryTest {
 	@Before
 	public void buildData(){
 		Club club = new Club();
-		club.setNombre("SportClub");
+		club.setNombre("SportClub");                
+		club.setLocalidad("Canada de Gomez");
 		
 		club = clubRepository.save(club);
 		

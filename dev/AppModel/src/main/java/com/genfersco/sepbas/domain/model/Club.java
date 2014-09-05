@@ -17,6 +17,8 @@ public class Club {
 
 	@Column(name = "club_nombre", nullable = false)
 	private String nombre;
+        @Column(name = "club_localidad", nullable = false)
+        private String localidad;
 
 	public Integer getId() {
 		return id;
@@ -33,5 +35,11 @@ public class Club {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+        public String getLocalidad() {
+		return localidad;
+	}
 
+	public void setLocalidad(String nombre) {
+		this.localidad = nombre;
+	}
 }

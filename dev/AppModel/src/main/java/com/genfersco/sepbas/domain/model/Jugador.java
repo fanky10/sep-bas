@@ -34,7 +34,7 @@ public class Jugador {
 	@Column(name = "jugador_numero", nullable = false)
 	private Integer numero;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+	@ManyToOne(targetEntity = Club.class)
 	@JoinColumn(name = "jugador_actual_club_id", referencedColumnName = "club_id")
 	private Club club;
 

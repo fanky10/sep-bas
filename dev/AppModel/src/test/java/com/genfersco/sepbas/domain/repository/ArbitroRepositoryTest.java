@@ -25,6 +25,7 @@ public class ArbitroRepositoryTest {
 	public void buildData() {		
 		arbitro.setNombre("Pepe");
 		arbitro.setApellido("Gonzalez");
+                arbitro.setLocalidad("Funes");
 		arbitro = arbitroRepository.save(arbitro);
 	}
 

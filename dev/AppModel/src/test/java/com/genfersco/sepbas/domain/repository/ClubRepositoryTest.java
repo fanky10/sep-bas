@@ -24,6 +24,7 @@ public class ClubRepositoryTest {
 	@Before
 	public void buildData(){
 		club.setNombre("SportClub");
+		club.setLocalidad("Rosario");
 		
 		club = clubRepository.save(club);
 		
