@@ -7,16 +7,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CuartoMocked {
-    
-    @Autowired
-    private CuartoRepository cuartoRepository;
-    @Autowired
-    private PartidoMocked partidoMocked;
-	public Cuarto getCuarto(){
+
+	@Autowired
+	private CuartoRepository cuartoRepository;
+	@Autowired
+	private PartidoMocked partidoMocked;
+
+	public Cuarto getCuarto() {
 		Cuarto cuarto = new Cuarto();
 		cuarto.setNumero(2);
 		cuarto.setPartido(partidoMocked.getPartido());
-                cuarto = cuartoRepository.save(cuarto);
+		cuarto = cuartoRepository.save(cuarto);
 		return cuarto;
 	}
 }
