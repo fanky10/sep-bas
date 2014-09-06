@@ -21,7 +21,7 @@ public class Arbitro {
 	@Column(name = "arbitro_apellido", nullable = false)
 	private String apellido;
         
-        @Column(name = "arbitro_localidad", nullable = false)
+	@Column(name = "arbitro_localidad", nullable = false)
 	private String localidad;
 
 	public Integer getId() {

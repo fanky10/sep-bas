@@ -20,12 +20,12 @@
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
+	<context:component-scan base-package="com.genfersco.sepbas.domain.mocked"/>
 
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 	<jpa:repositories base-package="com.genfersco.sepbas.domain.repository" />
-        <jpa:repositories base-package="com.genfersco.sepbas.domain.mocked" />
         
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

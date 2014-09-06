@@ -7,13 +7,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ClubMocked {
-    @Autowired
-    private ClubRepository clubRepository;
+	@Autowired
+	private ClubRepository clubRepository;
+
 	public Club getClub() {
 		Club club = new Club();
 		club.setNombre("SportClub");
 		club.setLocalidad("Canada de Gomez");
-                club = clubRepository.save(club);
+		club = clubRepository.save(club);
 		return club;
 	}
 }
