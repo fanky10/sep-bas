@@ -11,9 +11,13 @@ public class ClubMocked {
 	private ClubRepository clubRepository;
 
 	public Club getClub() {
+		return getClub("Sportclub", "Canada de Gomez");
+	}
+	
+	public Club getClub(String nombre, String localidad){
 		Club club = new Club();
-		club.setNombre("SportClub");
-		club.setLocalidad("Canada de Gomez");
+		club.setNombre(nombre);
+		club.setLocalidad(localidad);
 		club = clubRepository.save(club);
 		return club;
 	}

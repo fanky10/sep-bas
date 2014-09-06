@@ -23,29 +23,30 @@ public class PartidoRepositoryTest {
 	@Autowired
 	private PartidoRepository partidoRepository;
 	@Autowired
-        private ClubMocked clubMocked;
-        
+	private ClubMocked clubMocked;
+
 	private Partido partido = new Partido();
 	private Club clubLocal = new Club();
 	private Club clubVisitante = new Club();
-	
+
 	@Before
-	public void buildData(){
+	public void buildData() {
 		clubLocal = clubMocked.getClub();
-		clubVisitante = clubMocked.getClub();
-		
+		clubVisitante = clubMocked.getClub("San Telmo", "Funes");
+
 		partido.setClubLocal(clubLocal);
 		partido.setClubVisitante(clubVisitante);
 		partido.setFecha(new Date(System.currentTimeMillis()));
 		partido.setResultadoLocal(10);
 		partido.setResultadoVisitante(20);
-		
+
 		partido = partidoRepository.save(partido);
 	}
+
 	@Test
-	public void testGuardarPartido(){
-		assertTrue(partidoRepository.count()>0);
+	public void testGuardarPartido() {
+		assertTrue(partidoRepository.count() > 0);
 		assertTrue(partidoRepository.exists(partido.getId()));
 	}
-	
+
 }
