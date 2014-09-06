@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.genfersco.sepbas.app.services.JugadorManager;
+import com.genfersco.sepbas.domain.mocked.ClubMocked;
 import com.genfersco.sepbas.domain.mocked.JugadorMocked;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.EstadoJugador;
@@ -26,18 +27,17 @@ public class JugadorManagerTest {
 	@Autowired
 	private JugadorManager jugadorManager;
 	@Autowired
-	private ClubRepository clubRepository;
+	private ClubMocked clubMocked;
+	@Autowired
+	private JugadorMocked jugadorMocked;
 
 	private Jugador jugador = new Jugador();
-	private Club club = new Club();
 
 	@Before
 	public void buildData() {
-		club.setNombre("SportClub");                
-		club.setLocalidad("Canada de Gomez");
-		club = clubRepository.save(club);
 
-		jugador = jugadorManager.addJugador(JugadorMocked.getJugador(club));
+
+		jugador = jugadorManager.addJugador(jugadorMocked.getJugador(false));
 	}
 
 	@Test
@@ -57,12 +57,9 @@ public class JugadorManagerTest {
 
 	@Test
 	public void testGetJugadoresClub() {
-		Club club = new Club();
-		club.setNombre("SportTest");             
-		club.setLocalidad("Canada de Gomez");
-		club = clubRepository.save(club);
+		Club club = clubMocked.getClub();
 		for (int i = 0; i < 10; i++) {
-			jugador = jugadorManager.addJugador(JugadorMocked.getJugador(club));
+			jugador = jugadorManager.addJugador(jugadorMocked.getJugador(club,false));
 		}
 		List<Jugador> jugadores = jugadorManager.getJugadoresClub(club.getId());
 		assertTrue(jugadores!=null && !jugadores.isEmpty());
