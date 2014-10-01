@@ -22,10 +22,10 @@ public class ArbitroRepositoryTest {
 	private Arbitro arbitro = new Arbitro();
 
 	@Before
-	public void buildData() {		
+	public void buildData() {
 		arbitro.setNombre("Pepe");
 		arbitro.setApellido("Gonzalez");
-                arbitro.setLocalidad("Funes");
+		arbitro.setLocalidad("Funes");
 		arbitro = arbitroRepository.save(arbitro);
 	}
 

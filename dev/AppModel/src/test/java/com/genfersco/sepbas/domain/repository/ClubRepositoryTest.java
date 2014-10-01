@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.genfersco.sepbas.domain.mocked.ClubMocked;
 import com.genfersco.sepbas.domain.model.Club;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,14 +21,12 @@ public class ClubRepositoryTest {
 	
 	@Autowired
 	private ClubRepository clubRepository;
+	@Autowired
+	private ClubMocked clubMocked;
 	
 	@Before
 	public void buildData(){
-		club.setNombre("SportClub");
-		club.setLocalidad("Rosario");
-		
-		club = clubRepository.save(club);
-		
+		club = clubMocked.getClub();
 	}
 	
 	@Test

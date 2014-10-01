@@ -28,6 +28,8 @@ public class ServicesManagerTest {
 	private ServicesManager servicesManager;
 	@Autowired
 	private ClubRepository clubRepository;
+	@Autowired
+	private JugadorMocked jugadorMocked;
 
 	private Jugador jugador = new Jugador();
 
@@ -39,7 +41,7 @@ public class ServicesManagerTest {
 
 		club = clubRepository.save(club);
 
-		jugador = servicesManager.addJugador(JugadorMocked.getJugador(club));
+		jugador = servicesManager.addJugador(jugadorMocked.getJugador(club,false));
 	}
 
 	@Test

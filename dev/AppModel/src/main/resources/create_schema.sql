@@ -22,7 +22,8 @@ DROP TABLE IF EXISTS clubes;
 
 CREATE TABLE clubes(
     club_id integer unsigned not null primary key AUTO_INCREMENT,
-    club_nombre varchar(100) not null 
+    club_nombre varchar(100) not null,
+    club_localidad varchar(100) not null
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS jugador_club;
@@ -66,10 +67,12 @@ CREATE TABLE eventos(
 	
 )ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS tipos_eventos;
+
 /** 
  * AHORA LOS TIPOS DE EVENTOS LOS MANEJA JAVA CON UN ENUM
  * 
+DROP TABLE IF EXISTS tipos_eventos;
+
 CREATE TABLE tipos_eventos(
     tipo_evento_id integer unsigned not null primary key AUTO_INCREMENT,
     tipo_evento_descripcion varchar(100) not null
@@ -98,5 +101,3 @@ ALTER TABLE cuartos ADD CONSTRAINT `FK_cuartos_id_1` FOREIGN KEY (`cuarto_partid
 
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_cuarto_id`) REFERENCES `cuartos` (`cuarto_id`);
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_2` FOREIGN KEY (`evento_jugador_id`) REFERENCES `jugadores` (`jugador_id`);
-
---- ALTER TABLE `sepbas_web`.`jugadores` ADD COLUMN `altura` FLOAT AFTER `jugador_estado`;

@@ -14,11 +14,13 @@ import org.springframework.util.StringUtils;
 import com.genfersco.sepbas.app.services.ServicesManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/dispatcher-servlet.xml",
+@ContextConfiguration(locations = {
+		"file:src/main/webapp/WEB-INF/config/dispatcher-servlet.xml",
 		"classpath:/dataAccessContext.xml" })
 public class ResourceBoundleMessageSourceTest extends TestCase {
 	@Resource
 	private String homeMessage;
+	
 	@Autowired
 	private ServicesManager servicesManager;
 	

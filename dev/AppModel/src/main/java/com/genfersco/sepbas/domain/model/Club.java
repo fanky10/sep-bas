@@ -14,11 +14,10 @@ public class Club {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "club_id", nullable = false)
 	private Integer id;
-
 	@Column(name = "club_nombre", nullable = false)
 	private String nombre;
-        @Column(name = "club_localidad", nullable = false)
-        private String localidad;
+	@Column(name = "club_localidad", nullable = false)
+	private String localidad;
 
 	public Integer getId() {
 		return id;
@@ -35,11 +34,12 @@ public class Club {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-        public String getLocalidad() {
+
+	public String getLocalidad() {
 		return localidad;
 	}
 
-	public void setLocalidad(String nombre) {
-		this.localidad = nombre;
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
 	}
 }
