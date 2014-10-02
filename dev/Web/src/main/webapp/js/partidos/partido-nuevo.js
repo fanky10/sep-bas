@@ -163,7 +163,7 @@ $(function () {
     $('.round.button.clubes').on('click', function (e) {
         e.preventDefault();
         var selectedClubs = partidoView.getSelectedClubs();
-        if(selectedClubs.idClubLocal === selectedClubs.idClubVisitante){
+        if (selectedClubs.idClubLocal === selectedClubs.idClubVisitante) {
             console.log('club local y visitante iguales');
             return false;
         }
@@ -185,17 +185,47 @@ PartidoView = function () {
         var clubLocal = $('#clubesLocales :selected').val(),
                 clubVisitante = $('#clubesVisitantes :selected').val();
         return {
-            idClubLocal:clubLocal,
-            idClubVisitante:clubVisitante
+            idClubLocal: clubLocal,
+            idClubVisitante: clubVisitante
         };
     }
-    function cargaJugadores(){
+    function cargaJugadores() {
         $("#jugadoresTab h5").text("Cargando Jugadores...");
+        var _self = this, clubes = getClubesSeleccionados(), clubLocal = clubes.idClubLocal, clubVisitante = clubes.idClubVisitante;
+        $.ajax({
+            dataType: "json",
+            url: APP_CTX + '/secure/api/jugadores/club/' + clubLocal,
+            data: null,
+            success: function (response) {
+                if (response.code === "0") {
+                    _self.renderJugadores(response.content,'jugadores-locales-container');
+                }
+            }
+        });
+        $.ajax({
+            dataType: "json",
+            url: APP_CTX + '/secure/api/jugadores/club/' + clubVisitante,
+            data: null,
+            success: function (response) {
+                if (response.code === "0") {
+                    _self.renderJugadores(response.content,'jugadores-visitantes-container');
+                }
+            }
+        });
+    }
+    function renderJugadores(jugadores,container) {
+        if (!jugadores || jugadores.length < 1) {
+            return false;
+        }
+        $.each(jugadores, function (idx, jugador) {
+            console.log("jugador:", jugador);
+        });
     }
 
     return {
         nextTab: showNextTab,
         getSelectedClubs: getClubesSeleccionados,
-        loadPlayers: cargaJugadores
+        loadPlayers: cargaJugadores,
+        renderJugadores: renderJugadores
     };
 }
