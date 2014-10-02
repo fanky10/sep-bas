@@ -32,8 +32,7 @@ public class PartidoRepositoryTest {
 	@Before
 	public void buildData() {
 		clubLocal = clubMocked.getClub();
-		clubVisitante = clubMocked.getClub("San Telmo", "Funes");
-
+		clubVisitante = clubMocked.getClub("San Telmo", "Funes",true);
 		partido.setClubLocal(clubLocal);
 		partido.setClubVisitante(clubVisitante);
 		partido.setFecha(new Date(System.currentTimeMillis()));

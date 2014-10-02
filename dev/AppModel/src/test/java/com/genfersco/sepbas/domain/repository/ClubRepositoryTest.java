@@ -26,6 +26,9 @@ public class ClubRepositoryTest {
 	
 	@Before
 	public void buildData(){
+                club.setNombre("Atletico");
+		club.setLocalidad("Funes");
+		club = clubRepository.save(club);
 		club = clubMocked.getClub();
 	}
 	

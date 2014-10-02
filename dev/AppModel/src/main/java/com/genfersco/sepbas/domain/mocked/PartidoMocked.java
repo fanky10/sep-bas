@@ -17,8 +17,8 @@ public class PartidoMocked {
 	private ClubMocked clubMocked;
 
 	public Partido getPartido() {
-		Club clubVisitante = clubMocked.getClub("Cachitos", "Arequito");
-		Club clubLocal = clubMocked.getClub("Cachitos", "Funes");
+		Club clubVisitante = clubMocked.getClub("Cachitos", "Arequito",true);
+		Club clubLocal = clubMocked.getClub("Cachitos", "Funes",true);
 		
 		Partido partido = new Partido();
 		partido.setFecha(new Date(System.currentTimeMillis()));
