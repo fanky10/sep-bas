@@ -8,7 +8,12 @@ INSERT INTO `arbitros` (`arbitro_id`, `arbitro_nombre`, `arbitro_apellido`) VALU
 -- Dumping data for table `clubes`
 --
 
-INSERT INTO `clubes` (`club_id`, `club_nombre`) VALUES (61,'Un club'),(62,'otro club'),(63,'Libertad'),(64,'Fisherton'),(65,'El Tala'),(66,'Estudiantil');
+INSERT INTO `clubes` (`club_id`, `club_nombre`,`club_localidad`) 
+VALUES 
+(1,'Libertad','Default'),
+(2,'Fisherton','Default'),
+(3,'El Tala','Default'),
+(4,'Estudiantil','Default');
 
 --
 -- Dumping data for table `cuartos`

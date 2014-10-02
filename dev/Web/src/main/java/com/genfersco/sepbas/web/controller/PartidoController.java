@@ -24,59 +24,57 @@ import com.genfersco.sepbas.web.util.PartidoHelper;
 
 @Controller
 public class PartidoController extends BaseController {
-	@Autowired
-	private ServicesManager servicesManager;
 
-	@InitBinder
-	protected void initBinder(HttpServletRequest request,
-			ServletRequestDataBinder binder) throws Exception {
-		binder.registerCustomEditor(Club.class, new ClubPropertyEditor(
-				getServicesManager()));
+    @Autowired
+    private ServicesManager servicesManager;
 
-	}
+    @InitBinder
+    protected void initBinder(HttpServletRequest request,
+            ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(Club.class, new ClubPropertyEditor(
+                getServicesManager()));
 
-	@RequestMapping(value = "/partidos/add", method = RequestMethod.POST)
-	public String addPartido(HttpServletRequest request,
-			@ModelAttribute PartidoForm partidoForm) {
-		Partido partido = new Partido();
-		partido.setClubLocal(partidoForm.getClubLocal());
-		partido.setClubVisitante(partidoForm.getClubVisitante());
-		partido.setFecha(new Date(System.currentTimeMillis()));
-		partido = getServicesManager().addPartido(partido);
-		PartidoHelper.setPartido(request, partido);
-		return "redirect:/cuartos/iniciar";
-	}
+    }
 
-	@RequestMapping(value = "/partidos/add", method = RequestMethod.GET)
-	public String showPartidoForm(ModelMap map) {
-		map.addAttribute("clubes", getServicesManager().getClubes());
-		map.addAttribute("partidoForm", new PartidoForm());
-		return WebAppConstants.AGREGAR_PARTIDO;
-	}
+    @RequestMapping(value = "/partidos/iniciar", method = RequestMethod.POST)
+    public String addPartido(HttpServletRequest request,
+            @ModelAttribute PartidoForm partidoForm) {
+        Partido partido = new Partido();
+        partido.setClubLocal(partidoForm.getClubLocal());
+        partido.setClubVisitante(partidoForm.getClubVisitante());
+        partido.setFecha(new Date(System.currentTimeMillis()));
+        partido = getServicesManager().addPartido(partido);
+        PartidoHelper.setPartido(request, partido);
+        return "redirect:/cuartos/iniciar";
+    }
 
-	@RequestMapping(value = "/partidos/nuevo", method = RequestMethod.GET)
-	public String nuevoJuego(HttpServletRequest request,
-			HttpServletResponse repsponse, ModelMap map) {
+    @RequestMapping(value = "/partido/iniciar", method = RequestMethod.GET)
+    public String nuevoJuego(HttpServletRequest request,
+            HttpServletResponse response, ModelMap map) {
+        // TODO: check if partido iniciado
+        boolean initialized = PartidoHelper.getPartido(request) != null;
+        if (initialized) {
+            return "redirect:/cuartos/iniciar";
+        }
+        map.addAttribute("clubes", getServicesManager().getClubes());
+        map.addAttribute("arbitros", getServicesManager().getArbitrosHabilitados());
+        return WebAppConstants.NUEVO_PARTIDO;
+    }
+
+    @RequestMapping(value = "/partidos/operador", method = RequestMethod.GET)
+    public String nuevoJuegoOperador(HttpServletRequest request,
+            HttpServletResponse repsponse, ModelMap map) {
 		// TODO: clubes locales.
-		map.addAttribute("clubes", getServicesManager().getClubes());
-		map.addAttribute("arbitros", getServicesManager().getArbitrosHabilitados());
-		return WebAppConstants.NUEVO_PARTIDO;
-	}
-	
-	@RequestMapping(value = "/partidos/operador", method = RequestMethod.GET)
-	public String nuevoJuegoOperador(HttpServletRequest request,
-			HttpServletResponse repsponse, ModelMap map) {
-		// TODO: clubes locales.
-		//map.addAttribute("clubes", getServicesManager().getClubes());
-		return WebAppConstants.INICIAR_PARTIDO;
-	}
+        //map.addAttribute("clubes", getServicesManager().getClubes());
+        return WebAppConstants.INICIAR_PARTIDO;
+    }
 
-	public ServicesManager getServicesManager() {
-		return servicesManager;
-	}
+    public ServicesManager getServicesManager() {
+        return servicesManager;
+    }
 
-	public void setServicesManager(ServicesManager servicesManager) {
-		this.servicesManager = servicesManager;
-	}
+    public void setServicesManager(ServicesManager servicesManager) {
+        this.servicesManager = servicesManager;
+    }
 
 }

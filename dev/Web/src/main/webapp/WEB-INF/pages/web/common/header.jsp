@@ -11,7 +11,6 @@
 	<div class="twelve columns">
 		<ul class="nav-bar" >
 			<li class="active"><a href="<c:url value="/home"/>" > Inicio</a></li>
-			<li><a href="<c:url value="/partidos/nuevo"/>" > Partido</a></li>
 			<li class="has-flyout" >
 				<a href="#" >Datos</a>
 				<a href="#" class="flyout-toggle"><span> </span></a>
@@ -21,7 +20,7 @@
 					<li><a href="<c:url value="/jugadores/list" />">ABM Jugadores</a></li>
 				</ul>
 			</li>
-			<li><a href="<c:url value="/partidos/add" />" title="Nuevo Partido">Nuevo Partido</a></li>
+			<li><a href="<c:url value="/partido/iniciar" />" title="Nuevo Partido">Nuevo Partido</a></li>
 			<li><a href="<c:url value="/cuartos/iniciar" />" title="Nuevo Partido">Nuevo Cuarto</a></li>
 			<li><a href="<c:url value="/partidos/operador" />" title="Nuevo Partido">Operador</a></li>
 			<li class="has-flyout" >

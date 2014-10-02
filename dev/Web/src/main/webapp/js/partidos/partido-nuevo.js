@@ -1,0 +1,172 @@
+//this is my superScript plugin!!
+(function ($) {
+    $.fn.extend({
+        //pass the options variable to the function
+        customDropdown: function (options) {
+            //Set the default values, use comma to separate the settings, example:
+            var defaults = {
+                opt: 1,
+                targetLabel: $("#divClubLocal a.current"),
+                targetSelect: $('#clubLocal')
+            }
+
+            var options = $.extend(defaults, options);
+            return this.each(function () {
+                var o = options;
+                var obj = $(this);
+                obj.bind('keyup', function (e) {
+                    if (e.keyCode == 13) {//enter
+                        o.targetSelect.trigger('change');
+                        return false;
+                    }
+
+                    var searching = String.fromCharCode(e.keyCode);
+                    var selectedElements = $("ul li.selected", obj);
+                    selectedElements.removeClass("selected");
+                    var filtered = $("ul li", obj).filter(function () {
+                        var currentText = $(this).text();
+                        var found = $(this).text().slice(0, searching.length).toLowerCase() == searching.toLowerCase();
+                        return found;
+                    });
+
+                    //we have everything found, but if there's something selected then select the next one
+                    var length = filtered.length;
+                    filtered.each(function (index, element) {
+                        var isSelected = $(element).attr("isselected") == 'true';
+
+                        if (isSelected && index == length - 1) {//we are the last one and we are selected!
+                            $(element).attr("class", "selected");
+                            return false;//nothing to do
+                        } else if (isSelected && index < length - 1) {//selected but not the last one
+                            //remove properties
+                            $(element).attr("isselected", false);//i'm not the last one, give me another!
+                            //continue (:
+                        } else {//not selected first one --> first timer!
+                            $(element).attr("isselected", true);
+                            $(element).attr("class", "selected");
+                            return false;
+                        }
+                    });
+                    //in case there are several
+                    var current = filtered.filter(".selected").filter(':first');
+                    o.targetLabel.text(current.text());
+
+                });
+
+            });
+        }
+    });
+})(jQuery);
+
+$('#divClubLocal').customDropdown({targetLabel: $("#divClubLocal a.current"),
+    targetSelect: $('#clubLocal')});
+$('#divClubVisita').customDropdown({targetLabel: $("#divClubVisita a.current"),
+    targetSelect: $('#clubLocal')});
+$('#clubLocal').on('change', function (e) {
+    var element = $("#divClubLocal ul li.selected");
+    $(element).attr("isselected", true);
+    //TODO: change clubVisita values, avoid select same element
+    //TODO: get listed players! --> ajax request
+});
+
+function validaClubes() {
+    var equipoVisitante = document.getElementsByName("visita");
+    var equipoLocal = document.getElementsByName("local");
+
+    if (equipoLocal[0].value.length == 0 || equipoVisitante[0].value.length == 0) {
+        alert("Debe elegirse algún club");
+        return false;
+    } else if (equipoVisitante[0].value == equipoLocal[0].value) {
+        alert("Deben elegirse clubes diferentes");
+        return false;
+    }
+
+    return true;
+}
+
+function validaJugadoresHabilitados() {
+    validaJugadores("checkbox_local");
+    validaJugadores("checkbox_visita");
+}
+
+
+function validaJugadores(tagNameOrigen) {
+    var checkboxes = document.getElementsByName(tagNameOrigen); //Array que contiene los checkbox
+    var cont = 0; //Variable que lleva la cuenta de los checkbox pulsados
+    for (var x = 0; x < checkboxes.length; x++) {
+        if (checkboxes[x].checked) {
+            cont = cont + 1;
+        }
+    }
+    
+    if (cont > 4 && cont < 12) {
+        return true;
+    }
+    if (tagNameOrigen == "checkbox_local") {
+        alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo local");
+    } else {
+        alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo visitante");
+    }
+}
+
+function validaArbitros() {
+
+    var checkboxes = document.getElementsByName("checkbox_arbitros"); //Array que contiene los checkbox	
+    var cont = 0; //Variable que lleva la cuenta de los checkbox pulsados
+
+    for (var x = 0; x < checkboxes.length; x++) {
+        if (checkboxes[x].checked) {
+            cont = cont + 1;
+        }
+    }
+    if (cont == 0) {
+        alert("Debe seleccionarse al menos un árbitro");
+        return true;
+    }
+}
+
+function cargarDatos() {
+    if (validaArbitros()){
+        return false;
+    }
+    var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+    var f = new Date();
+
+    document.getElementById("fecha_reemplaza").innerHTML = '<input name="Fecha" disabled type="text" value="' + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear() + '">';
+    var l = document.getElementsByName("local");
+    var local = $("local");//getElementsByName
+    local = $("#local");//getElementsById
+    local = $(".local");//getElementsByClass
+    
+
+    document.getElementById("equipo_local").innerHTML = '<input name="e_local" disabled type="text" value="' + l[0].value + '">';
+    var v = document.getElementsByName("visita");
+    document.getElementById("equipo_visita").innerHTML = '<input name="e_visita" disabled type="text" value="' + v[0].value + '">';
+
+    crearTabla("checkbox_local", "jugadores_locales__habilitados", "Jugadores en cancha de: " + l[0].value);
+    crearTabla("checkbox_visita", "jugadores_visitantes_habilitados", "Jugadores en cancha de: " + v[0].value);
+    crearTabla("checkbox_arbitros", "arbitros_asignados", "Arbitros designados");
+}
+
+function crearTabla(tagNameOrigen, tagIdDestino, tituloTabla) {
+    var checboxes = document.getElementsByName(tagNameOrigen);
+    var tabla = '';
+    tabla += '<table class="twelve">';
+    tabla += '<thead>';
+    tabla += '<tr>';
+    tabla += '<th>' + tituloTabla + '</th>';
+    tabla += '</tr>';
+    tabla += '</thead>';
+    tabla += '<tbody>';
+
+    for (var x = 0; x < checboxes.length; x++){
+        if (checboxes[x].checked){
+            tabla += '<tr>';
+            tabla += '<td><input name="e_visita" disabled type="text" value="' + checboxes[x].getAttribute("title") + '"></td>';
+            tabla += '</tr>';
+        }
+    }
+    tabla += '</tbody>';
+    tabla += '</table>';
+    document.getElementById(tagIdDestino).innerHTML = tabla;
+}
