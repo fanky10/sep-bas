@@ -41,7 +41,7 @@ public class ServicesManagerTest {
 
 		club = clubRepository.save(club);
 
-		jugador = servicesManager.addJugador(jugadorMocked.getJugador(club,false));
+		 jugador = servicesManager.addJugador(jugadorMocked.getJugador(club,false));
 	}
 
 	@Test

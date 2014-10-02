@@ -27,7 +27,7 @@ public class JugadorManagerImpl implements JugadorManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT jugadores FROM Jugador jugadores WHERE jugadores.estado = :estadoJugador");
 		Query query = getEntityManager().createQuery(sb.toString());
-		query.setParameter("estadoJugador", EstadoJugador.HABILITADO);
+		 query.setParameter("estadoJugador", EstadoJugador.HABILITADO);
 		return query.getResultList();
 	}
 
