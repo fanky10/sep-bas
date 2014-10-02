@@ -20,6 +20,15 @@ public class JugadorForm implements Serializable {
 	private Club club;
 	private Date fechaNacimiento;
 	private Date fechaAlta;
+        private Integer numero;
+
+        public Integer getNumero() {
+            return numero;
+        }
+
+        public void setNumero(Integer numero) {
+            this.numero = numero;
+        }
 	
 	
 	public String getNombre() {

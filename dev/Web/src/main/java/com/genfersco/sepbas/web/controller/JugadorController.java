@@ -62,13 +62,12 @@ public class JugadorController extends BaseController {
 	public String addJugador(@ModelAttribute JugadorForm jugadorForm, ModelMap map) {
 		// some validation later (:
 		Jugador jugador = new Jugador();
-                jugador.setId(jugadorForm.getId());
+                jugador.setNumero(1);
 		jugador.setNombre(jugadorForm.getNombre());
 		jugador.setApellido(jugadorForm.getApellido());
 		jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());
 		jugador.setClub(jugadorForm.getClub());
 		servicesManager.addJugador(jugador);
-                map.addAttribute("jugadorForm", jugadorForm);
 		// redirecciona a la url correspondiente
 		return "redirect:/jugadores/list";
 	}
@@ -79,54 +78,56 @@ public class JugadorController extends BaseController {
                 Jugador jugador = servicesManager.getJugadorById(id);
                 JugadorForm jugadorForm = new JugadorForm();
                 jugadorForm.setId(id);
+                jugadorForm.setNumero(jugador.getNumero());
                 jugadorForm.setNombre(jugador.getNombre());
-                jugador.setApellido(jugadorForm.getApellido());
-		jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());
-		jugador.setClub(jugadorForm.getClub());
+                jugadorForm.setApellido(jugador.getApellido());
+		jugadorForm.setFechaNacimiento(jugador.getFechaNacimiento());
+		jugadorForm.setClub(jugador.getClub());
 		map.addAttribute("jugadorForm", jugadorForm);
+		map.addAttribute("clubes", getServicesManager().getClubes());
 		return WebAppConstants.AGREGAR_JUGADOR;
 	}
         
-	@RequestMapping(value = "/jugadores/delete.json", method = RequestMethod.POST)
-	public @ResponseBody
-	JSONResponse jsonDeleteJugador(@RequestParam("id") String id, ModelMap map) {
-		// shows view
-		JSONResponse response = null;
-		try {
-			if (StringUtils.hasText(id)) {
-				Integer iId = Integer.parseInt(id);
-				getServicesManager().deleteJugador(iId);
-				response = new DefaultJSONResponse("OK", "Jugador eliminado");
-			} else {
-				response = new DefaultJSONResponse("ERROR", "Id jugador vacio");
-			}
-		} catch (NumberFormatException nfe) {
-			response = new DefaultJSONResponse("ERROR",
-					"Id jugador no es un entero");
-		}
-		return response;
-	}
-
-	@RequestMapping(value = "/jugadores/club/{clubId}/list.json", method = RequestMethod.GET)
-	public @ResponseBody
-	JSONResponse getJugadoresClub(@PathVariable("clubId") String id, ModelMap map) {
-		// shows view
-		JSONResponse response = null;
-		try {
-			if (StringUtils.hasText(id)) {
-				Integer clubId = Integer.parseInt(id);
-				List<Jugador> jugadores = getServicesManager()
-						.getJugadoresClub(clubId);
-				response = new JugadorJSONResponse("OK", "", jugadores);
-			} else {
-				response = new DefaultJSONResponse("ERROR", "Id club vacio");
-			}
-		} catch (NumberFormatException nfe) {
-			response = new DefaultJSONResponse("ERROR",
-					"Id jugador no es un entero");
-		}
-		return response;
-	}
+//	@RequestMapping(value = "/jugadores/delete.json", method = RequestMethod.POST)
+//	public @ResponseBody
+//	JSONResponse jsonDeleteJugador(@RequestParam("id") String id, ModelMap map) {
+//		// shows view
+//		JSONResponse response = null;
+//		try {
+//			if (StringUtils.hasText(id)) {
+//				Integer iId = Integer.parseInt(id);
+//				getServicesManager().deleteJugador(iId);
+//				response = new DefaultJSONResponse("OK", "Jugador eliminado");
+//			} else {
+//				response = new DefaultJSONResponse("ERROR", "Id jugador vacio");
+//			}
+//		} catch (NumberFormatException nfe) {
+//			response = new DefaultJSONResponse("ERROR",
+//					"Id jugador no es un entero");
+//		}
+//		return response;
+//	}
+//
+//	@RequestMapping(value = "/jugadores/club/{clubId}/list.json", method = RequestMethod.GET)
+//	public @ResponseBody
+//	JSONResponse getJugadoresClub(@PathVariable("clubId") String id, ModelMap map) {
+//		// shows view
+//		JSONResponse response = null;
+//		try {
+//			if (StringUtils.hasText(id)) {
+//				Integer clubId = Integer.parseInt(id);
+//				List<Jugador> jugadores = getServicesManager()
+//						.getJugadoresClub(clubId);
+//				response = new JugadorJSONResponse("OK", "", jugadores);
+//			} else {
+//				response = new DefaultJSONResponse("ERROR", "Id club vacio");
+//			}
+//		} catch (NumberFormatException nfe) {
+//			response = new DefaultJSONResponse("ERROR",
+//					"Id jugador no es un entero");
+//		}
+//		return response;
+//	}
 
 	public ServicesManager getServicesManager() {
 		return this.servicesManager;
