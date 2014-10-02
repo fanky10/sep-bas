@@ -198,7 +198,7 @@ PartidoView = function () {
             data: null,
             success: function (response) {
                 if (response.code === "0") {
-                    _self.renderJugadores(response.content,'jugadores-locales-container');
+                    _self.renderJugadores('Equipo Local', '.jugadores-locales-container', response.content);
                 }
             }
         });
@@ -208,18 +208,22 @@ PartidoView = function () {
             data: null,
             success: function (response) {
                 if (response.code === "0") {
-                    _self.renderJugadores(response.content,'jugadores-visitantes-container');
+                    _self.renderJugadores('Equipo Visitante', '.jugadores-visitantes-container', response.content);
                 }
             }
         });
     }
-    function renderJugadores(jugadores,container) {
+    function renderJugadores(label, container, jugadores) {
         if (!jugadores || jugadores.length < 1) {
             return false;
         }
+        var content = ['<p>' + label + '</p>'];
         $.each(jugadores, function (idx, jugador) {
-            console.log("jugador:", jugador);
+            content.push('<label for="checkbox_'+label+'_'+idx+'">');
+            content.push('<input name="checkbox__'+label+'" type="checkbox" data-jugador=id="'+jugador.id+'" CHECKED id="checkbox_'+label+'_'+idx+'" title="Jugador 1">');
+            content.push(jugador.nombre+'</label>');
         });
+        $(container).html(content.join('\n'));
     }
 
     return {

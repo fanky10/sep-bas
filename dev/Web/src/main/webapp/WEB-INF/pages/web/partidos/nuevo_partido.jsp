@@ -61,7 +61,12 @@
                 <!-- fin tab clubes --> 
                 <li id="jugadoresTab">
                     <h5>Sin Jugadores</h5>
-                    <div class="row jugadores-content" ></div>
+                    <div class="row jugadores-content" >
+                        <div class="six columns jugadores-locales-container">
+                        </div>
+                        <div class="six columns end jugadores-visitantes-container">
+                        </div>
+                    </div>
                 </li>
                 <!-- fin tab jugadores --> 
                 <li id="simple3Tab">
