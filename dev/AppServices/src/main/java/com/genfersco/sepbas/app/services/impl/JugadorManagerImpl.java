@@ -17,64 +17,65 @@ import com.genfersco.sepbas.domain.repository.JugadorRepository;
 @Service("jugadorManager")
 public class JugadorManagerImpl implements JugadorManager {
 
-	@Autowired
-	private JugadorRepository jugadorRepository;
-	@PersistenceContext
-	private EntityManager entityManager;
+    @Autowired
+    private JugadorRepository jugadorRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-	@Override
-	public List<Jugador> getJugadores() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT jugadores FROM Jugador jugadores WHERE jugadores.estado = :estadoJugador");
-		Query query = getEntityManager().createQuery(sb.toString());
-		query.setParameter("estadoJugador", EstadoJugador.HABILITADO);
-		return query.getResultList();
-	}
+    @Override
+    public List<Jugador> getJugadores() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT jugadores FROM Jugador jugadores WHERE jugadores.estado = :estadoJugador");
+        Query query = getEntityManager().createQuery(sb.toString());
+        query.setParameter("estadoJugador", EstadoJugador.HABILITADO);
+        return query.getResultList();
+    }
 
-	@Override
-	public Jugador addJugador(Jugador jugador) {
-		Jugador saved = jugadorRepository.save(jugador);
-		return saved;
-	}
+    @Override
+    public Jugador addJugador(Jugador jugador) {
+        Jugador saved = jugadorRepository.save(jugador);
+        return saved;
+    }
 
-	@Override
-	public void deleteJugador(Jugador jugador) {
-		jugador.setEstado(EstadoJugador.DESHABILITADO);
-		jugadorRepository.save(jugador);
-	}
+    @Override
+    public void deleteJugador(Jugador jugador) {
+        jugador.setEstado(EstadoJugador.DESHABILITADO);
+        jugadorRepository.save(jugador);
+    }
 
-	@Override
-	public Jugador getJugadorById(Integer id) {
-		return jugadorRepository.findOne(id);
-	}
+    @Override
+    public Jugador getJugadorById(Integer id) {
+        return jugadorRepository.findOne(id);
+    }
 
-	@Override
-	public List<Jugador> getJugadoresClub(Integer clubId) {
-		if(clubId==null){
-			return null;
-		}
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT jugadores FROM Jugador jugadores WHERE jugadores.club.id = :clubId");
-		Query query = getEntityManager().createQuery(sb.toString());
-		query.setParameter("clubId", clubId);
-		return query.getResultList();
-		
-	}
+    @Override
+    public List<Jugador> getJugadoresClub(Integer clubId) {
+        if (clubId == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT j FROM Jugador j WHERE j.club.id = :clubId and j.estado = :estadoJugador");
+        Query query = getEntityManager().createQuery(sb.toString());
+        query.setParameter("clubId", clubId);
+        query.setParameter("estadoJugador", EstadoJugador.HABILITADO);
+        return query.getResultList();
 
-	public JugadorRepository getJugadorRepository() {
-		return jugadorRepository;
-	}
+    }
 
-	public void setJugadorRepository(JugadorRepository jugadorRepository) {
-		this.jugadorRepository = jugadorRepository;
-	}
+    public JugadorRepository getJugadorRepository() {
+        return jugadorRepository;
+    }
 
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
+    public void setJugadorRepository(JugadorRepository jugadorRepository) {
+        this.jugadorRepository = jugadorRepository;
+    }
 
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
-	
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
 }

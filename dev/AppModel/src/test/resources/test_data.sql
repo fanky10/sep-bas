@@ -31,7 +31,11 @@ INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `e
 -- Dumping data for table `jugadores`
 --
 
-INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jugador_apellido`, `jugador_numero`, `jugador_actual_club_id`, `jugador_estado`) VALUES (60,'2013-03-15 03:00:00','Facundo','Scoccia',99,62,1),(61,'2013-03-27 03:00:00','lalal','jajaja',88,61,0),(80,'2013-03-20 03:00:00','lalalaal','jajajaj',11,61,0),(81,'2013-03-14 03:00:00','Marcos','Lewis',22,61,0);
+INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jugador_apellido`, `jugador_numero`, `jugador_actual_club_id`, `jugador_estado`) VALUES 
+(60,'2013-03-15 03:00:00','Facundo','Scoccia',99,1,1),
+(61,'2013-03-27 03:00:00','Cacho','Pereyra',88,2,0),
+(80,'2013-03-20 03:00:00','Juancito','Perez',11,2,0),
+(81,'2013-03-14 03:00:00','Marcos','Lewis',22,1,0);
 
 --
 -- Dumping data for table `partidos`
