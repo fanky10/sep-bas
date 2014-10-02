@@ -18,4 +18,5 @@ public class WebAppConstants {
 	
 	// List of Session and Request attribute names
 	public static final String PARTIDO_KEY = "sessionPartido";
+    public static String AGREGAR_ClUB;
 }

@@ -9,9 +9,8 @@
 <div class="content">
 	<div class="row">
 		<div class="twelve columns">
-			<h1>Agregar Arbitros</h1>
-
-			
+                    
+			<h3>Arbitros</h3>
                         <form:form action="${pageContext.request.contextPath}/arbitros/add"
 				modelAttribute="arbitroForm" method="POST">
                                 <fieldset>
@@ -39,7 +38,7 @@
                                 <br/>
                                 <br/>    
                                 <input name="submit" type="submit" class="button tiny" value="Guardar" />
-                                <a href="<c:url value="/home"/>" class="button tiny"> Volver</a>
+                                <a href="<c:url value="/arbitros/list"/>" class="button tiny"> Volver</a>
                                 </fieldset>
                             </form:form>
 		</div>

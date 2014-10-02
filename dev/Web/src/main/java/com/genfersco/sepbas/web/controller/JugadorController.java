@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -44,14 +44,14 @@ public class JugadorController extends BaseController {
 	}
 
 	@RequestMapping(value = "/jugadores/list", method = RequestMethod.GET)
-	public String getJugadores(Model map) {
-		List<Jugador> jugadores = getServicesManager().getJugadores();
+	public String getJugadores(ModelMap map) {
+		List<Jugador> jugadores = servicesManager.getJugadores();
 		map.addAttribute("jugadores", jugadores);
 		return WebAppConstants.JUGADORES;
 	}
 
 	@RequestMapping(value = "/jugadores/add", method = RequestMethod.GET)
-	public String showAddJugador(Model map) {
+	public String showAddJugador(ModelMap map) {
 		// shows view
 		map.addAttribute("jugadorForm", new JugadorForm());
 		map.addAttribute("clubes", getServicesManager().getClubes());
@@ -59,22 +59,37 @@ public class JugadorController extends BaseController {
 	}
 
 	@RequestMapping(value = "/jugadores/add", method = RequestMethod.POST)
-	public String addJugador(@ModelAttribute JugadorForm jugadorForm, Model map) {
+	public String addJugador(@ModelAttribute JugadorForm jugadorForm, ModelMap map) {
 		// some validation later (:
 		Jugador jugador = new Jugador();
+                jugador.setId(jugadorForm.getId());
 		jugador.setNombre(jugadorForm.getNombre());
 		jugador.setApellido(jugadorForm.getApellido());
 		jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());
 		jugador.setClub(jugadorForm.getClub());
-		jugador.setNumero(jugadorForm.getNumero());
-		getServicesManager().addJugador(jugador);
+		servicesManager.addJugador(jugador);
+                map.addAttribute("jugadorForm", jugadorForm);
 		// redirecciona a la url correspondiente
 		return "redirect:/jugadores/list";
 	}
-
+        
+        @RequestMapping(value = "/jugadores/edit/{jugadorId}", method = RequestMethod.GET)
+	public String editarJugador(@PathVariable("jugadorId") Integer id, ModelMap map) {
+		// shows view
+                Jugador jugador = servicesManager.getJugadorById(id);
+                JugadorForm jugadorForm = new JugadorForm();
+                jugadorForm.setId(id);
+                jugadorForm.setNombre(jugador.getNombre());
+                jugador.setApellido(jugadorForm.getApellido());
+		jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());
+		jugador.setClub(jugadorForm.getClub());
+		map.addAttribute("jugadorForm", jugadorForm);
+		return WebAppConstants.AGREGAR_JUGADOR;
+	}
+        
 	@RequestMapping(value = "/jugadores/delete.json", method = RequestMethod.POST)
 	public @ResponseBody
-	JSONResponse jsonDeleteJugador(@RequestParam("id") String id, Model map) {
+	JSONResponse jsonDeleteJugador(@RequestParam("id") String id, ModelMap map) {
 		// shows view
 		JSONResponse response = null;
 		try {
@@ -94,7 +109,7 @@ public class JugadorController extends BaseController {
 
 	@RequestMapping(value = "/jugadores/club/{clubId}/list.json", method = RequestMethod.GET)
 	public @ResponseBody
-	JSONResponse getJugadoresClub(@PathVariable("clubId") String id, Model map) {
+	JSONResponse getJugadoresClub(@PathVariable("clubId") String id, ModelMap map) {
 		// shows view
 		JSONResponse response = null;
 		try {

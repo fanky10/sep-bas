@@ -18,19 +18,10 @@ public class JugadorForm implements Serializable {
 	private String nombre;
 	private String apellido;
 	private Club club;
-	private Integer numero;
 	private Date fechaNacimiento;
-	private Float altura;
 	private Date fechaAlta;
 	
-	public Float getAltura() {
-		return altura;
-	}
-
-	public void setAltura(Float altura) {
-		this.altura = altura;
-	}
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -63,14 +54,7 @@ public class JugadorForm implements Serializable {
 		this.club = club;
 	}
 
-	public Integer getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
+	
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}

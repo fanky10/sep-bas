@@ -43,7 +43,7 @@ public class JugadorJSONResponse extends DefaultJSONResponse {
 			this.fechaNacimiento = jugador.getFechaNacimiento();
 			this.nombre = jugador.getNombre();
 			this.apellido = jugador.getApellido();
-			this.numero = jugador.getNumero();
+			
 		}
 
 		public Integer getId() {
