@@ -45,4 +45,12 @@ public class ClubManagerTest {
         List<Club> clubes = clubManager.getClubes();
         assertTrue(clubes != null && !clubes.isEmpty());
     }
+    @Test
+    public void testDelete() {
+        Club toDeleteClub = clubMocked.getClub("SportClub", "Caniada", true);
+        int clubId = toDeleteClub.getId();
+        clubManager.deleteClub(clubId);
+        Club gotClub = clubManager.getClub(clubId);
+        assertTrue(gotClub == null);
+    }
 }
