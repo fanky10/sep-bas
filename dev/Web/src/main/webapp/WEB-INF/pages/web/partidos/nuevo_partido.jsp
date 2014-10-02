@@ -12,22 +12,22 @@
 
             <dl class="tabs">
                 <dd class="active">
-                    <a href="#simple1"> Equipos</a>
+                    <a href="#equipos" data-name="equipos" data-idx="0"> Equipos</a>
+                </dd>
+                <dd >
+                    <a href="#jugadores" data-name="jugadores" data-idx="1"> Jugadores Habilitados</a>
                 </dd>
                 <dd>
-                    <a href="#simple2"> Jugadores Habilitados</a>
+                    <a href="#simple3" data-name="arbitros" data-idx="2"> Árbitros</a>
                 </dd>
                 <dd>
-                    <a href="#simple3"> Árbitros</a>
-                </dd>
-                <dd>
-                    <a href="#simple4"> Resumen</a>
+                    <a href="#simple4" data-name="resumen" data-idx="3"> Resumen</a>
                 </dd>
             </dl>
 
             <ul class="tabs-content">
                 <!-- inicio tab clubes --> 
-                <li class="active" id="simple1Tab">
+                <li class="active" id="equiposTab">
                     <h5>Aquí seleccionaremos el local y el visitante</h5>
                     <form class="custom">
                         <div class="row">
@@ -35,7 +35,7 @@
                                 <label for="clubesLocales">Local</label> 
                                 <select id="clubesLocales" class="medium">
                                     <c:forEach items="${clubes}" var="club" varStatus="stat">
-                                        <option value="${club.nombre}">${club.nombre}</option>
+                                        <option value="${club.id}">${club.nombre}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -45,7 +45,7 @@
                                 <label for="clubesVisitantes">Visitante</label> 
                                 <select id="clubesVisitantes" class="medium">
                                     <c:forEach items="${clubes}" var="club" varStatus="stat">
-                                        <option value="${club.nombre}">${club.nombre}</option>
+                                        <option value="${club.id}">${club.nombre}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -54,53 +54,14 @@
                     </form>
                     <div class="row">
                         <div class="two columns offset-by-ten">
-                            <a class="round button" href="#simple2" onClick="validaClubes()">Siguiente</a>
+                            <a class="round button clubes" href="#">Siguiente</a>
                         </div>
                     </div>
                 </li>
                 <!-- fin tab clubes --> 
-                <li id="simple2Tab">
-                    <h5>Jugadores Habilitados</h5>
-                    <div class="row">
-                        <div class="six columns">
-                            <p>Local</p>
-                            <label for="checkbox1"><input name="checkbox_local"
-                                                          type="checkbox" CHECKED id="checkbox1" title="Jugador 1">
-                                Jugador 1</label> <label for="checkbox2"><input
-                                    name="checkbox_local" type="checkbox" CHECKED id="checkbox2"
-                                    title="Jugador 2"> Jugador 2</label> <label for="checkbox3"><input
-                                    name="checkbox_local" type="checkbox" CHECKED id="checkbox3"
-                                    title="Jugador 3"> Jugador 3</label> <label for="checkbox4"><input
-                                    name="checkbox_local" type="checkbox" CHECKED id="checkbox4"
-                                    title="Jugador 4"> Jugador 4</label> <label for="checkbox4"><input
-                                    name="checkbox_local" type="checkbox" CHECKED id="checkbox5"
-                                    title="Jugador 5"> Jugador 5</label> <label for="checkbox4"><input
-                                    name="checkbox_local" type="checkbox" CHECKED id="checkbox6"
-                                    title="Jugador 6"> Jugador 6</label> <label for="checkbox4"><input
-                                    name="checkbox_local" type="checkbox" CHECKED id="checkbox7"
-                                    title="Jugador 7"> Jugador 7</label>
-                        </div>
-                        <div class="five columns end">
-                            <p>Visita</p>
-                            <label for="checkbox6"><input name="checkbox_visita"
-                                                          type="checkbox" CHECKED id="checkbox66" title="Jugador 1">
-                                Jugador 1</label> <label for="checkbox7"><input
-                                    name="checkbox_visita" type="checkbox" CHECKED id="checkbox76"
-                                    title="Jugador 2"> Jugador 2</label> <label for="checkbox8"><input
-                                    name="checkbox_visita" type="checkbox" CHECKED id="checkbox86"
-                                    title="Jugador 3"> Jugador 3</label> <label for="checkbox9"><input
-                                    name="checkbox_visita" type="checkbox" CHECKED id="checkbox96"
-                                    title="Jugador 4"> Jugador 4</label> <label for="checkbox9"><input
-                                    name="checkbox_visita" type="checkbox" CHECKED id="checkbox93"
-                                    title="Jugador 5"> Jugador 5</label> <label for="checkbox9"><input
-                                    name="checkbox_visita" type="checkbox" CHECKED id="checkbox92"
-                                    title="Jugador 6"> Jugador 6</label> <label for="checkbox9"><input
-                                    name="checkbox_visita" type="checkbox" CHECKED id="checkbox91"
-                                    title="Jugador 7"> Jugador 7</label> <label for="checkbox9"><input
-                                    name="checkbox_visita" type="checkbox" CHECKED id="checkbox94"
-                                    title="Jugador 8"> Jugador 8</label>
-                        </div>
-                    </div>
+                <li id="jugadoresTab">
+                    <h5>Sin Jugadores</h5>
+                    <div class="row jugadores-content" ></div>
                 </li>
                 <!-- fin tab jugadores --> 
                 <li id="simple3Tab">

@@ -69,20 +69,7 @@ $('#clubLocal').on('change', function (e) {
     //TODO: get listed players! --> ajax request
 });
 
-function validaClubes() {
-    var equipoVisitante = document.getElementsByName("visita");
-    var equipoLocal = document.getElementsByName("local");
 
-    if (equipoLocal[0].value.length == 0 || equipoVisitante[0].value.length == 0) {
-        alert("Debe elegirse algún club");
-        return false;
-    } else if (equipoVisitante[0].value == equipoLocal[0].value) {
-        alert("Deben elegirse clubes diferentes");
-        return false;
-    }
-
-    return true;
-}
 
 function validaJugadoresHabilitados() {
     validaJugadores("checkbox_local");
@@ -98,7 +85,7 @@ function validaJugadores(tagNameOrigen) {
             cont = cont + 1;
         }
     }
-    
+
     if (cont > 4 && cont < 12) {
         return true;
     }
@@ -126,7 +113,7 @@ function validaArbitros() {
 }
 
 function cargarDatos() {
-    if (validaArbitros()){
+    if (validaArbitros()) {
         return false;
     }
     var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
@@ -137,7 +124,7 @@ function cargarDatos() {
     var local = $("local");//getElementsByName
     local = $("#local");//getElementsById
     local = $(".local");//getElementsByClass
-    
+
 
     document.getElementById("equipo_local").innerHTML = '<input name="e_local" disabled type="text" value="' + l[0].value + '">';
     var v = document.getElementsByName("visita");
@@ -159,8 +146,8 @@ function crearTabla(tagNameOrigen, tagIdDestino, tituloTabla) {
     tabla += '</thead>';
     tabla += '<tbody>';
 
-    for (var x = 0; x < checboxes.length; x++){
-        if (checboxes[x].checked){
+    for (var x = 0; x < checboxes.length; x++) {
+        if (checboxes[x].checked) {
             tabla += '<tr>';
             tabla += '<td><input name="e_visita" disabled type="text" value="' + checboxes[x].getAttribute("title") + '"></td>';
             tabla += '</tr>';
@@ -169,4 +156,46 @@ function crearTabla(tagNameOrigen, tagIdDestino, tituloTabla) {
     tabla += '</tbody>';
     tabla += '</table>';
     document.getElementById(tagIdDestino).innerHTML = tabla;
+}
+
+$(function () {
+    var partidoView = new PartidoView();
+    $('.round.button.clubes').on('click', function (e) {
+        e.preventDefault();
+        var selectedClubs = partidoView.getSelectedClubs();
+        if(selectedClubs.idClubLocal === selectedClubs.idClubVisitante){
+            console.log('club local y visitante iguales');
+            return false;
+        }
+        partidoView.nextTab();
+        partidoView.loadPlayers();
+    });
+});
+
+PartidoView = function () {
+    function showNextTab() {
+        var activeTab = $('.tabs .active'),
+                idxActiveTab = parseInt(activeTab.find('a').attr('data-idx')),
+                nextTab = $('.tabs').find('a[data-idx=' + (idxActiveTab + 1) + ']');
+        if (nextTab && nextTab.length > 0) {
+            nextTab.click();
+        }
+    }
+    function getClubesSeleccionados() {
+        var clubLocal = $('#clubesLocales :selected').val(),
+                clubVisitante = $('#clubesVisitantes :selected').val();
+        return {
+            idClubLocal:clubLocal,
+            idClubVisitante:clubVisitante
+        };
+    }
+    function cargaJugadores(){
+        $("#jugadoresTab h5").text("Cargando Jugadores...");
+    }
+
+    return {
+        nextTab: showNextTab,
+        getSelectedClubs: getClubesSeleccionados,
+        loadPlayers: cargaJugadores
+    };
 }
