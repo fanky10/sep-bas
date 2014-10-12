@@ -28,14 +28,13 @@ public class JugadoresController {
     @RequestMapping(value = "/secure/api/jugadores/club/{idClub}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseMessage getJugadoresByClub(@PathVariable(value = "idClub") Integer idClub) {
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage("Club Desconocido");
-        responseMessage.setCode("-1");
         List<Jugador> jugadores = serviceManager.getJugadoresClub(idClub);
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setMessage("Club sin jugadores");
+        responseMessage.setCode(ResponseMessage.CODE_OK);
+        responseMessage.setContent(jugadores);
         if (jugadores != null && !jugadores.isEmpty()) {
-            responseMessage.setCode(ResponseMessage.CODE_OK);
             responseMessage.setMessage("");
-            responseMessage.setContent(jugadores);
         }
         return responseMessage;
     }
