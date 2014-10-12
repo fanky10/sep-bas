@@ -161,11 +161,7 @@ $(function () {
     }
     $('.button.iniciar').click(function (e) {
         e.preventDefault();
-        var valid = partidoView.validate();
-        if (valid) {
-            partidoView.showModal();
-        }
-
+        return partidoView.validate();
     });
 
 });
@@ -229,9 +225,6 @@ PartidoView = function () {
         });
         $(container).html(content.join('\n'));
     }
-    function mostrarModal() {
-
-    }
     function validar() {
         var valid = true;
         if (!validaJugadores('.jugadores-locales-container')) {
@@ -241,9 +234,7 @@ PartidoView = function () {
             alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo visitante");
             valid = false;
         }
-
         return valid;
-
     }
     function validaJugadores(jugadoresContainer) {
         var cont = $(jugadoresContainer).find('input[type=checkbox]:checked').length;
@@ -257,7 +248,6 @@ PartidoView = function () {
         getSelectedClubs: getClubesSeleccionados,
         loadPlayers: cargaJugadores,
         renderJugadores: renderJugadores,
-        validate: validar,
-        showModal: mostrarModal
+        validate: validar
     };
 }

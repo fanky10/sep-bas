@@ -57,11 +57,15 @@
             </div>
             <div class="row">
                 <div class="two columns offset-by-ten">
-                    <a class="round button iniciar" href="#">Iniciar</a>
+                    <a href="#" data-reveal-id="resumenModal" class="round button iniciar">Iniciar</a>
                 </div>
             </div>
 
-            <div id="resumenModal" hidden="true">
+
+        </div>
+    </div>
+    <div id="resumenModal" class="reveal-modal medium" data-reveal>
+        <a class="close-reveal-modal">&#215;</a>
                 <h5>Resumen</h5>
                 <div class="row">
                     <div class="two mobile-one columns">
@@ -108,16 +112,11 @@
                 <div class="row">
 
                     <div class="two columns">
-                        <a class="alert button" href="<c:url value="/partidos/nuevo" />">Cancelar</a>
-
+                        <a class="close-reveal-modal">Cancelar</a>
                     </div>
-                    <div class="two columns offset-by-eight">
-                        <a class="success button" href="#simple2">Iniciar Partido</a>
+                    <div class="two columns">
+                        <a class="success button" href="#">Iniciar Partido</a>
                     </div>
                 </div>
             </div>
-
-
-        </div>
-    </div>
 </content>
