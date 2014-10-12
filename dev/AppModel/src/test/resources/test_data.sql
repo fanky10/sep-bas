@@ -2,7 +2,7 @@
 -- Dumping data for table `arbitros`
 --
 
-INSERT INTO `arbitros` (`arbitro_id`, `arbitro_nombre`, `arbitro_apellido`) VALUES (4,'Leonardo',' Zalazar');
+INSERT INTO `arbitros` (`arbitro_id`, `arbitro_nombre`, `arbitro_apellido`, `arbitro_localidad`) VALUES (4,'Leonardo',' Zalazar','Villa GG');
 
 --
 -- Dumping data for table `clubes`
