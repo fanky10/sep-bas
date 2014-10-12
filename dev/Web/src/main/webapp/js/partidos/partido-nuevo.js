@@ -151,17 +151,30 @@ $(function () {
     var partidoView = new PartidoView();
     $('#clubesLocales').change(clubSeleccionadoEvent);
     $('#clubesVisitantes').change(clubSeleccionadoEvent);
-    function clubSeleccionadoEvent(e){
+    function clubSeleccionadoEvent(e) {
         var selectedClubs = partidoView.getSelectedClubs();
         if (selectedClubs.idClubLocal === selectedClubs.idClubVisitante) {
-            console.log('club local y visitante iguales');
+            $(".jugadores h5").text('Club local y visitante iguales');
             return false;
         }
         partidoView.loadPlayers();
     }
+    $('.button.iniciar').click(function (e) {
+        e.preventDefault();
+        var valid = partidoView.validate();
+        if (valid) {
+            partidoView.showModal();
+        }
+
+    });
+
 });
 
 PartidoView = function () {
+    var options = {
+        NUMERO_MINIMO_JUGADORES : 4,
+        NUMERO_MAXIMO_JUGADORES : 12
+    }
     function showNextTab() {
         var activeTab = $('.tabs .active'),
                 idxActiveTab = parseInt(activeTab.find('a').attr('data-idx')),
@@ -179,7 +192,9 @@ PartidoView = function () {
         };
     }
     function cargaJugadores() {
-        $(".jugadores h5").text("Cargando Jugadores...");
+        $(".jugadores h5").text("");
+        $('.jugadores-locales-container').text("Cargando Jugadores...");
+        $('.jugadores-visitantes-container').text("Cargando Jugadores...");
         var _self = this, clubes = getClubesSeleccionados(), clubLocal = clubes.idClubLocal, clubVisitante = clubes.idClubVisitante;
         $.ajax({
             dataType: "json",
@@ -214,11 +229,35 @@ PartidoView = function () {
         });
         $(container).html(content.join('\n'));
     }
+    function mostrarModal() {
+
+    }
+    function validar() {
+        var valid = true;
+        if (!validaJugadores('.jugadores-locales-container')) {
+            alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo local");
+            valid = false;
+        } else if (!validaJugadores('.jugadores-visitantes-container')) {
+            alert("Debe haber entre 5 y 12 jugadores habilitados para jugar en el equipo visitante");
+            valid = false;
+        }
+
+        return valid;
+
+    }
+    function validaJugadores(jugadoresContainer) {
+        var cont = $(jugadoresContainer).find('input[type=checkbox]:checked').length;
+        if (cont > options.NUMERO_MINIMO_JUGADORES && cont < options.NUMERO_MAXIMO_JUGADORES) {
+            return true;
+        }
+    }
 
     return {
         nextTab: showNextTab,
         getSelectedClubs: getClubesSeleccionados,
         loadPlayers: cargaJugadores,
-        renderJugadores: renderJugadores
+        renderJugadores: renderJugadores,
+        validate: validar,
+        showModal: mostrarModal
     };
 }

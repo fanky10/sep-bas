@@ -8,7 +8,7 @@
 <content tag="bodyContent">
     <div class="row">
         <div class="twelve columns">
-            
+
             <h3>Iniciar Partido</h3>
             <div class="clubes">
                 <h5>Aquí seleccionaremos el local y el visitante</h5>
@@ -37,7 +37,7 @@
                 </form>
             </div>
             <div class="jugadores">
-                <h5>Sin Jugadores</h5>
+                <h5>Seleccione Clubes</h5>
                 <div class="row jugadores-content" >
                     <div class="six columns jugadores-locales-container">
                     </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="arbitros">
                 <h5>Seleccione el árbitro del encuentro</h5> 
                 <c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
@@ -55,75 +55,67 @@
                     </label>
                 </c:forEach>
             </div>
+            <div class="row">
+                <div class="two columns offset-by-ten">
+                    <a class="round button iniciar" href="#">Iniciar</a>
+                </div>
+            </div>
 
-            <ul class="tabs-content">
-                <!-- inicio tab clubes --> 
-                <li class="active" id="equiposTab">
-
-                    <div class="row">
-                        <div class="two columns offset-by-ten">
-                            <a class="round button clubes" href="#">Siguiente</a>
-                        </div>
+            <div id="resumenModal" hidden="true">
+                <h5>Resumen</h5>
+                <div class="row">
+                    <div class="two mobile-one columns">
+                        <label class="right inline">Fecha :</label>
                     </div>
-                </li>
-                
-
-                <div id="resumenModal" hidden="true">
-                        <h5>Resumen</h5>
-                        <div class="row">
-                            <div class="two mobile-one columns">
-                                <label class="right inline">Fecha :</label>
-                            </div>
-                            <div class="ten mobile-three columns">
-                                <p id="fecha_reemplaza">Fecha del partido</p>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="two mobile-one columns">
-                                <label class="right inline">Local :</label>
-                            </div>
-                            <div class="ten mobile-three columns">
-                                <p id="equipo_local">Local</p>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="two mobile-one columns">
-                                <label class="right inline">Visita :</label>
-                            </div>
-                            <div class="ten mobile-three columns">
-                                <p id="equipo_visita">Visita</p>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="twelve columns">
-                                <div id="jugadoresLocales" class="twelve columns"></div>
-                                <div id="jugadoresVisita" class="twelve columns"></div>
-                                <div id="arbitros" class="twelve columns"></div>
-
-                                <p id="jugadores_locales__habilitados">Jugadores locales</p>
-
-                                <p id="jugadores_visitantes_habilitados">Jugadores Visitantes</p>
-
-                                <p id="arbitros_asignados">Arbitros desigandos</p>
-
-                            </div>
-
-                        </div>
-                        <div class="row">
-
-                            <div class="two columns">
-                                <a class="alert button" href="<c:url value="/partidos/nuevo" />">Cancelar</a>
-
-                            </div>
-                            <div class="two columns offset-by-eight">
-                                <a class="success button" href="#simple2">Iniciar Partido</a>
-                            </div>
-                        </div>
+                    <div class="ten mobile-three columns">
+                        <p id="fecha_reemplaza">Fecha del partido</p>
                     </div>
-            </ul>
+
+                </div>
+                <div class="row">
+                    <div class="two mobile-one columns">
+                        <label class="right inline">Local :</label>
+                    </div>
+                    <div class="ten mobile-three columns">
+                        <p id="equipo_local">Local</p>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="two mobile-one columns">
+                        <label class="right inline">Visita :</label>
+                    </div>
+                    <div class="ten mobile-three columns">
+                        <p id="equipo_visita">Visita</p>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="twelve columns">
+                        <div id="jugadoresLocales" class="twelve columns"></div>
+                        <div id="jugadoresVisita" class="twelve columns"></div>
+                        <div id="arbitros" class="twelve columns"></div>
+
+                        <p id="jugadores_locales__habilitados">Jugadores locales</p>
+
+                        <p id="jugadores_visitantes_habilitados">Jugadores Visitantes</p>
+
+                        <p id="arbitros_asignados">Arbitros desigandos</p>
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="two columns">
+                        <a class="alert button" href="<c:url value="/partidos/nuevo" />">Cancelar</a>
+
+                    </div>
+                    <div class="two columns offset-by-eight">
+                        <a class="success button" href="#simple2">Iniciar Partido</a>
+                    </div>
+                </div>
+            </div>
 
 
         </div>
