@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author fanky
  */
 @Controller
-public class JugadoresController {
+public class JugadoresController extends AbstractAPIController{
 
     @Autowired
     private ServicesManager serviceManager;
 
-    @RequestMapping(value = "/secure/api/jugadores/club/{idClub}", method = RequestMethod.GET)
+    @RequestMapping(value = "/jugadores/club/{idClub}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseMessage getJugadoresByClub(@PathVariable(value = "idClub") Integer idClub) {
         List<Jugador> jugadores = serviceManager.getJugadoresClub(idClub);
@@ -39,7 +39,7 @@ public class JugadoresController {
         return responseMessage;
     }
 
-    @RequestMapping(value = "/secure/api/jugadores/club.json", method = RequestMethod.GET)
+    @RequestMapping(value = "/jugadores/club.json", method = RequestMethod.GET)
     public @ResponseBody
     ResponseMessage getJugadoresByClub() {
         return getJugadoresByClub(1);

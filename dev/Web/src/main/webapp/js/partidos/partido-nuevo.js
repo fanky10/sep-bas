@@ -115,8 +115,12 @@ $(function () {
 
 });
 
-PartidoModel = function(){
-    
+PartidoModel = function(idArbitro, idClubLocal, idClubVisitante, jugadoresLocales, jugadoresVisitantes){
+    var data = {
+        arbitro: idArbitro,
+        clubLocal: idClubLocal,
+        clubVisitante: idClubVisitante
+    }
 }
 
 PartidoView = function () {
