@@ -2,8 +2,8 @@
 <content tag="styles"> <%-- some link rel to this page in specific --%>
 </content>
 <content tag="jscriptlibs"> 
-    <script type="text/javascript" src="<c:url value="/js/jquery.validate.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/js/app.js"/>"></script> 
+    <script type="text/javascript" src="<c:url value="/js/foundation/foundation.forms.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/vendor/jquery.validate.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/partidos/partido-nuevo.js"/>"></script> 
 </content>
 <content tag="bodyContent">
@@ -68,55 +68,36 @@
 
         </div>
     </div>
-    <div id="resumenModal" class="reveal-modal medium" data-reveal>
+    <div id="resumenModal" class="reveal-modal medium" data-hello="hello-data" data-reveal-id="resumenModal" data-reveal >
         <a class="close-reveal-modal">&#215;</a>
-        <h5>Resumen</h5>
+        <h5>Super Resumen</h5>
         <div class="row">
-            <div class="two mobile-one columns">
-                <label class="right inline">Fecha :</label>
+            <div class="four mobile-one columns">
+                <label class="left inline">Fecha:</label>
+                <label class="right inline fecha">10/10/2014</label>
             </div>
-            <div class="ten mobile-three columns">
-                <p id="fecha_reemplaza">Fecha del partido</p>
-            </div>
-
         </div>
         <div class="row">
-            <div class="two mobile-one columns">
-                <label class="right inline">Local :</label>
+            <div class="four mobile-one columns">
+                <label class="left inline">Local: Cantidad Jugadores Seleccionados:</label>
+                <label class="right inline fecha">20</label>
             </div>
-            <div class="ten mobile-three columns">
-                <p id="equipo_local">Local</p>
-            </div>
-
         </div>
         <div class="row">
-            <div class="two mobile-one columns">
-                <label class="right inline">Visita :</label>
+            <div class="four mobile-one columns">
+                <label class="left inline">Visitante: Cantidad Jugadores Seleccionados:</label>
+                <label class="right inline fecha">20</label>
             </div>
-            <div class="ten mobile-three columns">
-                <p id="equipo_visita">Visita</p>
-            </div>
-
         </div>
         <div class="row">
-            <div class="twelve columns">
-                <div id="jugadoresLocales" class="twelve columns"></div>
-                <div id="jugadoresVisita" class="twelve columns"></div>
-                <div id="arbitros" class="twelve columns"></div>
-
-                <p id="jugadores_locales__habilitados">Jugadores locales</p>
-
-                <p id="jugadores_visitantes_habilitados">Jugadores Visitantes</p>
-
-                <p id="arbitros_asignados">Arbitros desigandos</p>
-
+            <div class="four mobile-one columns">
+                <label class="left inline">Arbitro Asignado</label>
+                <label class="right inline fecha">Juan Perez</label>
             </div>
-
         </div>
         <div class="row">
-
             <div class="two columns">
-                <a class="close-reveal-modal">Cancelar</a>
+                <a href="#" id="closeResumenModal" class="">Cancelar</a>
             </div>
             <div class="two columns">
                 <a class="success button" href="#">Iniciar Partido</a>

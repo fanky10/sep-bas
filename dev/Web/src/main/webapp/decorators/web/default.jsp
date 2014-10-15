@@ -64,14 +64,10 @@
     <%-- Typekit --%>
     <%-- Setup variables needed for tracking and load scode --%>
 	<%-- common --%>
-	<jsp:include page="/WEB-INF/pages/web/common/baseJScripts.jsp" />
 	<script type="text/javascript">
             APP_CTX = "${pageContext.request.contextPath}";
 	</script>
-        <%-- specific --%>
-  	<decorator:getProperty property="page.jscriptlibs" />
-  	<%-- written --%>
-  	<decorator:getProperty property="page.jscript" />
+        
 <decorator:head />       
 </head>
 
@@ -108,7 +104,10 @@
 <%----------------------------------------------------------------------------------------
     Include dependent scripts defined in the JSP
    ---------------------------------------------------------------------------------------%>
-        
+    <jsp:include page="/WEB-INF/pages/web/common/baseJScripts.jsp" />
+    <%-- specific --%>
+    <decorator:getProperty property="page.jscriptlibs" />
+    <%-- written --%>
     <decorator:extractProperty property="page.jscript" />
      
 

@@ -4,13 +4,15 @@ $(function () {
             options = {
                 NUMERO_MINIMO_JUGADORES: 4,
                 NUMERO_MAXIMO_JUGADORES: 12
-            };
+            };            
+    // events
     $('#clubesLocales').change(clubSeleccionadoEvent);
     $('#clubesVisitantes').change(clubSeleccionadoEvent);
     function clubSeleccionadoEvent(e) {
         var clubesValidated = $('#iniciarPartidoForm').validate().element("#clubesValidation");
         if (clubesValidated) {
             partidoView.loadPlayers();
+            debugger;
         }
     }
 
@@ -18,6 +20,12 @@ $(function () {
         e.preventDefault();
         return iniciarPartidoForm.valid();
     });
+    
+    // modal events:
+    $('#closeResumenModal').click(function(e){
+        e.preventDefault();
+        $('#resumenModal').foundation('reveal', 'close');
+    });//
 
     // validation
     $.validator.setDefaults({
