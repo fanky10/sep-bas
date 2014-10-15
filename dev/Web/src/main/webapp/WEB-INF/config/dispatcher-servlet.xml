@@ -68,5 +68,11 @@
 	<bean id="homeMessage" class="java.lang.String" factory-method="valueOf">
 		<constructor-arg value="${home.message}" />
 	</bean>
+        <bean id="minJugadores" class="java.lang.Integer" factory-method="valueOf">
+		<constructor-arg value="${app.jugadores.minimo}" />
+	</bean>
+        <bean id="maxJugadores" class="java.lang.Integer" factory-method="valueOf">
+		<constructor-arg value="${app.jugadores.maximo}" />
+	</bean>
 
 </beans>

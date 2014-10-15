@@ -6,12 +6,15 @@
 package com.genfersco.sepbas.services.controller;
 
 import com.genfersco.sepbas.datafields.ClubPropertyEditor;
-import com.genfersco.sepbas.datafields.FechaPropertyEditor;
+import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
+import com.genfersco.sepbas.domain.model.Jugador;
+import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.web.form.InicioPartidoData;
-import java.beans.PropertyEditorSupport;
 import java.util.Date;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -32,20 +35,75 @@ public class ServicePartidosController extends AbstractAPIController {
             ServletRequestDataBinder binder) throws Exception {
         binder.registerCustomEditor(Club.class, new ClubPropertyEditor(getServicesManager()));
     }
+    @Resource
+    private Integer minJugadores;
+    @Resource
+    private Integer maxJugadores;
 
     @RequestMapping(value = "/partido/nuevo.json", method = RequestMethod.POST)
     public @ResponseBody
     ResponseMessage partidoNuevo(@RequestBody InicioPartidoData inicioPartidoData) {
-        String mensaje = "inicio given: " + inicioPartidoData;
         ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setMessage(mensaje);
-        if(validateData(inicioPartidoData)){
-            responseMessage.setCode("OK");
+        responseMessage.setCode(ResponseMessage.CODE_OK);
+        Arbitro arbitro = getServicesManager().getArbitro(inicioPartidoData.getIdArbitro());
+        Club clubLocal = getServicesManager().getClub(String.valueOf(inicioPartidoData.getIdClubLocal()));
+        Club clubVisitante = getServicesManager().getClub(String.valueOf(inicioPartidoData.getIdClubVisitante()));
+        if (arbitro == null) {
+            responseMessage.setMessage("Arbitro desconocido");
+            responseMessage.setCode("-1");
+        } else if (clubLocal == null) {
+            responseMessage.setMessage("Club local desconocido");
+            responseMessage.setCode("-2");
+        } else if (clubVisitante == null) {
+            responseMessage.setMessage("Club visitante desconocido");
+            responseMessage.setCode("-3");
+        } else if (inicioPartidoData.getIdJugadoresLocales().size() < minJugadores) {
+            responseMessage.setMessage("Cantidad jugadores locales menores a: " + minJugadores);
+            responseMessage.setCode("-4");
+        } else if (inicioPartidoData.getIdJugadoresLocales().size() > maxJugadores) {
+            responseMessage.setMessage("Cantidad jugadores locales mayores a:" + maxJugadores);
+            responseMessage.setCode("-5");
+        } else if (inicioPartidoData.getIdJugadoresVisitantes().size() < minJugadores) {
+            responseMessage.setMessage("Cantidad jugadores visitantes menores a: " + minJugadores);
+            responseMessage.setCode("-6");
+        } else if (inicioPartidoData.getIdJugadoresVisitantes().size() > maxJugadores) {
+            responseMessage.setMessage("Cantidad jugadores visitantes mayores a:" + maxJugadores);
+            responseMessage.setCode("-7");
+        } else {
+            // check cada uno de los jugadores.
+            for (Integer idJugador : inicioPartidoData.getIdJugadoresLocales()) {
+                Jugador j = getServicesManager().getJugadorById(idJugador);
+                if (j == null) {
+                    responseMessage.setMessage("Jugador local desconocido con id:" + j);
+                    responseMessage.setCode("-8");
+                    break;
+                }
+            }
+
+            for (Integer idJugador : inicioPartidoData.getIdJugadoresVisitantes()) {
+                Jugador j = getServicesManager().getJugadorById(idJugador);
+                if (j == null) {
+                    responseMessage.setMessage("Jugador visitante desconocido con id:" + j);
+                    responseMessage.setCode("-9");
+                    break;
+                }
+            }
         }
+        // still everything valid
+        if (responseMessage.getCode().equals(ResponseMessage.CODE_OK)) {
+            Partido partido = new Partido();
+            partido.setClubLocal(clubLocal);
+            partido.setClubVisitante(clubVisitante);
+            partido.setFecha(new Date(System.currentTimeMillis()));
+            partido = getServicesManager().savePartido(partido);
+        }
+
         return responseMessage;
     }
-    
-    private boolean validateData(InicioPartidoData inicioPartidoData){
+
+    private boolean validateData(InicioPartidoData inicioPartidoData) {
+        boolean valid = true;
+
         return true;
     }
 

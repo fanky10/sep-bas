@@ -5,36 +5,26 @@
  */
 package com.genfersco.sepbas.web.form;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
 /**
  *
  * @author fanky
  */
-public class InicioPartidoData {
-    private Integer idClubLocal;
-    private Integer idClubVisitante;
-    private Integer idArbitro;
-    private List<Integer> idJugadoresLocales;
-    private List<Integer> idJugadoresVisitantes;
+@JsonPropertyOrder({ "idClubLocal","idClubVisitante","idArbitro","idJugadoresLocales","idJugadoresVisitantes" })
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class InicioPartidoData implements Serializable {
+
+    private Integer idClubLocal = 0;
+    private Integer idClubVisitante = 0;
+    private Integer idArbitro = 0;
+    private List<Integer> idJugadoresLocales = new ArrayList<Integer>();
+    private List<Integer> idJugadoresVisitantes = new ArrayList<Integer>();
     
-    public Integer getClubLocal() {
-        return idClubLocal;
-    }
-
-    public void setClubLocal(Integer clubLocal) {
-        this.idClubLocal = clubLocal;
-    }
-
-    public Integer getClubVisitante() {
-        return idClubVisitante;
-    }
-
-    public void setClubVisitante(Integer clubVisitante) {
-        this.idClubVisitante = clubVisitante;
-    }
-
     public Integer getIdClubLocal() {
         return idClubLocal;
     }
@@ -74,7 +64,5 @@ public class InicioPartidoData {
     public void setIdJugadoresVisitantes(List<Integer> idJugadoresVisitantes) {
         this.idJugadoresVisitantes = idJugadoresVisitantes;
     }
-    
-    
-    
+
 }

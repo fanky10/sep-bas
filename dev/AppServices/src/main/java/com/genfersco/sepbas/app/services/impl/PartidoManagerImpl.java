@@ -13,7 +13,7 @@ public class PartidoManagerImpl implements PartidoManager {
 	private PartidoRepository partidoRepository;
 	
 	@Override
-	public Partido addPartido(Partido partido) {
+	public Partido savePartido(Partido partido) {
 		return getPartidoRepository().save(partido);
 	}
 

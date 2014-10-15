@@ -5,6 +5,7 @@ import java.util.List;
 import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Cuarto;
+import com.genfersco.sepbas.domain.model.Evento;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 
@@ -34,7 +35,7 @@ public interface ServicesManager {
 	
 	public List<Jugador> getJugadoresClub(Integer clubId);
 	
-	public Partido addPartido(Partido partido);
+	public Partido savePartido(Partido partido);
 	
 	public Cuarto addCuarto(Cuarto cuarto, List<Jugador> equipo1, List<Jugador> equipo2);
 	
@@ -45,4 +46,6 @@ public interface ServicesManager {
         public Arbitro getArbitro(Integer id);
         
         public void eliminarArbitro(Integer id);
+        
+        public Evento saveEvento(Evento e);
 }
