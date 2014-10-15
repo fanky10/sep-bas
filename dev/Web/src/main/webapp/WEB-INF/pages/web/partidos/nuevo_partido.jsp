@@ -52,7 +52,7 @@
                     <h5>Seleccione el árbitro del encuentro</h5> 
                     <c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
                         <label for="radio${stat.count}"> <input
-                                name="radio${stat.count}" type="radio" id="radio${stat.count}">${arbitro.nombre}
+                                name="radioArbitros" type="radio" id="radio${stat.count}">${arbitro.nombre}
                             ${arbitro.apellido}
                         </label>
                     </c:forEach>
