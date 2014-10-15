@@ -8,12 +8,12 @@ $(function () {
     $('#clubesLocales').change(clubSeleccionadoEvent);
     $('#clubesVisitantes').change(clubSeleccionadoEvent);
     function clubSeleccionadoEvent(e) {
-        var clubesValidated = $('#iniciarPartidoForm').validate().element("#clubesLocales");
+        var clubesValidated = $('#iniciarPartidoForm').validate().element("#clubesValidation");
         if (clubesValidated) {
             partidoView.loadPlayers();
         }
     }
-    
+
     $('.button.iniciar').click(function (e) {
         e.preventDefault();
         return iniciarPartidoForm.valid();
@@ -28,21 +28,36 @@ $(function () {
         var selectedClubs = partidoView.getSelectedClubs();
         return (selectedClubs.idClubLocal !== selectedClubs.idClubVisitante);
     }, 'Club local y visitante iguales');
-    
+    $.validator.addMethod('tieneJugadoresLocales', function (value, element) {
+        var jugadoresLength = $('.jugadores-locales-container input:checkbox').length;;
+        return jugadoresLength > 0;
+    }, 'Seleccione un club con jugadores');
+    $.validator.addMethod('tieneJugadoresVisitantes', function (value, element) {
+        var jugadoresLength = $('.jugadores-visitantes-container input:checkbox').length;
+        return jugadoresLength > 0;
+    }, 'Seleccione un club con jugadores');
+
+
     $.validator.addMethod('minSelectedPlayer', function (value, element) {
-        var selected = $('input[name="'+element.name+'"]').filter(':checked').length;
+        var selected = $('input[name="' + element.name + '"]').filter(':checked').length;
         return selected >= options.NUMERO_MINIMO_JUGADORES;
     }, 'Cantidad de jugadores seleccionados menor al minimo');
-    
+
     $.validator.addMethod('maxSelectedPlayer', function (value, element) {
-        var selected = $('input[name="'+element.name+'"]').filter(':checked').length;
+        var selected = $('input[name="' + element.name + '"]').filter(':checked').length;
         return selected <= options.NUMERO_MAXIMO_JUGADORES;
     }, 'Cantidad de jugadores seleccionados mayor al maximo');
 
     $('#iniciarPartidoForm').validate({
         rules: {
-            clubesLocales: {
+            clubesValidation: {
                 selectedClub: true
+            },
+            clubesLocales: {
+                tieneJugadoresLocales: true
+            },
+            clubesVisitantes: {
+                tieneJugadoresVisitantes: true
             },
             equipolocal: {
                 minSelectedPlayer: true,
@@ -56,14 +71,20 @@ $(function () {
                 required: true
             }
         },
-        messages:{
+        messages: {
+            clubesLocales: {
+                tieneJugadoresLocales: 'Equipo Local: Seleccione un club con jugadores'
+            },
+            clubesVisitantes: {
+                tieneJugadoresVisitantes: 'Equipo Visitante: Seleccione un club con jugadores'
+            },
             equipolocal: {
-                minSelectedPlayer: 'Equipo Local: Al menos deben seleccionarse '+options.NUMERO_MINIMO_JUGADORES,
-                maxSelectedPlayer: 'Equipo Local: Como maximo deben seleccionarse '+options.NUMERO_MAXIMO_JUGADORES
+                minSelectedPlayer: 'Equipo Local: Al menos deben seleccionarse ' + options.NUMERO_MINIMO_JUGADORES,
+                maxSelectedPlayer: 'Equipo Local: Como maximo deben seleccionarse ' + options.NUMERO_MAXIMO_JUGADORES
             },
             equipovisitante: {
-                minSelectedPlayer: 'Equipo Visitante: Al menos deben seleccionarse '+options.NUMERO_MINIMO_JUGADORES,
-                maxSelectedPlayer: 'Equipo Visitante: Como maximo deben seleccionarse '+options.NUMERO_MAXIMO_JUGADORES
+                minSelectedPlayer: 'Equipo Visitante: Al menos deben seleccionarse ' + options.NUMERO_MINIMO_JUGADORES,
+                maxSelectedPlayer: 'Equipo Visitante: Como maximo deben seleccionarse ' + options.NUMERO_MAXIMO_JUGADORES
             },
             radioArbitros: {
                 required: 'Al menos debe seleccionarse un arbitro'
@@ -127,11 +148,11 @@ PartidoView = function () {
         }
         $.each(jugadores, function (idx, jugador) {
             content.push('<label for="checkbox_' + label + '_' + idx + '">');
-            content.push('<input name="' + checkboxName + '" type="checkbox" data-jugador=id="' + jugador.id + '" id="checkbox_' + label + '_' + idx + '" title="Jugador '+jugador.nombre+'">');
+            content.push('<input name="' + checkboxName + '" type="checkbox" data-jugador=id="' + jugador.id + '" id="checkbox_' + label + '_' + idx + '" title="Jugador ' + jugador.nombre + '">');
             content.push(jugador.nombre + '</label>');
         });
         $(container).html(content.join('\n'));
-        
+
     }
 
     return {

@@ -12,9 +12,9 @@
 
             <h3>Iniciar Partido</h3>
             <form id="iniciarPartidoForm" class="custom">
+                <input id="clubesValidation" name="clubesValidation" hidden="true" />
                 <div class="clubes">
                     <h5>Aquí seleccionaremos el local y el visitante</h5>
-                <form class="custom">
                     <div class="row">
                         <div class="large-4 columns">
                             <label for="clubesLocales">Local</label> 
@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="large-4 columns">
                             <label for="clubesVisitantes">Visitante</label> 
-                            <select id="clubesVisitantes" class="medium">
+                            <select id="clubesVisitantes" name="clubesVisitantes" class="medium">
                                 <c:forEach items="${clubes}" var="club" varStatus="stat">
                                     <option value="${club.id}">${club.nombre}</option>
                                 </c:forEach>
