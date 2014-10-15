@@ -31,11 +31,34 @@ INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `e
 -- Dumping data for table `jugadores`
 --
 
+-- Jugadores del club Libertad
 INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jugador_apellido`, `jugador_numero`, `jugador_actual_club_id`, `jugador_estado`) VALUES 
-(60,'2013-03-15 03:00:00','Facundo','Scoccia',99,1,1),
-(61,'2013-03-27 03:00:00','Cacho','Pereyra',88,2,0),
-(80,'2013-03-20 03:00:00','Juancito','Perez',11,2,0),
-(81,'2013-03-14 03:00:00','Marcos','Lewis',22,1,0);
+(null,'2013-03-15 03:00:00','Paul','Arizin',99,1,0),
+(null,'2013-03-14 03:00:00','Charles','Barkley',22,1,0),
+(null,'2013-03-15 03:00:00','Rick','Barry',23,1,0),
+(null,'2013-03-14 03:00:00','Elgin','Baylor',33,1,0),
+(null,'2013-03-15 03:00:00','Dave','Bing',11,1,0),
+(null,'2013-03-14 03:00:00','Larry','Bird',10,1,0),
+(null,'2013-03-15 03:00:00','Wilt','Chamberlain',9,1,0),
+(null,'2013-03-14 03:00:00','Bob','Cousy',2,1,0),
+(null,'2013-03-27 03:00:00','Dave','Cowens',88,1,0),
+(null,'2013-03-27 03:00:00','Julius','Erving',89,2,0),
+(null,'2013-03-27 03:00:00','George','Gervin',12,2,0),
+(null,'2013-03-20 03:00:00','Dave','DeBusschere',14,1,0);
+-- Jugadores del club Fisherton
+INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jugador_apellido`, `jugador_numero`, `jugador_actual_club_id`, `jugador_estado`) VALUES 
+(null,'2013-03-15 03:00:00','Paul','Arizin',99,2,0),
+(null,'2013-03-14 03:00:00','Charles','Barkley',22,2,0),
+(null,'2013-03-15 03:00:00','Rick','Barry',23,2,0),
+(null,'2013-03-14 03:00:00','Elgin','Baylor',33,2,0),
+(null,'2013-03-15 03:00:00','Dave','Bing',11,2,0),
+(null,'2013-03-14 03:00:00','Larry','Bird',10,2,0),
+(null,'2013-03-15 03:00:00','Wilt','Chamberlain',9,2,0),
+(null,'2013-03-14 03:00:00','Bob','Cousy',2,2,0),
+(null,'2013-03-27 03:00:00','Dave','Cowens',88,2,0),
+(null,'2013-03-27 03:00:00','Julius','Erving',89,2,0),
+(null,'2013-03-27 03:00:00','George','Gervin',12,2,0),
+(null,'2013-03-20 03:00:00','Dave','DeBusschere',14,2,0);
 
 --
 -- Dumping data for table `partidos`
