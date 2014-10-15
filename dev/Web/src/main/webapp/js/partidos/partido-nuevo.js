@@ -12,13 +12,26 @@ $(function () {
         var clubesValidated = $('#iniciarPartidoForm').validate().element("#clubesValidation");
         if (clubesValidated) {
             partidoView.loadPlayers();
-            debugger;
         }
     }
 
     $('.button.iniciar').click(function (e) {
         e.preventDefault();
-        return iniciarPartidoForm.valid();
+        var validated = iniciarPartidoForm.valid(),
+            jugadoresLocalesLength = $('.jugadores-locales-container input:checkbox').length,
+            jugadoresVisitantedLength = $('.jugadores-visitantes-container input:checkbox').length,
+            idSelectArbitro = $('input:radio:checked').attr('id'),
+            arbitroSeleccionado = $("label[for='"+idSelectArbitro+"']").text();
+        if(validated){
+            $('div label.jugadores-locales').text(jugadoresLocalesLength);
+            $('div label.jugadores-visitantes').text(jugadoresVisitantedLength);
+            $('div label.arbitro-seleccionado').text(arbitroSeleccionado);
+        }
+        return validated;
+    });
+    
+    $('#acceptResumenModal').click(function(e){
+        var arbitroId = $('input:radio:checked').val();
     });
     
     // modal events:
@@ -37,7 +50,7 @@ $(function () {
         return (selectedClubs.idClubLocal !== selectedClubs.idClubVisitante);
     }, 'Club local y visitante iguales');
     $.validator.addMethod('tieneJugadoresLocales', function (value, element) {
-        var jugadoresLength = $('.jugadores-locales-container input:checkbox').length;;
+        var jugadoresLength = $('.jugadores-locales-container input:checkbox').length;
         return jugadoresLength > 0;
     }, 'Seleccione un club con jugadores');
     $.validator.addMethod('tieneJugadoresVisitantes', function (value, element) {
@@ -101,6 +114,10 @@ $(function () {
     });
 
 });
+
+PartidoModel = function(){
+    
+}
 
 PartidoView = function () {
     var options = {

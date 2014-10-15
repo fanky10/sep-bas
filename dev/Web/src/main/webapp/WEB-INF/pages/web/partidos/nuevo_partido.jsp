@@ -56,7 +56,7 @@
                     <h5>Seleccione el árbitro del encuentro</h5> 
                     <c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
                         <label for="radio${stat.count}"> <input
-                                name="radioArbitros" type="radio" id="radio${stat.count}">${arbitro.nombre}
+                                name="radioArbitros" type="radio" id="radio${stat.count}" value="${arbitro.id}">${arbitro.nombre}
                             ${arbitro.apellido}
                         </label>
                     </c:forEach>
@@ -84,19 +84,19 @@
         <div class="row">
             <div class="six mobile-one columns">
                 <label class="left inline">Local: Cantidad Jugadores Seleccionados:</label>
-                <label class="right inline jugadoresLocales">20</label>
+                <label class="right inline jugadores-locales">20</label>
             </div>
         </div>
         <div class="row">
             <div class="six mobile-one columns">
                 <label class="left inline">Visitante: Cantidad Jugadores Seleccionados:</label>
-                <label class="right inline jugadoresVisitantes">20</label>
+                <label class="right inline jugadores-visitantes">20</label>
             </div>
         </div>
         <div class="row">
             <div class="six mobile-one columns">
-                <label class="left inline">Arbitro Asignado</label>
-                <label class="right inline arbitroSeleccionado">Juan Perez</label>
+                <label class="left inline">Arbitro Asignado:</label>
+                <label class="right inline arbitro-seleccionado">Juan Perez</label>
             </div>
         </div>
         <div class="row">
