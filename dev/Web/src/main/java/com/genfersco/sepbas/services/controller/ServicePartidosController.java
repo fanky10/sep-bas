@@ -5,7 +5,6 @@
  */
 package com.genfersco.sepbas.services.controller;
 
-import com.genfersco.sepbas.datafields.ClubPropertyEditor;
 import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Jugador;
@@ -14,10 +13,8 @@ import com.genfersco.sepbas.web.form.InicioPartidoData;
 import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Value;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,11 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ServicePartidosController extends AbstractAPIController {
 
-    @InitBinder
-    protected void initBinder(HttpServletRequest request,
-            ServletRequestDataBinder binder) throws Exception {
-        binder.registerCustomEditor(Club.class, new ClubPropertyEditor(getServicesManager()));
-    }
     @Resource
     private Integer minJugadores;
     @Resource
@@ -42,7 +34,7 @@ public class ServicePartidosController extends AbstractAPIController {
 
     @RequestMapping(value = "/partido/nuevo.json", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseMessage partidoNuevo(@RequestBody InicioPartidoData inicioPartidoData) {
+    ResponseMessage partidoNuevo(@RequestBody InicioPartidoData inicioPartidoData, HttpServletRequest request,HttpSession session) {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setCode(ResponseMessage.CODE_OK);
         Arbitro arbitro = getServicesManager().getArbitro(inicioPartidoData.getIdArbitro());
@@ -96,15 +88,25 @@ public class ServicePartidosController extends AbstractAPIController {
             partido.setClubVisitante(clubVisitante);
             partido.setFecha(new Date(System.currentTimeMillis()));
             partido = getServicesManager().savePartido(partido);
+            savedSessionPartido(session, partido);
+            responseMessage.setMessage("Nuevo partido guardado");
         }
 
         return responseMessage;
     }
 
-    private boolean validateData(InicioPartidoData inicioPartidoData) {
-        boolean valid = true;
+    @RequestMapping(value = "/partido.json", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseMessage partidoNuevo(HttpServletRequest request, HttpSession session) {
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setCode("-1");
+        responseMessage.setMessage("Sin partido guardado");
+        Partido p = getSavedSessionPartido(session);
+        if (p != null) {
+            responseMessage.setCode(ResponseMessage.CODE_OK);
+            responseMessage.setContent(p);
+        }
+        return responseMessage;
 
-        return true;
     }
-
 }

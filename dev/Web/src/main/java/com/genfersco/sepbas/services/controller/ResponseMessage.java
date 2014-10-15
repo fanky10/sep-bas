@@ -20,7 +20,7 @@ public class ResponseMessage {
     private Object content;
     private Map<String, Object> extras;
 
-    ResponseMessage() {
+    public ResponseMessage() {
         super();
         code = "-1";
         message = "NOT_SET";

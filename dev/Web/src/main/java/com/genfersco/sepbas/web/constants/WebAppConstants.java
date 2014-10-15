@@ -16,5 +16,5 @@ public class WebAppConstants {
 	public static final String ARBITROS = "web/arbitros/arbitros";
 	
 	// List of Session and Request attribute names
-	public static final String PARTIDO_KEY = "sessionPartido";
+	public static final String SESSION_PARTIDO_KEY = "sessionPartido";
 }

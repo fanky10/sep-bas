@@ -21,91 +21,92 @@ import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciaCuartoForm;
-import com.genfersco.sepbas.web.util.PartidoHelper;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class CuartoController extends BaseController {
-	@Autowired
-	private ServicesManager serviceManager;
-	@Autowired
-	private PartidoController partidoController;
 
-	@InitBinder
-	protected void initBinder(HttpServletRequest request,
-			ServletRequestDataBinder binder) throws Exception {
-		binder.registerCustomEditor(Jugador.class, new JugadorPropertyEditor(
-				getServiceManager()));
-	}
+    @Autowired
+    private ServicesManager serviceManager;
+    @Autowired
+    private PartidoController partidoController;
 
-	@RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.GET)
-	public String showIniciaCuarto(HttpServletRequest request, ModelMap map) {
-		Partido partido = getPartido(request);
-		List<Jugador> jugadoresClubLocal = getServiceManager()
-				.getJugadoresClub(partido.getClubLocal().getId());
-		List<Jugador> jugadoresClubVisitante = getServiceManager()
-				.getJugadoresClub(partido.getClubVisitante().getId());
+    @InitBinder
+    protected void initBinder(HttpServletRequest request,
+            ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(Jugador.class, new JugadorPropertyEditor(
+                getServiceManager()));
+    }
 
-		map.addAttribute("clubLocal", partido.getClubLocal());
-		map.addAttribute("clubVisitante", partido.getClubVisitante());
-		map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
-		map.addAttribute("jugadoresClubVisitante", jugadoresClubVisitante);
+    @RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.GET)
+    public String showIniciaCuarto(HttpSession session, ModelMap map) {
+        Partido partido = getPartido(session);
+        List<Jugador> jugadoresClubLocal = getServiceManager()
+                .getJugadoresClub(partido.getClubLocal().getId());
+        List<Jugador> jugadoresClubVisitante = getServiceManager()
+                .getJugadoresClub(partido.getClubVisitante().getId());
 
-		map.addAttribute("iniciaCuartoForm", new IniciaCuartoForm());
-		return WebAppConstants.INICIO_CUARTO;
-	}
+        map.addAttribute("clubLocal", partido.getClubLocal());
+        map.addAttribute("clubVisitante", partido.getClubVisitante());
+        map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
+        map.addAttribute("jugadoresClubVisitante", jugadoresClubVisitante);
 
-	@RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.POST)
-	public String guardarIniciaCuarto(HttpServletRequest request,
-			@ModelAttribute IniciaCuartoForm iniciaCuartoForm) {
+        map.addAttribute("iniciaCuartoForm", new IniciaCuartoForm());
+        return WebAppConstants.INICIO_CUARTO;
+    }
+
+    @RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.POST)
+    public String guardarIniciaCuarto(HttpSession session,
+            @ModelAttribute IniciaCuartoForm iniciaCuartoForm) {
 		// TODO create a VO object (BO) CuartoBO
-		// with equipo1 and equipo2 as attributes
-		List<Jugador> equipo1 = Arrays.asList(iniciaCuartoForm
-				.getJugadoresEquipo1());
-		List<Jugador> equipo2 = Arrays.asList(iniciaCuartoForm
-				.getJugadoresEquipo2());
-		Partido partido = getPartido(request);
-		Cuarto cuarto = new Cuarto();
-		cuarto.setNumero(1);
-		cuarto.setPartido(partido);
-		cuarto = getServiceManager().addCuarto(cuarto, equipo1, equipo2);
+        // with equipo1 and equipo2 as attributes
+        List<Jugador> equipo1 = Arrays.asList(iniciaCuartoForm
+                .getJugadoresEquipo1());
+        List<Jugador> equipo2 = Arrays.asList(iniciaCuartoForm
+                .getJugadoresEquipo2());
+        Partido partido = getPartido(session);
+        Cuarto cuarto = new Cuarto();
+        cuarto.setNumero(1);
+        cuarto.setPartido(partido);
+        cuarto = getServiceManager().addCuarto(cuarto, equipo1, equipo2);
 
-		// TODO: redirect ingresoEventos controller (:
-		return "web/test/okMessage";
-	}
+        // TODO: redirect ingresoEventos controller (:
+        return "web/test/okMessage";
+    }
 
-	@RequestMapping(value = "/cuartos/finalizar", method = RequestMethod.GET)
-	public String showFinalizaCuarto() {
-		return "";
-	}
+    @RequestMapping(value = "/cuartos/finalizar", method = RequestMethod.GET)
+    public String showFinalizaCuarto() {
+        return "";
+    }
 
-	@RequestMapping(value = "/cuartos/finalizar", method = RequestMethod.POST)
-	public String guardarFinCuarto() {
-		// TODO: call ingresoEventos controller (:
-		return "";
-	}
+    @RequestMapping(value = "/cuartos/finalizar", method = RequestMethod.POST)
+    public String guardarFinCuarto() {
+        // TODO: call ingresoEventos controller (:
+        return "";
+    }
 
-	protected Partido getPartido(HttpServletRequest request) {
-		Partido partido = PartidoHelper.getPartido(request);
-		if (partido == null) {
-			throw new IllegalArgumentException("Sin partido guardado");
-		}
-		return partido;
-	}
+    protected Partido getPartido(HttpSession session) {
+        Partido partido = getSavedSessionPartido(session);
+        if (partido == null) {
+            throw new IllegalArgumentException("Sin partido guardado");
+        }
+        return partido;
+    }
 
-	public ServicesManager getServiceManager() {
-		return serviceManager;
-	}
+    public ServicesManager getServiceManager() {
+        return serviceManager;
+    }
 
-	public void setServiceManager(ServicesManager serviceManager) {
-		this.serviceManager = serviceManager;
-	}
+    public void setServiceManager(ServicesManager serviceManager) {
+        this.serviceManager = serviceManager;
+    }
 
-	public PartidoController getPartidoController() {
-		return partidoController;
-	}
+    public PartidoController getPartidoController() {
+        return partidoController;
+    }
 
-	public void setPartidoController(PartidoController partidoController) {
-		this.partidoController = partidoController;
-	}
+    public void setPartidoController(PartidoController partidoController) {
+        this.partidoController = partidoController;
+    }
 
 }
