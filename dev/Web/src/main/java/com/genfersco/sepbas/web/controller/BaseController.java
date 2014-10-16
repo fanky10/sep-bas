@@ -38,7 +38,7 @@ public abstract class BaseController {
         return (Partido) session.getAttribute(WebAppConstants.SESSION_PARTIDO_KEY);
     }
 
-    public void savedSessionPartido(HttpSession session, Partido partido) {
+    public void saveSessionPartido(HttpSession session, Partido partido) {
         session.setAttribute(WebAppConstants.SESSION_PARTIDO_KEY, partido);
     }
 }

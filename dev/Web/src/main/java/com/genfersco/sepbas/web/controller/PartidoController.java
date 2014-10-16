@@ -44,7 +44,7 @@ public class PartidoController extends BaseController {
         partido.setClubVisitante(partidoForm.getClubVisitante());
         partido.setFecha(new Date(System.currentTimeMillis()));
         partido = getServicesManager().savePartido(partido);
-        savedSessionPartido(session, partido);
+        saveSessionPartido(session, partido);
         return "redirect:/cuartos/iniciar";
     }
 

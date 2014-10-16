@@ -88,7 +88,7 @@ public class ServicePartidosController extends AbstractAPIController {
             partido.setClubVisitante(clubVisitante);
             partido.setFecha(new Date(System.currentTimeMillis()));
             partido = getServicesManager().savePartido(partido);
-            savedSessionPartido(session, partido);
+            saveSessionPartido(session, partido);
             responseMessage.setMessage("Nuevo partido guardado");
         }
 
