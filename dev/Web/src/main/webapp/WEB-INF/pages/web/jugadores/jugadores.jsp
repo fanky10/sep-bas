@@ -40,13 +40,17 @@
 				<c:choose>
 					<c:when test="${empty jugadores}">
 						<div class="twelve columns">
+                                                        No se encontraron jugadores
 							<hr class="sin-margin-top" />
-						</div>
-						<div class="twelve columns">
-							<h3>Proximamente Jugadores...</h3>
 						</div>
 					</c:when>
 					<c:otherwise>
+                                                <div class="row">
+							<div class="twelve columns">
+                                                        <h2>Jugadores</h2>
+                                                        <h3>Listado</h3>
+							</div>
+						</div>
 						<div class="row">
 							<div class="two columns">
 								<h5>Nombre</h5>
@@ -72,13 +76,14 @@
 									<h5>${jugador.club.nombre}</h5>
 								</div>
 								<div class="one column" align="center">
-									<a href="#"><img alt="Editar" jugador-id="${jugador.id}"
-										src="<c:url value="/images/soft-scraps-edit-icon.png" />"></a>
+									<a href="<c:url value="/jugadores/edit/${jugador.id}" />" class="button" alt="Editar" jugador-id="${jugador.id}" >
+                                                                        Editar        
+                                                                        </a>
 								</div>
 								<div class="one column" align="center">
-									<a href="#"><img alt="Editar" jugador-id="${jugador.id}"
-										onclick="deleteJugador(this); return false;"
-										src="<c:url value="/images/soft-scraps-delete-icon.png" />"></a>
+                                                                        <a href="<c:url value="/jugadores/del/${jugador.id}" />" class="button" alt="Eliminar" jugador-id="${jugador.id}" >
+                                                                        Eliminar        
+                                                                        </a>									
 								</div>
 								<div class="four columns" align="center"></div>
 							</div>
@@ -86,6 +91,8 @@
 						<div id="deleteResponse"></div>
 					</c:otherwise>
 				</c:choose>
+                                <h3><a href="<c:url value="/jugadores/add"/>" class="button"> Nuevo Club</a></h3>
+                                <a href="<c:url value="/home"/>" class="button">Volver</a> 
 			</div>
 		</div>
 	</div>

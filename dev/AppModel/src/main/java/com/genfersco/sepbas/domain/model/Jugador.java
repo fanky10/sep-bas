@@ -5,13 +5,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "jugadores")
@@ -23,7 +23,8 @@ public class Jugador {
 	private Integer id;
 
 	@Column(name = "jugador_fec_nac", nullable = false, unique = true)
-	private Date fechaNacimiento;
+        @Temporal(javax.persistence.TemporalType.DATE)
+       	private Date fechaNacimiento;
 
 	@Column(name = "jugador_nombre", nullable = false)
 	private String nombre;
@@ -77,7 +78,7 @@ public class Jugador {
 	public Integer getNumero() {
 		return numero;
 	}
-
+	
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}

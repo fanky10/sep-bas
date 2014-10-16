@@ -38,32 +38,38 @@
 					</c:when>
 					<c:otherwise>
 						<div class="row">
-							<div class="four columns">
-								<h5>Arbitro</h5>
+							<div class="twelve columns">
+                                                        <h2>Arbitros</h2>
+                                                        <h3>Listado</h3>
 							</div>
-							<div class="four columns"></div>
-							<div class="four columns"></div>
+							
 						</div>
 						<c:forEach var="arbitro" items="${arbitros}">
 							<div class="row">
 								<div class="four columns">
-									<h5>${arbitro.nombre}</h5>
-                                                                        <h5>${arbitro.apellido}</h5>
+									<h4>${arbitro.nombre}</h4>
+                                                                        <h4>${arbitro.apellido}</h4>
 								</div>
-								<div class="four columns">
-									<a href="<c:url value="/arbitros/edit/${arbitro.id}" />" ><img alt="Editar" arbitro-id="${arbitro.id}"
-										src="<c:url value="/images/soft-scraps-edit-icon.png" />"></a>
+                                                                <div class="four columns">
+									<h4>${arbitro.localidad}</h4>
+                                                                </div>
+								<div class="two columns">
+									<a href="<c:url value="/arbitros/edit/${arbitro.id}" />" class="button" alt="Editar" arbitro-id="${arbitro.id}" >
+                                                                        Editar        
+                                                                        </a>
 								</div>
-								<div class="four columns">
-									<a href="<c:url value="/arbitros/del/${arbitro.id}" />" ><img alt="Eliminar" arbitro-id="${arbitro.id}"
-										src="<c:url value="/images/soft-scraps-delete-icon.png" />"></a>
+								<div class="two columns">
+									<a href="<c:url value="/arbitros/del/${arbitro.id}" />" class="button" alt="Eliminar" arbitro-id="${arbitro.id}" >
+                                                                        Eliminar        
+                                                                        </a>
 								</div>
 							</div>
 						</c:forEach>
 						<div id="deleteResponse"></div>
 					</c:otherwise>
 				</c:choose>
-	
+                        <h3><a href="<c:url value="/arbitros/add"/>" class="button"> Nuevo Arbitro</a></h3>
+                        <a href="<c:url value="/home"/>" class="button"> Volver</a>                            
 			</div>
 		</div>
 	</div>
