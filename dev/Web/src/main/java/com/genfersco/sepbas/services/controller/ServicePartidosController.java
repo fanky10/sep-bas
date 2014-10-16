@@ -9,6 +9,7 @@ import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
+import com.genfersco.sepbas.web.form.ArbitroForm;
 import com.genfersco.sepbas.web.form.InicioPartidoData;
 import java.util.Date;
 import javax.annotation.Resource;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.util.WebUtils;
 
 /**
  *
@@ -32,9 +35,8 @@ public class ServicePartidosController extends AbstractAPIController {
     @Resource
     private Integer maxJugadores;
 
-    @RequestMapping(value = "/partido/nuevo.json", method = RequestMethod.POST)
-    public @ResponseBody
-    ResponseMessage partidoNuevo(@RequestBody InicioPartidoData inicioPartidoData, HttpServletRequest request,HttpSession session) {
+    @RequestMapping(value = "/partido/add", method = RequestMethod.POST)
+    public @ResponseBody ResponseMessage restAgregarPartido(@RequestBody InicioPartidoData inicioPartidoData, HttpServletRequest request, WebRequest webRequest) {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setCode(ResponseMessage.CODE_OK);
         Arbitro arbitro = getServicesManager().getArbitro(inicioPartidoData.getIdArbitro());
@@ -88,25 +90,15 @@ public class ServicePartidosController extends AbstractAPIController {
             partido.setClubVisitante(clubVisitante);
             partido.setFecha(new Date(System.currentTimeMillis()));
             partido = getServicesManager().savePartido(partido);
-            saveSessionPartido(session, partido);
-            responseMessage.setMessage("Nuevo partido guardado");
+            saveSessionPartido(request, partido);
         }
-
         return responseMessage;
     }
-
-    @RequestMapping(value = "/partido.json", method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseMessage partidoNuevo(HttpServletRequest request, HttpSession session) {
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setCode("-1");
-        responseMessage.setMessage("Sin partido guardado");
-        Partido p = getSavedSessionPartido(session);
-        if (p != null) {
-            responseMessage.setCode(ResponseMessage.CODE_OK);
-            responseMessage.setContent(p);
-        }
-        return responseMessage;
-
+    @RequestMapping(value = "/partido/get", method = RequestMethod.GET)
+    public @ResponseBody ResponseMessage restGetPartido(HttpServletRequest request, WebRequest webRequest) {
+        ResponseMessage message = new ResponseMessage();
+        message.setCode("0");
+        message.setContent(getSavedSessionPartido(request));
+        return message;
     }
 }

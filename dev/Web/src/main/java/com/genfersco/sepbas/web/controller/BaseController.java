@@ -6,6 +6,7 @@ import com.genfersco.sepbas.web.constants.WebAppConstants;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.util.WebUtils;
 
 public abstract class BaseController {
 
@@ -34,11 +35,11 @@ public abstract class BaseController {
         return servicesManager;
     }
 
-    public Partido getSavedSessionPartido(HttpSession session) {
-        return (Partido) session.getAttribute(WebAppConstants.SESSION_PARTIDO_KEY);
+    public Partido getSavedSessionPartido(HttpServletRequest request) {
+        return (Partido) WebUtils.getSessionAttribute(request, WebAppConstants.SESSION_PARTIDO_KEY);
     }
 
-    public void saveSessionPartido(HttpSession session, Partido partido) {
-        session.setAttribute(WebAppConstants.SESSION_PARTIDO_KEY, partido);
+    public void saveSessionPartido(HttpServletRequest request, Partido partido) {
+        WebUtils.setSessionAttribute(request, WebAppConstants.SESSION_PARTIDO_KEY, partido);
     }
 }
