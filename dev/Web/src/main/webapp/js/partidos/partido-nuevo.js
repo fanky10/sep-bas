@@ -130,9 +130,11 @@ PartidoModel = function (options) {
     var data = $.extend(true, defaultData, options);
     function sendData() {
         $.ajax({
+            contentType : 'application/json',
+            data : JSON.stringify(data),
+            dataType : 'json',
+            type: 'POST',
             url: APP_CTX + '/secure/api/partido/add',
-            data: data,
-            dataType: 'json'
         }).success(function (resultData) {
             console.log("result: ", resultData)
         });

@@ -39,8 +39,8 @@ public class CuartoController extends BaseController {
     }
 
     @RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.GET)
-    public String showIniciaCuarto(HttpSession session, ModelMap map) {
-        Partido partido = getPartido(session);
+    public String showIniciaCuarto(HttpServletRequest request, ModelMap map) {
+        Partido partido = getPartido(request);
         List<Jugador> jugadoresClubLocal = getServiceManager()
                 .getJugadoresClub(partido.getClubLocal().getId());
         List<Jugador> jugadoresClubVisitante = getServiceManager()
@@ -56,7 +56,7 @@ public class CuartoController extends BaseController {
     }
 
     @RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.POST)
-    public String guardarIniciaCuarto(HttpSession session,
+    public String guardarIniciaCuarto(HttpServletRequest request,
             @ModelAttribute IniciaCuartoForm iniciaCuartoForm) {
 		// TODO create a VO object (BO) CuartoBO
         // with equipo1 and equipo2 as attributes
@@ -64,7 +64,7 @@ public class CuartoController extends BaseController {
                 .getJugadoresEquipo1());
         List<Jugador> equipo2 = Arrays.asList(iniciaCuartoForm
                 .getJugadoresEquipo2());
-        Partido partido = getPartido(session);
+        Partido partido = getPartido(request);
         Cuarto cuarto = new Cuarto();
         cuarto.setNumero(1);
         cuarto.setPartido(partido);
@@ -85,8 +85,8 @@ public class CuartoController extends BaseController {
         return "";
     }
 
-    protected Partido getPartido(HttpSession session) {
-        Partido partido = getSavedSessionPartido(session);
+    protected Partido getPartido(HttpServletRequest request) {
+        Partido partido = getSavedSessionPartido(request);
         if (partido == null) {
             throw new IllegalArgumentException("Sin partido guardado");
         }
