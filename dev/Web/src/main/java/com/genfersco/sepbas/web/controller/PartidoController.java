@@ -20,7 +20,6 @@ import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.PartidoForm;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class PartidoController extends BaseController {
@@ -37,22 +36,22 @@ public class PartidoController extends BaseController {
     }
 
     @RequestMapping(value = "/partidos/iniciar", method = RequestMethod.POST)
-    public String addPartido(HttpSession session,
+    public String addPartido(HttpServletRequest request,
             @ModelAttribute PartidoForm partidoForm) {
         Partido partido = new Partido();
         partido.setClubLocal(partidoForm.getClubLocal());
         partido.setClubVisitante(partidoForm.getClubVisitante());
         partido.setFecha(new Date(System.currentTimeMillis()));
         partido = getServicesManager().savePartido(partido);
-        saveSessionPartido(session, partido);
+        saveSessionPartido(request, partido);
         return "redirect:/cuartos/iniciar";
     }
 
     @RequestMapping(value = "/partido/iniciar", method = RequestMethod.GET)
-    public String nuevoJuego(HttpSession session,
+    public String nuevoJuego(HttpServletRequest request,
             HttpServletResponse response, ModelMap map) {
         // TODO: check if partido iniciado
-        boolean initialized = getSavedSessionPartido(session) != null;
+        boolean initialized = getSavedSessionPartido(request) != null;
         if (initialized) {
             return "redirect:/cuartos/iniciar";
         }
