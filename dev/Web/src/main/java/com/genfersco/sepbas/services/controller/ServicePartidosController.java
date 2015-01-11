@@ -36,7 +36,8 @@ public class ServicePartidosController extends AbstractAPIController {
     private Integer maxJugadores;
 
     @RequestMapping(value = "/partido/add", method = RequestMethod.POST)
-    public @ResponseBody ResponseMessage restAgregarPartido(@RequestBody InicioPartidoData inicioPartidoData, HttpServletRequest request, WebRequest webRequest) {
+    public @ResponseBody
+    ResponseMessage restAgregarPartido(@RequestBody InicioPartidoData inicioPartidoData, HttpServletRequest request, WebRequest webRequest) {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setCode(ResponseMessage.CODE_OK);
         Arbitro arbitro = getServicesManager().getArbitro(inicioPartidoData.getIdArbitro());
@@ -94,11 +95,22 @@ public class ServicePartidosController extends AbstractAPIController {
         }
         return responseMessage;
     }
+
     @RequestMapping(value = "/partido/get", method = RequestMethod.GET)
-    public @ResponseBody ResponseMessage restGetPartido(HttpServletRequest request, WebRequest webRequest) {
+    public @ResponseBody
+    ResponseMessage restGetPartido(HttpServletRequest request, WebRequest webRequest) {
         ResponseMessage message = new ResponseMessage();
         message.setCode("0");
         message.setContent(getSavedSessionPartido(request));
+        return message;
+    }
+
+    @RequestMapping(value = "/partido/restart", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseMessage restRestartPartido(HttpServletRequest request) {
+        saveSessionPartido(request, null);
+        ResponseMessage message = new ResponseMessage();
+        message.setCode("0");
         return message;
     }
 }

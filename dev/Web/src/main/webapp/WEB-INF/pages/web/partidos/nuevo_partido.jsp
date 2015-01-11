@@ -75,31 +75,31 @@
     <div id="resumenModal" class="reveal-modal medium" data-reveal >
         <a class="close-reveal-modal">&#215;</a>
         <h5>Resumen</h5>
-        <div class="row">
+        <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Fecha:</label>
                 <label class="right inline fecha">10/10/2014</label>
             </div>
         </div>
-        <div class="row">
+        <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Local: Cantidad Jugadores Seleccionados:</label>
                 <label class="right inline jugadores-locales">20</label>
             </div>
         </div>
-        <div class="row">
+        <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Visitante: Cantidad Jugadores Seleccionados:</label>
                 <label class="right inline jugadores-visitantes">20</label>
             </div>
         </div>
-        <div class="row">
+        <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Arbitro Asignado:</label>
                 <label class="right inline arbitro-seleccionado">Juan Perez</label>
             </div>
         </div>
-        <div class="row">
+        <div>
             <div class="six columns">
                 <a href="#" id="closeResumenModal" class="left button">Cancelar</a>
                 <a href="#" id="acceptResumenModal" class="right success button">Aceptar</a>
