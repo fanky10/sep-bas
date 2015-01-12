@@ -105,7 +105,7 @@ public class ServicePartidosController extends AbstractAPIController {
         return message;
     }
 
-    @RequestMapping(value = "/partido/restart", method = RequestMethod.POST)
+    @RequestMapping(value = "/partido/restart", method = RequestMethod.GET)
     public @ResponseBody
     ResponseMessage restRestartPartido(HttpServletRequest request) {
         saveSessionPartido(request, null);

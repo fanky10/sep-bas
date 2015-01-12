@@ -15,7 +15,7 @@
         <div class="twelve columns">
 
             <h3>Iniciar Partido</h3>
-            <form id="iniciarPartidoForm" class="custom">
+            <form id="iniciarPartidoForm" class="custom" method="POST" action="<c:url value="/partidos/iniciar"/>">
                 <input id="clubesValidation" name="clubesValidation" hidden="true" />
                 <div class="clubes">
                     <h5>Aquí seleccionaremos el local y el visitante</h5>
