@@ -17,6 +17,7 @@
             <h3>Iniciar Partido</h3>
             <c:url value="/partido/iniciar" var="iniciarPartidoFormAction"/>
             <form:form id="iniciarPartidoForm" action="${iniciarPartidoFormAction}" modelAttribute="iniciarPartidoForm" method="POST">
+                <input id="clubesValidation" name="clubesValidation" hidden="true" />
                 <div class="arbitros">
                     <h5>Seleccione el árbitro del encuentro</h5> 
                     <c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
@@ -29,7 +30,7 @@
                 <div class="clubes">
                     <h5>Aquí seleccionaremos el local y el visitante</h5>
                     <div class="row">
-                        <div class="large-4 columns">
+                        <div class="large-6 columns">
                             <label for="clubesLocales">Local</label> 
                             <select id="clubesLocales" name="clubLocal" class="medium">
                                 <c:forEach items="${clubes}" var="club" varStatus="stat">
@@ -37,9 +38,7 @@
                                 </c:forEach>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-4 columns">
+                        <div class="large-6 columns">
                             <label for="clubesVisitantes">Visitante</label> 
                             <select id="clubesVisitantes" name="clubVisitante" class="medium">
                                 <c:forEach items="${clubes}" var="club" varStatus="stat">
@@ -48,15 +47,18 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row">
+                        
+                    </div>
 
 
                 </div>
                 <div class="jugadores">
                     <h5>Seleccione Clubes</h5>
                     <div class="row jugadores-content" >
-                        <div class="six columns jugadores-locales-container">
+                        <div class="large-6 columns jugadores-locales-container">
                         </div>
-                        <div class="six columns end jugadores-visitantes-container">
+                        <div class="large-6 columns jugadores-visitantes-container">
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,10 @@ $(function () {
     $('#clubesLocales').change(clubSeleccionadoEvent);
     $('#clubesVisitantes').change(clubSeleccionadoEvent);
     function clubSeleccionadoEvent(e) {
-        partidoView.loadPlayers();
+        var clubesValidated = $('#iniciarPartidoForm').validate().element("#clubesValidation");
+        if (clubesValidated) {
+            partidoView.loadPlayers();
+        }
     }
 
     $('.button.iniciar').click(function (e) {
@@ -80,11 +83,11 @@ $(function () {
             clubesVisitantes: {
                 tieneJugadoresVisitantes: true
             },
-            equipolocal: {
+            jugadoresLocales: {
                 minSelectedPlayer: true,
                 maxSelectedPlayer: true
             },
-            equipovisitante: {
+            jugadoresVisitantes: {
                 minSelectedPlayer: true,
                 maxSelectedPlayer: true
             },
@@ -99,11 +102,11 @@ $(function () {
             clubesVisitantes: {
                 tieneJugadoresVisitantes: 'Equipo Visitante: Seleccione un club con jugadores'
             },
-            equipolocal: {
+            jugadoresLocales: {
                 minSelectedPlayer: 'Equipo Local: Al menos deben seleccionarse ' + options.NUMERO_MINIMO_JUGADORES,
                 maxSelectedPlayer: 'Equipo Local: Como maximo deben seleccionarse ' + options.NUMERO_MAXIMO_JUGADORES
             },
-            equipovisitante: {
+            jugadoresVisitantes: {
                 minSelectedPlayer: 'Equipo Visitante: Al menos deben seleccionarse ' + options.NUMERO_MINIMO_JUGADORES,
                 maxSelectedPlayer: 'Equipo Visitante: Como maximo deben seleccionarse ' + options.NUMERO_MAXIMO_JUGADORES
             },
