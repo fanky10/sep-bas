@@ -1,18 +1,15 @@
 $(function () {
-    var partidoView = new PartidoView(),
-            iniciarPartidoForm = $('#iniciarPartidoForm'),
-            options = {
-                NUMERO_MINIMO_JUGADORES: 4,
-                NUMERO_MAXIMO_JUGADORES: 12
-            };
+    var partidoView = new PartidoView();
+    var iniciarPartidoForm = $('#iniciarPartidoForm');
+    var options = {
+        NUMERO_MINIMO_JUGADORES: 4,
+        NUMERO_MAXIMO_JUGADORES: 12
+    };
     // events
     $('#clubesLocales').change(clubSeleccionadoEvent);
     $('#clubesVisitantes').change(clubSeleccionadoEvent);
     function clubSeleccionadoEvent(e) {
-        var clubesValidated = $('#iniciarPartidoForm').validate().element("#clubesValidation");
-        if (clubesValidated) {
-            partidoView.loadPlayers();
-        }
+        partidoView.loadPlayers();
     }
 
     $('.button.iniciar').click(function (e) {
@@ -34,16 +31,7 @@ $(function () {
         if (!iniciarPartidoForm.valid()) {
             return false;
         }
-        var arbitroId = $('input:radio:checked').val(),
-                clubesSeleccionados = partidoView.getSelectedClubs(),
-                jugadoresSeleccionados = partidoView.getSelectedJugadores();
-        var partidoModel = new PartidoModel({idArbitro: arbitroId,
-            idClubLocal: clubesSeleccionados.idClubLocal,
-            idClubVisitante: clubesSeleccionados.idClubVisitante,
-            idJugadoresLocales: jugadoresSeleccionados.jugadoresLocales,
-            idJugadoresVisitantes: jugadoresSeleccionados.jugadoresVisitantes
-        });
-        partidoModel.sendData();
+        iniciarPartidoForm.submit();
     });
 
     // modal events:
@@ -127,25 +115,6 @@ $(function () {
 
 });
 
-PartidoModel = function (options) {
-    var defaultData = {};
-    var data = $.extend(true, defaultData, options);
-    function sendData() {
-        $.ajax({
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            dataType: 'json',
-            type: 'POST',
-            url: APP_CTX + '/secure/api/partido/add',
-        }).success(function (resultData) {
-            console.log("result: ", resultData)
-        });
-    }
-    ;
-    return {
-        sendData: sendData
-    };
-};
 
 PartidoView = function () {
     var options = {
