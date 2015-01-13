@@ -31,7 +31,9 @@ $(function () {
     });
 
     $('#acceptResumenModal').click(function (e) {
-        if(!iniciarPartidoForm.valid()){return false;}
+        if (!iniciarPartidoForm.valid()) {
+            return false;
+        }
         var arbitroId = $('input:radio:checked').val(),
                 clubesSeleccionados = partidoView.getSelectedClubs(),
                 jugadoresSeleccionados = partidoView.getSelectedJugadores();
@@ -130,9 +132,9 @@ PartidoModel = function (options) {
     var data = $.extend(true, defaultData, options);
     function sendData() {
         $.ajax({
-            contentType : 'application/json',
-            data : JSON.stringify(data),
-            dataType : 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
             type: 'POST',
             url: APP_CTX + '/secure/api/partido/add',
         }).success(function (resultData) {
@@ -178,7 +180,7 @@ PartidoView = function () {
             data: null,
             success: function (response) {
                 if (response.code === "0") {
-                    _self.renderJugadores('Equipo Local', options.jugadoresLocalesContainer, response.content);
+                    _self.renderJugadores('LOCAL', options.jugadoresLocalesContainer, response.content);
                 }
             }
         });
@@ -188,19 +190,26 @@ PartidoView = function () {
             data: null,
             success: function (response) {
                 if (response.code === "0") {
-                    _self.renderJugadores('Equipo Visitante', options.jugadoresVisitantesContainer, response.content);
+                    _self.renderJugadores('VISITANTE', options.jugadoresVisitantesContainer, response.content);
                 }
             }
         });
     }
-    function renderJugadores(label, container, jugadores) {
-        var content = ['<p>' + label + '</p>'], checkboxName = label.replace(/\s+/g, '').toLowerCase();
+    function renderJugadores(type, container, jugadores) {
+        var label = 'Equipo Local';
+        var inputName = 'jugadoresLocales';
+        if (type === 'VISITANTE') {
+            label = 'Equipo Visitante';
+            inputName = 'jugadoresVisitantes';
+        }
+
+        var content = ['<p>' + label + '</p>'];
         if (!jugadores || jugadores.length < 1) {
             content.push('Sin jugadores habilitados');
         }
         $.each(jugadores, function (idx, jugador) {
             content.push('<label for="checkbox_' + label + '_' + idx + '">');
-            content.push('<input name="' + checkboxName + '" type="checkbox" data-jugador-id="' + jugador.id + '" id="checkbox_' + label + '_' + idx + '" title="Jugador ' + jugador.nombre + '">');
+            content.push('<input value="' + jugador.id + '"name="' + inputName + '" type="checkbox" data-jugador-id="' + jugador.id + '" id="checkbox_' + label + '_' + idx + '" title="Jugador ' + jugador.nombre + '">');
             content.push(jugador.nombre + '</label>');
         });
         $(container).html(content.join('\n'));

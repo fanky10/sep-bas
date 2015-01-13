@@ -15,14 +15,23 @@
         <div class="twelve columns">
 
             <h3>Iniciar Partido</h3>
-            <form id="iniciarPartidoForm" class="custom" method="POST" action="<c:url value="/partidos/iniciar"/>">
-                <input id="clubesValidation" name="clubesValidation" hidden="true" />
+            <c:url value="/partido/iniciar" var="iniciarPartidoFormAction"/>
+            <form:form id="iniciarPartidoForm" action="${iniciarPartidoFormAction}" modelAttribute="iniciarPartidoForm" method="POST">
+                <div class="arbitros">
+                    <h5>Seleccione el árbitro del encuentro</h5> 
+                    <c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
+                        <label for="radio${stat.count}"> <input
+                                name="arbitro" type="radio" id="radio${stat.count}" value="${arbitro.id}">${arbitro.nombre}
+                            ${arbitro.apellido}
+                        </label>
+                    </c:forEach>
+                </div>
                 <div class="clubes">
                     <h5>Aquí seleccionaremos el local y el visitante</h5>
                     <div class="row">
                         <div class="large-4 columns">
                             <label for="clubesLocales">Local</label> 
-                            <select id="clubesLocales" name="clubesLocales" class="medium">
+                            <select id="clubesLocales" name="clubLocal" class="medium">
                                 <c:forEach items="${clubes}" var="club" varStatus="stat">
                                     <option value="${club.id}">${club.nombre}</option>
                                 </c:forEach>
@@ -32,7 +41,7 @@
                     <div class="row">
                         <div class="large-4 columns">
                             <label for="clubesVisitantes">Visitante</label> 
-                            <select id="clubesVisitantes" name="clubesVisitantes" class="medium">
+                            <select id="clubesVisitantes" name="clubVisitante" class="medium">
                                 <c:forEach items="${clubes}" var="club" varStatus="stat">
                                     <option value="${club.id}">${club.nombre}</option>
                                 </c:forEach>
@@ -51,17 +60,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="arbitros">
-                    <h5>Seleccione el árbitro del encuentro</h5> 
-                    <c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
-                        <label for="radio${stat.count}"> <input
-                                name="radioArbitros" type="radio" id="radio${stat.count}" value="${arbitro.id}">${arbitro.nombre}
-                            ${arbitro.apellido}
-                        </label>
-                    </c:forEach>
-                </div>
-            </form>
+            </form:form>
             <div id="errorsContainer"></div>
             <div class="row">
                 <div class="two columns offset-by-ten">
