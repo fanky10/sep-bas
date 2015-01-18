@@ -18,11 +18,12 @@ import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
+import com.genfersco.sepbas.dto.PartidoSession;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciarPartidoForm;
 import com.genfersco.sepbas.web.validation.IniciarPartidoFormValidator;
+import java.util.Arrays;
 import java.util.Date;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 
@@ -57,8 +58,11 @@ public class PartidoController extends BaseController {
             partido.setClubVisitante(iniciarPartidoForm.getClubVisitante());
             partido.setFecha(new Date(System.currentTimeMillis()));
             partido = getServicesManager().savePartido(partido);
-            //TODO: save current jugadores playing in court
-            saveSessionPartido(request, partido);
+            PartidoSession ps = new PartidoSession();
+            ps.setPartido(partido);
+            ps.setJugadoresLocalesDisponibles(Arrays.asList(iniciarPartidoForm.getJugadoresLocales()));
+            ps.setJugadoresVisitantesDisponibles(Arrays.asList(iniciarPartidoForm.getJugadoresVisitantes()));
+            saveSessionPartido(request, ps);
         }
         return redirect;
     }

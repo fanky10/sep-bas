@@ -19,6 +19,7 @@ import com.genfersco.sepbas.datafields.JugadorPropertyEditor;
 import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
+import com.genfersco.sepbas.dto.PartidoSession;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciaCuartoForm;
 import javax.servlet.http.HttpSession;
@@ -40,14 +41,12 @@ public class CuartoController extends BaseController {
 
     @RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.GET)
     public String showIniciaCuarto(HttpServletRequest request, ModelMap map) {
-        Partido partido = getPartido(request);
-        List<Jugador> jugadoresClubLocal = getServiceManager()
-                .getJugadoresClub(partido.getClubLocal().getId());
-        List<Jugador> jugadoresClubVisitante = getServiceManager()
-                .getJugadoresClub(partido.getClubVisitante().getId());
+        PartidoSession partidoSession = getSavedSessionPartido(request);
+        List<Jugador> jugadoresClubLocal = partidoSession.getJugadoresLocalesDisponibles();
+        List<Jugador> jugadoresClubVisitante = partidoSession.getJugadoresVisitantesDisponibles();
 
-        map.addAttribute("clubLocal", partido.getClubLocal());
-        map.addAttribute("clubVisitante", partido.getClubVisitante());
+        map.addAttribute("clubLocal", partidoSession.getPartido().getClubLocal());
+        map.addAttribute("clubVisitante", partidoSession.getPartido().getClubVisitante());
         map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
         map.addAttribute("jugadoresClubVisitante", jugadoresClubVisitante);
 
@@ -64,7 +63,7 @@ public class CuartoController extends BaseController {
                 .getJugadoresEquipo1());
         List<Jugador> equipo2 = Arrays.asList(iniciaCuartoForm
                 .getJugadoresEquipo2());
-        Partido partido = getPartido(request);
+        Partido partido = getSavedSessionPartido(request).getPartido();
         Cuarto cuarto = new Cuarto();
         cuarto.setNumero(1);
         cuarto.setPartido(partido);
@@ -85,13 +84,13 @@ public class CuartoController extends BaseController {
         return "";
     }
 
-    protected Partido getPartido(HttpServletRequest request) {
-        Partido partido = getSavedSessionPartido(request);
-        if (partido == null) {
-            throw new IllegalArgumentException("Sin partido guardado");
-        }
-        return partido;
-    }
+//    protected Partido getPartido(HttpServletRequest request) {
+//        Partido partido = getSavedSessionPartido(request);
+//        if (partido == null) {
+//            throw new IllegalArgumentException("Sin partido guardado");
+//        }
+//        return partido;
+//    }
 
     public ServicesManager getServiceManager() {
         return serviceManager;
