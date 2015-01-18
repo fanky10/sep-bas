@@ -20,16 +20,17 @@ import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciarPartidoForm;
+import com.genfersco.sepbas.web.validation.IniciarPartidoFormValidator;
 import java.util.Date;
 import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class PartidoController extends BaseController {
 
-    @Resource
-    private Integer minJugadores;
-    @Resource
-    private Integer maxJugadores;
+    @Autowired
+    private IniciarPartidoFormValidator iniciarPartidoFormValidator;
 
     @InitBinder
     protected void initBinder(HttpServletRequest request,
@@ -45,9 +46,10 @@ public class PartidoController extends BaseController {
 
     @RequestMapping(value = "/partido/iniciar", method = RequestMethod.POST)
     public String addPartido(HttpServletRequest request, ModelMap map,
-            @ModelAttribute IniciarPartidoForm iniciarPartidoForm) {
+            @ModelAttribute IniciarPartidoForm iniciarPartidoForm, BindingResult bindingResult) {
+        iniciarPartidoFormValidator.validate(iniciarPartidoForm, bindingResult);
         String redirect = "redirect:/cuartos/iniciar";
-        if (!isPartidoValid()) {
+        if (bindingResult.hasErrors()) {
             redirect = nuevoJuego(request, map, iniciarPartidoForm);
         } else {
             Partido partido = new Partido();
@@ -59,12 +61,6 @@ public class PartidoController extends BaseController {
             saveSessionPartido(request, partido);
         }
         return redirect;
-    }
-
-    private boolean isPartidoValid() {
-        //TODO: validate jugadores length
-        // with proper message validator
-        return true;
     }
 
     @RequestMapping(value = "/partido/iniciar", method = RequestMethod.GET)
