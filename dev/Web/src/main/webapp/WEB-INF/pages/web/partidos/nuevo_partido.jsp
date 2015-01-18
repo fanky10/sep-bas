@@ -4,6 +4,7 @@
 <content tag="jscriptlibs"> 
     <script type="text/javascript" src="<c:url value="/js/vendor/jquery.validate.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/partidos/nuevo-partido.js"/>"></script> 
+    <script type="text/javascript" src="<c:url value="/js/vendor/moment-with-locales.js"/>"></script> 
 </content>
 <content tag="jscript">
     <script>
@@ -62,15 +63,14 @@
                         </div>
                     </div>
                 </div>
+                <form:errors path="*" cssClass="errorsContainer" element="div"/>
             </form:form>
             <div id="errorsContainer"></div>
-            <div class="row">
-                <div class="two columns offset-by-ten">
+        </div>
+        <div class="row">
+            <div class="two columns offset-by-ten">
                     <a href="#" data-reveal-id="resumenModal" class="round button iniciar">Iniciar</a>
-                </div>
             </div>
-
-
         </div>
     </div>
     <div id="resumenModal" class="reveal-modal medium" data-reveal >
@@ -79,25 +79,25 @@
         <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Fecha:</label>
-                <label class="right inline fecha">10/10/2014</label>
+                <label class="js-fecha-encuentro right inline fecha"></label>
             </div>
         </div>
         <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Local: Cantidad Jugadores Seleccionados:</label>
-                <label class="right inline jugadores-locales">20</label>
+                <label class="js-jugadores-locales-count right inline jugadores-locales"></label>
             </div>
         </div>
         <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Visitante: Cantidad Jugadores Seleccionados:</label>
-                <label class="right inline jugadores-visitantes">20</label>
+                <label class="js-jugadores-visitantes-count right inline jugadores-visitantes"></label>
             </div>
         </div>
         <div>
             <div class="six mobile-one columns">
                 <label class="left inline">Arbitro Asignado:</label>
-                <label class="right inline arbitro-seleccionado">Juan Perez</label>
+                <label class="js-arbitro right inline arbitro-seleccionado"></label>
             </div>
         </div>
         <div>

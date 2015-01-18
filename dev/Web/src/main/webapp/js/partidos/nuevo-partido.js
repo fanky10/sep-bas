@@ -18,18 +18,21 @@ $(function () {
     $('.button.iniciar').click(function (e) {
         e.preventDefault();
         var validated = iniciarPartidoForm.valid(),
-                jugadoresLocalesLength = $('.jugadores-locales-container input:checkbox').length,
-                jugadoresVisitantedLength = $('.jugadores-visitantes-container input:checkbox').length,
+                jugadoresLocalesLength = $('.jugadores-locales-container input:checkbox:checked').length,
+                jugadoresVisitantedLength = $('.jugadores-visitantes-container input:checkbox:checked').length,
                 idSelectArbitro = $('input:radio:checked').attr('id'),
                 arbitroSeleccionado = $("label[for='" + idSelectArbitro + "']").text();
         if (validated) {
             $('div label.jugadores-locales').text(jugadoresLocalesLength);
             $('div label.jugadores-visitantes').text(jugadoresVisitantedLength);
             $('div label.arbitro-seleccionado').text(arbitroSeleccionado);
+            var mDate = moment().format('DD/MM/YYYY');
+            $('.js-fecha-encuentro').text(mDate);
         }
         return validated;
     });
 
+    // modal events:
     $('#acceptResumenModal').click(function (e) {
         if (!iniciarPartidoForm.valid()) {
             return false;
@@ -37,11 +40,10 @@ $(function () {
         iniciarPartidoForm.submit();
     });
 
-    // modal events:
     $('#closeResumenModal').click(function (e) {
         e.preventDefault();
         $('#resumenModal').foundation('reveal', 'close');
-    });//
+    });
 
     // validation
     $.validator.setDefaults({
@@ -91,7 +93,7 @@ $(function () {
                 minSelectedPlayer: true,
                 maxSelectedPlayer: true
             },
-            radioArbitros: {
+            arbitro: {
                 required: true
             }
         },
@@ -110,7 +112,7 @@ $(function () {
                 minSelectedPlayer: 'Equipo Visitante: Al menos deben seleccionarse ' + options.NUMERO_MINIMO_JUGADORES,
                 maxSelectedPlayer: 'Equipo Visitante: Como maximo deben seleccionarse ' + options.NUMERO_MAXIMO_JUGADORES
             },
-            radioArbitros: {
+            arbitro: {
                 required: 'Al menos debe seleccionarse un arbitro'
             }
         }
