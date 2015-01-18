@@ -3,7 +3,7 @@
 </content>
 <content tag="jscriptlibs"> 
     <script type="text/javascript" src="<c:url value="/js/vendor/jquery.validate.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/js/partidos/partido-nuevo.js"/>"></script> 
+    <script type="text/javascript" src="<c:url value="/js/partidos/nuevo-partido.js"/>"></script> 
 </content>
 <content tag="jscript">
     <script>
