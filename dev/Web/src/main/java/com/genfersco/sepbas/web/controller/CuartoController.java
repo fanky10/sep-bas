@@ -39,12 +39,18 @@ public class CuartoController extends BaseController {
                 getServiceManager()));
     }
 
-    @RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.GET)
+    @RequestMapping(value = "/cuarto/iniciar", method = RequestMethod.GET)
     public String showIniciaCuarto(HttpServletRequest request, ModelMap map) {
         PartidoSession partidoSession = getSavedSessionPartido(request);
+        if(partidoSession == null ){
+            return "redirect:/partido/iniciar";
+        }
         List<Jugador> jugadoresClubLocal = partidoSession.getJugadoresLocalesDisponibles();
         List<Jugador> jugadoresClubVisitante = partidoSession.getJugadoresVisitantesDisponibles();
-
+        if(partidoSession.getCuartoNumero() == 0){
+            partidoSession.setCuartoNumero(1);
+        }
+        map.addAttribute("cuartoNumero", partidoSession.getCuartoNumero());
         map.addAttribute("clubLocal", partidoSession.getPartido().getClubLocal());
         map.addAttribute("clubVisitante", partidoSession.getPartido().getClubVisitante());
         map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
@@ -54,7 +60,7 @@ public class CuartoController extends BaseController {
         return WebAppConstants.INICIO_CUARTO;
     }
 
-    @RequestMapping(value = "/cuartos/iniciar", method = RequestMethod.POST)
+    @RequestMapping(value = "/cuarto/iniciar", method = RequestMethod.POST)
     public String guardarIniciaCuarto(HttpServletRequest request,
             @ModelAttribute IniciaCuartoForm iniciaCuartoForm) {
 		// TODO create a VO object (BO) CuartoBO

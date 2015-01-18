@@ -14,7 +14,6 @@
 <content tag="bodyContent">
     <div class="row">
         <div class="twelve columns">
-
             <h3>Iniciar Partido</h3>
             <c:url value="/partido/iniciar" var="iniciarPartidoFormAction"/>
             <form:form id="iniciarPartidoForm" action="${iniciarPartidoFormAction}" modelAttribute="iniciarPartidoForm" method="POST">

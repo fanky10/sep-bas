@@ -49,7 +49,7 @@ public class PartidoController extends BaseController {
     public String addPartido(HttpServletRequest request, ModelMap map,
             @ModelAttribute IniciarPartidoForm iniciarPartidoForm, BindingResult bindingResult) {
         iniciarPartidoFormValidator.validate(iniciarPartidoForm, bindingResult);
-        String redirect = "redirect:/cuartos/iniciar";
+        String redirect = "redirect:/cuarto/iniciar";
         if (bindingResult.hasErrors()) {
             redirect = nuevoJuego(request, map, iniciarPartidoForm, bindingResult);
         } else {
@@ -70,7 +70,7 @@ public class PartidoController extends BaseController {
     @RequestMapping(value = "/partido/iniciar", method = RequestMethod.GET)
     public String nuevoJuego(HttpServletRequest request, ModelMap map, IniciarPartidoForm iniciarPartidoForm, BindingResult result) {
         if (getSavedSessionPartido(request) != null) {
-            return "redirect:/cuartos/iniciar";
+            return "redirect:/cuarto/iniciar";
         }
         map.addAttribute("iniciarPartidoForm", iniciarPartidoForm == null ? new IniciarPartidoForm() : iniciarPartidoForm);
         map.addAttribute("clubes", getServicesManager().getClubes());
@@ -81,9 +81,7 @@ public class PartidoController extends BaseController {
     @RequestMapping(value = "/partido/operador", method = RequestMethod.GET)
     public String nuevoJuegoOperador(HttpServletRequest request,
             HttpServletResponse repsponse, ModelMap map) {
-        // TODO: clubes locales.
-        //map.addAttribute("clubes", getServicesManager().getClubes());
-        return WebAppConstants.INICIAR_PARTIDO;
+        return nuevoJuego(request, map, null, null);
     }
 
 }

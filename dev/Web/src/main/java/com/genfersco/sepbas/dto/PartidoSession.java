@@ -21,6 +21,15 @@ public class PartidoSession implements Serializable {
     private List<Jugador> jugadoresVisitantesDisponibles;
     private List<Jugador> jugadoresLocalesSeleccionados;
     private List<Jugador> jugadoresVisitantesSeleccionados;
+    private Integer cuartoNumero = 0;
+
+    public Integer getCuartoNumero() {
+        return cuartoNumero;
+    }
+
+    public void setCuartoNumero(Integer cuartoNumero) {
+        this.cuartoNumero = cuartoNumero;
+    }
 
     public Partido getPartido() {
         return partido;
