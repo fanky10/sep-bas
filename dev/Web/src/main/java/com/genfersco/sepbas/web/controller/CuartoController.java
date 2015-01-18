@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.genfersco.sepbas.app.services.ServicesManager;
 import com.genfersco.sepbas.datafields.JugadorPropertyEditor;
 import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.Jugador;
@@ -22,32 +20,29 @@ import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.dto.PartidoSession;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciaCuartoForm;
-import javax.servlet.http.HttpSession;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
 @Controller
 public class CuartoController extends BaseController {
-
-    @Autowired
-    private ServicesManager serviceManager;
-    @Autowired
-    private PartidoController partidoController;
 
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {
         binder.registerCustomEditor(Jugador.class, new JugadorPropertyEditor(
-                getServiceManager()));
+                getServicesManager()));
     }
 
     @RequestMapping(value = "/cuarto/iniciar", method = RequestMethod.GET)
-    public String showIniciaCuarto(HttpServletRequest request, ModelMap map) {
+    public String showIniciaCuarto(HttpServletRequest request, ModelMap map,
+            IniciaCuartoForm iniciaCuartoForm, BindingResult bindingResult) {
         PartidoSession partidoSession = getSavedSessionPartido(request);
-        if(partidoSession == null ){
+        if (partidoSession == null) {
             return "redirect:/partido/iniciar";
         }
         List<Jugador> jugadoresClubLocal = partidoSession.getJugadoresLocalesDisponibles();
         List<Jugador> jugadoresClubVisitante = partidoSession.getJugadoresVisitantesDisponibles();
-        if(partidoSession.getCuartoNumero() == 0){
+        if (partidoSession.getCuartoNumero() == 0) {
             partidoSession.setCuartoNumero(1);
         }
         map.addAttribute("cuartoNumero", partidoSession.getCuartoNumero());
@@ -55,63 +50,44 @@ public class CuartoController extends BaseController {
         map.addAttribute("clubVisitante", partidoSession.getPartido().getClubVisitante());
         map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
         map.addAttribute("jugadoresClubVisitante", jugadoresClubVisitante);
+        map.addAttribute("iniciaCuartoForm", iniciaCuartoForm == null ? new IniciaCuartoForm() : iniciaCuartoForm);
 
-        map.addAttribute("iniciaCuartoForm", new IniciaCuartoForm());
         return WebAppConstants.INICIO_CUARTO;
     }
 
     @RequestMapping(value = "/cuarto/iniciar", method = RequestMethod.POST)
-    public String guardarIniciaCuarto(HttpServletRequest request,
-            @ModelAttribute IniciaCuartoForm iniciaCuartoForm) {
-		// TODO create a VO object (BO) CuartoBO
-        // with equipo1 and equipo2 as attributes
-        List<Jugador> equipo1 = Arrays.asList(iniciaCuartoForm
-                .getJugadoresEquipo1());
-        List<Jugador> equipo2 = Arrays.asList(iniciaCuartoForm
-                .getJugadoresEquipo2());
-        Partido partido = getSavedSessionPartido(request).getPartido();
-        Cuarto cuarto = new Cuarto();
-        cuarto.setNumero(1);
-        cuarto.setPartido(partido);
-        cuarto = getServiceManager().addCuarto(cuarto, equipo1, equipo2);
+    public String guardarIniciaCuarto(HttpServletRequest request, ModelMap map,
+            @ModelAttribute IniciaCuartoForm iniciaCuartoForm, BindingResult bindingResult) {
+        PartidoSession partidoSession = getSavedSessionPartido(request);
+        if (partidoSession == null) {
+            return "redirect:/partido/iniciar";
+        }
 
-        // TODO: redirect ingresoEventos controller (:
+        validateIniciaCuarto(iniciaCuartoForm, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return showIniciaCuarto(request, map, iniciaCuartoForm, bindingResult);
+        }
+
+        List<Jugador> jugadoresLocales = Arrays.asList(iniciaCuartoForm
+                .getJugadoresLocales());
+        List<Jugador> jugadoresVisitantes = Arrays.asList(iniciaCuartoForm
+                .getJugadoresVisitantes());
+        Cuarto cuarto = new Cuarto();
+        cuarto.setNumero(iniciaCuartoForm.getCuartoNumero());
+        cuarto.setPartido(partidoSession.getPartido());
+        // TODO: eventos de ingreso??
+        getServicesManager().addCuarto(cuarto, jugadoresLocales, jugadoresVisitantes);
+
         return "web/test/okMessage";
     }
 
-    @RequestMapping(value = "/cuartos/finalizar", method = RequestMethod.GET)
-    public String showFinalizaCuarto() {
-        return "";
-    }
-
-    @RequestMapping(value = "/cuartos/finalizar", method = RequestMethod.POST)
-    public String guardarFinCuarto() {
-        // TODO: call ingresoEventos controller (:
-        return "";
-    }
-
-//    protected Partido getPartido(HttpServletRequest request) {
-//        Partido partido = getSavedSessionPartido(request);
-//        if (partido == null) {
-//            throw new IllegalArgumentException("Sin partido guardado");
-//        }
-//        return partido;
-//    }
-
-    public ServicesManager getServiceManager() {
-        return serviceManager;
-    }
-
-    public void setServiceManager(ServicesManager serviceManager) {
-        this.serviceManager = serviceManager;
-    }
-
-    public PartidoController getPartidoController() {
-        return partidoController;
-    }
-
-    public void setPartidoController(PartidoController partidoController) {
-        this.partidoController = partidoController;
+    private void validateIniciaCuarto(IniciaCuartoForm iniciaCuartoForm, Errors errors) {
+        if (iniciaCuartoForm.getJugadoresLocales() == null) {
+            errors.rejectValue("jugadoresLocales","iniciarCuarto.jugadoresLocales.requires", "Sin jugadores locales");
+        }
+        if (iniciaCuartoForm.getJugadoresVisitantes() == null) {
+            errors.rejectValue("jugadoresVisitantes","iniciarCuarto.jugadoresVisitantes.requires", "Sin jugadores visitantes");
+        }
     }
 
 }
