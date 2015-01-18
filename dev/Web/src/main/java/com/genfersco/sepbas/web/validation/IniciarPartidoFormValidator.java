@@ -32,29 +32,29 @@ public class IniciarPartidoFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         IniciarPartidoForm form = (IniciarPartidoForm) target;
         if (form.getArbitro() == null) {
-            errors.rejectValue("arbitro", "Arbitro Requerido");
+            errors.rejectValue("arbitro","iniciarPartido.arbitro.required", "Arbitro Requerido");
         }
         if (form.getClubLocal() == null) {
-            errors.rejectValue("clubLocal", "Club Requerido");
+            errors.rejectValue("clubLocal","iniciarPartido.clubLocal.required", "Club Local Requerido");
         }
         if (form.getClubVisitante() == null) {
-            errors.rejectValue("clubVisitante", "Club Requerido");
+            errors.rejectValue("clubVisitante","iniciarPartido.clubVisitante.required", "Club Visitante Requerido");
         }
         
         if (form.getJugadoresLocales() == null) {
-            errors.rejectValue("jugadoresLocales", "Sin jugadores locales");
+            errors.rejectValue("jugadoresLocales","iniciarPartido.jugadoresLocales.required", "Sin jugadores locales");
         } else if (form.getJugadoresLocales().length < minJugadores) {
-            errors.rejectValue("jugadoresLocales", "Muy pocos jugadores locales");
+            errors.rejectValue("jugadoresLocales","iniciarPartido.jugadoresLocales.menorMinimo", "Muy pocos jugadores locales");
         } else if (form.getJugadoresLocales().length > maxJugadores) {
-            errors.rejectValue("jugadoresLocales", "Muchos jugadores locales");
+            errors.rejectValue("jugadoresLocales","iniciarPartido.jugadoresLocales.mayorMaximo", "Muchos jugadores locales");
         }
         
         if (form.getJugadoresVisitantes()== null) {
-            errors.rejectValue("jugadoresLocales", "Sin jugadores visitantes");
+            errors.rejectValue("jugadoresVisitantes","iniciarPartido.jugadoresVisitantes.requires", "Sin jugadores visitantes");
         } else if (form.getJugadoresVisitantes().length < minJugadores) {
-            errors.rejectValue("jugadoresLocales", "Muy pocos jugadores visitantes");
+            errors.rejectValue("jugadoresVisitantes","iniciarPartido.jugadoresVisitantes.menorMinimo", "Muy pocos jugadores visitantes");
         } else if (form.getJugadoresVisitantes().length > maxJugadores) {
-            errors.rejectValue("jugadoresLocales", "Muchos jugadores visitantes");
+            errors.rejectValue("jugadoresVisitantes","iniciarPartido.jugadoresVisitantes.mayorMaximo", "Muchos jugadores visitantes");
         }
     }
 

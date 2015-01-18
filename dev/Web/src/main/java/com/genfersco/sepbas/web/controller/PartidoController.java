@@ -50,7 +50,7 @@ public class PartidoController extends BaseController {
         iniciarPartidoFormValidator.validate(iniciarPartidoForm, bindingResult);
         String redirect = "redirect:/cuartos/iniciar";
         if (bindingResult.hasErrors()) {
-            redirect = nuevoJuego(request, map, iniciarPartidoForm);
+            redirect = nuevoJuego(request, map, iniciarPartidoForm, bindingResult);
         } else {
             Partido partido = new Partido();
             partido.setClubLocal(iniciarPartidoForm.getClubLocal());
@@ -64,7 +64,7 @@ public class PartidoController extends BaseController {
     }
 
     @RequestMapping(value = "/partido/iniciar", method = RequestMethod.GET)
-    public String nuevoJuego(HttpServletRequest request, ModelMap map, IniciarPartidoForm iniciarPartidoForm) {
+    public String nuevoJuego(HttpServletRequest request, ModelMap map, IniciarPartidoForm iniciarPartidoForm, BindingResult result) {
         if (getSavedSessionPartido(request) != null) {
             return "redirect:/cuartos/iniciar";
         }
