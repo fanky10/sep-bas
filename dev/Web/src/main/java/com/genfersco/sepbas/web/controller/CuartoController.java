@@ -20,12 +20,15 @@ import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.dto.PartidoSession;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciaCuartoForm;
+import javax.annotation.Resource;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 
 @Controller
 public class CuartoController extends BaseController {
-
+    @Resource
+    private Integer numeroJugadoresCancha;
+    
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {
@@ -44,6 +47,8 @@ public class CuartoController extends BaseController {
         List<Jugador> jugadoresClubVisitante = partidoSession.getJugadoresVisitantesDisponibles();
         if (partidoSession.getCuartoNumero() == 0) {
             partidoSession.setCuartoNumero(1);
+        } else {
+            partidoSession.setCuartoNumero(partidoSession.getCuartoNumero());
         }
         map.addAttribute("cuartoNumero", partidoSession.getCuartoNumero());
         map.addAttribute("clubLocal", partidoSession.getPartido().getClubLocal());
@@ -75,18 +80,26 @@ public class CuartoController extends BaseController {
         Cuarto cuarto = new Cuarto();
         cuarto.setNumero(iniciaCuartoForm.getCuartoNumero());
         cuarto.setPartido(partidoSession.getPartido());
-        // TODO: eventos de ingreso??
+        
         getServicesManager().addCuarto(cuarto, jugadoresLocales, jugadoresVisitantes);
-
+        partidoSession.setJugadoresLocalesSeleccionados(jugadoresLocales);
+        partidoSession.setJugadoresVisitantesSeleccionados(jugadoresVisitantes);
+        
+        saveSessionPartido(request, partidoSession);
         return "web/test/okMessage";
     }
 
     private void validateIniciaCuarto(IniciaCuartoForm iniciaCuartoForm, Errors errors) {
         if (iniciaCuartoForm.getJugadoresLocales() == null) {
             errors.rejectValue("jugadoresLocales","iniciarCuarto.jugadoresLocales.requires", "Sin jugadores locales");
+        } else if (iniciaCuartoForm.getJugadoresLocales().length != numeroJugadoresCancha) {
+            errors.rejectValue("jugadoresLocales","iniciarCuarto.jugadoresLocales.requires", "Debe seleccionar 5 jugadores locales");
         }
+
         if (iniciaCuartoForm.getJugadoresVisitantes() == null) {
             errors.rejectValue("jugadoresVisitantes","iniciarCuarto.jugadoresVisitantes.requires", "Sin jugadores visitantes");
+        } else if (iniciaCuartoForm.getJugadoresVisitantes().length != numeroJugadoresCancha) {
+            errors.rejectValue("jugadoresVisitantes","iniciarCuarto.jugadoresVisitantes.requires", "Debe seleccionar 5 jugadores visitantes");
         }
     }
 

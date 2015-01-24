@@ -75,5 +75,9 @@
         <bean id="maxJugadores" class="java.lang.Integer" factory-method="valueOf">
 		<constructor-arg value="${app.jugadores.maximo}" />
 	</bean>
+        
+        <bean id="numeroJugadoresCancha" class="java.lang.Integer" factory-method="valueOf">
+		<constructor-arg value="${app.jugadores.partido.seleccionados}" />
+	</bean>
 
 </beans>
