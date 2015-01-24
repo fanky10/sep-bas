@@ -5,6 +5,7 @@
  */
 package com.genfersco.sepbas.dto;
 
+import com.genfersco.sepbas.domain.model.Cuarto;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 import java.io.Serializable;
@@ -21,14 +22,14 @@ public class PartidoSession implements Serializable {
     private List<Jugador> jugadoresVisitantesDisponibles;
     private List<Jugador> jugadoresLocalesSeleccionados;
     private List<Jugador> jugadoresVisitantesSeleccionados;
-    private Integer cuartoNumero = 0;
+    private Cuarto cuarto;
 
-    public Integer getCuartoNumero() {
-        return cuartoNumero;
+    public Cuarto getCuarto() {
+        return cuarto;
     }
 
-    public void setCuartoNumero(Integer cuartoNumero) {
-        this.cuartoNumero = cuartoNumero;
+    public void setCuarto(Cuarto cuarto) {
+        this.cuarto = cuarto;
     }
 
     public Partido getPartido() {

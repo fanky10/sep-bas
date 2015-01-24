@@ -1,5 +1,6 @@
 package com.genfersco.sepbas.domain.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "jugadores")
-public class Jugador {
+public class Jugador implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

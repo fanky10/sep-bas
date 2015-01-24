@@ -12,7 +12,7 @@ public class WebAppConstants {
     public static final String CLUBES = "web/clubes/clubes";
     public static final String INICIO_CUARTO = "web/cuartos/inicia_cuarto";
     public static final String NUEVO_PARTIDO = "web/partidos/nuevo_partido";
-    public static final String INICIAR_PARTIDO = "web/partidos/operador";
+    public static final String CONSOLA_OPERADOR = "web/partidos/operador";
     public static final String AGREGAR_ARBITRO = "web/arbitros/arbitro";
     public static final String ARBITROS = "web/arbitros/arbitros";
 

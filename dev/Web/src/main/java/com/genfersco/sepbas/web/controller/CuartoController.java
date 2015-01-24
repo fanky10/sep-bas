@@ -45,12 +45,14 @@ public class CuartoController extends BaseController {
         }
         List<Jugador> jugadoresClubLocal = partidoSession.getJugadoresLocalesDisponibles();
         List<Jugador> jugadoresClubVisitante = partidoSession.getJugadoresVisitantesDisponibles();
-        if (partidoSession.getCuartoNumero() == 0) {
-            partidoSession.setCuartoNumero(1);
+        Cuarto sessionCuarto = partidoSession.getCuarto();
+        int cuartoNumero = sessionCuarto == null ? 0 : sessionCuarto.getNumero();
+        if (cuartoNumero == 0) {
+            cuartoNumero = 1;
         } else {
-            partidoSession.setCuartoNumero(partidoSession.getCuartoNumero());
+            cuartoNumero++;
         }
-        map.addAttribute("cuartoNumero", partidoSession.getCuartoNumero());
+        map.addAttribute("cuartoNumero", cuartoNumero);
         map.addAttribute("clubLocal", partidoSession.getPartido().getClubLocal());
         map.addAttribute("clubVisitante", partidoSession.getPartido().getClubVisitante());
         map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
@@ -84,9 +86,9 @@ public class CuartoController extends BaseController {
         getServicesManager().addCuarto(cuarto, jugadoresLocales, jugadoresVisitantes);
         partidoSession.setJugadoresLocalesSeleccionados(jugadoresLocales);
         partidoSession.setJugadoresVisitantesSeleccionados(jugadoresVisitantes);
-        
+        partidoSession.setCuarto(cuarto);
         saveSessionPartido(request, partidoSession);
-        return "web/test/okMessage";
+        return "redirect:/partido/operador";
     }
 
     private void validateIniciaCuarto(IniciaCuartoForm iniciaCuartoForm, Errors errors) {

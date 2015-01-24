@@ -81,7 +81,13 @@ public class PartidoController extends BaseController {
     @RequestMapping(value = "/partido/operador", method = RequestMethod.GET)
     public String nuevoJuegoOperador(HttpServletRequest request,
             HttpServletResponse repsponse, ModelMap map) {
-        return nuevoJuego(request, map, null, null);
+        PartidoSession ps = getSavedSessionPartido(request);
+        if (ps == null) {// apply some filtering may be?
+            return "redirect:/partido/iniciar";
+        } else if (ps.getCuarto() == null){
+            return "redirect:/cuarto/iniciar";
+        }
+        return WebAppConstants.CONSOLA_OPERADOR;
     }
 
 }
