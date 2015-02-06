@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.genfersco.sepbas.web.form.EventoLanzamientoData;
+import com.genfersco.sepbas.web.form.EventoData;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -20,17 +20,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
-public class EventoController extends AbstractAPIController {
+public class EventoApiController extends AbstractAPIController {
 
     @Autowired
     private EventoManager eventoManager;
 
-    @RequestMapping(value = "/evento/lanzamiento.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/evento/post", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseMessage eventoLanzamientoJSON(HttpServletRequest request, @RequestBody EventoLanzamientoData evtLanzamientoData) {
+    ResponseMessage postEvento(HttpServletRequest request, @RequestBody EventoData evtLanzamientoData) {
         String code = "0";
         String mensaje = "";
-        Jugador jugador = servicesManager.getJugadorById(evtLanzamientoData.getIdJugadorLanzador());
+        Jugador jugador = servicesManager.getJugadorById(evtLanzamientoData.getIdJugador());
         PartidoSession ps = getSavedSessionPartido(request);
         // TODO: MOVE TO BASE CONTROLLER
         if(ps == null) {
@@ -41,7 +41,7 @@ public class EventoController extends AbstractAPIController {
             mensaje = "Id jugador lanzador desconocido";
         } else if (evtLanzamientoData.getTipoEvento() == null) {
             code = "-2";
-            mensaje = "Numero de puntos desconocido";
+            mensaje = "Tipo Evento desconocido";
         } else {
             Evento evt = new Evento();
             evt.setJugador(jugador);
@@ -51,15 +51,30 @@ public class EventoController extends AbstractAPIController {
             evt.setCuarto(ps.getCuarto());
             eventoManager.addEvento(evt);
         }
-
-        int nroPuntos = evtLanzamientoData.getNumeroPuntos();
-        if (nroPuntos == 2 || nroPuntos == 3) {
-            code = "0";
-            mensaje = "numero de puntos:" + nroPuntos;
-        }
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setMessage(mensaje);
         responseMessage.setCode(code);
+        return responseMessage;
+    }
+    
+    @RequestMapping(value = "/evento/get", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseMessage getEventos(HttpServletRequest request) {
+        PartidoSession ps = getSavedSessionPartido(request);
+        String code = "0";
+        String mensaje = "";
+        List content = null;
+        if(ps == null) {
+            code = "-10";
+            mensaje = "Sin session";
+        } else {
+            content = eventoManager.findEventosByCuarto(ps.getCuarto());
+        }
+        
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setMessage(mensaje);
+        responseMessage.setCode(code);
+        responseMessage.setContent(content);
         return responseMessage;
     }
 }

@@ -18,9 +18,9 @@
             <h5>Eventos</h5>
             <select class="js-eventos-equipo" data-tipo="local">
                 <optgroup label="Lanzamientos">
-                    <option value="evt=lanzamiento,val=1">Lanzamiento - 1</option>
-                    <option value="evt=lanzamiento,val=2">Lanzamiento - 2</option>
-                    <option value="evt=lanzamiento,val=3">Lanzamiento - 3</option>
+                    <option value="evt=LANZAMIENTO_JUGADOR_UN_PUNTO">Lanzamiento - 1</option>
+                    <option value="evt=LANZAMIENTO_JUGADOR_DOS_PUNTOS">Lanzamiento - 2</option>
+                    <option value="evt=LANZAMIENTO_JUGADOR_TRES_PUNTOS">Lanzamiento - 3</option>
                 </optgroup>
             </select>
             <button class="js-enviar-evento" data-tipo="local">Enviar</button>
@@ -30,9 +30,9 @@
             <h5>Eventos</h5>
             <select class="js-eventos-equipo" data-tipo="visitante">
                 <optgroup label="Lanzamientos">
-                    <option value="evt=lanzamiento,val=1">Lanzamiento - 1</option>
-                    <option value="evt=lanzamiento,val=2">Lanzamiento - 2</option>
-                    <option value="evt=lanzamiento,val=3">Lanzamiento - 3</option>
+                    <option value="evt=LANZAMIENTO_JUGADOR_UN_PUNTO">Lanzamiento - 1</option>
+                    <option value="evt=LANZAMIENTO_JUGADOR_DOS_PUNTOS">Lanzamiento - 2</option>
+                    <option value="evt=LANZAMIENTO_JUGADOR_TRES_PUNTOS">Lanzamiento - 3</option>
                 </optgroup>
             </select>
             <button class="js-enviar-evento" data-tipo="visitante">Enviar</button>

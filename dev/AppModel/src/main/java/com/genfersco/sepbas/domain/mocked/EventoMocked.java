@@ -25,9 +25,12 @@ public class EventoMocked {
 		return getEvento(null);
 	}
 
-	public Evento getEvento(Evento eventoGenerador) {
-		Cuarto cuarto = cuartoMocked.getCuarto();
-		Jugador jugador = jugadorMocked.getJugador();
+        public Evento getEvento(Evento eventoGenerador) {
+		return getEvento(cuartoMocked.getCuarto(), eventoGenerador);
+        }
+
+        public Evento getEvento(Cuarto cuarto, Evento eventoGenerador){
+                Jugador jugador = jugadorMocked.getJugador();
 		Evento evento = new Evento();
 		evento.setCuarto(cuarto);
 		evento.setFechaHora(new Date(System.currentTimeMillis()));

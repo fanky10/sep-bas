@@ -60,24 +60,19 @@ OperadorView = function () {
         });
         var evento = {};
         if (tipoEvento.indexOf('evt=') === 0) {
-            var eventTipoParam = tipoEvento.split(',')[0];
-            var eventValueParam = tipoEvento.split(',')[1];
-            evento.tipo = eventTipoParam.substring('evt='.length, eventTipoParam.length);
-            evento.value = eventValueParam.substring('evt='.length, eventValueParam.length);
+            evento.tipo = tipoEvento.substring('evt='.length, tipoEvento.length);
         }
         if (jugadorSeleccionado && evento.tipo && evento.tipo.length) {
-            var data = {numeroPuntos: evento.value, idJugadorLanzador: jugadorSeleccionado.id}; //data : JSON.stringify(jsonData),
-            if (evento.tipo === 'lanzamiento') {
-                $.ajax({
-                    contentType : 'application/json',
-                    dataType : 'json',
-                    url: APP_CTX + '/secure/api/evento/lanzamiento.json',
-                    type: "POST",
-                    data : JSON.stringify(data)
-                }).success(function (response) {
-                    options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
-                });
-            }
+            var data = {nombreEvento: evento.tipo, idJugador: jugadorSeleccionado.id}; //data : JSON.stringify(jsonData),
+            $.ajax({
+                contentType : 'application/json',
+                dataType : 'json',
+                url: APP_CTX + '/secure/api/evento/post.json',
+                type: "POST",
+                data : JSON.stringify(data)
+            }).success(function (response) {
+                options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
+            });
         }
     }
 
