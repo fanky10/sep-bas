@@ -89,5 +89,11 @@ public class PartidoController extends BaseController {
         }
         return WebAppConstants.CONSOLA_OPERADOR;
     }
+    
+    @RequestMapping(value = "/partido/static", method = RequestMethod.GET)
+    public String operadorEstatico(HttpServletRequest request,
+            HttpServletResponse repsponse, ModelMap map) {
+        return "web/partidos/operador_static";
+    }
 
 }
