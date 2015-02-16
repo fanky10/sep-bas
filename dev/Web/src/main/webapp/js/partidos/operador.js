@@ -1,7 +1,7 @@
 $(function () {
     new OperadorView().render();
 });
-
+// function constructora de clase
 OperadorView = function () {
     var options = {
         jugadoresLocalesContainer: $('.js-jugadores-equipo[data-tipo="local"]'),
@@ -29,6 +29,8 @@ OperadorView = function () {
 
                 $.each(options.jugadoresLocalesDisponibles, function (idx, el) {
                     options.jugadoresLocalesContainer.append('<option value="' + el.id + '">' + el.nombre + ' ' + el.apellido + '</option>')
+                
+                    console.log('id la puta madre ' + el.id);
                 });
 
                 $.each(options.jugadoresVisitantesDisponibles, function (idx, el) {

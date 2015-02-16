@@ -36,7 +36,7 @@
 <!--</script>-->
 <!-- HEADER -->
 <div class="row">
-  <div class="two columns"><img src="Logo_SEPBas_sin_cintas.png" alt="Sistema Estadistico de Partidos de Basquet" height="91" width="91"></div>
+  <div class="two columns"><img src="<c:url value="/images/Logo_SEPBas_sin_cintas.png"/>" alt="Sistema Estadistico de Partidos de Basquet" height="91" width="91"></div>
   <div class="one columns"></div>
   <div class="six columns" >
     <table class="twelve">
@@ -50,7 +50,7 @@
       </tr>
       <tbody>
         <tr>
-          <th class="local"><script>document.write(clubLocal.nombre);</script></th>
+          <th class="local"><div id="equipoLocal">Local</div></th>
           <td ><div id="local_primer_cuarto">0</div></td>
           <td ><div id="local_segundo_cuarto">0</div></td>
           <td ><div id="local_tercer_cuarto">0</div></td>
@@ -61,7 +61,7 @@
         </tr>
       <tbody>
         <tr>
-          <th class="visita"><script>document.write(clubVisitante.nombre);</script></th>
+          <th class="visita"><div id="equipoVisita">Visita</div></th>
           <td ><div id="visita_primer_cuarto">0</div></td>
           <td ><div id="visita_segundo_cuarto">0</div></td>
           <td ><div id="visita_tercer_cuarto">0</div></td>
@@ -279,7 +279,7 @@
 <div id="FinCuarto" class="reveal-modal xlarge">
   <div class="row">
     <div class="row">
-      <div class="two columns"><img src="Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>
+      <div class="two columns"><img src="<c:url value="/images/Logo_SEPBas_sin_cintas.png"/>" height="50" width="50"></div>
       <div class="two columns"></div>
       <div class="four columns">
         <h4 style="text-align:center">Cuarto Finalizado</h4>
@@ -314,13 +314,13 @@
 <div id="estadisticasLocal" class="reveal-modal xlarge">
   <div class="row">
     <div class="row">
-      <div class="four columns"><img src="Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>
+      <div class="four columns"><img src="<c:url value="/images/Logo_SEPBas_sin_cintas.png"/>" height="50" width="50"></div>
       <div class="four columns">
         <h5 style="text-align:center">Estadisticas
           <script> document.write(clubLocal.nombre); </script>
         </h5>
       </div>
-      <div class="four columns"><a href="javascript:imprSelec('estadisticasLocal')"><img src="images/imprimir.jpg" height="38" width="130"></a></div>
+      <div class="four columns"><a href="javascript:imprSelec('estadisticasLocal')"><img src="<c:url value="/images/imprimir.jpg"/>" height="38" width="130"></a></div>
     </div>
     <div class="row">
       <div id="TablaEstadisticasLocal"></div>
@@ -333,14 +333,14 @@
 <div id="estadisticasVisita" class="reveal-modal xlarge">
   <div class="row">
     <div class="row">
-      <div class="four columns"><img src="Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>
+      <div class="four columns"><img src="<c:url value="/images/Logo_SEPBas_sin_cintas.png"/>" height="50" width="50"></div>
       <div class="four columns">
         <h5 style="text-align:center">
         Estadisticas
         <script> document.write(clubVisitante.nombre); </script>
         </h5>
       </div>
-      <div class="four columns"><a href="javascript:imprSelec('estadisticasVisita')"><img src="images/imprimir.jpg" height="38" width="130"></a></div>
+      <div class="four columns"><a href="javascript:imprSelec('estadisticasVisita')"><img src="<c:url value="/images/imprimir.jpg"/>" height="38" width="130"></a></div>
     </div>
     <div class="row">
       <div id="TablaEstadisticasVisita"></div>
@@ -354,7 +354,7 @@
 <div id="FinPartido" class="reveal-modal xlarge"> 
 <div class="row">
   <div class="row">
-    <div class="four columns"><img src="Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>
+    <div class="four columns"><img src="<c:url value="/images/Logo_SEPBas_sin_cintas.png"/>" height="50" width="50"></div>
     <div class="four columns">
       <h4 style="text-align:center">Partido Finalizado </h4>
     </div>
