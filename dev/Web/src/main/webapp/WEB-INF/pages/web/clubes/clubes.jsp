@@ -45,18 +45,18 @@
 						</div>
 						<c:forEach var="club" items="${clubes}">
 							<div class="row">
-								<div class="four columns">
-									<h4>${club.nombre}</h4>                                                                 
+								<div class="large-4 columns">
+									<h6>${club.nombre}</h6>                                                                 
 								</div>
-                                                                <div class="four columns">
-									<h4>${club.localidad}</h4>
+                                                                <div class="large-4 columns">
+									<h6>${club.localidad}</h6>
 								</div>
-								<div class="two columns">
+								<div class="large-2 columns">
 									<a href="<c:url value="/clubes/edit/${club.id}" />" class="button" alt="Editar" club-id="${club.id}" >
                                                                         Editar        
                                                                         </a>
 								</div>
-								<div class="two columns">
+								<div class="large-2 columns">
 									<a href="<c:url value="/clubes/del/${club.id}" />" class="button" alt="Eliminar" club-id="${club.id}" >
                                                                         Eliminar        
                                                                         </a>

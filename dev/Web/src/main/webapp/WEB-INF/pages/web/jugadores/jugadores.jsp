@@ -45,7 +45,7 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-                                                <div class="row">
+                          <div class="row">
 							<div class="twelve columns">
                                                         <h2>Jugadores</h2>
                                                         <h3>Listado</h3>
@@ -53,39 +53,39 @@
 						</div>
 						<div class="row">
 							<div class="two columns">
-								<h5>Nombre</h5>
+								<h6>Nombre</h6>
 							</div>
 							<div class="two columns">
-								<h5>Apellido</h5>
+								<h6>Apellido</h6>
 							</div>
 							<div class="two columns">
-								<h5>Equipo</h5>
+								<h6>Equipo</h6>
 							</div>
 							<div class="two columns"></div>
 							<div class="four columns"></div>
 						</div>
 						<c:forEach var="jugador" items="${jugadores}">
 							<div class="row">
-								<div class="two columns">
-									<h5>${jugador.nombre}</h5>
+								<div class="large-2 columns">
+									<h6>${jugador.nombre}</h6>
 								</div>
-								<div class="two columns">
-									<h5>${jugador.apellido}</h5>
+								<div class="large-2 columns">
+									<h6>${jugador.apellido}</h6>
 								</div>
-								<div class="two columns">
-									<h5>${jugador.club.nombre}</h5>
+								<div class="large-2 columns">
+									<h6>${jugador.club.nombre}</h6>
 								</div>
-								<div class="one column" align="center">
+								<div class="large-1 columns" align="center">
 									<a href="<c:url value="/jugadores/edit/${jugador.id}" />" class="button" alt="Editar" jugador-id="${jugador.id}" >
                                                                         Editar        
                                                                         </a>
 								</div>
-								<div class="one column" align="center">
+								<div class="large-1 columns" align="center">
                                                                         <a href="<c:url value="/jugadores/del/${jugador.id}" />" class="button" alt="Eliminar" jugador-id="${jugador.id}" >
                                                                         Eliminar        
                                                                         </a>									
 								</div>
-								<div class="four columns" align="center"></div>
+								<div class="large-4 columns" align="center"></div>
 							</div>
 						</c:forEach>
 						<div id="deleteResponse"></div>

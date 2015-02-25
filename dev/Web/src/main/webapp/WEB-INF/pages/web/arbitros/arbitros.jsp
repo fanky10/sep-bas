@@ -46,19 +46,19 @@
 						</div>
 						<c:forEach var="arbitro" items="${arbitros}">
 							<div class="row">
-								<div class="four columns">
-									<h4>${arbitro.nombre}</h4>
-                                                                        <h4>${arbitro.apellido}</h4>
+								<div class="large-4 columns">
+									<h6>${arbitro.nombre}</h6>
+                                                                        <h6>${arbitro.apellido}</h6>
 								</div>
-                                                                <div class="four columns">
-									<h4>${arbitro.localidad}</h4>
+                                                                <div class="large-4 columns">
+									<h6>${arbitro.localidad}</h6>
                                                                 </div>
-								<div class="two columns">
+								<div class="large-2 columns">
 									<a href="<c:url value="/arbitros/edit/${arbitro.id}" />" class="button" alt="Editar" arbitro-id="${arbitro.id}" >
                                                                         Editar        
                                                                         </a>
 								</div>
-								<div class="two columns">
+								<div class="large-2 columns">
 									<a href="<c:url value="/arbitros/del/${arbitro.id}" />" class="button" alt="Eliminar" arbitro-id="${arbitro.id}" >
                                                                         Eliminar        
                                                                         </a>

@@ -184,7 +184,7 @@ PartidoView = function () {
         $.each(jugadores, function (idx, jugador) {
             content.push('<label for="checkbox_' + label + '_' + idx + '">');
             content.push('<input value="' + jugador.id + '"name="' + inputName + '" type="checkbox" data-jugador-id="' + jugador.id + '" id="checkbox_' + label + '_' + idx + '" title="Jugador ' + jugador.nombre + '">');
-            content.push(jugador.nombre + '</label>');
+            content.push('('+jugador.numero +')'+  jugador.nombre + ' ' + jugador.apellido+'</label>');
         });
         $(container).html(content.join('\n'));
 
