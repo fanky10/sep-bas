@@ -320,7 +320,7 @@
           <script> document.write(clubLocal.nombre); </script>
         </h5>
       </div>
-      <div class="four columns"><a href="javascript:imprSelec('estadisticasLocal')"><img src="<c:url value="/images/imprimir.jpg"/>" height="38" width="130"></a></div>
+      <div class="four columns"><a id="boton_imprimir" href="javascript:imprSelec('estadisticasLocal')"><img src="<c:url value="/images/imprimir.jpg"/>" height="38" width="130"></a></div>
     </div>
     <div class="row">
       <div id="TablaEstadisticasLocal"></div>
@@ -340,7 +340,7 @@
         <script> document.write(clubVisitante.nombre); </script>
         </h5>
       </div>
-      <div class="four columns"><a href="javascript:imprSelec('estadisticasVisita')"><img src="<c:url value="/images/imprimir.jpg"/>" height="38" width="130"></a></div>
+      <div class="four columns"><a id="boton_imprimir1" href="javascript:imprSelec('estadisticasVisita')"><img src="<c:url value="/images/imprimir.jpg"/>" height="38" width="130"></a></div>
     </div>
     <div class="row">
       <div id="TablaEstadisticasVisita"></div>

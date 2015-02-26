@@ -119,13 +119,20 @@ function cargaHtmlEstadisticasLocal() {
 }
 
 
-function imprSelec(muestra) {
-    var ficha = document.getElementById(muestra);
-    var ventimp = window.open(' ', 'popimpr');
-    ventimp.document.write(ficha.innerHTML);
-    ventimp.document.close();
-    ventimp.print();
-    ventimp.close();
+function imprSelec(muestra)
+
+{
+		var ficha=document.getElementById(muestra);
+		var ventimp=window.open(' ','popimpr');
+		ventimp.document.write(ficha.innerHTML);
+		ventimp.document.close();
+		ventimp.print();
+		ventimp.close();
+		var css = ventimp.document.createElement("link");
+		css.setAttribute("href", "/Web/css/operador/imprimir.css");
+		css.setAttribute("rel", "stylesheet");
+		css.setAttribute("type", "text/css");
+		ventimp.document.head.appendChild(css);
 }
 
 function cargaHtmlEstadisticasVisita() {
