@@ -23,7 +23,11 @@
                     <option value="evt=LANZAMIENTO_JUGADOR_TRES_PUNTOS">Lanzamiento - 3</option>
                 </optgroup>
             </select>
-            <button class="js-enviar-evento" data-tipo="local">Enviar</button>
+            <button class="js-enviar-evento" data-tipo="local">Enviar Lanzamiento</button>
+            
+            <h5>Cambiar por</h5>
+            <select class="js-jugadores-equipo-cambio" data-tipo="local"></select>
+            <button class="js-enviar-evento-cambio" data-tipo="local">Realizar Cambio</button>
             
             <h5>Equipo Visitante</h5>
             <select class="js-jugadores-equipo" data-tipo="visitante"></select>
@@ -35,7 +39,7 @@
                     <option value="evt=LANZAMIENTO_JUGADOR_TRES_PUNTOS">Lanzamiento - 3</option>
                 </optgroup>
             </select>
-            <button class="js-enviar-evento" data-tipo="visitante">Enviar</button>
+            <button class="js-enviar-evento" data-tipo="visitante">Enviar Lanzamiento</button>
         </div>
         <div class="js-response"></div>
     </div>

@@ -1,5 +1,8 @@
 package com.genfersco.sepbas.web.constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WebAppConstants {
 
     public static final String FORMATO_FECHA = "dd/MM/yyyy";
@@ -18,4 +21,20 @@ public class WebAppConstants {
 
     // List of Session and Request attribute names
     public static final String SESSION_PARTIDO_KEY = "sessionPartido";
+
+    public static final Map<String, String> RESPONSE_MESSAGES = new HashMap<String, String>();
+    public static final String RESPONSE_CODE_OK = "0";
+    public static final String RESPONSE_CODE_SIN_PARTIDO = "-1";
+    public static final String RESPONSE_CODE_SIN_CUARTO = "-2";
+    public static final String RESPONSE_CODE_ID_JUGADOR_DESCONOCIDO = "-10";
+    public static final String RESPONSE_CODE_TIPO_EVENTO_DESCONOCIDO = "-11";
+    
+
+    static {
+        RESPONSE_MESSAGES.put(RESPONSE_CODE_OK,"response.ok");
+        RESPONSE_MESSAGES.put(RESPONSE_CODE_SIN_PARTIDO,"response.sin.partido");
+        RESPONSE_MESSAGES.put(RESPONSE_CODE_SIN_CUARTO,"response.sin.cuarto");
+        RESPONSE_MESSAGES.put(RESPONSE_CODE_ID_JUGADOR_DESCONOCIDO,"response.idJugador.desconocido");
+        RESPONSE_MESSAGES.put(RESPONSE_CODE_TIPO_EVENTO_DESCONOCIDO,"response.tipoEvento.desconocido");
+    }
 }

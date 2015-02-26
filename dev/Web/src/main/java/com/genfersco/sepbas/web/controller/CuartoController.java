@@ -58,6 +58,7 @@ public class CuartoController extends BaseController {
         map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
         map.addAttribute("jugadoresClubVisitante", jugadoresClubVisitante);
         map.addAttribute("iniciaCuartoForm", iniciaCuartoForm == null ? new IniciaCuartoForm() : iniciaCuartoForm);
+        map.addAttribute("allChecked", true);
 
         return WebAppConstants.INICIO_CUARTO;
     }

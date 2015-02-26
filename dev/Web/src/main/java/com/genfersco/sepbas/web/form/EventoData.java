@@ -9,9 +9,19 @@ import org.codehaus.jackson.annotate.JsonPropertyOrder;
 public class EventoData {
 
     public static final Integer[] PUNTOS_HABILITADOS = new Integer[]{1, 2, 3};
-    private String nombreEvento;
+
+    private EventoData eventoGenerador;
+    private Integer idEvento;
     private Integer idJugador;
-    private Integer idEventoGenerador;
+    private String nombreEvento;
+
+    public Integer getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(Integer idEvento) {
+        this.idEvento = idEvento;
+    }
 
     public TipoEvento getTipoEvento() {
         return TipoEvento.valueOf(nombreEvento);
@@ -33,11 +43,11 @@ public class EventoData {
         this.idJugador = idJugador;
     }
 
-    public Integer getIdEventoGenerador() {
-        return idEventoGenerador;
+    public EventoData getEventoGenerador() {
+        return eventoGenerador;
     }
 
-    public void setIdEventoGenerador(Integer idEventoGenerador) {
-        this.idEventoGenerador = idEventoGenerador;
+    public void setEventoGenerador(EventoData eventoGenerador) {
+        this.eventoGenerador = eventoGenerador;
     }
 }

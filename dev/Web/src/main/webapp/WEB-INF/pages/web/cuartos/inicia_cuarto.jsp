@@ -24,7 +24,7 @@
                         <div class="large-6 columns jugadores-locales-container">
                             <c:forEach items="${jugadoresClubLocal}" var="jugador" varStatus="stat">
                                 <label for="chkLocal${stat.count}">
-                                    <input name="jugadoresLocales" type="checkbox" id="chkLocal${stat.count}" value="${jugador.id}"/>
+                                    <input name="jugadoresLocales" type="checkbox" id="chkLocal${stat.count}" value="${jugador.id}" checked="${allChecked}"/>
                                     ${jugador.nombre} ${jugador.apellido}
                                 </label>
                             </c:forEach>
@@ -32,7 +32,7 @@
                         <div class="large-6 columns jugadores-visitantes-container">
                             <c:forEach items="${jugadoresClubVisitante}" var="jugador" varStatus="stat">
                                 <label for="chkVisita${stat.count}"> 
-                                    <input name="jugadoresVisitantes" type="checkbox" id="chkVisita${stat.count}" value="${jugador.id}"/>
+                                    <input name="jugadoresVisitantes" type="checkbox" id="chkVisita${stat.count}" value="${jugador.id}" checked="${allChecked}"/>
                                     ${jugador.nombre} ${jugador.apellido}
                                 </label>
                             </c:forEach>
