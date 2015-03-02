@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
-public class EventoApiController extends AbstractAPIController {
+public class EventoAPIController extends AbstractAPIController {
 
     @Autowired
     private EventoManager eventoManager;

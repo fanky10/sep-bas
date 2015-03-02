@@ -41,7 +41,7 @@ var options = {
 };
 
 
-<!-- Hard Code -->
+// <!-- Hard Code -->
 var v_nroCuarto = 1;
 var v_local_primer_cuarto = 0;
 var v_local_segundo_cuarto = 0;
@@ -68,7 +68,7 @@ var jugadoresLocales = [];
 
 var jugadoresVisita = [];
 
-<!-- Javascript functions  -->	
+// <!-- Javascript functions  -->	
 
 var IndiceJugadorLocal = new Array(5);
 var IndiceJugadorVisita = new Array(5);
@@ -955,7 +955,7 @@ function Falta(Equipo, posicion) {
             jugadoresLocales[posicion].Faltas++;
             EventoMensaje = jugadoresLocales[posicion].Faltas + ' Falta de (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre;
             if (jugadoresLocales[posicion].Faltas == 5) {
-                alert('(' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre + ' ha llegado a su 5° falta y debe ser sustuido');
+                alert('(' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre + ' ha llegado a su 5ï¿½ falta y debe ser sustuido');
                 $("#SustitucionesLocal").reveal();
             };
             break;
@@ -965,7 +965,7 @@ function Falta(Equipo, posicion) {
             jugadoresVisita[posicion].Faltas++;
             EventoMensaje = jugadoresVisita[posicion].Faltas + ' Falta de (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
             if (jugadoresVisita[posicion].Faltas == 5) {
-                alert('(' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre + ' ha llegado a su 5° falta y debe ser sustuido');
+                alert('(' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre + ' ha llegado a su 5ï¿½ falta y debe ser sustuido');
                 $("#SustitucionesVisita").reveal();
             };
             break;

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author fanky
  */
 @Controller
-public class JugadoresController extends AbstractAPIController{
+public class JugadoresAPIController extends AbstractAPIController{
 
     @Autowired
     private ServicesManager serviceManager;
