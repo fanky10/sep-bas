@@ -43,14 +43,9 @@ public class EventoAPIController extends AbstractAPIController {
     }
 
     private String getResponseKey(HttpServletRequest request, EventoData evtLanzamientoData) {
-        String errorKey = WebAppConstants.RESPONSE_CODE_OK;
-        PartidoSession ps = getSavedSessionPartido(request);
+        String errorKey = getResponseKey(request);
 
-        if (ps == null || ps.getPartido() == null) {
-            errorKey = WebAppConstants.RESPONSE_CODE_SIN_PARTIDO;
-        } else if (ps.getCuarto() == null) {
-            errorKey = WebAppConstants.RESPONSE_CODE_SIN_CUARTO;
-        } else if (evtLanzamientoData.getTipoEvento() == null) {
+        if (errorKey.equals(WebAppConstants.RESPONSE_CODE_OK) && evtLanzamientoData.getTipoEvento() == null) {
             errorKey = WebAppConstants.RESPONSE_CODE_TIPO_EVENTO_DESCONOCIDO;
         }
 

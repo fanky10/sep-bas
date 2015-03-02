@@ -10,6 +10,7 @@ OperadorView = function () {
         jugadoresLocalesDisponibles: [],
         jugadoresVisitantesContainer: $('.js-jugadores-equipo[data-tipo="visitante"]'),
         jugadoresVisitantesDisponibles: [],
+        numeroCuartoContainer: $('.js-numero-cuarto'),
         responseContainer: $('.js-response'),
     };
 
@@ -50,6 +51,7 @@ OperadorView = function () {
             var jugadorId = $('.js-jugadores-equipo[data-tipo="' + origenEvento + '"]').val();
             enviarEvento(jugadorId, origenEvento, tipoEvento);
         });
+
         $('.js-enviar-evento-cambio').on('click', function (evt) {
             var origenEvento = $(this).attr('data-tipo');
             var tipoEventoIngreso = 'INGRESA_JUGADOR';
@@ -60,7 +62,7 @@ OperadorView = function () {
             var eventoEntrada = {nombreEvento: tipoEventoIngreso, idJugador: entraJugadorId, eventoGenerador: eventoSalida};
             eviarEventoEntero(eventoEntrada);
         });
-        
+
         $('.js-enviar-evento-asistencia').on('click', function (evt) {
             var origenEvento = $(this).attr('data-tipo');
             var tipoEventoLanzamiento = $('.js-eventos-equipo[data-tipo="' + origenEvento + '"]').val();;
@@ -70,6 +72,18 @@ OperadorView = function () {
             var eventoAsistencia = {nombreEvento: tipoEventoAsistencia, idJugador: asisteJugadorId};
             var eventoLanzamiento = {nombreEvento: tipoEventoLanzamiento, idJugador: lanzadorJugadorId, eventoGenerador: eventoAsistencia};
             eviarEventoEntero(eventoLanzamiento);
+        });
+        $('.js-nuevo-cuarto').on('click', function (evt) {
+            $.ajax({
+                contentType : 'application/json',
+                dataType : 'json',
+                url: APP_CTX + '/secure/api/cuarto/nuevo',
+                type: "POST"
+            }).success(function (response) {
+                var cuarto = response.content;
+                options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
+                options.numeroCuartoContainer.html(cuarto.numero);
+            });
         });
         
     }
@@ -96,14 +110,14 @@ OperadorView = function () {
     
     function eviarEventoEntero(evento) {
         $.ajax({
-                contentType : 'application/json',
-                dataType : 'json',
-                url: APP_CTX + '/secure/api/evento/post.json',
-                type: "POST",
-                data : JSON.stringify(evento)
-            }).success(function (response) {
-                options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
-            });
+            contentType : 'application/json',
+            dataType : 'json',
+            url: APP_CTX + '/secure/api/evento/post.json',
+            type: "POST",
+            data : JSON.stringify(evento)
+        }).success(function (response) {
+            options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
+        });
     }
 
     return {

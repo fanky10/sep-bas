@@ -12,7 +12,7 @@
 <content tag="bodyContent">
     <div class="row">
         <div class="twelve columns">
-            <h3>Consola Operador</h3>
+            <h3>Consola Operador Cuarto #<span class="js-numero-cuarto">1</span></h3>
             <h5>Equipo Local</h5>
             <select class="js-jugadores-equipo" data-tipo="local"></select>
             <h5>Eventos</h5>
@@ -45,6 +45,9 @@
             </select>
             <button class="js-enviar-evento" data-tipo="visitante">Enviar Lanzamiento</button>
         </div>
+
+        <button class="js-nuevo-cuarto">Nuevo Cuarto</button>
+
         <div class="js-response"></div>
     </div>
     
