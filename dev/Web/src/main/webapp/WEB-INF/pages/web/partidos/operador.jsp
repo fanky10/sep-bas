@@ -18,12 +18,16 @@
             <h5>Eventos</h5>
             <select class="js-eventos-equipo" data-tipo="local">
                 <optgroup label="Lanzamientos">
-                    <option value="evt=LANZAMIENTO_JUGADOR_UN_PUNTO">Lanzamiento - 1</option>
-                    <option value="evt=LANZAMIENTO_JUGADOR_DOS_PUNTOS">Lanzamiento - 2</option>
-                    <option value="evt=LANZAMIENTO_JUGADOR_TRES_PUNTOS">Lanzamiento - 3</option>
+                    <option value="LANZAMIENTO_JUGADOR_UN_PUNTO">Lanzamiento - 1</option>
+                    <option value="LANZAMIENTO_JUGADOR_DOS_PUNTOS">Lanzamiento - 2</option>
+                    <option value="LANZAMIENTO_JUGADOR_TRES_PUNTOS">Lanzamiento - 3</option>
                 </optgroup>
             </select>
             <button class="js-enviar-evento" data-tipo="local">Enviar Lanzamiento</button>
+            
+            <h5>Lanzamiento con asistencia de:</h5>
+            <select class="js-jugadores-equipo-asistencia" data-tipo="local"></select>
+            <button class="js-enviar-evento-asistencia" data-tipo="local">Realizar Lanzamiento + Asistencia</button>
             
             <h5>Cambiar por</h5>
             <select class="js-jugadores-equipo-cambio" data-tipo="local"></select>

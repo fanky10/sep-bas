@@ -4,6 +4,7 @@ $(function () {
 // function constructora de clase
 OperadorView = function () {
     var options = {
+        jugadoresLocalesAsistenciaContainer: $('.js-jugadores-equipo-asistencia[data-tipo="local"]'),
         jugadoresLocalesContainer: $('.js-jugadores-equipo[data-tipo="local"]'),
         jugadoresLocalesCambioContainer: $('.js-jugadores-equipo-cambio[data-tipo="local"]'),
         jugadoresLocalesDisponibles: [],
@@ -29,8 +30,10 @@ OperadorView = function () {
                 options.jugadoresVisitantesDisponibles = response.content.jugadoresVisitantesDisponibles;
 
                 $.each(options.jugadoresLocalesDisponibles, function (idx, el) {
-                    options.jugadoresLocalesContainer.append('<option value="' + el.id + '">' + el.nombre + ' ' + el.apellido + '</option>');
-                    options.jugadoresLocalesCambioContainer.append('<option value="' + el.id + '">' + el.nombre + ' ' + el.apellido + '</option>');
+                    var opt = '<option value="' + el.id + '">' + el.nombre + ' ' + el.apellido + '</option>';
+                    options.jugadoresLocalesContainer.append(opt);
+                    options.jugadoresLocalesCambioContainer.append(opt);
+                    options.jugadoresLocalesAsistenciaContainer.append(opt);
                 });
 
                 $.each(options.jugadoresVisitantesDisponibles, function (idx, el) {
@@ -57,25 +60,36 @@ OperadorView = function () {
             var eventoEntrada = {nombreEvento: tipoEventoIngreso, idJugador: entraJugadorId, eventoGenerador: eventoSalida};
             eviarEventoEntero(eventoEntrada);
         });
+        
+        $('.js-enviar-evento-asistencia').on('click', function (evt) {
+            var origenEvento = $(this).attr('data-tipo');
+            var tipoEventoLanzamiento = $('.js-eventos-equipo[data-tipo="' + origenEvento + '"]').val();;
+            var tipoEventoAsistencia = 'ASISTENCIA_JUGADOR';
+            var lanzadorJugadorId = $('.js-jugadores-equipo[data-tipo="' + origenEvento + '"]').val();
+            var asisteJugadorId = $('.js-jugadores-equipo-asistencia[data-tipo="' + origenEvento + '"]').val();
+            var eventoAsistencia = {nombreEvento: tipoEventoAsistencia, idJugador: asisteJugadorId};
+            var eventoLanzamiento = {nombreEvento: tipoEventoLanzamiento, idJugador: lanzadorJugadorId, eventoGenerador: eventoAsistencia};
+            eviarEventoEntero(eventoLanzamiento);
+        });
+        
     }
 
     function enviarEvento(jugadorId, origenEvento, tipoEvento) {
         var jugadorSeleccionado = null;
         var jugadores = options.jugadoresLocalesDisponibles;
+
         if(origenEvento === 'visitante') {
             jugadores = options.jugadoresVisitantesDisponibles;
         }
+
         $.each(jugadores, function(idx, jugador){
            if(jugadorId == jugador.id) {
                jugadorSeleccionado = jugador;
            }
         });
-        var evento = {};
-        if (tipoEvento.indexOf('evt=') === 0) {
-            evento.tipo = tipoEvento.substring('evt='.length, tipoEvento.length);
-        }
-        if (jugadorSeleccionado && evento.tipo && evento.tipo.length) {
-            var data = {nombreEvento: evento.tipo, idJugador: jugadorSeleccionado.id}; //data : JSON.stringify(jsonData),
+
+        if (jugadorSeleccionado && tipoEvento && tipoEvento.length) {
+            var data = {nombreEvento: tipoEvento, idJugador: jugadorSeleccionado.id}; //data : JSON.stringify(jsonData),
             eviarEventoEntero(data);
         }
     }
