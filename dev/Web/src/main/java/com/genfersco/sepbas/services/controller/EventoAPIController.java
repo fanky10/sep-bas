@@ -34,6 +34,7 @@ public class EventoAPIController extends AbstractAPIController {
         responseMessage.setCode(code);
 
         if (code.equals(WebAppConstants.RESPONSE_CODE_OK)) {
+            //TODO: si evento de cambio entonces, actualizar session.jugadoresDisp.
             Evento evento = createEvento(request, eventoData, null);
             saveEvento(evento);
             responseMessage.setContent(evento);

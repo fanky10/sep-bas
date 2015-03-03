@@ -47,6 +47,7 @@
         </div>
 
         <button class="js-nuevo-cuarto">Nuevo Cuarto</button>
+        <button class="js-fin-partido">Fin Partido</button>
 
         <div class="js-response"></div>
     </div>

@@ -19,7 +19,7 @@ OperadorView = function () {
     var puntos = {
         local: 0,
         visitante: 0
-    }
+    };
 
     function render() {
         loadData();
@@ -99,12 +99,32 @@ OperadorView = function () {
                 options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
             });
         });
+
         $('.js-nuevo-cuarto').on('click', function (evt) {
             $.ajax({
                 contentType : 'application/json',
                 dataType : 'json',
                 url: APP_CTX + '/secure/api/cuarto/nuevo',
                 type: "POST"
+            }).success(function (response) {
+                var cuarto = response.content;
+                options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
+                options.numeroCuartoContainer.html(cuarto.numero);
+            });
+        });
+        
+        $('.js-fin-partido').on('click', function (evt) {
+            var puntaje = {
+                resultadoLocal: puntos.local,
+                resultadoVisitante: puntos.visitante
+            };
+            
+            $.ajax({
+                contentType : 'application/json',
+                dataType : 'json',
+                url: APP_CTX + '/secure/api/partido/finalizar',
+                type: "POST",
+                data : JSON.stringify(puntaje)
             }).success(function (response) {
                 var cuarto = response.content;
                 options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
