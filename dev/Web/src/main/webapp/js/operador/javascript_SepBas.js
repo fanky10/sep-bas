@@ -432,12 +432,21 @@ function cargaHTML() {
 }
 
 function cargaCuarto() {
-    document.getElementById('nroCuarto').innerHTML = '<h1>' + v_nroCuarto + '&ordm; -C</h1>';
+     
+        $.ajax({
+            contentType : 'application/json',
+            dataType : 'json',
+            url: APP_CTX + '/secure/api/cuarto/nuevo',
+            type: "POST"
+        }).success(function (response) {
+            alert('Funciono OK!');
+            v_nroCuarto++;
+            document.getElementById('nroCuarto').innerHTML = '<h1>' + v_nroCuarto + '&ordm; -C</h1>';
+        });
 };
 
 function cambioCuarto() {
-    if (v_nroCuarto < 4) {
-        v_nroCuarto++;
+    if (v_nroCuarto < 4) {      
         cargaCuarto();
         $('#FinCuarto').trigger('reveal:close')
     } else {
@@ -890,9 +899,15 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                 jugadoresLocales[IDAsistencia].asistencias++;
                 EventoMensaje += ' Asistencia (' + jugadoresLocales[IDAsistencia].numero + ') ' + jugadoresLocales[IDAsistencia].nombre;
                 var tipoEventoAsistencia = 'ASISTENCIA_JUGADOR';
+                
                 var asisteJugadorId = jugadoresLocales[IDAsistencia].id;
                 var eventoAsistencia = {nombreEvento: tipoEventoAsistencia , idJugador: asisteJugadorId};
                 var eventoLanzamiento = {nombreEvento: tipoEvento, idJugador: jugadorId, eventoGenerador: eventoAsistencia};
+                
+                console.log('tipo evento' + tipoEventoAsistencia);
+                console.log('asiste: '+asisteJugadorId);
+               // console.log(eventoAsistencia);
+                console.log(eventoLanzamiento);
                 eviarEventoEntero(eventoLanzamiento);
             }else{
             	alert('Fue lo que debia ser!');
