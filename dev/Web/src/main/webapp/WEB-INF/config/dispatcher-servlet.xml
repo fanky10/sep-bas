@@ -79,5 +79,9 @@
         <bean id="numeroJugadoresCancha" class="java.lang.Integer" factory-method="valueOf">
 		<constructor-arg value="${app.jugadores.partido.seleccionados}" />
 	</bean>
+        
+        <bean id="autoCheck" class="java.lang.Boolean" factory-method="valueOf">
+		<constructor-arg value="${app.cuarto.autoCheck}" />
+	</bean>
 
 </beans>

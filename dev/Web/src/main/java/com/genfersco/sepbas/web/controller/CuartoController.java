@@ -29,6 +29,9 @@ public class CuartoController extends BaseController {
     @Resource
     private Integer numeroJugadoresCancha;
     
+    @Resource
+    private Boolean autoCheck;
+    
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {
@@ -58,7 +61,7 @@ public class CuartoController extends BaseController {
         map.addAttribute("jugadoresClubLocal", jugadoresClubLocal);
         map.addAttribute("jugadoresClubVisitante", jugadoresClubVisitante);
         map.addAttribute("iniciaCuartoForm", iniciaCuartoForm == null ? new IniciaCuartoForm() : iniciaCuartoForm);
-        map.addAttribute("allChecked", true);
+        map.addAttribute("allChecked", autoCheck);
 
         return WebAppConstants.INICIO_CUARTO;
     }
