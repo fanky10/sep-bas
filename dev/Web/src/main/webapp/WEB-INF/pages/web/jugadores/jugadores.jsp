@@ -26,7 +26,6 @@
 	</script>
 </content>
 <content tag="bodyContent">
-	<!-- navigation  -->
 	<div class="row">
 		<div class="twelve columns">
 			</br>
@@ -91,7 +90,7 @@
 						<div id="deleteResponse"></div>
 					</c:otherwise>
 				</c:choose>
-                                <h3><a href="<c:url value="/jugadores/add"/>" class="button"> Nuevo Club</a></h3>
+                               
                                 <a href="<c:url value="/home"/>" class="button">Volver</a> 
 			</div>
 		</div>

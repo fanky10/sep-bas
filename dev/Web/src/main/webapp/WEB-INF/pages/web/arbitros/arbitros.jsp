@@ -26,7 +26,14 @@
 	</script>
 </content>
 <content tag="bodyContent">
+	<div class="row">
+	<div class="twelve columns">
+			</br>
+			<h3><a href="<c:url value="/arbitros/add"/>" class="button"> NUEVO ARBITRO</a></h3>
+		</div>
+	</div>
 	<div class="content">
+	
 		<div class="row">
 			<div class="twelve columns">
 				<c:choose>
@@ -68,7 +75,8 @@
 						<div id="deleteResponse"></div>
 					</c:otherwise>
 				</c:choose>
-                        <h3><a href="<c:url value="/arbitros/add"/>" class="button"> Nuevo Arbitro</a></h3>
+                        
+                        
                         <a href="<c:url value="/home"/>" class="button"> Volver</a>                            
 			</div>
 		</div>
