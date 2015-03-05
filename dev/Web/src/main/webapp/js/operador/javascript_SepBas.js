@@ -29,7 +29,27 @@ $(document).ready(function() {
     $("#cancelaFinPartido").click(function() {
         $("#FinCuarto").reveal();
     });
-
+    $("#aceptaFinPartido").click(function() {
+    	
+    	
+    	var puntaje = {
+                resultadoLocal: clubLocal.puntos,
+                resultadoVisitante: clubVisitante.puntos
+            };
+            console.log(puntaje);
+            $.ajax({
+                contentType : 'application/json',
+                dataType : 'json',
+                url: APP_CTX + '/secure/api/partido/finalizar',
+                type: "POST",
+                data : JSON.stringify(puntaje)
+            }).success(function (response) {
+            	window.location.replace(APP_CTX);
+            });
+    });
+    
+    
+    
 });
 var options = {
     equipoLocal: '',
@@ -51,7 +71,6 @@ var v_visita_primer_cuarto = 0;
 var v_visita_segundo_cuarto = 0;
 var v_visita_tercer_cuarto = 0;
 var v_visita_cuarto_cuarto = 0;
-
 
 var clubLocal = {
     id: 0,
@@ -193,6 +212,7 @@ function cargaHtmlEstadisticasLocal() {
     document.getElementById('TablaEstadisticasLocal').innerHTML = EstadisticasLocal;
 }
 function enviarEvento(jugadorId, origenEvento, tipoEvento) {
+	console.log('enviando evento: ',jugadorId,origenEvento,tipoEvento);
     var jugadorSeleccionado = null;
     var jugadores = options.jugadoresLocalesDisponibles;
     if(origenEvento === 'visitante') {
@@ -207,13 +227,15 @@ function enviarEvento(jugadorId, origenEvento, tipoEvento) {
     if (tipoEvento.indexOf('evt=') === 0) {
         evento.tipo = tipoEvento.substring('evt='.length, tipoEvento.length);
     }
+    
     if (jugadorSeleccionado && evento.tipo && evento.tipo.length) {
-        var data = {nombreEvento: evento.tipo, idJugador: jugadorSeleccionado.id}; //data : JSON.stringify(jsonData),
+    	var data = {nombreEvento: evento.tipo, idJugador: jugadorSeleccionado.id}; //data : JSON.stringify(jsonData),
         eviarEventoEntero(data);
     }
 }
 
 function eviarEventoEntero(evento) {
+	console.log('enviando evento: ',evento);
     $.ajax({
             contentType : 'application/json',
             dataType : 'json',
@@ -222,7 +244,8 @@ function eviarEventoEntero(evento) {
             data : JSON.stringify(evento)
         }).success(function (response) {
             //options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
-        	alert('todo ok aguante central !!');
+//        	alert('todo ok aguante central !!');
+        	console.log('se guardo! ',response.content);
         });
 }
 
@@ -797,7 +820,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
 function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
     console.log("Tipo de lanzamiento: " + TipoLanzamiento + ", Asistencia: " + IDAsistencia + ",Equipo: " + Equipo + ",Posicion: " + posicion);
     var origenEvento= '';
-    var jugadorId=jugadoresLocales[posicion].id;
+    var jugadorId=0;
     var tipoEvento = '';    
     var EventoEquipo = '';
     var EventoMensaje = '';
@@ -806,6 +829,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
     var CantPuntosLanzamiento = 0;
     switch (Equipo) {
         case String(clubLocal.id):
+        	jugadorId= jugadoresLocales[posicion].id;
             EventoEquipo = clubLocal.nombre;
         	origenEvento= 'local';
             EventoMensaje = TipoLanzamiento + ' (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre;
@@ -910,7 +934,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                 console.log(eventoLanzamiento);
                 eviarEventoEntero(eventoLanzamiento);
             }else{
-            	alert('Fue lo que debia ser!');
+//            	alert('Fue lo que debia ser!');
             	enviarEvento(jugadorId, origenEvento, tipoEvento);
             }         	           
             ;
@@ -920,6 +944,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
             break;
 
         case String(clubVisitante.id):
+        	jugadorId= jugadoresVisita[posicion].id;
         	origenEvento= 'visitante';
             EventoEquipo = clubVisitante.nombre;
             EventoMensaje = TipoLanzamiento + ' (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
@@ -1015,7 +1040,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                 jugadoresVisita[IDAsistencia].asistencias++;
                 EventoMensaje += ' Asistencia (' + jugadoresVisita[IDAsistencia].numero + ') ' + jugadoresVisita[IDAsistencia].nombre;
             }else{
-            	alert('Fue lo que debia ser!');
+//            	alert('Fue lo que debia ser!');
             	enviarEvento(jugadorId, origenEvento, tipoEvento);
             }
             	           

@@ -382,7 +382,7 @@
 <div class="row">
   <div class="two columns"><a href="#" class="alert button" id="cancelaFinPartido">Cancelar</a></div>
   <div class="ten columns"></div>
-  <div class="two columns"><a href="#" class="button" onClick="finPartido()">Aceptar</a></div>
+  <div class="two columns"><a href="#" class="button" id="aceptaFinPartido">Aceptar</a></div>
 </div>
 </div>
 </div>
