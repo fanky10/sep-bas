@@ -3,6 +3,7 @@ package com.genfersco.sepbas.web.controller;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,14 @@ public class PartidoController extends BaseController {
 		map.addAttribute("clubes", getServicesManager().getClubes());
 		map.addAttribute("partidoForm", new PartidoForm());
 		return WebAppConstants.AGREGAR_PARTIDO;
+	}
+
+	@RequestMapping(value = "/partidos/nuevo", method = RequestMethod.GET)
+	public String nuevoJuego(HttpServletRequest request,
+			HttpServletResponse repsponse, ModelMap map) {
+		// TODO: clubes locales.
+		map.addAttribute("clubes", getServicesManager().getClubes());
+		return WebAppConstants.NUEVO_PARTIDO;
 	}
 
 	public ServicesManager getServicesManager() {
