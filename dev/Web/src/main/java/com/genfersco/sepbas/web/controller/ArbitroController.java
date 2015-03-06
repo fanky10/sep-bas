@@ -17,6 +17,8 @@ import com.genfersco.sepbas.web.form.ArbitroForm;
 import com.genfersco.sepbas.web.json.DefaultJSONResponse;
 import com.genfersco.sepbas.web.json.JSONResponse;
 import java.util.List;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -43,8 +45,10 @@ public class ArbitroController extends BaseController {
 	}
         /*VER ERRORES CON PABLITO/FACU */
 	@RequestMapping(value = "/arbitros/add", method = RequestMethod.POST)
-	public String agregarArbitro(ModelMap map, @ModelAttribute ArbitroForm arbitroForm) {
-		// TODO: some validation here
+	public String agregarArbitro(ModelMap map, @Valid @ModelAttribute ArbitroForm arbitroForm,  BindingResult result) {
+		// TODO: some validation here 
+                if (result.hasErrors())
+                    return WebAppConstants.AGREGAR_ARBITRO;
 		Arbitro arbitro = new Arbitro();
 		//arbitro.setArbitro(arbitroForm.getArbitro());
                 arbitro.setId(arbitroForm.getId());

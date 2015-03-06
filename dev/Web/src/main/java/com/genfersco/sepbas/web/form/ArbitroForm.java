@@ -1,6 +1,7 @@
 package com.genfersco.sepbas.web.form;
 
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class ArbitroForm implements Serializable{
 	/**
@@ -8,8 +9,11 @@ public class ArbitroForm implements Serializable{
 	 */
 	private static final long serialVersionUID = -6148610887747709026L;
 	private Integer id;
+        @NotEmpty
 	private String nombre;
-	private String apellido;
+	@NotEmpty
+        private String apellido;
+        @NotEmpty
         private String localidad;
 	public ArbitroForm(){
 		
