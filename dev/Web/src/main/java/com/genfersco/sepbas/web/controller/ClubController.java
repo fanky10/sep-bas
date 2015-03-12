@@ -14,6 +14,8 @@ import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.ClubForm;
 import java.util.List;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -30,8 +32,10 @@ public class ClubController extends BaseController {
 	}
 
 	@RequestMapping(value = "/clubes/add", method = RequestMethod.POST)
-	public String agregarClub(ModelMap map, @ModelAttribute ClubForm clubForm) {
+	public String agregarClub(ModelMap map, @Valid @ModelAttribute ClubForm clubForm, BindingResult result) {
 		// TODO: some validation here
+                if (result.hasErrors())
+                    return WebAppConstants.AGREGAR_CLUB;
 		Club club = new Club();
                 club.setId(clubForm.getId());
 		club.setNombre(clubForm.getNombre());

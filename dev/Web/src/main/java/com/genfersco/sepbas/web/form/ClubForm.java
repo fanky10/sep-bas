@@ -1,15 +1,17 @@
 package com.genfersco.sepbas.web.form;
 
 import java.io.Serializable;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class ClubForm implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6148610887747709026L;
-
+        @NotEmpty
         private String localidad;
 	private Integer id;
+        @NotEmpty
 	private String nombre;
 	public ClubForm(){
 		
