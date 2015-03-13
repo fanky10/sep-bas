@@ -93,8 +93,14 @@ OperadorView = function () {
             var tipoEventoAsistencia = 'ASISTENCIA_JUGADOR';
             var lanzadorJugadorId = $('.js-jugadores-equipo[data-tipo="' + origenEvento + '"]').val();
             var asisteJugadorId = $('.js-jugadores-equipo-asistencia[data-tipo="' + origenEvento + '"]').val();
+            
+            
+           
+            
             var eventoAsistencia = {nombreEvento: tipoEventoAsistencia, idJugador: asisteJugadorId};
             var eventoLanzamiento = {nombreEvento: tipoEventoLanzamiento, idJugador: lanzadorJugadorId, eventoGenerador: eventoAsistencia};
+           // console.log(eventoAsistencia);
+            console.log(eventoLanzamiento);
             eviarEvento(eventoLanzamiento).success(function (response) {
                 options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
             });

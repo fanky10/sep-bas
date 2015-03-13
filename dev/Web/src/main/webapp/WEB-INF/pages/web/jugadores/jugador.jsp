@@ -76,13 +76,7 @@
                             </form:select>
                                 </span>
                                 <br/>
-                                <br/>
-                                <label for="fechaAlta"> Fecha Alta: </label> 
-                                <span class="input"> 
-                                <input id="datePickerfechaAlta" type="text" name="fechaAlta" id="fechaAlta">
-                                <form:errors path="fechaAlta" id="fechaAltaError"/>
-                                </span>
-                                <br/>
+                                
                                 <br/>
                              <input name="submit" type="submit" class="button tiny" value="Guardar" />
                              <a href="<c:url value="/jugadores/list"/>" class="button tiny"> Volver</a>

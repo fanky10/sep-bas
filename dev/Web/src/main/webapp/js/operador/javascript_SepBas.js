@@ -450,10 +450,14 @@ function cargaHTML() {
         Faltas_Visita += '<p class="menuFaltas"><a href="javascript:Falta(' + "'" + jugadoresVisita[IndiceJugadorVisita[b]].equipo + "','" + IndiceJugadorVisita[b] + "'" + ')">(' + jugadoresVisita[IndiceJugadorVisita[b]].numero + ') ' + jugadoresVisita[IndiceJugadorVisita[b]].nombre + '</a></p>';
     }
     document.getElementById('Link_Faltas_Visita').innerHTML = Faltas_Visita;
-    cargaCuarto();
+    cargaCuartosolamente();
 
 }
 
+function cargaCuartosolamente()
+{
+	document.getElementById('nroCuarto').innerHTML = '<h1>' + v_nroCuarto + '&ordm; -C</h1>';
+};
 function cargaCuarto() {
      
         $.ajax({
@@ -464,7 +468,7 @@ function cargaCuarto() {
         }).success(function (response) {
             alert('Funciono OK!');
             v_nroCuarto++;
-            document.getElementById('nroCuarto').innerHTML = '<h1>' + v_nroCuarto + '&ordm; -C</h1>';
+            cargaCuartosolamente();
         });
 };
 
@@ -923,15 +927,15 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                 jugadoresLocales[IDAsistencia].asistencias++;
                 EventoMensaje += ' Asistencia (' + jugadoresLocales[IDAsistencia].numero + ') ' + jugadoresLocales[IDAsistencia].nombre;
                 var tipoEventoAsistencia = 'ASISTENCIA_JUGADOR';
-                
+                tipoEvento = tipoEvento.replace("evt=","");
                 var asisteJugadorId = jugadoresLocales[IDAsistencia].id;
                 var eventoAsistencia = {nombreEvento: tipoEventoAsistencia , idJugador: asisteJugadorId};
                 var eventoLanzamiento = {nombreEvento: tipoEvento, idJugador: jugadorId, eventoGenerador: eventoAsistencia};
                 
-                console.log('tipo evento' + tipoEventoAsistencia);
-                console.log('asiste: '+asisteJugadorId);
+               // console.log('tipo evento' + tipoEventoAsistencia);
+               // console.log('asiste: '+ asisteJugadorId);
                // console.log(eventoAsistencia);
-                console.log(eventoLanzamiento);
+                //console.log(eventoLanzamiento);
                 eviarEventoEntero(eventoLanzamiento);
             }else{
 //            	alert('Fue lo que debia ser!');
@@ -1037,8 +1041,23 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
 
             var ASISTENCIA = IDAsistencia;
             if (ASISTENCIA.trim() != "-1") {
-                jugadoresVisita[IDAsistencia].asistencias++;
+                
                 EventoMensaje += ' Asistencia (' + jugadoresVisita[IDAsistencia].numero + ') ' + jugadoresVisita[IDAsistencia].nombre;
+           
+            
+                jugadoresVisita[IDAsistencia].asistencias++;
+               
+                var tipoEventoAsistencia = 'ASISTENCIA_JUGADOR';
+                tipoEvento = tipoEvento.replace("evt=","");
+                var asisteJugadorId = jugadoresLocales[IDAsistencia].id;
+                var eventoAsistencia = {nombreEvento: tipoEventoAsistencia , idJugador: asisteJugadorId};
+                var eventoLanzamiento = {nombreEvento: tipoEvento, idJugador: jugadorId, eventoGenerador: eventoAsistencia};
+                
+              
+                eviarEventoEntero(eventoLanzamiento);
+            
+            
+            
             }else{
 //            	alert('Fue lo que debia ser!');
             	enviarEvento(jugadorId, origenEvento, tipoEvento);
