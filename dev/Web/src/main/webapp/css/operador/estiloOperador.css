@@ -1,0 +1,78 @@
+/* CSS Document */
+body { text-align:center;}
+.local { color:#FF0000;}
+.visita { color:#0000FF;}
+
+.ui-menu-item a:hover 
+{
+background-color:#D2691E; 
+}
+
+
+
+.fondo_cancha{
+margin:0 auto 0 auto;
+height:284px;
+width:528px;
+background-image:url("/Web/images/cancha.jpg");
+
+
+}
+.menuFaltas{
+font-size: 12px;
+}
+.media_cancha_izquierda{
+margin:0 auto 0 auto;
+height:284px;
+width:50%;
+float:left;
+z-index:100}
+
+.media_cancha_derecha{
+margin:0 auto 0 auto;
+height:100%;
+width:50%;
+float:left;
+z-index:100}
+
+#menu_visita{ z-index:100;}
+#menu_local{ z-index:100;}
+/*.cancha{
+background-color:#CCFF00;
+width:528 px;
+height:284px;
+filter: alpha(opacity=50); opacity: .5;
+z-index:0;
+}*/
+
+.semi_circulo_derecha{
+   	
+width: 156px;
+height: 246px;
+border-radius: 123px 0 0 123px;
+overflow:hidden;
+background-color: #FF0000;
+float:right;margin-top:19px;
+filter: alpha(opacity=50); opacity: .5;
+z-index:1;
+}
+
+.semi_circulo_izquierda {
+	
+width: 156px;
+height: 246px;
+
+border-radius: 0 123px 123px 0;
+ 
+overflow:hidden;
+background-color:#CC6600;
+float:left;
+margin-top:19px;
+filter: alpha(opacity=50); opacity: .5;
+z-index:-1;
+}
+
+.boton_local
+{
+
+background-color:#FF0000;}

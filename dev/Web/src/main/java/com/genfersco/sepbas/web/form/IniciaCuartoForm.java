@@ -5,27 +5,37 @@ import java.io.Serializable;
 import com.genfersco.sepbas.domain.model.Jugador;
 
 public class IniciaCuartoForm implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2922727765877387400L;
-	private Jugador[] jugadoresEquipo1;
-	private Jugador[] jugadoresEquipo2;
 
-	public Jugador[] getJugadoresEquipo1() {
-		return jugadoresEquipo1;
-	}
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2922727765877387400L;
+    private Jugador[] jugadoresLocales;
+    private Jugador[] jugadoresVisitantes;
+    private Integer cuartoNumero;
 
-	public void setJugadoresEquipo1(Jugador[] jugadoresEquipo1) {
-		this.jugadoresEquipo1 = jugadoresEquipo1;
-	}
+    public Integer getCuartoNumero() {
+        return cuartoNumero;
+    }
 
-	public Jugador[] getJugadoresEquipo2() {
-		return jugadoresEquipo2;
-	}
+    public void setCuartoNumero(Integer cuartoNumero) {
+        this.cuartoNumero = cuartoNumero;
+    }
 
-	public void setJugadoresEquipo2(Jugador[] jugadoresEquipo2) {
-		this.jugadoresEquipo2 = jugadoresEquipo2;
-	}
+    public Jugador[] getJugadoresLocales() {
+        return jugadoresLocales;
+    }
+
+    public void setJugadoresLocales(Jugador[] jugadoresLocales) {
+        this.jugadoresLocales = jugadoresLocales;
+    }
+
+    public Jugador[] getJugadoresVisitantes() {
+        return jugadoresVisitantes;
+    }
+
+    public void setJugadoresVisitantes(Jugador[] jugadoresVisitantes) {
+        this.jugadoresVisitantes = jugadoresVisitantes;
+    }
 
 }

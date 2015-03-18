@@ -22,7 +22,8 @@ DROP TABLE IF EXISTS clubes;
 
 CREATE TABLE clubes(
     club_id integer unsigned not null primary key AUTO_INCREMENT,
-    club_nombre varchar(100) not null 
+    club_nombre varchar(100) not null,
+    club_localidad varchar(100) not null
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS jugador_club;
@@ -66,10 +67,12 @@ CREATE TABLE eventos(
 	
 )ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS tipos_eventos;
+
 /** 
  * AHORA LOS TIPOS DE EVENTOS LOS MANEJA JAVA CON UN ENUM
  * 
+DROP TABLE IF EXISTS tipos_eventos;
+
 CREATE TABLE tipos_eventos(
     tipo_evento_id integer unsigned not null primary key AUTO_INCREMENT,
     tipo_evento_descripcion varchar(100) not null
@@ -79,6 +82,14 @@ ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_tipo_e
 **/
 
 
+DROP TABLE IF EXISTS arbitros;
+
+CREATE TABLE arbitros(
+    arbitro_id integer unsigned not null primary key AUTO_INCREMENT,
+    arbitro_nombre varchar(100) not null,
+    arbitro_apellido varchar(100) not null,
+    arbitro_localidad varchar(100) not null 
+)ENGINE=InnoDB;
 
 -- foreign key relationships
 ALTER TABLE jugadores ADD CONSTRAINT `FK_jugador_id_1` FOREIGN KEY (`jugador_actual_club_id`) REFERENCES `clubes` (`club_id`);

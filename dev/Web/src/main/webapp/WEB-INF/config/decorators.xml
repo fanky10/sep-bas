@@ -9,7 +9,9 @@
 		<pattern>*/services*</pattern>
 		
         <!-- Non-decorated pages -->   
-        <pattern>/service*</pattern>
+        <pattern>/service*</pattern> 
+        <pattern>/error*</pattern>
+        <pattern>/partido/static*</pattern>
     </excludes>
     <decorator name="WEB" page="web/default.jsp">
         <pattern>/*</pattern>

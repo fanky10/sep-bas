@@ -6,6 +6,7 @@ target/
 *.prefs
 *.project
 log.txt
+.metadata
 
 # Compiled source #
 ###################
