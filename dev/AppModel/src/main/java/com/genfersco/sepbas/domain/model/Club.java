@@ -43,4 +43,13 @@ public class Club implements Serializable {
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
+        
+        public boolean equals(Object target) {
+            boolean isEqual = false;
+            if(target instanceof Club) {
+                Club club = (Club) target;
+                isEqual = club.getId().equals(this.id);
+            }
+            return isEqual;
+        }
 }

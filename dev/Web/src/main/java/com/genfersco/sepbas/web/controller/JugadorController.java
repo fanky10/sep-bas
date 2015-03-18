@@ -49,10 +49,7 @@ public class JugadorController extends BaseController {
 
     @RequestMapping(value = "/jugadores/add", method = RequestMethod.GET)
     public String showAddJugador(ModelMap map) {
-        // shows view
-        map.addAttribute("jugadorForm", new JugadorForm());
-        map.addAttribute("clubes", getServicesManager().getClubes());
-        return WebAppConstants.AGREGAR_JUGADOR;
+        return showJugadorForm(map, new JugadorForm());
     }
 
     @RequestMapping(value = "/jugadores/save", method = RequestMethod.POST)
@@ -61,8 +58,7 @@ public class JugadorController extends BaseController {
         String redirect = "redirect:/jugadores/list";
         // some validation later (:
         if (bindingResult.hasErrors()) {
-            map.addAttribute("clubes", getServicesManager().getClubes());
-            redirect = WebAppConstants.AGREGAR_JUGADOR;
+            return showJugadorForm(map, jugadorForm);
         } else {
             Jugador jugador = new Jugador();
             jugador.setId(jugadorForm.getId());
@@ -87,11 +83,15 @@ public class JugadorController extends BaseController {
         jugadorForm.setApellido(jugador.getApellido());
         jugadorForm.setFechaNacimiento(jugador.getFechaNacimiento());
         jugadorForm.setClub(jugador.getClub());
+        return showJugadorForm(map, jugadorForm);
+    }
+
+    public String showJugadorForm(ModelMap map, JugadorForm jugadorForm) {
         map.addAttribute("jugadorForm", jugadorForm);
         map.addAttribute("clubes", getServicesManager().getClubes());
         return WebAppConstants.AGREGAR_JUGADOR;
     }
-
+    
     @RequestMapping(value = "/jugadores/del/{jugadorId}", method = RequestMethod.GET)
     public String deleteClub(@PathVariable("jugadorId") Integer id) {
         servicesManager.deleteJugador(id);
