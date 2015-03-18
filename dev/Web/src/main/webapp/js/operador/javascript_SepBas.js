@@ -171,11 +171,12 @@ function inicializaVariables() {
 
             });
 
+
+            cargaJugadores();
+            cargaHTML();
         }
     });
-    alert(jugadoresLocales.length);
-    cargaJugadores();
-    cargaHTML();
+    
 };
 
 function salirCambioCuarto() {
@@ -384,7 +385,7 @@ function cargaHTML() {
     Form_suplentes_locales += '<div class="six columns" style="text-align:left" id="formSustLocal">';
     for (var n in jugadoresLocales) {
         
-    	alert('Jugador local en cancga ?? ' + jugadoresLocales[n].enCancha);
+//    	alert('Jugador local en cancga ?? ' + jugadoresLocales[n].enCancha);
     	if (jugadoresLocales[n].enCancha == 1) {
            
         	Form_suplentes_locales += '<label for="JugadorLocalSale"><input name="JugadorLocalSale" type="radio" value="' + n + '">(' + jugadoresLocales[n].numero + ') ' + jugadoresLocales[n].nombre + '</label>';
