@@ -65,7 +65,8 @@ public class JugadorController extends BaseController {
             redirect = WebAppConstants.AGREGAR_JUGADOR;
         } else {
             Jugador jugador = new Jugador();
-            jugador.setNumero(1);
+            jugador.setId(jugadorForm.getId());
+            jugador.setNumero(jugadorForm.getNumero());
             jugador.setNombre(jugadorForm.getNombre());
             jugador.setApellido(jugadorForm.getApellido());
             jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());

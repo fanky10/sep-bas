@@ -9,17 +9,7 @@
 <content tag="jscript">
 	<script>
 		$(function() {
-			$("#datePickerfechaNacimiento").datepicker({
-				onSelect : function(textoFecha, objDatepicker) {
-					//on select do something!
-				}
-			});
-		
-		});
-	</script>
-	<script>
-		$(function() {
-			$("#datePickerfechaAlta").datepicker({
+			 $("#datePickerfechaNacimiento").datepicker({
 				onSelect : function(textoFecha, objDatepicker) {
 					//on select do something!
 				}
@@ -48,6 +38,13 @@
                                 <span class="input"> 
                                 <form:input path="apellido" />
                                 <form:errors path="apellido" id="apellidoError"/>
+                                </span>
+                                <br/>
+                                <br/>
+                                <label for="apellido"> Numero: </label> 
+                                <span class="input"> 
+                                <form:input path="numero" />
+                                <form:errors path="numero" id="apellidoError"/>
                                 </span>
                                 <br/>
                                 <br/>
