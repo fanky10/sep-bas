@@ -44,6 +44,7 @@ public class JugadorController extends BaseController {
     public String getJugadores(ModelMap map) {
         List<Jugador> jugadores = servicesManager.getJugadores();
         map.addAttribute("jugadores", jugadores);
+        map.addAttribute("clubes", getServicesManager().getClubes());
         return WebAppConstants.JUGADORES;
     }
 

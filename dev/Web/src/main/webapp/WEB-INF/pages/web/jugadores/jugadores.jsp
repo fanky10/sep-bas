@@ -3,7 +3,7 @@
     <%-- some link rel to this page in specific --%>	
 </content>
 <content tag="jscriptlibs">
-    <%-- some jscript libraries rel to this page in specific --%>	
+    <script type="text/javascript" src="<c:url value="/js/jugadores/jugadores.js"/>"></script>
 </content>
 <content tag="jscript">
     <script>
@@ -49,6 +49,18 @@
                                 <h2>Jugadores</h2>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="six columns">
+                                <h2>Filtro por Club</h2>
+                            </div>
+                            <div class="six columns">
+                                <select class="js-clubes">
+                                    <c:forEach var="club" items="${clubes}">
+                                        <option class="js-club" label="${club.nombre}" value="${club.id}" />${club.nombre}
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
                         <table>
                             <thead>
                                 <tr>
@@ -58,25 +70,23 @@
                                     <th colspan="2">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="js-jugadores-body">
                                 <c:forEach var="jugador" items="${jugadores}">
-                                <div class="row">
-                                    <tr>
-                                        <td>${jugador.nombre}</td>
-                                        <td>${jugador.apellido}</td>
-                                        <td>${jugador.club.nombre}</td>
-                                        <td>
-                                            <a href="<c:url value="/jugadores/edit/${jugador.id}" />" class="button" alt="Editar" jugador-id="${jugador.id}" >
-                                                Editar
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="<c:url value="/jugadores/del/${jugador.id}" />" class="button" alt="Eliminar" jugador-id="${jugador.id}" >
-                                                Eliminar
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </div>
+                                <tr>
+                                    <td>${jugador.nombre}</td>
+                                    <td>${jugador.apellido}</td>
+                                    <td>${jugador.club.nombre}</td>
+                                    <td>
+                                        <a href="<c:url value="/jugadores/edit/${jugador.id}" />" class="button" alt="Editar" jugador-id="${jugador.id}" >
+                                            Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<c:url value="/jugadores/del/${jugador.id}" />" class="button" alt="Eliminar" jugador-id="${jugador.id}" >
+                                            Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
                             </c:forEach>
                             </tbody>
                         </table>
