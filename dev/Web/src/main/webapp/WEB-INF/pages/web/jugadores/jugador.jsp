@@ -10,6 +10,7 @@
     <script>
         $(function () {
             $("#datePickerfechaNacimiento").datepicker({
+                dateFormat: 'dd/mm/yy',
                 onSelect: function (textoFecha, objDatepicker) {
                     //on select do something!
                 }
@@ -50,7 +51,8 @@
                         <br/>
                         <label for="fechaNacimiento"> Fecha Nacimiento: </label> 
                         <span class="input"> 
-                            <input id="datePickerfechaNacimiento" type="text" name="fechaNacimiento" id="fechaNacimiento">
+                            <fmt:formatDate value="${jugadorForm.fechaNacimiento}" var="dateString" pattern="dd/MM/yyyy" />
+                            <form:input id="datePickerfechaNacimiento" type="text" path="fechaNacimiento" value="${dateString}"/>
                             <form:errors path="fechaNacimiento" id="fechaNacimientoError"/>
                         </span>
                         <br/>
