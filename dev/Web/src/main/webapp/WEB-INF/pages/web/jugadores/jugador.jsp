@@ -33,7 +33,7 @@
 	<div class="row">
 		<div class="twelve columns">
 			<h3>Nuevo Jugador</h3>
-                        <form:form action="${pageContext.request.contextPath}/jugadores/add" modelAttribute="jugadorForm" method="POST">
+                        <form:form action="${pageContext.request.contextPath}/jugadores/save" modelAttribute="jugadorForm" method="POST">
                             <fieldset>
                             <legend>Datos Personales</legend>
                             <form:hidden path="id" />

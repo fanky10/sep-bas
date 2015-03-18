@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 import com.genfersco.sepbas.domain.model.Club;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Component
 public class JugadorForm implements Serializable {
@@ -15,7 +16,11 @@ public class JugadorForm implements Serializable {
 	 */
 	private static final long serialVersionUID = 5091223400542004345L;
 	private Integer id;
+
+        @NotEmpty(message = "El nombre es requerido")
 	private String nombre;
+
+        @NotEmpty(message = "El apellido es requerido")
 	private String apellido;
 	private Club club;
 	private Date fechaNacimiento;

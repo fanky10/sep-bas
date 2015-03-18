@@ -18,8 +18,7 @@ public class FechaPropertyEditor extends PropertyEditorSupport {
 					.parse(text);
 			super.setValue(date);
 		} catch (ParseException ex) {
-			throw new IllegalArgumentException(
-					"texto ingresado no tiene formato de fecha valido");
+			super.setValue(null);
 		}
 	}
 }

@@ -22,12 +22,15 @@ import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.JugadorForm;
+import com.genfersco.sepbas.web.validation.JugadorFormValidator;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class JugadorController extends BaseController {
 
     @Autowired
-    private ServicesManager servicesManager;
+    private JugadorFormValidator jugadorFormValidator;
 
     @InitBinder
     protected void initBinder(HttpServletRequest request,
@@ -52,18 +55,24 @@ public class JugadorController extends BaseController {
         return WebAppConstants.AGREGAR_JUGADOR;
     }
 
-    @RequestMapping(value = "/jugadores/add", method = RequestMethod.POST)
-    public String addJugador(@ModelAttribute JugadorForm jugadorForm, ModelMap map) {
+    @RequestMapping(value = "/jugadores/save", method = RequestMethod.POST)
+    public String saveJugador(ModelMap map, @Valid @ModelAttribute JugadorForm jugadorForm, BindingResult bindingResult) {
+        jugadorFormValidator.validate(jugadorForm, bindingResult);
+        String redirect = "redirect:/jugadores/list";
         // some validation later (:
-        Jugador jugador = new Jugador();
-        jugador.setNumero(1);
-        jugador.setNombre(jugadorForm.getNombre());
-        jugador.setApellido(jugadorForm.getApellido());
-        jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());
-        jugador.setClub(jugadorForm.getClub());
-        servicesManager.addJugador(jugador);
-        // redirecciona a la url correspondiente
-        return "redirect:/jugadores/list";
+        if (bindingResult.hasErrors()) {
+            map.addAttribute("clubes", getServicesManager().getClubes());
+            redirect = WebAppConstants.AGREGAR_JUGADOR;
+        } else {
+            Jugador jugador = new Jugador();
+            jugador.setNumero(1);
+            jugador.setNombre(jugadorForm.getNombre());
+            jugador.setApellido(jugadorForm.getApellido());
+            jugador.setFechaNacimiento(jugadorForm.getFechaNacimiento());
+            jugador.setClub(jugadorForm.getClub());
+            servicesManager.addJugador(jugador);
+        }
+        return redirect;
     }
 
     @RequestMapping(value = "/jugadores/edit/{jugadorId}", method = RequestMethod.GET)
