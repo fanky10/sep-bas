@@ -54,8 +54,7 @@
 						<c:forEach var="arbitro" items="${arbitros}">
 							<div class="row">
 								<div class="large-4 columns">
-									<h6>${arbitro.nombre}</h6>
-                                                                        <h6>${arbitro.apellido}</h6>
+									<h6>${arbitro.nombre} ${arbitro.apellido}</h6>
 								</div>
                                                                 <div class="large-4 columns">
 									<h6>${arbitro.localidad}</h6>
