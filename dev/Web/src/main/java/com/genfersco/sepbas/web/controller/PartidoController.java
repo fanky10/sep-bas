@@ -77,6 +77,11 @@ public class PartidoController extends BaseController {
         map.addAttribute("arbitros", getServicesManager().getArbitrosHabilitados());
         return WebAppConstants.NUEVO_PARTIDO;
     }
+    
+    @RequestMapping(value = "/partido/finalizar", method = RequestMethod.GET)
+    public String finPartido(HttpServletRequest request, ModelMap map) {
+        return WebAppConstants.FIN_PARTIDO;
+    }
 
     @RequestMapping(value = "/partido/operador", method = RequestMethod.GET)
     public String nuevoJuegoOperador(HttpServletRequest request,
