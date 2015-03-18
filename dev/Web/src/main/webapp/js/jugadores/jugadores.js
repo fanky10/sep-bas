@@ -1,12 +1,14 @@
 $(function () {
     var jqClubSelector = $('.js-clubes');
     var jugadoresView = new JugadoresView();
-
+    
     jqClubSelector.on('change', function (event) {
         var idClub = this.value;
         jugadoresView.renderJugadoresByClub(idClub);
     });
-
+    // carga inicial
+    var idClubInicial = jqClubSelector.val();
+    jugadoresView.renderJugadoresByClub(idClubInicial);
 
 });
 
