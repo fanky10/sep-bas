@@ -959,12 +959,14 @@ function Evento(Equipo, Mensaje, Eliminar) {
 function Falta(Equipo, posicion) {
     var EventoEquipo = '';
     var EventoMensaje = '';
+    var idJugador=0;
     EventoElimina = '<a href="javascript:' + "cancelaEvento('" + 3 + "','" + -1 + "','" + -1 + "','" + Equipo + "','" + posicion + "')" + '">Eliminar</a>';
     console.log('Equipo enviado' + Equipo + ', Local ' + clubLocal.id);
     switch (Equipo) {
         case String(clubLocal.id):
             EventoEquipo = clubLocal.nombre;
             jugadoresLocales[posicion].Faltas++;
+            idJugador = jugadoresLocales[posicion].id;
             EventoMensaje = jugadoresLocales[posicion].Faltas + ' Falta de (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre;
             if (jugadoresLocales[posicion].Faltas == 5) {
                 alert('(' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre + ' ha llegado a su 5� falta y debe ser sustuido');
@@ -974,6 +976,7 @@ function Falta(Equipo, posicion) {
         case String(clubVisitante.id):
             EventoEquipo = clubVisitante.nombre;
             jugadoresVisita[posicion].Faltas++;
+            idJugador = jugadoresVisita[posicion].id;
             EventoMensaje = jugadoresVisita[posicion].Faltas + ' Falta de (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
             if (jugadoresVisita[posicion].Faltas == 5) {
                 alert('(' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre + ' ha llegado a su 5� falta y debe ser sustuido');
@@ -981,6 +984,11 @@ function Falta(Equipo, posicion) {
             };
             break;
     };
+    var eventoFalta = {
+            nombreEvento: 'FALTA_JUGADOR',
+            idJugador: idJugador
+        };
+    enviarEvento(eventoFalta);
     Evento(EventoEquipo, EventoMensaje, EventoElimina);
 };
 //semi_circulo_izquierda
