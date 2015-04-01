@@ -39,7 +39,7 @@ $(document).ready(function() {
             type: "POST",
             data: JSON.stringify(puntaje)
         }).success(function(response) {
-            window.location.replace(APP_CTX);
+        	window.location.replace(APP_CTX + '/partido/finalizar');
         });
     });
 });
