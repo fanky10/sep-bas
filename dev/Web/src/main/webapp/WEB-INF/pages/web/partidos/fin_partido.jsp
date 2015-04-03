@@ -1,17 +1,55 @@
 <%@ include file="/WEB-INF/pages/web/common/taglibs.jsp"%>
 <content tag="styles"> <%-- some link rel to this page in specific --%>
-
+<link rel="stylesheet" href="<c:url value="/css/fin_partido.css"/>">
 </content>
 <content tag="jscriptlibs">
 <script type="text/javascript" src="<c:url value="/js/vendor/modernizr.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/Chart.js"/>"></script>
 </content>
 <content tag="jscript">
     <script>
+       
+        var lineChartData = {
+    			labels : ["Inicio","1er Cuarto","2do Cuarto","3er Cuarto","4to Cuarto"],
+    			datasets : [
+    				{
+    					label: "Local",
+    					fillColor : "rgba(255,50,0,0.2)",
+    					strokeColor : "rgba(255,50,0,1)",
+    					pointColor : "rgba(255,50,0,1)",
+    					pointStrokeColor : "#fff",
+    					pointHighlightFill : "#fff",
+    					pointHighlightStroke : "rgba(255,0,0,1)",
+    					data : [0,23,45,67,88]
+    				},
+    				{
+    					label: "Visita",
+    					fillColor : "rgba(151,187,205,0.2)",
+    					strokeColor : "rgba(151,187,205,1)",
+    					pointColor : "rgba(151,187,205,1)",
+    					pointStrokeColor : "#fff",
+    					pointHighlightFill : "#fff",
+    					pointHighlightStroke : "rgba(151,187,205,1)",
+    					data : [0,32,44,67,103]
+    				}
+    			]
+
+    		}
+
+    	window.onload = function(){
+    		var ctx = document.getElementById("canvas").getContext("2d");
+    		window.myLine = new Chart(ctx).Line(lineChartData, {
+    			responsive: true
+    		});
+    	}
         $(document).foundation();
     </script>
 </content>
 <content tag="bodyContent">
+
    <div class="row">
+   <br>
+   
             <div class="large-3 columns" style="text-align:center;">
                 <h1 class="txtLocal">LOCAL<br>84</h1>
             </div>
@@ -29,6 +67,14 @@
                 </div>
             </div>
         </div>
+       
+       <div class="row">
+       		<div style="width:100%;height:170px">
+				<div>
+				<canvas id="canvas" height="100" width="600"></canvas>
+				</div>
+			</div>
+       </div>
        
         <div class="row">
             <ul class="tabs" data-tab>
@@ -250,7 +296,7 @@
                 <div class="content" id="panel5">
                     <ul class="tabs" data-tab>
                         <li class="tab-title active"><a href="#panel51"><div class="txtLocal">Local</div></a></li>
-                        <li class="tab-title"><a href="#panel52" ><div class="txtVisita">Visitante</div></a></li>
+                        <li class="tab-title"><a href="#panel52" ><div class="txtVisita">Visita</div></a></li>
                     </ul>
                     <div class="tabs-content">
                         <div class="content active" id="panel51">
