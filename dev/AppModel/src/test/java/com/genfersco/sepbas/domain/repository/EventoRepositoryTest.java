@@ -49,16 +49,16 @@ public class EventoRepositoryTest {
         assertTrue(eventoHijo != null
                 && eventoRepository.exists(eventoHijo.getId()));
     }
-    
+
     @Test
     public void testFindByCuarto() {
         Cuarto c = cuartoMocked.getCuarto();
         List<Evento> eventosGenerados = new ArrayList<Evento>();
-        for(int i = 0;i < 5;i++){
+        for (int i = 0; i < 5; i++) {
             eventosGenerados.add(eventoMocked.getEvento(c, null));
         }
         List<Evento> found = eventoRepository.findByCuarto(c);
-        assertTrue(!found.isEmpty());
+        assertTrue(!found.isEmpty() && eventosGenerados.size() == found.size());
     }
 
 }

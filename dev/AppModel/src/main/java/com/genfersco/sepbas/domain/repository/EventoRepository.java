@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 import com.genfersco.sepbas.domain.model.Evento;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Integer> {
-	@Query
-        public List<Evento> findByCuarto(Cuarto c);
+	@Query("SELECT e FROM Evento e WHERE e.cuarto = :cuarto and e.estado = com.genfersco.sepbas.domain.model.EstadoEvento.NO_ELIMINADO")
+        public List<Evento> findByCuarto(@Param("cuarto") Cuarto c);
 }

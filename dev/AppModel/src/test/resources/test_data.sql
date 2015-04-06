@@ -16,18 +16,6 @@ VALUES
 (4,'Estudiantil','Default');
 
 --
--- Dumping data for table `cuartos`
---
-
-INSERT INTO `cuartos` (`cuarto_id`, `cuarto_numero`, `cuarto_partido_id`) VALUES (11,1,21),(12,1,27);
-
---
--- Dumping data for table `eventos`
---
-
-INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo_evento`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) VALUES (10,NULL,'2013-03-04 18:12:14',0,1,11,61),(11,NULL,'2013-03-04 18:12:14',0,1,11,61),(12,NULL,'2013-05-09 01:02:39',0,1,12,61),(13,NULL,'2013-05-09 01:02:39',0,1,12,80),(14,NULL,'2013-05-09 01:02:39',0,1,12,60);
-
---
 -- Dumping data for table `jugadores`
 --
 
@@ -59,6 +47,19 @@ INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jug
 (null,'2013-03-27 03:00:00','Julius','Erving',89,2,0),
 (null,'2013-03-27 03:00:00','George','Gervin',12,2,0),
 (null,'2013-03-20 03:00:00','Dave','DeBusschere',14,2,0);
+
+
+--
+-- Dumping data for table `cuartos`
+--
+
+INSERT INTO `cuartos` (`cuarto_id`, `cuarto_numero`, `cuarto_partido_id`) VALUES (11,1,21),(12,1,27);
+
+--
+-- Dumping data for table `eventos`
+--
+
+INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo_evento`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) VALUES (10,NULL,'2013-03-04 18:12:14',0,1,11,61),(11,NULL,'2013-03-04 18:12:14',0,1,11,61),(12,NULL,'2013-05-09 01:02:39',0,1,12,61),(13,NULL,'2013-05-09 01:02:39',0,1,12,80),(14,NULL,'2013-05-09 01:02:39',0,1,12,60);
 
 --
 -- Dumping data for table `partidos`
