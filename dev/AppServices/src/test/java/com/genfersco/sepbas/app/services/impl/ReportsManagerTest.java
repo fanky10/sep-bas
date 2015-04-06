@@ -18,6 +18,7 @@ import com.genfersco.sepbas.domain.repository.CuartoRepository;
 import com.genfersco.sepbas.domain.repository.PartidoRepository;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +49,7 @@ public class ReportsManagerTest {
     private ReportsManager reportsManager;
 
     private Partido partido = new Partido();
+    private Cuarto primerCuarto = new Cuarto();
 
     @Before
     public void buildData() {
@@ -63,10 +65,9 @@ public class ReportsManagerTest {
         partido.setArbitro(arbitro);
         partido = partidoRepository.save(partido);
 
-        Cuarto primerCuarto = new Cuarto();
         primerCuarto.setNumero(1);
         primerCuarto.setPartido(partido);
-        cuartoRepository.save(primerCuarto);
+        primerCuarto = cuartoRepository.save(primerCuarto);
     }
 
     @Test
@@ -80,5 +81,11 @@ public class ReportsManagerTest {
         PartidoReportVO partidoReport = reportsManager.getPartidoReport(partido.getId());
         assertTrue(partidoReport != null);
         assertTrue(!partidoReport.getCuartos().isEmpty());
+    }
+
+    @Test
+    public void testGetResultadoPorCuarto() {
+        Map<String,Integer> partidoReport = reportsManager.getResultadoPorCuarto(partido.getId(), primerCuarto.getId());
+        assertTrue(partidoReport != null);
     }
 }
