@@ -67,16 +67,17 @@ VALUES
 --
 
 -- cuarto 1 partido 1 total puntos: 9
-INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo_evento`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
-VALUES (1,NULL,'2013-03-04 18:12:14',3,1,1,1),
-(2,NULL,'2013-03-04 18:12:14',3,1,1,1),
-(3,NULL,'2013-05-09 01:02:39',3,1,1,1),
-(4,NULL,'2013-05-09 01:02:39',4,1,1,1);
+INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
+VALUES (1,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,1),
+(2,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,1),
+(3,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,1),
+(4,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_TRES_PUNTOS',1,1,1);
 
 -- cuarto 1 partido 1 total puntos: 11
-INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo_evento`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
-VALUES (5,NULL,'2013-03-04 18:12:14',3,1,1,12),
-(6,NULL,'2013-03-04 18:12:14',3,1,1,12),
-(7,NULL,'2013-05-09 01:02:39',3,1,1,12),
-(8,NULL,'2013-05-09 01:02:39',3,1,1,12),
-(9,NULL,'2013-05-09 01:02:39',4,1,1,12);
+INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
+VALUES (5,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(6,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(7,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(8,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(9,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_TRES_PUNTOS',1,1,12);
+

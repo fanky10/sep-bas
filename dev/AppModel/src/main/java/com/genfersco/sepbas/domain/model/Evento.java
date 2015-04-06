@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -41,8 +42,8 @@ public class Evento {
 	@JoinColumn(name = "evento_cuarto_id", referencedColumnName = "cuarto_id")
 	private Cuarto cuarto;
 
-	@Column(name = "evento_tipo_evento", nullable = false)
-	@Enumerated
+	@Column(name = "evento_tipo", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private TipoEvento tipoEvento;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Jugador.class)

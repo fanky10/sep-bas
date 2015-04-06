@@ -61,7 +61,7 @@ CREATE TABLE eventos(
     evento_id integer unsigned not null primary key AUTO_INCREMENT,
     evento_generador_id integer unsigned null,
     evento_fec_hora timestamp not null default current_timestamp,
-    evento_tipo_evento integer unsigned not null,
+    evento_tipo varchar(80) not null,
     evento_estado integer unsigned not null default 0,
     evento_cuarto_id integer unsigned not null,
     evento_jugador_id integer unsigned not null
@@ -86,3 +86,13 @@ ALTER TABLE cuartos ADD CONSTRAINT `FK_cuartos_id_1` FOREIGN KEY (`cuarto_partid
 
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_cuarto_id`) REFERENCES `cuartos` (`cuarto_id`);
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_2` FOREIGN KEY (`evento_jugador_id`) REFERENCES `jugadores` (`jugador_id`);
+
+CREATE VIEW reporte_jugadores AS (
+SELECT evento_jugador_id, evento_cuarto_id, 
+CASE WHEN evento_tipo = 'LANZAMIENTO_JUGADOR_UN_PUNTO' then 1 ELSE 0 END AS cantLanzamientosSimples,
+CASE WHEN evento_tipo = 'LANZAMIENTO_JUGADOR_DOS_PUNTOS' then 1 ELSE 0 END AS cantLanzamientosDobles,
+CASE WHEN evento_tipo = 'LANZAMIENTO_JUGADOR_TRES_PUNTOS' then 1 ELSE 0 END AS cantLanzamientosTriples,
+CASE WHEN evento_tipo = 'ASISTENCIA_JUGADOR' then 1 ELSE 0 END AS cantAsistencias,
+CASE WHEN evento_tipo = 'FALTA_JUGADOR' then 1 ELSE 0 END AS cantFaltas
+FROM eventos
+);
