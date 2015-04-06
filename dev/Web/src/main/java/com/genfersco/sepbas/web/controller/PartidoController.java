@@ -83,7 +83,7 @@ public class PartidoController extends BaseController {
         return WebAppConstants.FIN_PARTIDO;
     }
 
-    @RequestMapping(value = "/partido/operador", method = RequestMethod.GET)
+    @RequestMapping(value = "/partido/simpleOperador", method = RequestMethod.GET)
     public String nuevoJuegoOperador(HttpServletRequest request,
             HttpServletResponse repsponse, ModelMap map) {
         PartidoSession ps = getSavedSessionPartido(request);
@@ -95,7 +95,7 @@ public class PartidoController extends BaseController {
         return WebAppConstants.CONSOLA_OPERADOR;
     }
     
-    @RequestMapping(value = "/partido/static", method = RequestMethod.GET)
+    @RequestMapping(value = "/partido/operador", method = RequestMethod.GET)
     public String operadorEstatico(HttpServletRequest request,
             HttpServletResponse repsponse, ModelMap map) {
         return "web/partidos/operador_static";

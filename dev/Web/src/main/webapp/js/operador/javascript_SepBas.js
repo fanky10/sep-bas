@@ -263,10 +263,17 @@ function enviarEvento(evento) {
         url: APP_CTX + '/secure/api/evento/post.json',
         type: "POST",
         data: JSON.stringify(evento)
-    })
-    
-   ;
+    });
 }
+
+function enviarCancelarEvento(idEvento) {
+    return $.ajax({
+        contentType: 'application/json',
+        url: APP_CTX + '/secure/api/evento/delete/'+idEvento,
+        type: "GET"
+    });
+}
+
 function imprSelec(muestra)
 {
     var ficha = document.getElementById(muestra);
@@ -552,12 +559,13 @@ function Sustitucion(Tipo) {
         cargaHTML();
     };
 };
-function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posicion,eventoID,eventoGeneradorID) //tipoEvento,tipoLanzamiento, IDAsistencia, Equipo, posicion
-    {
-	//canselo eventoID
-	if (eventoGeneradorID!= -1){
-		alert('Cancelo evento de ID'+ eventoGeneradorID);
-	}
+function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posicion, eventoID, eventoGeneradorID)
+{
+    var cancelaEventoCallback = function () {
+        //cancelo eventoID
+        if (eventoGeneradorID != -1) {
+            alert('Cancelo evento de ID' + eventoGeneradorID);
+        }
         switch (TipoEvento) {
             case "1":
                 var EventoEquipo = '';
@@ -657,7 +665,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                         void 0
                         break;
                     case String(clubVisitante.id):
-                      EventoEquipo = clubVisitante.nombre;
+                        EventoEquipo = clubVisitante.nombre;
                         EventoMensaje = 'Cancela ' + TipoLanzamiento + ' (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
                         switch (TipoLanzamiento) {
                             case "SIMPLE":
@@ -759,7 +767,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                 var EventoEquipo = '';
                 var EventoMensaje = '';
                 EventoElimina = '...'
-                    // var CantPuntosLanzamiento = 0;
+                // var CantPuntosLanzamiento = 0;
                 switch (Equipo) {
 
                     case String(clubLocal.id):
@@ -776,8 +784,11 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                 Evento(EventoEquipo, EventoMensaje, EventoElimina);
                 break;
         }
-
     };
+
+    enviarCancelarEvento(eventoID).success(cancelaEventoCallback);
+}
+
 function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
     console.log("Tipo de lanzamiento: " + TipoLanzamiento + ", Asistencia: " + IDAsistencia + ",Equipo: " + Equipo + ",Posicion: " + posicion);
    // var origenEvento = '';
