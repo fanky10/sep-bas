@@ -63,7 +63,7 @@ public class ReportsManagerImpl implements ReportsManager {
          * (CASE WHEN e.tipoEvento.valor = 2 THEN 1 ELSE (CASE WHEN e.tipoEvento.valor = 3 THEN 2 ELSE 0 END) END)
          */
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT SUM(CASE WHEN e.tipoEvento.valor = 2 THEN 1 ELSE (CASE WHEN e.tipoEvento.valor = 3 THEN 2 ELSE 0 END) END)");
+        sb.append("SELECT SUM(CASE WHEN e.tipoEvento = com.genfersco.sepbas.domain.model.TipoEvento.LANZAMIENTO_JUGADOR_DOS_PUNTOS THEN 2 ELSE 0 END)");
         sb.append(" FROM Evento e");
         sb.append(" JOIN e.jugador j");
         sb.append(" JOIN j.club club");
@@ -73,11 +73,11 @@ public class ReportsManagerImpl implements ReportsManager {
         sb.append(" AND p.id = :partidoId AND cuarto.id = :cuartoId");
         sb.append(" AND cuarto.id = :cuartoId");
 
-//        Query query = entityManager.createQuery(sb.toString());
-//        query.setParameter("partidoId", partidoId);
-//        query.setParameter("cuartoId", cuartoId);
-//        Long puntos = (Long) query.getSingleResult();
-//        puntosCuarto.put("local", puntos.intValue());
+        Query query = entityManager.createQuery(sb.toString());
+        query.setParameter("partidoId", partidoId);
+        query.setParameter("cuartoId", cuartoId);
+        Long puntos = (Long) query.getSingleResult();
+        puntosCuarto.put("local", puntos.intValue());
         puntosCuarto.put("visitante", 200);
         return puntosCuarto;
     }
