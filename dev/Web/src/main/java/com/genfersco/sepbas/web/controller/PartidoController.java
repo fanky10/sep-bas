@@ -56,6 +56,7 @@ public class PartidoController extends BaseController {
             Partido partido = new Partido();
             partido.setClubLocal(iniciarPartidoForm.getClubLocal());
             partido.setClubVisitante(iniciarPartidoForm.getClubVisitante());
+            partido.setArbitro(iniciarPartidoForm.getArbitro());
             partido.setFecha(new Date(System.currentTimeMillis()));
             partido = getServicesManager().savePartido(partido);
             PartidoSession ps = new PartidoSession();

@@ -17,74 +17,86 @@ import javax.persistence.Table;
 @Table(name = "partidos")
 public class Partido implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "partido_id", nullable = false)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "partido_id", nullable = false)
+    private Integer id;
 
-	@Column(name = "partido_fecha", nullable = false, unique = true)
-	private Date fecha;
+    @Column(name = "partido_fecha", nullable = false, unique = true)
+    private Date fecha;
 
-	@Column(name = "partido_resultado_local", nullable = true)
-	private Integer resultadoLocal;
+    @Column(name = "partido_resultado_local", nullable = true)
+    private Integer resultadoLocal;
 
-	@Column(name = "partido_resultado_visitante", nullable = true)
-	private Integer resultadoVisitante;
-	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
-	@JoinColumn(name = "partido_local_club_id", referencedColumnName = "club_id")
-	private Club clubLocal;
-	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
-	@JoinColumn(name = "partido_visitante_club_id", referencedColumnName = "club_id")
-	private Club clubVisitante;
-	
-	public Integer getId() {
-		return id;
-	}
+    @Column(name = "partido_resultado_visitante", nullable = true)
+    private Integer resultadoVisitante;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+    @JoinColumn(name = "partido_local_club_id", referencedColumnName = "club_id")
+    private Club clubLocal;
 
-	public Date getFecha() {
-		return fecha;
-	}
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+    @JoinColumn(name = "partido_visitante_club_id", referencedColumnName = "club_id")
+    private Club clubVisitante;
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Arbitro.class)
+    @JoinColumn(name = "partido_arbitro_id", referencedColumnName = "arbitro_id", nullable = false)
+    private Arbitro arbitro;
 
-	public Integer getResultadoLocal() {
-		return resultadoLocal;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setResultadoLocal(Integer resultadoLocal) {
-		this.resultadoLocal = resultadoLocal;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getResultadoVisitante() {
-		return resultadoVisitante;
-	}
+    public Date getFecha() {
+        return fecha;
+    }
 
-	public void setResultadoVisitante(Integer resultadoVisitante) {
-		this.resultadoVisitante = resultadoVisitante;
-	}
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
-	public Club getClubLocal() {
-		return clubLocal;
-	}
+    public Integer getResultadoLocal() {
+        return resultadoLocal;
+    }
 
-	public void setClubLocal(Club clubLocal) {
-		this.clubLocal = clubLocal;
-	}
+    public void setResultadoLocal(Integer resultadoLocal) {
+        this.resultadoLocal = resultadoLocal;
+    }
 
-	public Club getClubVisitante() {
-		return clubVisitante;
-	}
+    public Integer getResultadoVisitante() {
+        return resultadoVisitante;
+    }
 
-	public void setClubVisitante(Club clubVisitante) {
-		this.clubVisitante = clubVisitante;
-	}
+    public void setResultadoVisitante(Integer resultadoVisitante) {
+        this.resultadoVisitante = resultadoVisitante;
+    }
+
+    public Club getClubLocal() {
+        return clubLocal;
+    }
+
+    public void setClubLocal(Club clubLocal) {
+        this.clubLocal = clubLocal;
+    }
+
+    public Club getClubVisitante() {
+        return clubVisitante;
+    }
+
+    public void setClubVisitante(Club clubVisitante) {
+        this.clubVisitante = clubVisitante;
+    }
+
+    public Arbitro getArbitro() {
+        return arbitro;
+    }
+
+    public void setArbitro(Arbitro arbitro) {
+        this.arbitro = arbitro;
+    }
 
 }

@@ -42,6 +42,7 @@ CREATE TABLE partidos(
     partido_fecha date not null,
     partido_visitante_club_id integer unsigned not null,
     partido_local_club_id integer unsigned not null,
+    partido_arbitro_id integer unsigned not null,
     partido_resultado_local integer unsigned,
     partido_resultado_visitante integer unsigned
 )ENGINE=InnoDB;
