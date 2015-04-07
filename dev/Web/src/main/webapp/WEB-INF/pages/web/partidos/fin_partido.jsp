@@ -51,19 +51,20 @@
    <br>
    
             <div class="large-3 columns" style="text-align:center;">
-                <h1 class="txtLocal">LOCAL<br>84</h1>
+                <h1 class="txtLocal">${clubLocal.nombre}<br><c:out value="${partido.resultadoLocal}"/></h1>
             </div>
             <div class="large-1 columns">
                 <h1><br>-</h1>
             </div>
             <div class="large-3 columns" style="text-align:center;">
-                <h1 class="txtVisita">VISITANTE<br>103</h1>
+                <h1 class="txtLocal">${clubVisitante.nombre}<br><c:out value="${partido.resultadoVisitante}"/></h1>
             </div>
             <div class="large-4 columns">
                 <div class="panel callout radius">
-                    <h5 style="text-align:center;"><strong>03/10/2014</strong></h5>
-                    <h6>Estadio de Central</h6>
-                    <h6>Arbitro: Nestor Pitana</h6>
+                    <fmt:formatDate value="${partido.fecha}" var="dateString" pattern="dd/MM/yyyy" />
+                    <h5 style="text-align:center;"><strong><c:out value="${dateString}"/></strong></h5>
+                    <h6>Estadio de <c:out value="${clubLocal.nombre}"/></h6>
+                    <h6>Arbitro: <c:out value="${arbitro.nombre}"/></h6>
                 </div>
             </div>
         </div>
@@ -79,6 +80,7 @@
         <div class="row">
             <ul class="tabs" data-tab>
                 <li class="tab-title active" style="width: 20%;"><a href="#panel1"><br><strong>General</strong><br><br></a></li>
+                <!-- each cuarto -->
                 <li class="tab-title" style="width: 20%;"><a href="#panel2"><strong>1&#186; Cuarto</strong><br>Local: 12<br>Visita: 17</a></li>
                 <li class="tab-title" style="width: 20%;"><a href="#panel3" ><strong>2&#186; Cuarto</strong><br>Local: 33<br>Visita: 34</a></li>
                 <li class="tab-title" style="width: 20%;"><a href="#panel4" ><strong>3&#186; Cuarto</strong><br>Local: 17<br>Visita: 24</a></li>

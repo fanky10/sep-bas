@@ -13,9 +13,7 @@ import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.domain.repository.PartidoRepository;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -75,11 +73,14 @@ public class ReportsManagerImpl implements ReportsManager {
         sb.append("SELECT j FROM Evento e");
         sb.append(" JOIN e.jugador j");
         sb.append(" JOIN e.cuarto c");
-        sb.append(" WHERE c.partido.id = :partidoId and c.id = :cuartoId");
+        sb.append(" WHERE c.partido.id = :partidoId");
+        sb.append((cuartoId !=null && cuartoId > 0 ? " AND c.id = :cuartoId" : ""));
         sb.append(" GROUP BY e.jugador");
         Query query = entityManager.createQuery(sb.toString());
         query.setParameter("partidoId", partidoId);
-        query.setParameter("cuartoId", cuartoId);
+        if(cuartoId != null && cuartoId > 0) {
+            query.setParameter("cuartoId", cuartoId);
+        }
 
         List<Jugador> jugadoresConEventos = query.getResultList();
 

@@ -51,7 +51,7 @@ INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jug
 INSERT INTO `partidos` 
 (`partido_id`, `partido_arbitro_id`, `partido_fecha`, `partido_visitante_club_id`, `partido_local_club_id`, `partido_resultado_local`, `partido_resultado_visitante`) 
 VALUES 
-(1,1,'2013-03-04',1,2,NULL,NULL),
+(1,1,'2013-03-04',1,2,9,11),
 (2,1,'2013-03-04',2,3,NULL,NULL),
 (3,1,'2013-03-04',1,3,NULL,NULL);
 

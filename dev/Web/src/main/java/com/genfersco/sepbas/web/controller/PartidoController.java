@@ -1,5 +1,7 @@
 package com.genfersco.sepbas.web.controller;
 
+import com.genfersco.sepbas.app.services.ReportsManager;
+import com.genfersco.sepbas.app.services.vo.PartidoReportVO;
 import com.genfersco.sepbas.datafields.ArbitroPropertyEditor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,13 +27,17 @@ import com.genfersco.sepbas.web.validation.IniciarPartidoFormValidator;
 import java.util.Arrays;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PartidoController extends BaseController {
 
     @Autowired
     private IniciarPartidoFormValidator iniciarPartidoFormValidator;
+    @Autowired
+    private ReportsManager reportsManager;
 
     @InitBinder
     protected void initBinder(HttpServletRequest request,
@@ -79,8 +85,19 @@ public class PartidoController extends BaseController {
         return WebAppConstants.NUEVO_PARTIDO;
     }
     
-    @RequestMapping(value = "/partido/finalizar", method = RequestMethod.GET)
-    public String finPartido(HttpServletRequest request, ModelMap map) {
+    @RequestMapping(value = "/partido/finalizar/{partidoId}", method = RequestMethod.GET)
+    public String finPartido(@PathVariable("partidoId") Integer partidoId, HttpServletRequest request, ModelMap map) {
+        PartidoReportVO partidoReport = reportsManager.getPartidoReport(1);
+        Partido partido = partidoReport.getPartido();
+        Club clubLocal = partido.getClubLocal();
+        Club clubVisitante = partido.getClubVisitante();
+        Arbitro arbitro = partido.getArbitro();
+        
+        map.put("arbitro", arbitro);
+        map.put("clubLocal", clubLocal);
+        map.put("clubVisitante", clubVisitante);
+        map.put("partido", partido);
+
         return WebAppConstants.FIN_PARTIDO;
     }
 
@@ -90,12 +107,12 @@ public class PartidoController extends BaseController {
         PartidoSession ps = getSavedSessionPartido(request);
         if (ps == null) {// apply some filtering may be?
             return "redirect:/partido/iniciar";
-        } else if (ps.getCuarto() == null){
+        } else if (ps.getCuarto() == null) {
             return "redirect:/cuarto/iniciar";
         }
         return WebAppConstants.CONSOLA_OPERADOR;
     }
-    
+
     @RequestMapping(value = "/partido/operador", method = RequestMethod.GET)
     public String operadorEstatico(HttpServletRequest request,
             HttpServletResponse repsponse, ModelMap map) {
