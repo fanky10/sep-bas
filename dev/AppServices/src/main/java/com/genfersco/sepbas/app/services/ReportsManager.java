@@ -7,8 +7,8 @@ package com.genfersco.sepbas.app.services;
 
 import com.genfersco.sepbas.app.services.vo.CuartoReportVO;
 import com.genfersco.sepbas.app.services.vo.PartidoReportVO;
+import com.genfersco.sepbas.app.services.vo.ReporteJugadorVO;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -20,5 +20,5 @@ public interface ReportsManager {
 
     public List<CuartoReportVO> getCuartosReport(Integer partidoId);
 
-    public Map<String, Integer> getResultadoPorCuarto(Integer partidoId, Integer cuartoId);
+    public List<ReporteJugadorVO> getReporteJugadoresPorCuarto(Integer partidoId, Integer cuartoId);
 }

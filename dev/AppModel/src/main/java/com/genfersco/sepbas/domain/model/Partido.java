@@ -31,17 +31,22 @@ public class Partido implements Serializable {
     @Column(name = "partido_resultado_visitante", nullable = true)
     private Integer resultadoVisitante;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Club.class)
     @JoinColumn(name = "partido_local_club_id", referencedColumnName = "club_id")
     private Club clubLocal;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Club.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Club.class)
     @JoinColumn(name = "partido_visitante_club_id", referencedColumnName = "club_id")
     private Club clubVisitante;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Arbitro.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Arbitro.class)
     @JoinColumn(name = "partido_arbitro_id", referencedColumnName = "arbitro_id", nullable = false)
     private Arbitro arbitro;
+
+    @Override
+    public String toString() {
+        return "Partido{" + "id=" + id + ", fecha=" + fecha + ", resultadoLocal=" + resultadoLocal + ", resultadoVisitante=" + resultadoVisitante + ", clubLocal=" + clubLocal + ", clubVisitante=" + clubVisitante + ", arbitro=" + arbitro + '}';
+    }
 
     public Integer getId() {
         return id;

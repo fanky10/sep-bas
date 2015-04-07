@@ -31,8 +31,7 @@ INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jug
 (6,'2013-03-14 03:00:00','Larry','Bird',10,1,0),
 (7,'2013-03-15 03:00:00','Wilt','Chamberlain',9,1,0),
 (8,'2013-03-14 03:00:00','Bob','Cousy',2,1,0),
-(9,'2013-03-27 03:00:00','Dave','Cowens',88,1,0),
-(10,'2013-03-27 03:00:00','Julius','Erving',89,2,0);
+(9,'2013-03-27 03:00:00','Dave','Cowens',88,1,0);
 
 --
 -- Jugadores del club Fisherton
@@ -42,7 +41,8 @@ INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jug
 (12,'2013-03-14 03:00:00','Charles','Barkley',22,2,0),
 (13,'2013-03-15 03:00:00','Rick','Barry',23,2,0),
 (14,'2013-03-14 03:00:00','Elgin','Baylor',33,2,0),
-(15,'2013-03-15 03:00:00','Dave','Bing',11,2,0);
+(15,'2013-03-15 03:00:00','Dave','Bing',11,2,0),
+(10,'2013-03-27 03:00:00','Julius','Erving',89,2,0);
 
 
 --
@@ -51,7 +51,7 @@ INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jug
 INSERT INTO `partidos` 
 (`partido_id`, `partido_arbitro_id`, `partido_fecha`, `partido_visitante_club_id`, `partido_local_club_id`, `partido_resultado_local`, `partido_resultado_visitante`) 
 VALUES 
-(1,1,'2013-03-04',1,2,NULL,NULL),
+(1,1,'2013-03-04',1,2,9,11),
 (2,1,'2013-03-04',2,3,NULL,NULL),
 (3,1,'2013-03-04',1,3,NULL,NULL);
 
@@ -67,16 +67,29 @@ VALUES
 --
 
 -- cuarto 1 partido 1 total puntos: 9
-INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo_evento`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
-VALUES (1,NULL,'2013-03-04 18:12:14',3,1,1,1),
-(2,NULL,'2013-03-04 18:12:14',3,1,1,1),
-(3,NULL,'2013-05-09 01:02:39',3,1,1,1),
-(4,NULL,'2013-05-09 01:02:39',4,1,1,1);
+INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
+VALUES (1,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,1),
+(2,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,1),
+(3,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,1),
+(4,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_TRES_PUNTOS',1,1,1);
 
 -- cuarto 1 partido 1 total puntos: 11
-INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo_evento`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
-VALUES (5,NULL,'2013-03-04 18:12:14',3,1,1,12),
-(6,NULL,'2013-03-04 18:12:14',3,1,1,12),
-(7,NULL,'2013-05-09 01:02:39',3,1,1,12),
-(8,NULL,'2013-05-09 01:02:39',3,1,1,12),
-(9,NULL,'2013-05-09 01:02:39',4,1,1,12);
+INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
+VALUES (5,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(6,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(7,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(8,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,1,12),
+(9,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_TRES_PUNTOS',1,1,12);
+
+
+-- cuarto 2 partido 1 total puntos: 7
+INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
+VALUES (NULL,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,2,1),
+(NULL,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,2,1),
+(NULL,NULL,'2013-05-09 01:02:39','LANZAMIENTO_JUGADOR_TRES_PUNTOS',1,2,1);
+
+-- cuarto 2 partido 1 total puntos: 4
+INSERT INTO `eventos` (`evento_id`, `evento_generador_id`, `evento_fec_hora`, `evento_tipo`, `evento_estado`, `evento_cuarto_id`, `evento_jugador_id`) 
+VALUES (NULL,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,2,12),
+(NULL,NULL,'2013-03-04 18:12:14','LANZAMIENTO_JUGADOR_DOS_PUNTOS',1,2,12);
+
