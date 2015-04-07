@@ -87,17 +87,8 @@ public class PartidoController extends BaseController {
     
     @RequestMapping(value = "/partido/finalizar/{partidoId}", method = RequestMethod.GET)
     public String finPartido(@PathVariable("partidoId") Integer partidoId, HttpServletRequest request, ModelMap map) {
-        PartidoReportVO partidoReport = reportsManager.getPartidoReport(1);
-        Partido partido = partidoReport.getPartido();
-        Club clubLocal = partido.getClubLocal();
-        Club clubVisitante = partido.getClubVisitante();
-        Arbitro arbitro = partido.getArbitro();
+        map.put("partidoId", partidoId);
         
-        map.put("arbitro", arbitro);
-        map.put("clubLocal", clubLocal);
-        map.put("clubVisitante", clubVisitante);
-        map.put("partido", partido);
-
         return WebAppConstants.FIN_PARTIDO;
     }
 

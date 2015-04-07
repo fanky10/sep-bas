@@ -3,71 +3,40 @@
 <link rel="stylesheet" href="<c:url value="/css/fin_partido.css"/>">
 </content>
 <content tag="jscriptlibs">
-<script type="text/javascript" src="<c:url value="/js/vendor/modernizr.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/Chart.js"/>"></script>
+    <script>
+        var ID_PARTIDO_PARAM = <c:out value="${partidoId}"/>;
+    </script>
+    <script type="text/javascript" src="<c:url value="/js/vendor/modernizr.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/Chart.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/vendor/moment-with-locales.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/partidos/finalizar.js"/>"></script>
 </content>
 <content tag="jscript">
     <script>
-       
-        var lineChartData = {
-    			labels : ["Inicio","1er Cuarto","2do Cuarto","3er Cuarto","4to Cuarto"],
-    			datasets : [
-    				{
-    					label: "Local",
-    					fillColor : "rgba(255,50,0,0.2)",
-    					strokeColor : "rgba(255,50,0,1)",
-    					pointColor : "rgba(255,50,0,1)",
-    					pointStrokeColor : "#fff",
-    					pointHighlightFill : "#fff",
-    					pointHighlightStroke : "rgba(255,0,0,1)",
-    					data : [0,23,45,67,88]
-    				},
-    				{
-    					label: "Visita",
-    					fillColor : "rgba(151,187,205,0.2)",
-    					strokeColor : "rgba(151,187,205,1)",
-    					pointColor : "rgba(151,187,205,1)",
-    					pointStrokeColor : "#fff",
-    					pointHighlightFill : "#fff",
-    					pointHighlightStroke : "rgba(151,187,205,1)",
-    					data : [0,32,44,67,103]
-    				}
-    			]
-
-    		}
-
-    	window.onload = function(){
-    		var ctx = document.getElementById("canvas").getContext("2d");
-    		window.myLine = new Chart(ctx).Line(lineChartData, {
-    			responsive: true
-    		});
-    	}
         $(document).foundation();
     </script>
 </content>
 <content tag="bodyContent">
 
-   <div class="row">
-   <br>
-   
-            <div class="large-3 columns" style="text-align:center;">
-                <h1 class="txtLocal">${clubLocal.nombre}<br><c:out value="${partido.resultadoLocal}"/></h1>
-            </div>
-            <div class="large-1 columns">
-                <h1><br>-</h1>
-            </div>
-            <div class="large-3 columns" style="text-align:center;">
-                <h1 class="txtLocal">${clubVisitante.nombre}<br><c:out value="${partido.resultadoVisitante}"/></h1>
-            </div>
-            <div class="large-4 columns">
-                <div class="panel callout radius">
-                    <fmt:formatDate value="${partido.fecha}" var="dateString" pattern="dd/MM/yyyy" />
-                    <h5 style="text-align:center;"><strong><c:out value="${dateString}"/></strong></h5>
-                    <h6>Estadio de <c:out value="${clubLocal.nombre}"/></h6>
-                    <h6>Arbitro: <c:out value="${arbitro.nombre}"/></h6>
-                </div>
+    <div class="row">
+        <br>
+        <div class="large-3 columns" style="text-align:center;">
+            <h1 class="js-resultado local txtLocal"></h1>
+        </div>
+        <div class="large-1 columns">
+            <h1><br>-</h1>
+        </div>
+        <div class="large-3 columns" style="text-align:center;">
+            <h1 class="js-resultado visitante txtLocal"></h1>
+        </div>
+        <div class="large-4 columns">
+            <div class="panel callout radius">
+                <h5 style="text-align:center;"><strong class="js-fecha-partido"></strong></h5>
+                <h6 class="js-estadio-partido"></h6>
+                <h6 class="js-arbitro-partido"></h6>
             </div>
         </div>
+    </div>
        
        <div class="row">
        		<div style="width:100%;height:170px">
@@ -78,13 +47,8 @@
        </div>
        
         <div class="row">
-            <ul class="tabs" data-tab>
+            <ul class="js-cuartos-tabs tabs" data-tab>
                 <li class="tab-title active" style="width: 20%;"><a href="#panel1"><br><strong>General</strong><br><br></a></li>
-                <!-- each cuarto -->
-                <li class="tab-title" style="width: 20%;"><a href="#panel2"><strong>1&#186; Cuarto</strong><br>Local: 12<br>Visita: 17</a></li>
-                <li class="tab-title" style="width: 20%;"><a href="#panel3" ><strong>2&#186; Cuarto</strong><br>Local: 33<br>Visita: 34</a></li>
-                <li class="tab-title" style="width: 20%;"><a href="#panel4" ><strong>3&#186; Cuarto</strong><br>Local: 17<br>Visita: 24</a></li>
-                <li class="tab-title" style="width: 20%;"><a href="#panel5" ><strong>4&#186; Cuarto</strong><br>Local: 24<br>Visita: 43</a></li>
             </ul>
             <div class="tabs-content">
                 <div class="content active" id="panel1">
