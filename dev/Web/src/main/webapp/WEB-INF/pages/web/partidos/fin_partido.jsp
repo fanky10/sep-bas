@@ -70,17 +70,7 @@
                                     <th scope="col">Faltas</th>
                                 </tr>
                             </thead>
-                            <tbody class="js-data-local">
-                                <tr>
-                                    <td align="center">32</td>
-                                    <td>Jugador Local</td>
-                                    <td align="center">2</td>
-                                    <td align="center">3</td>
-                                    <td align="center">4</td>
-                                    <td align="center">5</td>
-                                    <td align="center">3</td>
-                                </tr>
-                            </tbody>
+                            <tbody class="js-jugadores-data-local"></tbody>
                         </table>
                     </div>
                     <div class="content" id="panelVisitante">
@@ -96,17 +86,7 @@
                                     <th scope="col">Faltas</th>
                                 </tr>
                             </thead>
-                            <tbody class="js-data-visitante">
-                                <tr>
-                                    <td align="center">32</td>
-                                    <td>Jugador Visitante</td>
-                                    <td align="center">2</td>
-                                    <td align="center">3</td>
-                                    <td align="center">4</td>
-                                    <td align="center">5</td>
-                                    <td align="center">3</td>
-                                </tr>
-                            </tbody>
+                            <tbody class="js-jugadores-data-visitante"></tbody>
                         </table>
                     </div>
                 </div>
