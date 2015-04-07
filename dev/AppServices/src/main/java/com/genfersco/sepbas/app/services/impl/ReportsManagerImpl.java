@@ -89,11 +89,14 @@ public class ReportsManagerImpl implements ReportsManager {
         sb.append(" FROM reporte_jugadores rj");
         sb.append(" INNER JOIN cuartos c ON c.cuarto_id = rj.cuarto_id");
         sb.append(" INNER JOIN partidos p ON p.partido_id = c.cuarto_partido_id");
-        sb.append(" WHERE p.partido_id = :partidoId AND c.cuarto_id = :cuartoId");
+        sb.append(" WHERE p.partido_id = :partidoId");
+        sb.append((cuartoId !=null && cuartoId > 0 ? " AND c.cuarto_id = :cuartoId" : ""));
         sb.append(" GROUP BY rj.jugador_id");
         query = entityManager.createNativeQuery(sb.toString());
         query.setParameter("partidoId", partidoId);
-        query.setParameter("cuartoId", cuartoId);
+        if(cuartoId != null && cuartoId > 0) {
+            query.setParameter("cuartoId", cuartoId);
+        }
         List<Object[]> reporteList = query.getResultList();
 
         List<ReporteJugadorVO> reporteJugadores = new ArrayList<ReporteJugadorVO>();

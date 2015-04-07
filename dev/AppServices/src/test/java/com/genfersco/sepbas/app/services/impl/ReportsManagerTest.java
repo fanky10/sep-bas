@@ -59,6 +59,7 @@ public class ReportsManagerTest {
 
     private Partido partido = new Partido();
     private Cuarto primerCuarto = new Cuarto();
+    private Cuarto segundoCuarto = new Cuarto();
 
     @Before
     public void buildData() {
@@ -77,6 +78,10 @@ public class ReportsManagerTest {
         primerCuarto.setNumero(1);
         primerCuarto.setPartido(partido);
         primerCuarto = cuartoRepository.save(primerCuarto);
+        
+        segundoCuarto.setNumero(2);
+        segundoCuarto.setPartido(partido);
+        segundoCuarto = cuartoRepository.save(segundoCuarto);
     }
 
     @Test
@@ -89,7 +94,7 @@ public class ReportsManagerTest {
         
         List<CuartoReportVO> cuartosReportVO = reportsManager.getCuartosReport(partido.getId());
         assertTrue(cuartosReportVO != null && !cuartosReportVO.isEmpty());
-        assertTrue(cuartosReportVO.size() == 1);
+        assertTrue(cuartosReportVO.size() == 2);
         assertTrue(cuartosReportVO.get(0).getResultadoLocal() == 3);
         assertTrue(cuartosReportVO.get(0).getResultadoVisitante() == 2);
     }
@@ -102,7 +107,7 @@ public class ReportsManagerTest {
     }
     
     @Test
-    public void testGetReporteJugadores() {
+    public void testGetReporteJugadoresByPartidoAndCuarto() {
         Jugador jugadorLocal = jugadorMocked.getJugador(partido.getClubLocal(), true);
         Jugador jugadorVisitante = jugadorMocked.getJugador(partido.getClubVisitante(), true);
         eventoMocked.getEvento(primerCuarto, null, TipoEvento.LANZAMIENTO_JUGADOR_TRES_PUNTOS, jugadorLocal);
@@ -120,6 +125,32 @@ public class ReportsManagerTest {
             
             if(rjvo.getJugador().getId().equals(jugadorVisitante.getId())) {
                 assertTrue(rjvo.getCantidadDobles() == 1);
+            }
+        }
+    }
+    
+    @Test
+    public void testGetReporteJugadoresByPartido() {
+        Jugador jugadorLocal = jugadorMocked.getJugador(partido.getClubLocal(), true);
+        Jugador jugadorVisitante = jugadorMocked.getJugador(partido.getClubVisitante(), true);
+        eventoMocked.getEvento(primerCuarto, null, TipoEvento.LANZAMIENTO_JUGADOR_TRES_PUNTOS, jugadorLocal);
+        eventoMocked.getEvento(primerCuarto, null, TipoEvento.LANZAMIENTO_JUGADOR_TRES_PUNTOS, jugadorLocal);
+        eventoMocked.getEvento(segundoCuarto, null, TipoEvento.LANZAMIENTO_JUGADOR_TRES_PUNTOS, jugadorLocal);
+        
+        eventoMocked.getEvento(primerCuarto, null, TipoEvento.LANZAMIENTO_JUGADOR_DOS_PUNTOS, jugadorVisitante);
+        eventoMocked.getEvento(segundoCuarto, null, TipoEvento.LANZAMIENTO_JUGADOR_DOS_PUNTOS, jugadorVisitante);
+        
+        List<ReporteJugadorVO> reporteJugadores = reportsManager.getReporteJugadoresPorCuarto(partido.getId(), null);
+        assertTrue(reporteJugadores != null);
+        assertTrue(!reporteJugadores.isEmpty());
+        assertTrue(reporteJugadores.size() == 2);
+        for(ReporteJugadorVO rjvo : reporteJugadores) {
+            if(rjvo.getJugador().getId().equals(jugadorLocal.getId())) {
+                assertTrue(rjvo.getCantidadTriples() == 3);
+            }
+            
+            if(rjvo.getJugador().getId().equals(jugadorVisitante.getId())) {
+                assertTrue(rjvo.getCantidadDobles() == 2);
             }
         }
     }

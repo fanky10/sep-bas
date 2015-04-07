@@ -7,6 +7,7 @@ package com.genfersco.sepbas.services.controller;
 
 import com.genfersco.sepbas.app.services.ReportsManager;
 import com.genfersco.sepbas.app.services.vo.CuartoReportVO;
+import com.genfersco.sepbas.app.services.vo.ReporteJugadorVO;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.domain.repository.PartidoRepository;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
@@ -55,6 +56,25 @@ public class ReportesAPIController extends AbstractAPIController {
                 message.setMessage("Partido not found with id: " + idPartido);
             }
         }
+
+        return message;
+    }
+    
+    @RequestMapping(value = "/reportes/jugadores/{idPartido}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseMessage getReporteJugadoresPortPartido(@PathVariable("idPartido") Integer idPartido, HttpServletRequest request, WebRequest webRequest) {
+        return getReporteJugadoresPortPartidoCuarto(idPartido, null, request, webRequest);
+    }
+    
+    @RequestMapping(value = "/reportes/jugadores/{idPartido}/{idCuarto}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseMessage getReporteJugadoresPortPartidoCuarto(@PathVariable("idPartido") Integer idPartido,
+            @PathVariable("idCuarto") Integer idCuarto, 
+            HttpServletRequest request, WebRequest webRequest) {
+        List<ReporteJugadorVO> report = reportsManager.getReporteJugadoresPorCuarto(idPartido, idCuarto);
+        ResponseMessage message = new ResponseMessage();
+        message.setCode(WebAppConstants.RESPONSE_CODE_OK);
+        message.setContent(report);
 
         return message;
     }
