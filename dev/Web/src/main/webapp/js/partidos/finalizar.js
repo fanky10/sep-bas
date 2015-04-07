@@ -17,7 +17,7 @@ ReporteFinPartidoView = function () {
     };
 
     var partidoActual;
-
+    
     function render() {
         getPartidoData()
                 .success(function (response) {
@@ -99,7 +99,16 @@ ReporteFinPartidoView = function () {
             content.push('<br>Local: ' + resultadoLocal + '<br>Visita: ' + resultadoVisitante + '</a></li>');
             numeroCuarto += 1;
         }
-        options.$partidoCuartoTabs.append(content.join(''))
+        options.$partidoCuartoTabs.append(content.join(''));
+
+        $('.js-tab-cuarto').on('click', function (event){
+            event.preventDefault();
+            
+            $('.js-tab-cuarto').parent().removeClass('active');
+            $(this).parent().addClass('active');
+            
+            renderTablaJugadores($(this).attr('data-numero'));
+        })
     }
 
     function renderPartidoData(partido) {

@@ -47,8 +47,8 @@
     </div>
 
     <div class="row">
-        <ul class="js-cuartos-tabs tabs" data-tab>
-            <li class="tab-title active" style="width: 20%;"><a href="#panel1"><br><strong>General</strong><br><br></a></li>
+        <ul class="js-cuartos-tabs tabs">
+            <li class="tab-title active" style="width: 20%;"><a class="js-tab-cuarto" href="#panel1"><br><strong>General</strong><br><br></a></li>
         </ul>
         <div class="tabs-content">
             <div class="content active" id="panel1">
