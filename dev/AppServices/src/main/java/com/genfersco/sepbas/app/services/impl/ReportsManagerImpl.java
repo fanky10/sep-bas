@@ -8,8 +8,11 @@ package com.genfersco.sepbas.app.services.impl;
 import com.genfersco.sepbas.app.services.ReportsManager;
 import com.genfersco.sepbas.app.services.vo.CuartoReportVO;
 import com.genfersco.sepbas.app.services.vo.PartidoReportVO;
+import com.genfersco.sepbas.app.services.vo.ReporteJugadorVO;
+import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
 import com.genfersco.sepbas.domain.repository.PartidoRepository;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,39 +50,68 @@ public class ReportsManagerImpl implements ReportsManager {
     @Override
     public List<CuartoReportVO> getCuartosReport(Integer partidoId) {
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT NEW com.genfersco.sepbas.app.services.vo.CuartoReportVO(c.id,c.numero,0,0) FROM Cuarto c");
-        sb.append(" WHERE c.partido.id = :partidoId");
+        sb.append("SELECT c.cuarto_id, c.cuarto_numero,");
+        sb.append(" COALESCE((select sum(lanzamientosDobles) * 2 + sum(lanzamientosTriples) * 3 + sum(lanzamientosSimples) as totalPuntos from reporte_jugadores rj inner join jugadores j on j.jugador_id = rj.jugador_id where jugador_actual_club_id = p.partido_local_club_id AND rj.cuarto_id = c.cuarto_id),0) totalClubLocal,");
+        sb.append(" COALESCE((select sum(lanzamientosDobles) * 2 + sum(lanzamientosTriples) * 3 + sum(lanzamientosSimples) as totalPuntos from reporte_jugadores rj inner join jugadores j on j.jugador_id = rj.jugador_id where jugador_actual_club_id = p.partido_visitante_club_id AND rj.cuarto_id = c.cuarto_id),0) totalClubVisitante");
+        sb.append(" FROM cuartos c ");
+        sb.append(" INNER JOIN partidos p ON p.partido_id = c.cuarto_partido_id");
+        sb.append(" WHERE p.partido_id = :partidoId");
+        sb.append(" GROUP BY cuarto_id");
 
-        Query query = entityManager.createQuery(sb.toString());
+        Query query = entityManager.createNativeQuery(sb.toString());
         query.setParameter("partidoId", partidoId);
-        List<CuartoReportVO> report = query.getResultList();
 
-        return report;
+        List<Object[]> result = query.getResultList();
+        List<CuartoReportVO> cuartoReport = new ArrayList<CuartoReportVO>();
+        for (Object[] row : result) {
+            cuartoReport.add(new CuartoReportVO(Integer.valueOf(row[0].toString()), Integer.valueOf(row[1].toString()), Integer.valueOf(row[2].toString()), Integer.valueOf(row[3].toString())));
+        }
+        return cuartoReport;
     }
 
-    public Map<String, Integer> getResultadoPorCuarto(Integer partidoId, Integer cuartoId) {
-        Map<String, Integer> puntosCuarto = new HashMap<String, Integer>();
-        /**
-         * (CASE WHEN e.tipoEvento.valor = 2 THEN 1 ELSE (CASE WHEN e.tipoEvento.valor = 3 THEN 2 ELSE 0 END) END)
-         */
+    @Override
+    public List<ReporteJugadorVO> getReporteJugadoresPorCuarto(Integer partidoId, Integer cuartoId) {
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT SUM(CASE WHEN e.tipoEvento = com.genfersco.sepbas.domain.model.TipoEvento.LANZAMIENTO_JUGADOR_DOS_PUNTOS THEN 2 ELSE 0 END)");
-        sb.append(" FROM Evento e");
+        sb.append("SELECT j FROM Evento e");
         sb.append(" JOIN e.jugador j");
-        sb.append(" JOIN j.club club");
-        sb.append(" JOIN e.cuarto cuarto");
-        sb.append(" JOIN cuarto.partido p");
-        sb.append(" WHERE club = p.clubLocal");
-        sb.append(" AND p.id = :partidoId AND cuarto.id = :cuartoId");
-        sb.append(" AND cuarto.id = :cuartoId");
-
+        sb.append(" JOIN e.cuarto c");
+        sb.append(" WHERE c.partido.id = :partidoId and c.id = :cuartoId");
+        sb.append(" GROUP BY e.jugador");
         Query query = entityManager.createQuery(sb.toString());
         query.setParameter("partidoId", partidoId);
         query.setParameter("cuartoId", cuartoId);
-        Long puntos = (Long) query.getSingleResult();
-        puntosCuarto.put("local", puntos.intValue());
-        puntosCuarto.put("visitante", 200);
-        return puntosCuarto;
+
+        List<Jugador> jugadoresConEventos = query.getResultList();
+
+        sb = new StringBuilder();
+        sb.append("SELECT rj.jugador_id, sum(lanzamientosSimples), sum(lanzamientosDobles), sum(lanzamientosTriples), sum(asistencias), sum(faltas) ");
+        sb.append(" FROM reporte_jugadores rj");
+        sb.append(" INNER JOIN cuartos c ON c.cuarto_id = rj.cuarto_id");
+        sb.append(" INNER JOIN partidos p ON p.partido_id = c.cuarto_partido_id");
+        sb.append(" WHERE p.partido_id = :partidoId AND c.cuarto_id = :cuartoId");
+        sb.append(" GROUP BY rj.jugador_id");
+        query = entityManager.createNativeQuery(sb.toString());
+        query.setParameter("partidoId", partidoId);
+        query.setParameter("cuartoId", cuartoId);
+        List<Object[]> reporteList = query.getResultList();
+
+        List<ReporteJugadorVO> reporteJugadores = new ArrayList<ReporteJugadorVO>();
+        for (Object[] row : reporteList) {
+            for (Jugador j : jugadoresConEventos) {
+                Integer jugadorId = Integer.valueOf(row[0].toString());
+                Integer simples = Integer.valueOf(row[1].toString());
+                Integer dobles = Integer.valueOf(row[2].toString());
+                Integer triples = Integer.valueOf(row[3].toString());
+                Integer asistencias = Integer.valueOf(row[4].toString());
+                Integer faltas = Integer.valueOf(row[5].toString());
+
+                if (j.getId().equals(jugadorId)) {
+                    reporteJugadores.add(new ReporteJugadorVO(j, simples, dobles, triples, asistencias, faltas));
+                }
+            }
+        }
+
+        return reporteJugadores;
     }
 
 }

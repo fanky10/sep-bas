@@ -31,21 +31,18 @@ public class EventoMocked {
     }
 
     public Evento getEvento(Cuarto cuarto, Evento eventoGenerador) {
-        return getEvento(cuarto, eventoGenerador, TipoEvento.INGRESA_JUGADOR);
+        return getEvento(cuarto, eventoGenerador, TipoEvento.INGRESA_JUGADOR, jugadorMocked.getJugador());
     }
 
-    public Evento getEvento(Cuarto cuarto, Evento eventoGenerador, TipoEvento tipoEvento) {
-        Jugador jugador = jugadorMocked.getJugador();
+    public Evento getEvento(Cuarto cuarto, Evento eventoGenerador, TipoEvento tipoEvento, Jugador jugador) {
         Evento evento = new Evento();
         evento.setCuarto(cuarto);
         evento.setFechaHora(new Date(System.currentTimeMillis()));
         evento.setEstado(EstadoEvento.NO_ELIMINADO);
         evento.setTipoEvento(tipoEvento);
         evento.setJugador(jugador);
-        if (eventoGenerador != null) {
-            evento.setEventoGenerador(eventoGenerador);
-        }
-        evento = eventoRepository.save(evento);
-        return evento;
+        evento.setEventoGenerador(eventoGenerador);
+
+        return eventoRepository.save(evento);
     }
 }

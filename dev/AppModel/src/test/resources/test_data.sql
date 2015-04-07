@@ -31,8 +31,7 @@ INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jug
 (6,'2013-03-14 03:00:00','Larry','Bird',10,1,0),
 (7,'2013-03-15 03:00:00','Wilt','Chamberlain',9,1,0),
 (8,'2013-03-14 03:00:00','Bob','Cousy',2,1,0),
-(9,'2013-03-27 03:00:00','Dave','Cowens',88,1,0),
-(10,'2013-03-27 03:00:00','Julius','Erving',89,2,0);
+(9,'2013-03-27 03:00:00','Dave','Cowens',88,1,0);
 
 --
 -- Jugadores del club Fisherton
@@ -42,7 +41,8 @@ INSERT INTO `jugadores` (`jugador_id`, `jugador_fec_nac`, `jugador_nombre`, `jug
 (12,'2013-03-14 03:00:00','Charles','Barkley',22,2,0),
 (13,'2013-03-15 03:00:00','Rick','Barry',23,2,0),
 (14,'2013-03-14 03:00:00','Elgin','Baylor',33,2,0),
-(15,'2013-03-15 03:00:00','Dave','Bing',11,2,0);
+(15,'2013-03-15 03:00:00','Dave','Bing',11,2,0),
+(10,'2013-03-27 03:00:00','Julius','Erving',89,2,0);
 
 
 --
