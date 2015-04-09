@@ -375,7 +375,7 @@ function cargaHTML() {
     console.log('Armando el form de suplentes!!');
     Form_suplentes_locales = '<div class="row">';
     Form_suplentes_locales += '<div class="row">';
-    Form_suplentes_locales += '<div class="four columns"><img src="/Web/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
+    Form_suplentes_locales += '<div class="four columns"><img src="'+CTX_PATH+'/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
     Form_suplentes_locales += '<div class="four columns">';
     Form_suplentes_locales += '<h4 style="text-align:center">Sustituciones ' + clubLocal.nombre + '</h4>';
     Form_suplentes_locales += '</div>';
@@ -407,7 +407,7 @@ function cargaHTML() {
     document.getElementById('SustitucionesLocal').innerHTML = Form_suplentes_locales;
     Form_suplentes_visitantes = '<div class="row">';
     Form_suplentes_visitantes += '<div class="row">';
-    Form_suplentes_visitantes += '<div class="four columns"><img src="/Web/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
+    Form_suplentes_visitantes += '<div class="four columns"><img src="'+CTX_PATH+'/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
     Form_suplentes_visitantes += '<div class="four columns">';
     Form_suplentes_visitantes += '<h4 style="text-align:center">Sustituciones ' + clubVisitante.nombre + '</h4>';
     Form_suplentes_visitantes += '</div>';
