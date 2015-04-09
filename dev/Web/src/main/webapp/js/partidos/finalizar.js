@@ -17,7 +17,7 @@ ReporteFinPartidoView = function () {
     };
 
     var partidoActual;
-    
+
     function render() {
         getPartidoData()
                 .success(function (response) {
@@ -84,23 +84,19 @@ ReporteFinPartidoView = function () {
         var resultadoVisitante = 0;
         var numeroCuarto = 1;
         var content = [];
+        partidoActual.resultadoLocalCuartos = 0;
+        partidoActual.resultadoVisitanteCuartos = 0;
         for (; i < 4; i++) {
             var cuarto = cuartos[i];
             if (cuarto) {
                 resultadoLocal = cuarto.resultadoLocal;
                 resultadoVisitante = cuarto.resultadoVisitante;
-
-                if(!partidoActual.resultadoLocal) {
-                    partidoActual.resultadoLocal += cuarto.resultadoLocal;
-                }
-                
-                if(!partidoActual.resultadoVisitante) {
-                    partidoActual.resultadoVisitante += cuarto.resultadoVisitante;
-                }
+                partidoActual.resultadoLocalCuartos += cuarto.resultadoLocal;
+                partidoActual.resultadoVisitanteCuartos += cuarto.resultadoVisitante;
             } else {
                 resultadoLocal = 0;
                 resultadoVisitante = 0;
-        
+
             }
             content.push('<li class="tab-title" style="width: 20%;">\n');
             content.push('<a class="js-tab-cuarto" data-numero="' + numeroCuarto + '" href="#"><strong>' + numeroCuarto + '&#186; Cuarto</strong>');
@@ -109,19 +105,19 @@ ReporteFinPartidoView = function () {
         }
         options.$partidoCuartoTabs.append(content.join(''));
 
-        $('.js-tab-cuarto').on('click', function (event){
+        $('.js-tab-cuarto').on('click', function (event) {
             event.preventDefault();
-            
+
             $('.js-tab-cuarto').parent().removeClass('active');
             $(this).parent().addClass('active');
-            
+
             renderTablaJugadores($(this).attr('data-numero'));
-        })
+        });
     }
 
     function renderPartidoData(partido) {
-        options.$resultadoLocalContainer.html(partido.clubLocal.nombre + '<br>' + partido.resultadoLocal);
-        options.$resultadoVisitanteContainer.html(partido.clubVisitante.nombre + '<br>' + partido.resultadoVisitante);
+        options.$resultadoLocalContainer.html(partido.clubLocal.nombre + '<br>' + partido.resultadoLocalCuartos);
+        options.$resultadoVisitanteContainer.html(partido.clubVisitante.nombre + '<br>' + partido.resultadoVisitanteCuartos);
         options.$partidoFechaContainer.html(moment(partido.fecha).format('DD/MM/YYYY'));
         options.$partidoEstadioContainer.html('Estadio de: ' + partido.clubLocal.nombre);
         options.$partidoArbitroContainer.html('Arbitro: ' + partido.arbitro.nombre);
@@ -138,26 +134,26 @@ ReporteFinPartidoView = function () {
             var localTableContent = [];
             var visitanteTableContent = [];
             var reporte = response.content;
-            $.each(reporte, function (idx,lineaReporte){
-                if(partidoActual.clubLocal.id === lineaReporte.jugador.club.id) {
+            $.each(reporte, function (idx, lineaReporte) {
+                if (partidoActual.clubLocal.id === lineaReporte.jugador.club.id) {
                     localTableContent.push('<tr>');
-                    localTableContent.push('<td align="center">'+lineaReporte.jugador.numero+'</td>');
-                    localTableContent.push('<td align="center">'+lineaReporte.jugador.nombre+'</td>');
-                    localTableContent.push('<td align="center">'+lineaReporte.cantidadSimples+'</td>');
-                    localTableContent.push('<td align="center">'+lineaReporte.cantidadDobles+'</td>');
-                    localTableContent.push('<td align="center">'+lineaReporte.cantidadTriples+'</td>');
-                    localTableContent.push('<td align="center">'+lineaReporte.cantidadAsistencias+'</td>');
-                    localTableContent.push('<td align="center">'+lineaReporte.cantidadFaltas+'</td>');
+                    localTableContent.push('<td align="center">' + lineaReporte.jugador.numero + '</td>');
+                    localTableContent.push('<td align="center">' + lineaReporte.jugador.nombre + '</td>');
+                    localTableContent.push('<td align="center">' + lineaReporte.cantidadSimples + '</td>');
+                    localTableContent.push('<td align="center">' + lineaReporte.cantidadDobles + '</td>');
+                    localTableContent.push('<td align="center">' + lineaReporte.cantidadTriples + '</td>');
+                    localTableContent.push('<td align="center">' + lineaReporte.cantidadAsistencias + '</td>');
+                    localTableContent.push('<td align="center">' + lineaReporte.cantidadFaltas + '</td>');
                     localTableContent.push('</tr>');
                 } else {
                     visitanteTableContent.push('<tr>');
-                    visitanteTableContent.push('<td align="center">'+lineaReporte.jugador.numero+'</td>');
-                    visitanteTableContent.push('<td align="center">'+lineaReporte.jugador.nombre+'</td>');
-                    visitanteTableContent.push('<td align="center">'+lineaReporte.cantidadSimples+'</td>');
-                    visitanteTableContent.push('<td align="center">'+lineaReporte.cantidadDobles+'</td>');
-                    visitanteTableContent.push('<td align="center">'+lineaReporte.cantidadTriples+'</td>');
-                    visitanteTableContent.push('<td align="center">'+lineaReporte.cantidadAsistencias+'</td>');
-                    visitanteTableContent.push('<td align="center">'+lineaReporte.cantidadFaltas+'</td>');
+                    visitanteTableContent.push('<td align="center">' + lineaReporte.jugador.numero + '</td>');
+                    visitanteTableContent.push('<td align="center">' + lineaReporte.jugador.nombre + '</td>');
+                    visitanteTableContent.push('<td align="center">' + lineaReporte.cantidadSimples + '</td>');
+                    visitanteTableContent.push('<td align="center">' + lineaReporte.cantidadDobles + '</td>');
+                    visitanteTableContent.push('<td align="center">' + lineaReporte.cantidadTriples + '</td>');
+                    visitanteTableContent.push('<td align="center">' + lineaReporte.cantidadAsistencias + '</td>');
+                    visitanteTableContent.push('<td align="center">' + lineaReporte.cantidadFaltas + '</td>');
                     visitanteTableContent.push('</tr>');
                 }
             });
