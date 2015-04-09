@@ -27,7 +27,7 @@
             <h1><br>-</h1>
         </div>
         <div class="large-3 columns" style="text-align:center;">
-            <h1 class="js-resultado visitante txtLocal"></h1>
+            <h1 class="js-resultado visitante txtVisita"></h1>
         </div>
         <div class="large-4 columns">
             <div class="panel callout radius">

@@ -22,9 +22,9 @@ ReporteFinPartidoView = function () {
         getPartidoData()
                 .success(function (response) {
                     partidoActual = response.content.partido;
+                    renderCuartosTabs(response.content.cuartos);
                     renderPartidoData(response.content.partido);
                     renderChart(response.content.cuartos);
-                    renderCuartosTabs(response.content.cuartos);
                     renderTablaJugadores();
                 });
     }
@@ -89,6 +89,14 @@ ReporteFinPartidoView = function () {
             if (cuarto) {
                 resultadoLocal = cuarto.resultadoLocal;
                 resultadoVisitante = cuarto.resultadoVisitante;
+
+                if(!partidoActual.resultadoLocal) {
+                    partidoActual.resultadoLocal += cuarto.resultadoLocal;
+                }
+                
+                if(!partidoActual.resultadoVisitante) {
+                    partidoActual.resultadoLocal += cuarto.resultadoVisitante;
+                }
             } else {
                 resultadoLocal = 0;
                 resultadoVisitante = 0;
