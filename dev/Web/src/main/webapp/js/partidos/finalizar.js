@@ -95,7 +95,7 @@ ReporteFinPartidoView = function () {
                 }
                 
                 if(!partidoActual.resultadoVisitante) {
-                    partidoActual.resultadoLocal += cuarto.resultadoVisitante;
+                    partidoActual.resultadoVisitante += cuarto.resultadoVisitante;
                 }
             } else {
                 resultadoLocal = 0;
