@@ -87,7 +87,7 @@ ALTER TABLE cuartos ADD CONSTRAINT `FK_cuartos_id_1` FOREIGN KEY (`cuarto_partid
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_1` FOREIGN KEY (`evento_cuarto_id`) REFERENCES `cuartos` (`cuarto_id`);
 ALTER TABLE eventos ADD CONSTRAINT `FK_eventos_id_2` FOREIGN KEY (`evento_jugador_id`) REFERENCES `jugadores` (`jugador_id`);
 
--- ValueObject vies go here
+-- ValueObject views go here
 DROP VIEW IF EXISTS reporte_jugadores;
 CREATE VIEW reporte_jugadores AS (
     SELECT evento_jugador_id as jugador_id, evento_cuarto_id as cuarto_id, 
@@ -96,5 +96,5 @@ CREATE VIEW reporte_jugadores AS (
     CASE WHEN evento_tipo = 'LANZAMIENTO_JUGADOR_TRES_PUNTOS' then 1 ELSE 0 END AS lanzamientosTriples,
     CASE WHEN evento_tipo = 'ASISTENCIA_JUGADOR' then 1 ELSE 0 END AS asistencias,
     CASE WHEN evento_tipo = 'FALTA_JUGADOR' then 1 ELSE 0 END AS faltas
-    FROM eventos
+    FROM eventos WHERE evento_estado = 1
 );
