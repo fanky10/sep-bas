@@ -1,7 +1,6 @@
 package com.genfersco.sepbas.web.controller;
 
-import com.genfersco.sepbas.app.services.ReportsManager;
-import com.genfersco.sepbas.app.services.vo.PartidoReportVO;
+import com.genfersco.sepbas.app.services.PartidoManager;
 import com.genfersco.sepbas.datafields.ArbitroPropertyEditor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +25,8 @@ import com.genfersco.sepbas.web.form.IniciarPartidoForm;
 import com.genfersco.sepbas.web.validation.IniciarPartidoFormValidator;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -37,7 +36,7 @@ public class PartidoController extends BaseController {
     @Autowired
     private IniciarPartidoFormValidator iniciarPartidoFormValidator;
     @Autowired
-    private ReportsManager reportsManager;
+    private PartidoManager partidoManager;
 
     @InitBinder
     protected void initBinder(HttpServletRequest request,
@@ -84,11 +83,11 @@ public class PartidoController extends BaseController {
         map.addAttribute("arbitros", getServicesManager().getArbitrosHabilitados());
         return WebAppConstants.NUEVO_PARTIDO;
     }
-    
-    @RequestMapping(value = "/partido/finalizar/{partidoId}", method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/partido/finalizar/{partidoId}", "/partido/{partidoId}"}, method = RequestMethod.GET)
     public String finPartido(@PathVariable("partidoId") Integer partidoId, HttpServletRequest request, ModelMap map) {
         map.put("partidoId", partidoId);
-        
+
         return WebAppConstants.FIN_PARTIDO;
     }
 
@@ -108,6 +107,14 @@ public class PartidoController extends BaseController {
     public String operadorEstatico(HttpServletRequest request,
             HttpServletResponse repsponse, ModelMap map) {
         return "web/partidos/operador_static";
+    }
+
+    @RequestMapping(value = "/partidos", method = RequestMethod.GET)
+    public String getPartidos(HttpServletRequest request,
+            HttpServletResponse repsponse, ModelMap map) {
+        List<Partido> partidos = partidoManager.getPartidos();
+        map.put("partidos", partidos);
+        return WebAppConstants.LISTA_PARTIDOS;
     }
 
 }
