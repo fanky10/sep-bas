@@ -30,6 +30,7 @@
                         </ul>
                     </li>
                     <li><a href="<c:url value="/partido/iniciar" />" title="Nuevo Partido">Nuevo Partido</a></li>
+                    <li><a href="<c:url value="/partidos" />" title="Lista Partidos">Partidos</a></li>
                     <li class="has-dropdown not-click" >
                         <a href="#" > Ayuda</a>
                         <a href="#" class="flyout-toggle"><span> </span></a>

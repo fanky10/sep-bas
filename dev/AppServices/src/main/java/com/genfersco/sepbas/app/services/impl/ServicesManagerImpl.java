@@ -145,7 +145,7 @@ public class ServicesManagerImpl implements ServicesManager {
     public void eliminarArbitro(Integer id) {
         arbitroManager.deleteArbitro(id);
     }
-
+    
     @Override
     public Evento saveEvento(Evento e) {
         //TODO: call proper manager
