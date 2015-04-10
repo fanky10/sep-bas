@@ -11,45 +11,51 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clubes")
 public class Club implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "club_id", nullable = false)
-	private Integer id;
-	@Column(name = "club_nombre", nullable = false)
-	private String nombre;
-	@Column(name = "club_localidad", nullable = false)
-	private String localidad;
 
-	public Integer getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "club_id", nullable = false)
+    private Integer id;
+    @Column(name = "club_nombre", nullable = false)
+    private String nombre;
+    @Column(name = "club_localidad", nullable = false)
+    private String localidad;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Override
+    public String toString() {
+        return "Club{" + "id=" + id + ", nombre=" + nombre + ", localidad=" + localidad + '}';
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getLocalidad() {
-		return localidad;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
-        
-        public boolean equals(Object target) {
-            boolean isEqual = false;
-            if(target instanceof Club) {
-                Club club = (Club) target;
-                isEqual = club.getId().equals(this.id);
-            }
-            return isEqual;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public boolean equals(Object target) {
+        boolean isEqual = false;
+        if (target instanceof Club) {
+            Club club = (Club) target;
+            isEqual = club.getId().equals(this.id);
         }
+        return isEqual;
+    }
 }

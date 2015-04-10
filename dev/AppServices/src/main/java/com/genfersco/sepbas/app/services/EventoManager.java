@@ -9,4 +9,6 @@ public interface EventoManager {
     public Evento addEvento(Evento evento);
 
     public List<Evento> findEventosByCuarto(Cuarto cuarto);
+    
+    public boolean deleteEvento(Integer eventoId);
 }

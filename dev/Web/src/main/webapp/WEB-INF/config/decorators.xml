@@ -11,7 +11,7 @@
         <!-- Non-decorated pages -->   
         <pattern>/service*</pattern> 
         <pattern>/error*</pattern>
-        <pattern>/partido/static*</pattern>
+        <pattern>/partido/operador*</pattern>
     </excludes>
     <decorator name="WEB" page="web/default.jsp">
         <pattern>/*</pattern>

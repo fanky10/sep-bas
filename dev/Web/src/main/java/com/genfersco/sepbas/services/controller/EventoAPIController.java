@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class EventoAPIController extends AbstractAPIController {
@@ -105,6 +106,22 @@ public class EventoAPIController extends AbstractAPIController {
         responseMessage.setMessage(mensaje);
         responseMessage.setCode(code);
         responseMessage.setContent(content);
+        return responseMessage;
+    }
+    
+    @RequestMapping(value = "/evento/delete/{eventoId}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseMessage deleteEvento(@PathVariable("eventoId") Integer eventoId, HttpServletRequest request) {
+        String code = getResponseKey(request);
+        String mensaje = WebAppConstants.RESPONSE_MESSAGES.get(code);
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setMessage(mensaje);
+        responseMessage.setCode(code);
+
+        if (code.equals(WebAppConstants.RESPONSE_CODE_OK)) {
+            eventoManager.deleteEvento(eventoId);
+        }
+
         return responseMessage;
     }
 }

@@ -1,12 +1,12 @@
+CTX_PATH = '/Web';
+
 $(document).ready(function() {
     $("#BotonSustitucionesLocal").click(function() {
         $("#SustitucionesLocal").reveal();
     });
-
     $("#BotonSustitucionesVisita").click(function() {
         $("#SustitucionesVisita").reveal();
     });
-
     $("#BotonFinCuarto").click(function() {
         $("#FinCuarto").reveal();
     });
@@ -18,7 +18,6 @@ $(document).ready(function() {
         cargaHtmlEstadisticasVisita();
         $("#estadisticasVisita").reveal();
     });
-
     $("#volverEntreCuartosLocal").click(function() {
         $("#FinCuarto").reveal();
     });
@@ -30,26 +29,21 @@ $(document).ready(function() {
         $("#FinCuarto").reveal();
     });
     $("#aceptaFinPartido").click(function() {
-    	
-    	
-    	var puntaje = {
-                resultadoLocal: clubLocal.puntos,
-                resultadoVisitante: clubVisitante.puntos
-            };
-            console.log(puntaje);
-            $.ajax({
-                contentType : 'application/json',
-                dataType : 'json',
-                url: APP_CTX + '/secure/api/partido/finalizar',
-                type: "POST",
-                data : JSON.stringify(puntaje)
-            }).success(function (response) {
-            	window.location.replace(APP_CTX);
-            });
+        var puntaje = {
+            resultadoLocal: clubLocal.puntos,
+            resultadoVisitante: clubVisitante.puntos
+        };
+        console.log(puntaje);
+        $.ajax({
+            contentType: 'application/json',
+            dataType: 'json',
+            url: APP_CTX + '/secure/api/partido/finalizar',
+            type: "POST",
+            data: JSON.stringify(puntaje)
+        }).success(function(response) {
+        	window.location.replace(APP_CTX + '/partido/finalizar');
+        });
     });
-    
-    
-    
 });
 var options = {
     equipoLocal: '',
@@ -59,8 +53,6 @@ var options = {
     jugadoresLocalesSeleccionados: [],
     jugadoresVisitantesSeleccionados: [],
 };
-
-
 // <!-- Hard Code -->
 var v_nroCuarto = 1;
 var v_local_primer_cuarto = 0;
@@ -71,7 +63,6 @@ var v_visita_primer_cuarto = 0;
 var v_visita_segundo_cuarto = 0;
 var v_visita_tercer_cuarto = 0;
 var v_visita_cuarto_cuarto = 0;
-
 var clubLocal = {
     id: 0,
     nombre: 'Local',
@@ -82,13 +73,8 @@ var clubVisitante = {
     nombre: 'Visita',
     puntos: 0
 }
-
 var jugadoresLocales = [];
-
 var jugadoresVisita = [];
-
-// <!-- Javascript functions  -->	
-
 var IndiceJugadorLocal = new Array(5);
 var IndiceJugadorVisita = new Array(5);
 var cant_suplentes_local = 0;
@@ -96,7 +82,6 @@ var cant_suplentes_visita = 0;
 var Form_suplentes_locales;
 var Faltas_Local;
 var Faltas_Visita;
-
 function inicializaVariables() {
     console.log("Inicializando el partido");
     $.ajax({
@@ -112,16 +97,10 @@ function inicializaVariables() {
             options.jugadoresVisitantesSeleccionados = response.content.jugadoresVisitantesSeleccionados;
             options.equipoLocal = response.content.cuarto.partido.clubLocal;
             options.equipoVisita = response.content.cuarto.partido.clubVisitante;
-
-            //console.log(options.equipoLocal);
-
             clubLocal.id = options.equipoLocal.id;
             clubLocal.nombre = options.equipoLocal.nombre;
-
             clubVisitante.id = options.equipoVisita.id;
             clubVisitante.nombre = options.equipoVisita.nombre;
-
-
             $.each(options.jugadoresVisitantesDisponibles, function(idx, el) {
                 var juega = 0;
                 $.each(options.jugadoresVisitantesSeleccionados, function(idx, ep) {
@@ -144,9 +123,7 @@ function inicializaVariables() {
                     Perdidas: 0,
                     Faltas: 0
                 });
-
             });
-
             $.each(options.jugadoresLocalesDisponibles, function(idx, el) {
                 var juega = 0;
                 $.each(options.jugadoresLocalesSeleccionados, function(idx, ep) {
@@ -168,21 +145,15 @@ function inicializaVariables() {
                     Perdidas: 0,
                     Faltas: 0
                 });
-
             });
-
-
             cargaJugadores();
             cargaHTML();
         }
     });
-    
 };
-
 function salirCambioCuarto() {
     $('#FinCuarto').trigger('reveal:close');
 };
-
 function cargaHtmlEstadisticasLocal() {
     var EstadisticasLocal = '';
     EstadisticasLocal += '<table width="100%" border="0">';
@@ -195,7 +166,6 @@ function cargaHtmlEstadisticasLocal() {
     EstadisticasLocal += '<th scope="col">Asistencias</th>';
     EstadisticasLocal += '<th scope="col">Faltas</th>';
     EstadisticasLocal += '</tr>';
-
     for (var n in jugadoresLocales) {
         EstadisticasLocal += '<tr>';
         EstadisticasLocal += '<td align="center">' + jugadoresLocales[n].numero + '</td>';
@@ -206,66 +176,120 @@ function cargaHtmlEstadisticasLocal() {
         EstadisticasLocal += '<td align="center">' + jugadoresLocales[n].asistencias + '</td>';
         EstadisticasLocal += '<td align="center">' + jugadoresLocales[n].Faltas + '</td>';
         EstadisticasLocal += '</tr>';
-
     };
     EstadisticasLocal += '</table>';
-
     document.getElementById('TablaEstadisticasLocal').innerHTML = EstadisticasLocal;
 }
-function enviarEvento(jugadorId, origenEvento, tipoEvento) {
-	console.log('enviando evento: ',jugadorId,origenEvento,tipoEvento);
-    var jugadorSeleccionado = null;
-    var jugadores = options.jugadoresLocalesDisponibles;
-    if(origenEvento === 'visitante') {
-        jugadores = options.jugadoresVisitantesDisponibles;
-    }
-    $.each(jugadores, function(idx, jugador){
-       if(jugadorId == jugador.id) {
-           jugadorSeleccionado = jugador;
+
+function gestionarEvento(evento,linkElimina)
+{
+	
+	console.log(linkElimina);
+	enviarEvento(evento).success(function(response) {
+
+    	
+    	var eventoId = response.content.id;
+    	var eventoGeneradorId = -1;
+    	var eventoClub = response.content.jugador.club.nombre;
+    	var Mensaje = response.content.jugador.nombre + ' ' +  response.content.jugador.apellido;
+    	
+		switch (response.content.tipoEvento) {
+        case "INGRESA_JUGADOR":
+        	Mensaje += " Ingresa ";
+            break;
+        case "SALIDA_JUGADOR":
+        	Mensaje += " Sale "
+            break;
+        case "LANZAMIENTO_JUGADOR_UN_PUNTO":
+        	Mensaje += " Simple ";
+            break;
+        case "LANZAMIENTO_JUGADOR_DOS_PUNTOS":
+        	Mensaje += " Doble ";
+            break;
+        case "LANZAMIENTO_JUGADOR_TRES_PUNTOS":
+        	Mensaje += " Triple ";
+            break;
+        case "ASISTENCIA_JUGADOR":
+        	Mensaje += " Asistencia ";
+            break;
+        case "FALTA_JUGADOR":
+        	Mensaje += " Falta ";
+            break;
        }
-    });
-    var evento = {};
-    if (tipoEvento.indexOf('evt=') === 0) {
-        evento.tipo = tipoEvento.substring('evt='.length, tipoEvento.length);
-    }
-    
-    if (jugadorSeleccionado && evento.tipo && evento.tipo.length) {
-    	var data = {nombreEvento: evento.tipo, idJugador: jugadorSeleccionado.id}; //data : JSON.stringify(jsonData),
-        eviarEventoEntero(data);
-    }
+    	if (response.content.eventoGenerador != null){
+    		eventoGeneradorId = response.content.eventoGenerador.id;
+    		Mensaje += response.content.eventoGenerador.jugador.nombre + ' ' +  response.content.eventoGenerador.jugador.apellido;
+    		
+    		switch (response.content.eventoGenerador.tipoEvento) {
+            case "INGRESA_JUGADOR":
+            	Mensaje += " Ingresa ";
+                break;
+            case "SALIDA_JUGADOR":
+            	Mensaje += " Sale ";
+                break;
+            case "LANZAMIENTO_JUGADOR_UN_PUNTO":
+            	Mensaje += " Simple ";
+                break;
+            case "LANZAMIENTO_JUGADOR_DOS_PUNTOS":
+            	Mensaje += " Doble ";
+                break;
+            case "LANZAMIENTO_JUGADOR_TRES_PUNTOS":
+            	Mensaje += " Triple ";
+                break;
+            case "ASISTENCIA_JUGADOR":
+            	Mensaje += " Asistencia ";
+                break;
+            case "FALTA_JUGADOR":
+            	Mensaje += " Falta ";
+                break;
+           
+           }
+    	};
+   
+    	if (linkElimina != '...'){
+    	linkElimina += "," + eventoId + "," + eventoGeneradorId + ")" + '">Eliminar</a>';
+    	}
+    	console.log(linkElimina);
+    	    	    	
+    	Evento(eventoClub, Mensaje, linkElimina);
+
+    });;
+	
+	
 }
 
-function eviarEventoEntero(evento) {
-	console.log('enviando evento: ',evento);
-    $.ajax({
-            contentType : 'application/json',
-            dataType : 'json',
-            url: APP_CTX + '/secure/api/evento/post.json',
-            type: "POST",
-            data : JSON.stringify(evento)
-        }).success(function (response) {
-            //options.responseContainer.html('Response: '+ response.code + ' msg: '+response.message);
-//        	alert('todo ok aguante central !!');
-        	console.log('se guardo! ',response.content);
-        });
+function enviarEvento(evento) {
+    return $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        url: APP_CTX + '/secure/api/evento/post.json',
+        type: "POST",
+        data: JSON.stringify(evento)
+    });
+}
+
+function enviarCancelarEvento(idEvento) {
+    return $.ajax({
+        contentType: 'application/json',
+        url: APP_CTX + '/secure/api/evento/delete/'+idEvento,
+        type: "GET"
+    });
 }
 
 function imprSelec(muestra)
-
 {
-		var ficha=document.getElementById(muestra);
-		var ventimp=window.open(' ','popimpr');
-		ventimp.document.write(ficha.innerHTML);
-		ventimp.document.close();
-		ventimp.print();
-		ventimp.close();
-		var css = ventimp.document.createElement("link");
-		css.setAttribute("href", "/Web/css/operador/imprimir.css");
-		css.setAttribute("rel", "stylesheet");
-		css.setAttribute("type", "text/css");
-		ventimp.document.head.appendChild(css);
+    var ficha = document.getElementById(muestra);
+    var ventimp = window.open(' ', 'popimpr');
+    ventimp.document.write(ficha.innerHTML);
+    ventimp.document.close();
+    ventimp.print();
+    ventimp.close();
+    var css = ventimp.document.createElement("link");
+    css.setAttribute("href", "/Web/css/operador/imprimir.css");
+    css.setAttribute("rel", "stylesheet");
+    css.setAttribute("type", "text/css");
+    ventimp.document.head.appendChild(css);
 }
-
 function cargaHtmlEstadisticasVisita() {
     var EstadisticasVisita = '';
     EstadisticasVisita += '<table width="100%" border="0">';
@@ -278,7 +302,6 @@ function cargaHtmlEstadisticasVisita() {
     EstadisticasVisita += '<th scope="col">Asistencias</th>';
     EstadisticasVisita += '<th scope="col">Faltas</th>';
     EstadisticasVisita += '</tr>';
-
     for (var n in jugadoresVisita) {
         EstadisticasVisita += '<tr>';
         EstadisticasVisita += '<td align="center">' + jugadoresVisita[n].numero + '</td>';
@@ -289,15 +312,11 @@ function cargaHtmlEstadisticasVisita() {
         EstadisticasVisita += '<td align="center">' + jugadoresVisita[n].asistencias + '</td>';
         EstadisticasVisita += '<td align="center">' + jugadoresVisita[n].Faltas + '</td>';
         EstadisticasVisita += '</tr>';
-
     };
     EstadisticasVisita += '</table>';
     document.getElementById('TablaEstadisticasVisita').innerHTML = EstadisticasVisita;
 }
-
 function cargaJugadores() {
-    
-    
     // Cargo los jugadores locales
     var j = 0;
     for (var i in jugadoresLocales) {
@@ -308,10 +327,7 @@ function cargaJugadores() {
             cant_suplentes_local++;
         }
     }
-    // Cargo los jugadores visitantes
     j = 0;
-
-  //  console.log(jugadoresVisita);
     for (i in jugadoresVisita) {
         if (jugadoresVisita[i].enCancha == 1) {
             IndiceJugadorVisita[j] = i;
@@ -319,16 +335,9 @@ function cargaJugadores() {
         } else {
             cant_suplentes_visita++;
         }
-
     }
-   // console.log('Jugadores Cargados');
-
-    //console.log('Suplentes Locales ' + cant_suplentes_local);
-    //console.log('Suplentes Visita  ' + cant_suplentes_visita);
 }
-
 function cargaHTML() {
-
     document.getElementById('equipoLocal').innerHTML = clubLocal.nombre;
     void 0;
     document.getElementById('equipoVisita').innerHTML = clubVisitante.nombre;
@@ -351,7 +360,6 @@ function cargaHTML() {
                 if (b != c) {
                     document.getElementById('jugadorLocal_' + a + b + c).innerHTML = '<a href="javascript:lanzamienmto(' + "'" + Tipo + "','" + IndiceJugadorLocal[c] + "','" + jugadoresLocales[IndiceJugadorLocal[c]].equipo + "','" + IndiceJugadorLocal[b] + "'" + ')">' + jugadoresLocales[IndiceJugadorLocal[c]].nombre + '</a>';
                     void 0;
-
                 }
             }
         }
@@ -364,31 +372,26 @@ function cargaHTML() {
                     void 0;
                 }
             }
-
         }
     }
-    //console.log("Html cargado");	
-
     console.log('Armando el form de suplentes!!');
     Form_suplentes_locales = '<div class="row">';
     Form_suplentes_locales += '<div class="row">';
-    Form_suplentes_locales += '<div class="four columns"><img src="/Web/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
+    Form_suplentes_locales += '<div class="four columns"><img src="'+CTX_PATH+'/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
     Form_suplentes_locales += '<div class="four columns">';
     Form_suplentes_locales += '<h4 style="text-align:center">Sustituciones ' + clubLocal.nombre + '</h4>';
     Form_suplentes_locales += '</div>';
     Form_suplentes_locales += '<div class="four columns"></div>';
     Form_suplentes_locales += '</div>';
-
-
     Form_suplentes_locales += '<div class="row">';
     Form_suplentes_locales += '<form class="custom" name="SustitucionLocal">';
     Form_suplentes_locales += '<div class="six columns" style="text-align:left" id="formSustLocal">';
     for (var n in jugadoresLocales) {
-        
-//    	alert('Jugador local en cancga ?? ' + jugadoresLocales[n].enCancha);
-    	if (jugadoresLocales[n].enCancha == 1) {
-           
-        	Form_suplentes_locales += '<label for="JugadorLocalSale"><input name="JugadorLocalSale" type="radio" value="' + n + '">(' + jugadoresLocales[n].numero + ') ' + jugadoresLocales[n].nombre + '</label>';
+
+        //    	alert('Jugador local en cancga ?? ' + jugadoresLocales[n].enCancha);
+        if (jugadoresLocales[n].enCancha == 1) {
+
+            Form_suplentes_locales += '<label for="JugadorLocalSale"><input name="JugadorLocalSale" type="radio" value="' + n + '">(' + jugadoresLocales[n].numero + ') ' + jugadoresLocales[n].nombre + '</label>';
         };
     };
     Form_suplentes_locales += '</div>';
@@ -403,19 +406,15 @@ function cargaHTML() {
     Form_suplentes_locales += '<div class="row"><input onClick="Sustitucion(' + "'" + 'Local' + "'" + ')" name="Realizar Cambio" class="button" type="button" value="Realizar Sustituci&oacute;n"></form></div>';
     Form_suplentes_locales += '</div>';
     Form_suplentes_locales += '</div>';
-
     document.getElementById('SustitucionesLocal').innerHTML = Form_suplentes_locales;
-
     Form_suplentes_visitantes = '<div class="row">';
     Form_suplentes_visitantes += '<div class="row">';
-    Form_suplentes_visitantes += '<div class="four columns"><img src="/Web/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
+    Form_suplentes_visitantes += '<div class="four columns"><img src="'+CTX_PATH+'/images/Logo_SEPBas_sin_cintas.png" height="50" width="50"></div>';
     Form_suplentes_visitantes += '<div class="four columns">';
     Form_suplentes_visitantes += '<h4 style="text-align:center">Sustituciones ' + clubVisitante.nombre + '</h4>';
     Form_suplentes_visitantes += '</div>';
     Form_suplentes_visitantes += '<div class="four columns"></div>';
     Form_suplentes_visitantes += '</div>';
-
-
     Form_suplentes_visitantes += '<div class="row">';
     Form_suplentes_visitantes += '<form class="custom" name="SustitucionVisita">';
     Form_suplentes_visitantes += '<div class="six columns" style="text-align:left" id="formSustVisita">';
@@ -437,44 +436,36 @@ function cargaHTML() {
     Form_suplentes_visitantes += '</div>';
     Form_suplentes_visitantes += '</div>';
     document.getElementById('SustitucionesVisita').innerHTML = Form_suplentes_visitantes;
-
-
     Faltas_Local = '<h4 class="local">' + clubLocal.nombre + '</h4>';
     for (var b = 0; b < 5; b++) {
         Faltas_Local += '<p class="menuFaltas"><a href="javascript:Falta(' + "'" + jugadoresLocales[IndiceJugadorLocal[b]].equipo + "','" + IndiceJugadorLocal[b] + "'" + ')">(' + jugadoresLocales[IndiceJugadorLocal[b]].numero + ') ' + jugadoresLocales[IndiceJugadorLocal[b]].nombre + '</a></p>';
     }
     document.getElementById('Link_Faltas_Local').innerHTML = Faltas_Local;
-
-
     Faltas_Visita = '<h4 class="visita">' + clubVisitante.nombre + '</h4>';
     for (var b = 0; b < 5; b++) {
         Faltas_Visita += '<p class="menuFaltas"><a href="javascript:Falta(' + "'" + jugadoresVisita[IndiceJugadorVisita[b]].equipo + "','" + IndiceJugadorVisita[b] + "'" + ')">(' + jugadoresVisita[IndiceJugadorVisita[b]].numero + ') ' + jugadoresVisita[IndiceJugadorVisita[b]].nombre + '</a></p>';
     }
     document.getElementById('Link_Faltas_Visita').innerHTML = Faltas_Visita;
     cargaCuartosolamente();
-
 }
-
-function cargaCuartosolamente()
-{
-	document.getElementById('nroCuarto').innerHTML = '<h1>' + v_nroCuarto + '&ordm; -C</h1>';
+function cargaCuartosolamente() {
+    document.getElementById('nroCuarto').innerHTML = '<h1>' + v_nroCuarto + '&ordm; -C</h1>';
 };
 function cargaCuarto() {
-     
-        $.ajax({
-            contentType : 'application/json',
-            dataType : 'json',
-            url: APP_CTX + '/secure/api/cuarto/nuevo',
-            type: "POST"
-        }).success(function (response) {
-            alert('Funciono OK!');
-            v_nroCuarto++;
-            cargaCuartosolamente();
-        });
-};
 
+    $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        url: APP_CTX + '/secure/api/cuarto/nuevo',
+        type: "POST"
+    }).success(function(response) {
+        alert('Funciono OK!');
+        v_nroCuarto++;
+        cargaCuartosolamente();
+    });
+};
 function cambioCuarto() {
-    if (v_nroCuarto < 4) {      
+    if (v_nroCuarto < 4) {
         cargaCuarto();
         $('#FinCuarto').trigger('reveal:close')
     } else {
@@ -482,26 +473,22 @@ function cambioCuarto() {
         void 0;
         document.getElementById('PuntosTotalVisita').innerHTML = '<h1>' + clubVisitante.puntos + '</h1>';
         void 0;
-
         $("#FinPartido").reveal();
     };
 };
-
 function Sustitucion(Tipo) {
-    var EventoEquipo = '';
-    var EventoMensaje = '';
+//    var EventoEquipo = '';
+    var EventoElimina = '...';
     var marcadoSale = -1;
     var marcadoEntra = -1;
-    
-    var origenEvento = '';
+
     var tipoEventoIngreso = 'INGRESA_JUGADOR';
     var tipoEventoSalida = 'SALIDA_JUGADOR';
     var saleJugadorId = -1;
     var entraJugadorId = -1;
-    
     if (Tipo == 'Local') {
-    	origenEvento= 'local';
-        EventoEquipo = clubLocal.nombre;
+
+//        EventoEquipo = clubLocal.nombre;
         $('#SustitucionesLocal').trigger('reveal:close');
         //Recupero el indice del jugador que sale	
         for (i = 0; i < document.SustitucionLocal.JugadorLocalSale.length; i++) {
@@ -515,29 +502,27 @@ function Sustitucion(Tipo) {
                 marcadoEntra = i;
             };
         };
-
         if (marcadoSale != -1 && marcadoEntra != -1) {
             var IndiceJugadorSale = document.SustitucionLocal.JugadorLocalSale[marcadoSale].value;
             var IndiceJugadorEntra = document.SustitucionLocal.JugadorLocalEntra[marcadoEntra].value;
-            EventoMensaje = 'Sustitucion: Sale (' + jugadoresLocales[IndiceJugadorSale].numero + ') ' + jugadoresLocales[IndiceJugadorSale].nombre + ' Entra (' + jugadoresLocales[IndiceJugadorEntra].numero + ') ' + jugadoresLocales[IndiceJugadorEntra].nombre;
-            Evento(EventoEquipo, EventoMensaje, '...');
+         //   EventoMensaje = 'Sustitucion: Sale (' + jugadoresLocales[IndiceJugadorSale].numero + ') ' + jugadoresLocales[IndiceJugadorSale].nombre + ' Entra (' + jugadoresLocales[IndiceJugadorEntra].numero + ') ' + jugadoresLocales[IndiceJugadorEntra].nombre;
+            
+         //   Evento(EventoEquipo, EventoMensaje, '...');
             jugadoresLocales[IndiceJugadorSale].enCancha = 0;
             jugadoresLocales[IndiceJugadorEntra].enCancha = 1;
-            
+
             saleJugadorId = jugadoresLocales[IndiceJugadorSale].id;
             entraJugadorId = jugadoresLocales[IndiceJugadorEntra].id;
         };
-
     } else {
-    	origenEvento= 'visitante';
-        EventoEquipo = clubVisitante.nombre;
+
+      //  EventoEquipo = clubVisitante.nombre;
         $('#SustitucionesVisita').trigger('reveal:close');
         for (i = 0; i < document.SustitucionVisita.JugadorVisitaSale.length; i++) {
             //alert(i);
             //alert(document.SustitucionVisita.JugadorVisitaSale[i].checked);
             if (document.SustitucionVisita.JugadorVisitaSale[i].checked) {
                 marcadoSale = i;
-
             };
         };
 
@@ -545,7 +530,6 @@ function Sustitucion(Tipo) {
         for (i = 0; i < document.SustitucionVisita.JugadorVisitaEntra.length; i++) {
             if (document.SustitucionVisita.JugadorVisitaEntra[i].checked) {
                 marcadoEntra = i;
-
             };
         };
 
@@ -556,41 +540,39 @@ function Sustitucion(Tipo) {
             EventoMensaje = 'Sustitucion: Sale (' + jugadoresVisita[IndiceJugadorSale].numero + ') ' + jugadoresVisita[IndiceJugadorSale].nombre + ' Entra (' + jugadoresVisita[IndiceJugadorEntra].numero + ') ' + jugadoresVisita[IndiceJugadorEntra].nombre;
             jugadoresVisita[IndiceJugadorSale].enCancha = 0;
             jugadoresVisita[IndiceJugadorEntra].enCancha = 1;
-            
             saleJugadorId = jugadoresVisita[IndiceJugadorSale].id;
-            entraJugadorId =jugadoresVisita[IndiceJugadorEntra].id;
-            Evento(EventoEquipo, EventoMensaje, '...');
+            entraJugadorId = jugadoresVisita[IndiceJugadorEntra].id;
+        //    Evento(EventoEquipo, EventoMensaje, '...');
         };
 
     };
-
     if (marcadoSale != -1 && marcadoEntra != -1) {
-    	var eventoSalida = {nombreEvento: tipoEventoSalida, idJugador: saleJugadorId};
-        var eventoEntrada = {nombreEvento: tipoEventoIngreso, idJugador: entraJugadorId, eventoGenerador: eventoSalida};
-        eviarEventoEntero(eventoEntrada);
-//	 	console.log(origenEvento);
-//		console.log(tipoEventoIngreso);
-//		console.log(tipoEventoSalida);
-//		console.log(saleJugadorId);
-//		console.log(entraJugadorId);
-//		console.log(eventoSalida);
-//		console.log(eventoEntrada); 
-    	cargaJugadores();
+        var eventoSalida = {
+            nombreEvento: tipoEventoSalida,
+            idJugador: saleJugadorId
+        };
+        var eventoEntrada = {
+            nombreEvento: tipoEventoIngreso,
+            idJugador: entraJugadorId,
+            eventoGenerador: eventoSalida
+        };
+        gestionarEvento(eventoEntrada,EventoElimina);
+        cargaJugadores();
         cargaHTML();
     };
 };
-
-function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posicion) //tipoEvento,tipoLanzamiento, IDAsistencia, Equipo, posicion
-    {
+function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posicion, eventoID, eventoGeneradorID)
+{
+    var cancelaEventoCallback = function () {
+        //cancelo eventoID
+        if (eventoGeneradorID != -1) {
+            alert('Cancelo evento de ID' + eventoGeneradorID);
+        }
         switch (TipoEvento) {
             case "1":
-
                 var EventoEquipo = '';
                 var EventoMensaje = '';
                 var EventoElimina = '...';
-                //alert('Hasta aca funco');
-                //alert(Equipo);
-
                 switch (Equipo) {
                     case String(clubLocal.id):
                         EventoEquipo = clubLocal.nombre;
@@ -675,8 +657,6 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                                 }
                                 break;
                         }
-
-
                         var ASISTENCIA = IDAsistencia;
                         if (ASISTENCIA.trim() != "-1") {
                             jugadoresLocales[IDAsistencia].asistencias--;
@@ -686,9 +666,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                         document.getElementById('puntosLocal').innerHTML = clubLocal.puntos;
                         void 0
                         break;
-
                     case String(clubVisitante.id):
-
                         EventoEquipo = clubVisitante.nombre;
                         EventoMensaje = 'Cancela ' + TipoLanzamiento + ' (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
                         switch (TipoLanzamiento) {
@@ -772,8 +750,6 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                                 }
                                 break;
                         }
-
-
                         var ASISTENCIA = IDAsistencia;
                         if (ASISTENCIA.trim() != "-1") {
                             jugadoresVisita[IDAsistencia].asistencias--;
@@ -782,9 +758,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                         clubVisitante.puntos -= CantPuntosLanzamiento;
                         document.getElementById('puntosVisitante').innerHTML = clubVisitante.puntos;
                         void 0;
-
                         break;
-
                 }
                 Evento(EventoEquipo, EventoMensaje, EventoElimina);
                 break;
@@ -795,7 +769,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                 var EventoEquipo = '';
                 var EventoMensaje = '';
                 EventoElimina = '...'
-                    // var CantPuntosLanzamiento = 0;
+                // var CantPuntosLanzamiento = 0;
                 switch (Equipo) {
 
                     case String(clubLocal.id):
@@ -803,8 +777,6 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                         jugadoresLocales[posicion].Faltas--;
                         EventoMensaje = 'Cancela Falta de (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre + ' a ' + jugadoresLocales[posicion].Faltas;
                         break;
-
-
                     case String(clubVisitante.id):
                         EventoEquipo = clubVisitante.nombre;
                         jugadoresVisita[posicion].Faltas--;
@@ -813,34 +785,32 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                 };
                 Evento(EventoEquipo, EventoMensaje, EventoElimina);
                 break;
-
-
-
         }
-
     };
 
-
+    enviarCancelarEvento(eventoID).success(cancelaEventoCallback);
+}
 
 function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
     console.log("Tipo de lanzamiento: " + TipoLanzamiento + ", Asistencia: " + IDAsistencia + ",Equipo: " + Equipo + ",Posicion: " + posicion);
-    var origenEvento= '';
-    var jugadorId=0;
-    var tipoEvento = '';    
-    var EventoEquipo = '';
-    var EventoMensaje = '';
+   // var origenEvento = '';
+    var jugadorId = 0;
+    var tipoEvento = '';
+    //var EventoEquipo = '';
+    //var EventoMensaje = '';
     var EventoElimina = '';
-    EventoElimina = '<a href="javascript:' + "cancelaEvento('" + 1 + "','" + TipoLanzamiento + "','" + IDAsistencia + "','" + Equipo + "','" + posicion + "')" + '">Eliminar</a>'
+    EventoElimina = '<a href="javascript:' + "cancelaEvento('" + 1 + "','" + TipoLanzamiento + "','" + IDAsistencia + "','" + Equipo + "','" + posicion + "'"; // )" + '">Eliminar</a>'
     var CantPuntosLanzamiento = 0;
     switch (Equipo) {
         case String(clubLocal.id):
-        	jugadorId= jugadoresLocales[posicion].id;
-            EventoEquipo = clubLocal.nombre;
-        	origenEvento= 'local';
-            EventoMensaje = TipoLanzamiento + ' (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre;
+            jugadorId = jugadoresLocales[posicion].id;
+          //  EventoEquipo = clubLocal.nombre;
+          //  origenEvento = 'local';
+           // EventoMensaje = TipoLanzamiento + ' (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre;
             switch (TipoLanzamiento) {
                 case "SIMPLE":
-                	tipoEvento ='evt=LANZAMIENTO_JUGADOR_UN_PUNTO';
+                    //tipoEvento ='evt=LANZAMIENTO_JUGADOR_UN_PUNTO';
+                    tipoEvento = 'LANZAMIENTO_JUGADOR_UN_PUNTO';
                     CantPuntosLanzamiento = 1;
                     jugadoresLocales[posicion].simples++;
                     switch (v_nroCuarto) {
@@ -867,7 +837,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                     }
                     break;
                 case "DOBLE":
-                	tipoEvento ='evt=LANZAMIENTO_JUGADOR_DOS_PUNTOS';
+                    tipoEvento = 'LANZAMIENTO_JUGADOR_DOS_PUNTOS';
                     CantPuntosLanzamiento = 2;
                     jugadoresLocales[posicion].dobles++;
                     switch (v_nroCuarto) {
@@ -894,7 +864,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                     }
                     break;
                 case "TRIPLE":
-                	tipoEvento ='evt=LANZAMIENTO_JUGADOR_TRES_PUNTOS';
+                    tipoEvento = 'LANZAMIENTO_JUGADOR_TRES_PUNTOS';
                     CantPuntosLanzamiento = 3;
                     jugadoresLocales[posicion].triples++;
                     switch (v_nroCuarto) {
@@ -920,42 +890,43 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                             break;
                     }
                     break;
-
             };
-
             var ASISTENCIA = IDAsistencia;
             if (ASISTENCIA.trim() != "-1") {
                 jugadoresLocales[IDAsistencia].asistencias++;
-                EventoMensaje += ' Asistencia (' + jugadoresLocales[IDAsistencia].numero + ') ' + jugadoresLocales[IDAsistencia].nombre;
+               // EventoMensaje += ' Asistencia (' + jugadoresLocales[IDAsistencia].numero + ') ' + jugadoresLocales[IDAsistencia].nombre;
                 var tipoEventoAsistencia = 'ASISTENCIA_JUGADOR';
-                tipoEvento = tipoEvento.replace("evt=","");
+               // tipoEvento = tipoEvento.replace("evt=", "");
                 var asisteJugadorId = jugadoresLocales[IDAsistencia].id;
-                var eventoAsistencia = {nombreEvento: tipoEventoAsistencia , idJugador: asisteJugadorId};
-                var eventoLanzamiento = {nombreEvento: tipoEvento, idJugador: jugadorId, eventoGenerador: eventoAsistencia};
-                
-               // console.log('tipo evento' + tipoEventoAsistencia);
-               // console.log('asiste: '+ asisteJugadorId);
-               // console.log(eventoAsistencia);
-                //console.log(eventoLanzamiento);
-                eviarEventoEntero(eventoLanzamiento);
-            }else{
-//            	alert('Fue lo que debia ser!');
-            	enviarEvento(jugadorId, origenEvento, tipoEvento);
-            }         	           
-            ;
+                var eventoAsistencia = {
+                    nombreEvento: tipoEventoAsistencia,
+                    idJugador: asisteJugadorId
+                };
+                var eventoLanzamiento = {
+                    nombreEvento: tipoEvento,
+                    idJugador: jugadorId,
+                    eventoGenerador: eventoAsistencia
+                };
+                gestionarEvento(eventoLanzamiento,EventoElimina);
+            } else {
+                var data = {
+                    nombreEvento: tipoEvento,
+                    idJugador: jugadorId
+                };
+                gestionarEvento(data,EventoElimina);
+            };
             clubLocal.puntos += CantPuntosLanzamiento;
             document.getElementById('puntosLocal').innerHTML = clubLocal.puntos;
             void 0;
             break;
-
         case String(clubVisitante.id):
-        	jugadorId= jugadoresVisita[posicion].id;
-        	origenEvento= 'visitante';
+            jugadorId = jugadoresVisita[posicion].id;
+            origenEvento = 'visitante';
             EventoEquipo = clubVisitante.nombre;
             EventoMensaje = TipoLanzamiento + ' (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
             switch (TipoLanzamiento) {
                 case "SIMPLE":
-                	tipoEvento ='evt=LANZAMIENTO_JUGADOR_UN_PUNTO';
+                    tipoEvento = 'LANZAMIENTO_JUGADOR_UN_PUNTO';
                     CantPuntosLanzamiento = 1;
                     jugadoresVisita[posicion].simples++;
                     switch (v_nroCuarto) {
@@ -982,7 +953,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                     }
                     break;
                 case "DOBLE":
-                	tipoEvento ='evt=LANZAMIENTO_JUGADOR_DOS_PUNTOS';
+                    tipoEvento = 'LANZAMIENTO_JUGADOR_DOS_PUNTOS';
                     CantPuntosLanzamiento = 2;
                     jugadoresVisita[posicion].dobles++;
                     switch (v_nroCuarto) {
@@ -1009,7 +980,7 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                     }
                     break;
                 case "TRIPLE":
-                	tipoEvento ='evt=LANZAMIENTO_JUGADOR_TRES_PUNTOS';
+                    tipoEvento = 'LANZAMIENTO_JUGADOR_TRES_PUNTOS';
                     CantPuntosLanzamiento = 3;
                     jugadoresVisita[posicion].triples++;
 
@@ -1036,92 +1007,84 @@ function lanzamienmto(TipoLanzamiento, IDAsistencia, Equipo, posicion) {
                             break;
                     }
                     break;
-
             };
-
-
             var ASISTENCIA = IDAsistencia;
             if (ASISTENCIA.trim() != "-1") {
-                
                 EventoMensaje += ' Asistencia (' + jugadoresVisita[IDAsistencia].numero + ') ' + jugadoresVisita[IDAsistencia].nombre;
-           
-            
                 jugadoresVisita[IDAsistencia].asistencias++;
-               
                 var tipoEventoAsistencia = 'ASISTENCIA_JUGADOR';
-                tipoEvento = tipoEvento.replace("evt=","");
+                tipoEvento = tipoEvento.replace("evt=", "");
                 var asisteJugadorId = jugadoresLocales[IDAsistencia].id;
-                var eventoAsistencia = {nombreEvento: tipoEventoAsistencia , idJugador: asisteJugadorId};
-                var eventoLanzamiento = {nombreEvento: tipoEvento, idJugador: jugadorId, eventoGenerador: eventoAsistencia};
-                
-              
-                eviarEventoEntero(eventoLanzamiento);
-            
-            
-            
-            }else{
-//            	alert('Fue lo que debia ser!');
-            	enviarEvento(jugadorId, origenEvento, tipoEvento);
-            }
-            	           
-            ;
+                var eventoAsistencia = {
+                    nombreEvento: tipoEventoAsistencia,
+                    idJugador: asisteJugadorId
+                };
+                var eventoLanzamiento = {
+                    nombreEvento: tipoEvento,
+                    idJugador: jugadorId,
+                    eventoGenerador: eventoAsistencia
+                };
+                gestionarEvento(eventoLanzamiento,EventoElimina);
+            } else {
+                var data = {
+                    nombreEvento: tipoEvento,
+                    idJugador: jugadorId
+                };
+                gestionarEvento(data,EventoElimina);
+            };
             clubVisitante.puntos += CantPuntosLanzamiento;
             document.getElementById('puntosVisitante').innerHTML = clubVisitante.puntos;
             void 0;
             break;
     };
-    
-    console.log(origenEvento);
-    console.log(tipoEvento);
-    console.log(jugadorId);
-    
-    Evento(EventoEquipo, EventoMensaje, EventoElimina);
+   // Evento(EventoEquipo, EventoMensaje, EventoElimina);
 };
-
 function Evento(Equipo, Mensaje, Eliminar) {
     document.getElementById('EquipoFila3').innerHTML = document.getElementById('EquipoFila2').innerHTML;
     document.getElementById('JugadaFila3').innerHTML = document.getElementById('JugadaFila2').innerHTML;
     document.getElementById('EliminaFila3').innerHTML = document.getElementById('EliminaFila2').innerHTML;
-
     document.getElementById('EquipoFila2').innerHTML = document.getElementById('EquipoFila1').innerHTML;
     document.getElementById('JugadaFila2').innerHTML = document.getElementById('JugadaFila1').innerHTML;
     document.getElementById('EliminaFila2').innerHTML = document.getElementById('EliminaFila1').innerHTML;
-
     document.getElementById('EquipoFila1').innerHTML = Equipo;
     document.getElementById('JugadaFila1').innerHTML = Mensaje;
     document.getElementById('EliminaFila1').innerHTML = Eliminar;
 };
-
 function Falta(Equipo, posicion) {
-    var EventoEquipo = '';
-    var EventoMensaje = '';
-    EventoElimina = '<a href="javascript:' + "cancelaEvento('" + 3 + "','" + -1 + "','" + -1 + "','" + Equipo + "','" + posicion + "')" + '">Eliminar</a>';
-    console.log('Equipo enviado' + Equipo + ', Local ' +clubLocal.id);
+ //   var EventoEquipo = '';
+  //  var EventoMensaje = '';
+    var idJugador=0;
+    EventoElimina = '<a href="javascript:' + "cancelaEvento('" + 3 + "','" + -1 + "','" + -1 + "','" + Equipo + "','" + posicion + "'";
+//    console.log('Equipo enviado' + Equipo + ', Local ' + clubLocal.id);
     switch (Equipo) {
-
         case String(clubLocal.id):
-            EventoEquipo = clubLocal.nombre;
+  //          EventoEquipo = clubLocal.nombre;
             jugadoresLocales[posicion].Faltas++;
-            EventoMensaje = jugadoresLocales[posicion].Faltas + ' Falta de (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre;
+            idJugador = jugadoresLocales[posicion].id;
+   //         EventoMensaje = jugadoresLocales[posicion].Faltas + ' Falta de (' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre;
             if (jugadoresLocales[posicion].Faltas == 5) {
                 alert('(' + jugadoresLocales[posicion].numero + ') ' + jugadoresLocales[posicion].nombre + ' ha llegado a su 5� falta y debe ser sustuido');
                 $("#SustitucionesLocal").reveal();
             };
             break;
-
         case String(clubVisitante.id):
-            EventoEquipo = clubVisitante.nombre;
+     //       EventoEquipo = clubVisitante.nombre;
             jugadoresVisita[posicion].Faltas++;
-            EventoMensaje = jugadoresVisita[posicion].Faltas + ' Falta de (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
+            idJugador = jugadoresVisita[posicion].id;
+     //       EventoMensaje = jugadoresVisita[posicion].Faltas + ' Falta de (' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre;
             if (jugadoresVisita[posicion].Faltas == 5) {
                 alert('(' + jugadoresVisita[posicion].numero + ') ' + jugadoresVisita[posicion].nombre + ' ha llegado a su 5� falta y debe ser sustuido');
                 $("#SustitucionesVisita").reveal();
             };
             break;
     };
-    Evento(EventoEquipo, EventoMensaje, EventoElimina);
+    var eventoFalta = {
+            nombreEvento: 'FALTA_JUGADOR',
+            idJugador: idJugador
+        };
+    gestionarEvento(eventoFalta,EventoElimina);
+    //Evento(EventoEquipo, EventoMensaje, EventoElimina);
 };
-
 //semi_circulo_izquierda
 $(function() {
     // arma el menu on ready
@@ -1129,39 +1092,28 @@ $(function() {
     $('#menu_local').menu();
     $('#menu_visita').hide();
     $('#menu_local').hide();
-
     var menuStatus = 0;
-
     jQuery(".media_cancha_izquierda").click(function(e) {
-
-
         if ($('#menu_local').css("display") != "none") {
             $('#menu_local').hide();
         };
-
         var menu = $('ul', $(this));
-
         if (menu.css("display") == "none") {
             var posX = $(this).offset().left;
             var posY = $(this).offset().top;
             var pX = (e.pageX - posX);
             var pY = (e.pageY - posY);
-
             menu.show('normal', function() {
                 menu.css("position", "absolute").css("top", pY).css("left", pX);
             });
         } else {
-
             menu.hide();
         }
-
     });
     jQuery(".media_cancha_derecha").click(function(e) {
-
         if ($('#menu_visita').css("display") != "none") {
             $('#menu_visita').hide();
         };
-
         var menu = $('ul', $(this));
         if (menu.css("display") == "none") {
             var mediaCanchaIzqWidth = $('.media_cancha_izquierda').width();
@@ -1173,13 +1125,7 @@ $(function() {
                 menu.css("position", "absolute").css("top", pY).css("left", pX);
             });
         } else {
-
             menu.hide();
         }
-
     });
-
-
-
-
 }); // Cierro document ready

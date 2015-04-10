@@ -1,5 +1,6 @@
 package com.genfersco.sepbas.domain.repository;
 
+import com.genfersco.sepbas.domain.mocked.ArbitroMocked;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
@@ -13,39 +14,46 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.genfersco.sepbas.domain.mocked.ClubMocked;
+import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Partido;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/dataAccessContext.xml" })
+@ContextConfiguration(locations = {"classpath:/dataAccessContext.xml"})
 @Transactional
 public class PartidoRepositoryTest {
-	@Autowired
-	private PartidoRepository partidoRepository;
-	@Autowired
-	private ClubMocked clubMocked;
 
-	private Partido partido = new Partido();
-	private Club clubLocal = new Club();
-	private Club clubVisitante = new Club();
+    @Autowired
+    private PartidoRepository partidoRepository;
+    @Autowired
+    private ClubMocked clubMocked;
+    @Autowired
+    private ArbitroMocked arbitroMocked;
 
-	@Before
-	public void buildData() {
-		clubLocal = clubMocked.getClub();
-		clubVisitante = clubMocked.getClub("San Telmo", "Funes",true);
-		partido.setClubLocal(clubLocal);
-		partido.setClubVisitante(clubVisitante);
-		partido.setFecha(new Date(System.currentTimeMillis()));
-		partido.setResultadoLocal(10);
-		partido.setResultadoVisitante(20);
+    private Partido partido = new Partido();
+    private Club clubLocal = new Club();
+    private Club clubVisitante = new Club();
 
-		partido = partidoRepository.save(partido);
-	}
+    @Before
+    public void buildData() {
+        clubLocal = clubMocked.getClub();
+        clubVisitante = clubMocked.getClub("San Telmo", "Funes", true);
+        Arbitro arbitro = arbitroMocked.getArbitro();
 
-	@Test
-	public void testGuardarPartido() {
-		assertTrue(partidoRepository.count() > 0);
-		assertTrue(partidoRepository.exists(partido.getId()));
-	}
+        partido.setClubLocal(clubLocal);
+        partido.setClubVisitante(clubVisitante);
+        partido.setFecha(new Date(System.currentTimeMillis()));
+        partido.setResultadoLocal(10);
+        partido.setResultadoVisitante(20);
+        partido.setArbitro(arbitro);
+
+        partido = partidoRepository.save(partido);
+    }
+
+    @Test
+    public void testGuardarPartido() {
+        assertTrue(partidoRepository.count() > 0);
+        assertTrue(partidoRepository.exists(partido.getId()));
+    }
 
 }
