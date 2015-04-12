@@ -41,7 +41,7 @@
     <div class="row">
         <div style="width:100%;height:170px">
             <div>
-                <canvas id="canvas" height="100" width="600"></canvas>
+               <canvas id="multi-line-bar"></canvas>
             </div>
         </div>
     </div>
