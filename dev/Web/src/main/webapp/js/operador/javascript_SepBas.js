@@ -786,7 +786,9 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                 break;
         }
     };
-
+    if(eventoGeneradorID > 0) {
+        enviarCancelarEvento(eventoGeneradorID).success(function(){console.log('eliminado evento generador')});
+    }
     enviarCancelarEvento(eventoID).success(cancelaEventoCallback);
 }
 
