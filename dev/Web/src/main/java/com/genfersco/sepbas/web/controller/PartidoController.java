@@ -19,6 +19,7 @@ import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Jugador;
 import com.genfersco.sepbas.domain.model.Partido;
+import com.genfersco.sepbas.domain.repository.PartidoRepository;
 import com.genfersco.sepbas.dto.PartidoSession;
 import com.genfersco.sepbas.web.constants.WebAppConstants;
 import com.genfersco.sepbas.web.form.IniciarPartidoForm;
@@ -37,6 +38,8 @@ public class PartidoController extends BaseController {
     private IniciarPartidoFormValidator iniciarPartidoFormValidator;
     @Autowired
     private PartidoManager partidoManager;
+    @Autowired
+    private PartidoRepository partidoRepository;
 
     @InitBinder
     protected void initBinder(HttpServletRequest request,
@@ -86,9 +89,17 @@ public class PartidoController extends BaseController {
 
     @RequestMapping(value = {"/partido/finalizar/{partidoId}", "/partido/{partidoId}"}, method = RequestMethod.GET)
     public String finPartido(@PathVariable("partidoId") Integer partidoId, HttpServletRequest request, ModelMap map) {
+        if(partidoId == null) { 
+            partidoId = partidoRepository.findLastPartido().get(0).getId();
+        }
         map.put("partidoId", partidoId);
 
         return WebAppConstants.FIN_PARTIDO;
+    }
+    
+    @RequestMapping(value = {"/partido/finalizar"}, method = RequestMethod.GET)
+    public String finalizarPartido(HttpServletRequest request, ModelMap map) {
+        return this.finPartido(null, request, map);
     }
 
     @RequestMapping(value = "/partido/simpleOperador", method = RequestMethod.GET)

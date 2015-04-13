@@ -17,6 +17,7 @@ import com.genfersco.sepbas.domain.mocked.ClubMocked;
 import com.genfersco.sepbas.domain.model.Arbitro;
 import com.genfersco.sepbas.domain.model.Club;
 import com.genfersco.sepbas.domain.model.Partido;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/dataAccessContext.xml"})
@@ -54,6 +55,14 @@ public class PartidoRepositoryTest {
     public void testGuardarPartido() {
         assertTrue(partidoRepository.count() > 0);
         assertTrue(partidoRepository.exists(partido.getId()));
+    }
+
+    @Test
+    public void testFindLastPartido() {
+        Integer savedId = partido.getId();
+        List<Partido> lastest = partidoRepository.findLastPartido();
+        assertTrue(!lastest.isEmpty() && lastest.get(0).getId() > 0);
+        assertTrue(savedId.equals(lastest.get(0).getId()));
     }
 
 }
