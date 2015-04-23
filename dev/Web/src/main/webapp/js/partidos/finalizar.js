@@ -73,7 +73,7 @@ ReporteFinPartidoView = function () {
 
         }
         var ctx = document.getElementById("canvas").getContext("2d");
-        new Chart(ctx).Line(lineChartData, {
+        new Chart(ctx).Bar(lineChartData, {
             responsive: true
         });
     }
