@@ -1,4 +1,4 @@
-CTX_PATH = '/sepbas';
+CTX_PATH = '/Web';
 
 $(document).ready(function() {
     $("#BotonSustitucionesLocal").click(function() {
