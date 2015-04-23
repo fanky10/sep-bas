@@ -2,7 +2,7 @@ $(function () {
     var partidoView = new PartidoView();
     var iniciarPartidoForm = $('#iniciarPartidoForm');
     var options = {
-        NUMERO_MINIMO_JUGADORES: 4,
+        NUMERO_MINIMO_JUGADORES: 5,
         NUMERO_MAXIMO_JUGADORES: 12
     };
     // events
