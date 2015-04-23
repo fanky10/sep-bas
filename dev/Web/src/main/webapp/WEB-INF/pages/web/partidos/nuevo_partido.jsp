@@ -20,12 +20,11 @@
                 <input id="clubesValidation" name="clubesValidation" hidden="true" />
                 <div class="arbitros">
                     <h5>Seleccione el árbitro del encuentro</h5> 
-                    <c:forEach items="${arbitros}" var="arbitro" varStatus="stat">
-                        <label for="radio${stat.count}"> <input
-                                name="arbitro" type="radio" id="radio${stat.count}" value="${arbitro.id}">${arbitro.nombre}
-                            ${arbitro.apellido}
-                        </label>
-                    </c:forEach>
+                    <span class="input">
+                        <form:select path="arbitro">
+                            <form:options items="${arbitros}" itemValue="id" itemLabel="nombre"></form:options>
+                        </form:select>
+                    </span>
                 </div>
                 <div class="clubes">
                     <h5>Aquí seleccionaremos el local y el visitante</h5>
