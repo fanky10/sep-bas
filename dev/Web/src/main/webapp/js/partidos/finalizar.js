@@ -83,6 +83,7 @@ ReporteFinPartidoView = function () {
         var resultadoLocal = 0;
         var resultadoVisitante = 0;
         var numeroCuarto = 1;
+        var idCuarto = 0;
         var content = [];
         partidoActual.resultadoLocalCuartos = 0;
         partidoActual.resultadoVisitanteCuartos = 0;
@@ -93,13 +94,14 @@ ReporteFinPartidoView = function () {
                 resultadoVisitante = cuarto.resultadoVisitante;
                 partidoActual.resultadoLocalCuartos += cuarto.resultadoLocal;
                 partidoActual.resultadoVisitanteCuartos += cuarto.resultadoVisitante;
+                idCuarto = cuarto.id;
             } else {
                 resultadoLocal = 0;
                 resultadoVisitante = 0;
 
             }
             content.push('<li class="tab-title" style="width: 20%;">\n');
-            content.push('<a class="js-tab-cuarto" data-numero="' + numeroCuarto + '" href="#"><strong>' + numeroCuarto + '&#186; Cuarto</strong>');
+            content.push('<a class="js-tab-cuarto" data-numero="' + numeroCuarto + '" data-id="' + idCuarto + '" href="#"><strong>' + numeroCuarto + '&#186; Cuarto</strong>');
             content.push('<br>Local: ' + resultadoLocal + '<br>Visita: ' + resultadoVisitante + '</a></li>');
             numeroCuarto += 1;
         }
@@ -111,7 +113,7 @@ ReporteFinPartidoView = function () {
             $('.js-tab-cuarto').parent().removeClass('active');
             $(this).parent().addClass('active');
 
-            renderTablaJugadores($(this).attr('data-numero'));
+            renderTablaJugadores($(this).attr('data-id'));
         });
     }
 
