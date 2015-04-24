@@ -37,10 +37,21 @@
             </div>
         </div>
     </div>
-
     <div class="row">
-        <div style="width:100%;height:340px">
-            <canvas id="canvas" height="200" width="600"></canvas>
+        <ul class="js-chart-tabs tabs">
+            <li class="tab-title active" style="width: 20%;">
+                <a class="js-chart-cuarto" href="#" data-type="ACUMULADO" ><br><strong>Acumulado Por Cuarto</strong></a>
+            </li>
+            <li class="tab-title" style="width: 20%;">
+                <a class="js-chart-cuarto" href="#" data-type="POR_CUARTO" ><br><strong>Puntos Por Cuarto</strong></a>
+            </li>
+        </ul>
+        <div class="tabs-content">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="js-canvas-container" style="width:100%;height:340px">
         </div>
     </div>
 
