@@ -35,9 +35,7 @@
                         <a href="#" > Ayuda</a>
                         <a href="#" class="flyout-toggle"><span> </span></a>
                         <ul class="dropdown" >
-                            <li><a href="#" >Documentación</a></li>
-                            <li><a href="#" >Reportar problema</a></li>
-                            <li><a href="#" >FAQ</a></li>
+                            <li><a href="<c:url value="/docs/manual-del-sistema.pdf" />" title="Manual Usuario">Manual Usuario</a></li>
                         </ul>
                     </li>
                 </ul>
