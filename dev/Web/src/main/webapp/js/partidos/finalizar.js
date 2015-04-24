@@ -60,15 +60,15 @@ ReporteFinPartidoView = function () {
     }
 
     function renderBarChartByCuarto() {
-        var localData = [0];
-        var visitanteData = [0];
+        var localData = [];
+        var visitanteData = [];
         $.each(partidoActual.cuartos, function (idx, cuarto) {
             localData.push(cuarto.resultadoLocal);
             visitanteData.push(cuarto.resultadoVisitante);
         });
 
         var lineChartData = {
-            labels: ["Inicio", "1er Cuarto", "2do Cuarto", "3er Cuarto", "4to Cuarto"],
+            labels: ["1er Cuarto", "2do Cuarto", "3er Cuarto", "4to Cuarto"],
             datasets: [
                 {
                     label: "Local",
