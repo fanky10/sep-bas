@@ -69,6 +69,10 @@
 		<servlet-name>static</servlet-name>
 		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>
+        <servlet-mapping>
+		<servlet-name>static</servlet-name>
+		<url-pattern>*.pdf</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>static</servlet-name>
 		<url-pattern>*.swf</url-pattern>
