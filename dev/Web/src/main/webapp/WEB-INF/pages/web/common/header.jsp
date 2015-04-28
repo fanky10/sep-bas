@@ -30,13 +30,12 @@
                         </ul>
                     </li>
                     <li><a href="<c:url value="/partido/iniciar" />" title="Nuevo Partido">Nuevo Partido</a></li>
+                    <li><a href="<c:url value="/partidos" />" title="Lista Partidos">Partidos</a></li>
                     <li class="has-dropdown not-click" >
                         <a href="#" > Ayuda</a>
                         <a href="#" class="flyout-toggle"><span> </span></a>
                         <ul class="dropdown" >
-                            <li><a href="#" >Documentación</a></li>
-                            <li><a href="#" >Reportar problema</a></li>
-                            <li><a href="#" >FAQ</a></li>
+                            <li><a href="<c:url value="/docs/manual-del-sistema.pdf" />" title="Manual Usuario">Manual Usuario</a></li>
                         </ul>
                     </li>
                 </ul>

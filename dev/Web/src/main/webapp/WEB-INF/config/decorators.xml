@@ -6,7 +6,8 @@
         <pattern>/*.xml*</pattern>
         <pattern>/*.css*</pattern>
         <pattern>/*.js*</pattern>
-		<pattern>*/services*</pattern>
+        <pattern>*/services*</pattern>
+        <pattern>/*.pdf*</pattern>
 		
         <!-- Non-decorated pages -->   
         <pattern>/service*</pattern> 

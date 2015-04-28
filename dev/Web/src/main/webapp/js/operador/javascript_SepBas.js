@@ -388,7 +388,7 @@ function cargaHTML() {
     Form_suplentes_locales += '<div class="six columns" style="text-align:left" id="formSustLocal">';
     for (var n in jugadoresLocales) {
 
-        //    	alert('Jugador local en cancga ?? ' + jugadoresLocales[n].enCancha);
+      
         if (jugadoresLocales[n].enCancha == 1) {
 
             Form_suplentes_locales += '<label for="JugadorLocalSale"><input name="JugadorLocalSale" type="radio" value="' + n + '">(' + jugadoresLocales[n].numero + ') ' + jugadoresLocales[n].nombre + '</label>';
@@ -459,7 +459,7 @@ function cargaCuarto() {
         url: APP_CTX + '/secure/api/cuarto/nuevo',
         type: "POST"
     }).success(function(response) {
-        alert('Funciono OK!');
+       
         v_nroCuarto++;
         cargaCuartosolamente();
     });
@@ -519,8 +519,7 @@ function Sustitucion(Tipo) {
       //  EventoEquipo = clubVisitante.nombre;
         $('#SustitucionesVisita').trigger('reveal:close');
         for (i = 0; i < document.SustitucionVisita.JugadorVisitaSale.length; i++) {
-            //alert(i);
-            //alert(document.SustitucionVisita.JugadorVisitaSale[i].checked);
+           
             if (document.SustitucionVisita.JugadorVisitaSale[i].checked) {
                 marcadoSale = i;
             };
@@ -566,7 +565,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
     var cancelaEventoCallback = function () {
         //cancelo eventoID
         if (eventoGeneradorID != -1) {
-            alert('Cancelo evento de ID' + eventoGeneradorID);
+           
         }
         switch (TipoEvento) {
             case "1":
@@ -763,7 +762,7 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                 Evento(EventoEquipo, EventoMensaje, EventoElimina);
                 break;
             case "2":
-                alert('Cancela Sustitucion !!!');
+                //alert('Cancela Sustitucion !!!');
                 break;
             case "3":
                 var EventoEquipo = '';
@@ -787,7 +786,9 @@ function cancelaEvento(TipoEvento, TipoLanzamiento, IDAsistencia, Equipo, posici
                 break;
         }
     };
-
+    if(eventoGeneradorID > 0) {
+        enviarCancelarEvento(eventoGeneradorID).success(function(){console.log('eliminado evento generador')});
+    }
     enviarCancelarEvento(eventoID).success(cancelaEventoCallback);
 }
 

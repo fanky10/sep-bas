@@ -13,7 +13,8 @@ ReporteFinPartidoView = function () {
         $partidoArbitroContainer: $('.js-arbitro-partido'),
         $partidoCuartoTabs: $('.js-cuartos-tabs'),
         $tablaJugadoresLocal: $('.js-jugadores-data-local'),
-        $tablaJugadoresVisitante: $('.js-jugadores-data-visitante')
+        $tablaJugadoresVisitante: $('.js-jugadores-data-visitante'),
+        $canvasContainer: $('.js-canvas-container')
     };
 
     var partidoActual;
@@ -22,9 +23,11 @@ ReporteFinPartidoView = function () {
         getPartidoData()
                 .success(function (response) {
                     partidoActual = response.content.partido;
+                    partidoActual.cuartos = response.content.cuartos;
+
                     renderCuartosTabs(response.content.cuartos);
                     renderPartidoData(response.content.partido);
-                    renderChart(response.content.cuartos);
+                    renderCharts();
                     renderTablaJugadores();
                 });
     }
@@ -38,16 +41,34 @@ ReporteFinPartidoView = function () {
         });
     }
 
-    function renderChart(cuartos) {
-        var localData = [0];
-        var visitanteData = [0];
-        $.each(cuartos, function (idx, cuarto) {
+    function renderCharts () {
+        renderLineChartAcumByCuarto();
+        $('.js-chart-cuarto').on('click', function (event) {
+            event.preventDefault();
+
+            var type = $(this).attr('data-type');
+
+            $('.js-chart-cuarto').parent().removeClass('active');
+            $(this).parent().addClass('active');
+
+            if(type === 'ACUMULADO') {
+                renderLineChartAcumByCuarto();
+            } else if(type === 'POR_CUARTO') {
+                renderBarChartByCuarto();
+            }
+        });
+    }
+
+    function renderBarChartByCuarto() {
+        var localData = [];
+        var visitanteData = [];
+        $.each(partidoActual.cuartos, function (idx, cuarto) {
             localData.push(cuarto.resultadoLocal);
             visitanteData.push(cuarto.resultadoVisitante);
         });
 
         var lineChartData = {
-            labels: ["Inicio", "1er Cuarto", "2do Cuarto", "3er Cuarto", "4to Cuarto"],
+            labels: ["1er Cuarto", "2do Cuarto", "3er Cuarto", "4to Cuarto"],
             datasets: [
                 {
                     label: "Local",
@@ -70,8 +91,52 @@ ReporteFinPartidoView = function () {
                     data: visitanteData
                 }
             ]
+        };
+        options.$canvasContainer.html('<canvas id="canvas" height="200" width="600"></canvas>');
+        var ctx = document.getElementById("canvas").getContext("2d");
+        new Chart(ctx).Bar(lineChartData, {
+            responsive: true
+        });
+    }
 
-        }
+    function renderLineChartAcumByCuarto() {
+        var localData = [0];
+        var visitanteData = [0];
+        var sumResultadoLocal = 0;
+        var sumResultadoVisitante = 0;
+        $.each(partidoActual.cuartos, function (idx, cuarto) {
+            sumResultadoLocal += cuarto.resultadoLocal;
+            sumResultadoVisitante += cuarto.resultadoVisitante;
+            localData.push(sumResultadoLocal);
+            visitanteData.push(sumResultadoVisitante);
+        });
+
+        var lineChartData = {
+            labels: ["Inicio", "1er Cuarto", "2do Cuarto", "3er Cuarto", "4to Cuarto"],
+            datasets: [
+                {
+                    label: "Local",
+                    fillColor: "rgba(220,220,220,0)",
+                    strokeColor: "rgba(255,50,0,1)",
+                    pointColor: "rgba(255,50,0,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(255,0,0,1)",
+                    data: localData
+                },
+                {
+                    label: "Visita",
+                    fillColor: "rgba(220,220,220,0)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: visitanteData
+                }
+            ]
+        };
+        options.$canvasContainer.html('<canvas id="canvas" height="200" width="600"></canvas>');
         var ctx = document.getElementById("canvas").getContext("2d");
         new Chart(ctx).Line(lineChartData, {
             responsive: true
@@ -83,6 +148,7 @@ ReporteFinPartidoView = function () {
         var resultadoLocal = 0;
         var resultadoVisitante = 0;
         var numeroCuarto = 1;
+        var idCuarto = 0;
         var content = [];
         partidoActual.resultadoLocalCuartos = 0;
         partidoActual.resultadoVisitanteCuartos = 0;
@@ -93,13 +159,14 @@ ReporteFinPartidoView = function () {
                 resultadoVisitante = cuarto.resultadoVisitante;
                 partidoActual.resultadoLocalCuartos += cuarto.resultadoLocal;
                 partidoActual.resultadoVisitanteCuartos += cuarto.resultadoVisitante;
+                idCuarto = cuarto.id;
             } else {
                 resultadoLocal = 0;
                 resultadoVisitante = 0;
 
             }
             content.push('<li class="tab-title" style="width: 20%;">\n');
-            content.push('<a class="js-tab-cuarto" data-numero="' + numeroCuarto + '" href="#"><strong>' + numeroCuarto + '&#186; Cuarto</strong>');
+            content.push('<a class="js-tab-cuarto" data-numero="' + numeroCuarto + '" data-id="' + idCuarto + '" href="#"><strong>' + numeroCuarto + '&#186; Cuarto</strong>');
             content.push('<br>Local: ' + resultadoLocal + '<br>Visita: ' + resultadoVisitante + '</a></li>');
             numeroCuarto += 1;
         }
@@ -111,7 +178,7 @@ ReporteFinPartidoView = function () {
             $('.js-tab-cuarto').parent().removeClass('active');
             $(this).parent().addClass('active');
 
-            renderTablaJugadores($(this).attr('data-numero'));
+            renderTablaJugadores($(this).attr('data-id'));
         });
     }
 
